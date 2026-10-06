@@ -2,7 +2,7 @@ title: "October Was Historically Necessary"
 subtitle: The Central Committee changes its line.
 new-page: true
 tags: event
-view-if: dix >= 42 and bol_regime = 1
+view-if: player_party = 'menshevik' and (dix >= 42 and bol_regime = 1)
 priority: 20
 max-visits: 1
 

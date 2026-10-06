@@ -8,14 +8,17 @@ if (Q.ending == 'final') {
         Q.ending = Q.vikzhel_deal ? 'all_socialist' : 'constituent_republic';
     } else if (Q.sd_win_check = (Q.soviet_democracy >= 55 && Q.legality >= 2 && Q.nep_early && Q.free_soviets && Q.repression <= 40)) {
         Q.ending = 'soviet_democracy';
-    } else if (Q.legality <= 1 || Q.members <= 20) {
+    } else if (Q.legality <= 1 || Q.members <= 20 * Q.mem_scale) {
         Q.ending = 'exile';
     } else {
         Q.ending = 'one_party';
     }
 }
+if (Q.player_party == 'sr' && (Q.ending == 'exile' || Q.ending == 'one_party')) { Q.ending = 'sr_historical'; }
 this.achieve('game_completed');
-if (Q.ending == 'exile' || Q.ending == 'one_party') { this.achieve('dustbin_of_history'); }
+if (Q.ending == 'exile' || Q.ending == 'one_party' || Q.ending == 'sr_historical') { this.achieve('dustbin_of_history'); }
+if (Q.player_party == 'sr' && Q.komuch_alive && Q.white_front < 72 && Q.bol_regime) { this.achieve('komuch_without_kolchak'); }
+if (Q.player_party == 'sr' && Q.lsr_kept && !Q.lsr_split) { this.achieve('one_party_sr'); }
 if (Q.ending == 'soviet_democracy') { this.achieve('soviet_democracy_win'); }
 if (Q.ending == 'constituent_republic') { this.achieve('constituent_republic_win'); }
 if (Q.ending == 'all_socialist') { this.achieve('all_socialist_win'); }
@@ -24,7 +27,7 @@ if (Q.program_adopted && Q.program_dix < 72) { this.achieve('chto_delat'); }
 if (Q.georgia_survives && Q.bol_regime) { this.achieve('free_georgia'); }
 Q.ending_exile = (Q.ending == 'exile') ? 1 : 0;
 !}
-go-to: eg_kornilov if ending = 'kornilov'; eg_right_coup if ending = 'right_coup'; eg_white if ending = 'white'; eg_exile if ending = 'exile'; eg_one_party if ending = 'one_party'; eg_all_socialist if ending = 'all_socialist'; eg_constituent_republic if ending = 'constituent_republic'; eg_soviet_democracy if ending = 'soviet_democracy'
+go-to: eg_kornilov if ending = 'kornilov'; eg_right_coup if ending = 'right_coup'; eg_white if ending = 'white'; eg_exile if ending = 'exile'; eg_sr_historical if ending = 'sr_historical'; eg_one_party if ending = 'one_party'; eg_all_socialist if ending = 'all_socialist'; eg_constituent_republic if ending = 'constituent_republic'; eg_soviet_democracy if ending = 'soviet_democracy'
 
 @eg_kornilov
 
@@ -34,7 +37,7 @@ go-to: eg_kornilov if ending = 'kornilov'; eg_right_coup if ending = 'right_coup
 
 On 14 September 1917 cavalry units of General Kornilov entered Petrograd. The Soviet was dissolved, its leaders arrested, and the revolution of February ended in the barracks. Kornilov proclaimed himself head of a National Defence Council, and the war went on.
 
-The party did not govern in 1917, but it had held the Soviet, and with it the only legitimate counterweight to the generals. It was not enough. In the months that followed the Mensheviks, the SRs and the Bolsheviks, who had been at each other's throats in the summer, were in the same prisons.
+The party [? if player_party = 'menshevik' : did not govern in 1917, but it had held the Soviet ?][? if player_party = 'sr' : had governed in 1917 only through Kerensky, but it had the votes of the peasants and the garrison ?], and with it the only legitimate counterweight to the generals. It was not enough. In the months that followed the Mensheviks, the SRs and the Bolsheviks, who had been at each other's throats in the summer, were in the same prisons.
 
 Historians have argued that Kornilov's march was ill-prepared and doomed. It was, in this game, a close thing.
 
@@ -60,7 +63,7 @@ The dictatorship of the officers does not need an ideology. It needs a reason, a
 
 The Whites reached Moscow. Whatever the party had done in the Civil War, however it had decided between the Bolsheviks and their enemies, it had not been enough. Kolchak had dispersed the SR Directory in November 1918, and Denikin's government does not need to be told that the Mensheviks are socialists.
 
-The soviets are dissolved and the workers' organisations banned. The party's leaders have been jailed; Dan and Abramovich went into hiding, and the Socialist Courier, if it is ever published, will be published abroad.
+The soviets are dissolved and the workers' organisations banned. The party's leaders have been jailed; [? if player_party = 'menshevik' : Dan and Abramovich went into hiding, and the Socialist Courier, if it is ever published, will be published abroad. ?][? if player_party = 'sr' : Chernov has gone abroad, and the rest sit in the officers' prisons, with the Bolsheviks. ?]
 
 - @eg_menu: Continue.
 
@@ -75,6 +78,20 @@ In January 1922 the leaders of the party were expelled from Russia. Martov, who 
 The party that had led the Petrograd Soviet in March 1917, that had held 248 delegates at the First Congress of Soviets and the largest bloc on its executive, ended its history in prisons, in emigration and, in Georgia, in the gold of a short and brilliant independence. It was always a party of a revolution that its enemies and its friends both said was premature.
 
 It was right about almost everything, and it lost.
+
+- @eg_menu: Continue.
+
+@eg_sr_historical
+
+= Prisoners of the Right and the Left
+
+*The historical ending.*
+
+[? if armed_struggle = 1 : The party's attempt to make a democratic government with the help of the Czechs, the officers and the Allies ended in Omsk, in November 1918, when Kolchak's officers arrested the party's members of the Directory. By 1919, with the Whites beaten in the east, the party's leaders found themselves in Bolshevik prisons for having been on the wrong side of the Whites. ?][? if armed_struggle = 0 : The party never took up arms against the Soviet government, and was destroyed anyway. Its newspapers were closed in 1918, its members arrested in 1919, its leaders in prison by 1920. ?]
+
+In the summer of 1922 thirty-four of its leaders stood in the dock in Moscow, in the first show trial of the Soviet state. Twelve were sentenced to death, and a stay of execution was granted, pending the good behaviour of the party in exile. Chernov, in Prague, wrote the party's history. The villagers of Tambov, who had been the party's strongest base, went on as before.
+
+The party that had received more votes than any other in the free elections of November 1917, and whose name was "Land and Freedom", had neither.
 
 - @eg_menu: Continue.
 
@@ -98,7 +115,7 @@ The NEP has come, without political freedom. The party that argued for a regulat
 
 The agreement of November 1917, which the Menshevik Central Committee voted on by 12 to 11, was signed in this world, and it held. For four years, Russia was governed by a coalition of every party that called itself socialist, with a Congress of Soviets above it and a Constituent Assembly below. It was a bad government: slow, quarrelsome and hungry. It was a democratic government, and it was not a dictatorship.
 
-The Bolsheviks sat in the Council of Ministers. Lenin was there, and Martov; it is said that they were seen, once, in the corridor, arguing, as they had argued in 1903, as old friends do.
+The Bolsheviks sat in the Council of Ministers. Lenin was there, and Martov, and Chernov; it is said that they were seen, once, in the corridor, arguing, as they had argued in 1903, as old friends do.
 
 - @eg_menu: Continue.
 
@@ -110,7 +127,7 @@ The Bolsheviks sat in the Council of Ministers. Lenin was there, and Martov; it 
 
 The Constituent Assembly, which in our world sat for thirteen hours, sat in this one for a long time. It passed the land law, ended the war, drafted a constitution and elected a President. The Bolsheviks sat on the left, sometimes in the government and sometimes not, and in the end they accepted that they had lost.
 
-Russia in December 1921 is a poor, damaged, hungry republic. It is also a republic. The Mensheviks, who said in March 1917 that Russia was not ready for socialism, are now the party that tells the peasants and workers what is possible.
+Russia in December 1921 is a poor, damaged, hungry republic. It is also a republic. [? if player_party = 'menshevik' : The Mensheviks, who said in March 1917 that Russia was not ready for socialism, are now the party that tells the peasants and workers what is possible. ?][? if player_party = 'sr' : The SRs, who have had the votes of the peasants since February, have the government, too. [? if land_socialised = 1 : The land has been socialised, as Chernov's law proposed, and is allocated by the village communities. ?] ?]
 
 - @eg_menu: Continue.
 
@@ -120,7 +137,7 @@ Russia in December 1921 is a poor, damaged, hungry republic. It is also a republ
 
 *The best ending.*
 
-The Eighth Congress of Soviets in December 1920 voted for free elections. By 1921 the NEP was an accomplished fact, the economic programme that the Mensheviks published in 1919 was a good part of it, and a number of Bolsheviks, in the party's left and right, were beginning to say that the soviets should be real. The Mensheviks were a legal opposition, and the Socialist Courier is published in Moscow.
+The Eighth Congress of Soviets in December 1920 voted for free elections. By 1921 the NEP was an accomplished fact, [? if player_party = 'menshevik' : the economic programme that the Mensheviks published in 1919 was a good part of it ?][? if player_party = 'sr' : the peasant programme that the SRs' congresses had put forward in 1919 was a good part of it ?], and a number of Bolsheviks, in the party's left and right, were beginning to say that the soviets should be real. [? if player_party = 'menshevik' : The Mensheviks were a legal opposition, and the Socialist Courier is published in Moscow. ?][? if player_party = 'sr' : The SRs are a legal party in the villages, and Delo Naroda is printed in Moscow again. ?]
 
 It is not a democracy yet. It is a one-party state that is willing to listen, and a party of the opposition that is willing to wait. Historians such as Brovkin and Getzler have argued that this was possible, and the evidence for it is in the soviet elections of the spring of 1918.
 
@@ -164,6 +181,10 @@ go-to: eg_menu
 [? if game_achievement_constituent_republic_win : **The Constituent Republic** - the Assembly governs. ?]
 
 [? if game_achievement_all_socialist_win : **The All-Socialist Government** - the coalition holds. ?]
+
+[? if game_achievement_komuch_without_kolchak : **Komuch Without Kolchak** - an SR government on the Volga that the Whites never capture. ?]
+
+[? if game_achievement_one_party_sr : **One Party** - the SRs never split. ?]
 
 @restart
 on-arrival: started = 0;

@@ -4,7 +4,7 @@ subtitle: Respond to antisemitic attacks and smears.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: response_to_antisemitism_timer <= 0
+view-if: player_party = 'menshevik' and (response_to_antisemitism_timer <= 0)
 on-arrival: month_actions += 1; response_to_antisemitism_timer = 8
 
 Many of the Menshevik leaders are Jews, and their enemies know it. Soldiers are told that the Soviet is run by Jews, pamphlets are circulated in the villages and, in 1919, the pogroms in Ukraine are the worst in a century.
@@ -18,7 +18,7 @@ Many of the Menshevik leaders are Jews, and their enemies know it. Soldiers are 
 on-arrival: {!
 RO.fac(Q, 'bund', 0, -6);
 RO.boost(Q, {soldiers: -1, peasants: -1});
-RO.add(Q, {right_threat: -1, rel_sr: 1});
+RO.add(Q, {right_threat: -1, rel_ally: 1});
 !}
 
 A public declaration named the authors and the printers of the smears. The Black Hundred press replied with more of the same.
@@ -38,7 +38,7 @@ on-arrival: {!
 RO.pay(Q, 1);
 RO.fac(Q, 'bund', 2, -10);
 RO.boost(Q, {nations: 3, workers: 1});
-RO.add(Q, {rel_sr: 1});
+RO.add(Q, {rel_ally: 1});
 !}
 
 Self-defence units and a relief fund for the victims. The Bund is grateful, and so are many who are not Jews.

@@ -1,0 +1,48 @@
+title: Chernov at the Ministry of Agriculture
+subtitle: The Kadets and the land.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 10 and chernov_gov = 1 and land_decree = 0
+priority: 8
+max-visits: 1
+
+= Chernov at the Ministry of Agriculture
+
+Viktor Chernov, the party's leader, has the ministry that the peasants care about. He is hampered by his Kadet colleagues, who say that no land should be touched until the Assembly decides, and by the peasants, who have begun to take it. A tour of the provinces has shown him land committees in every volost, and estates burning.
+
+The party's whole programme depends on what Chernov can do in the next few months.
+
+- @decree: Legalise the committees' transfers by decree.
+- @compromise: Regulate leases and open the state lands; leave the estates to the Assembly.
+- @defer: Defer to the Kadet ministers.
+
+@decree
+on-arrival: {!
+Q.land_committees = (Q.land_committees || 0) + 2;
+RO.add(Q, {land_pressure: -10, rel_kad: -8, right_threat: 4});
+RO.boost(Q, {peasants: 4, soldiers: 2});
+RO.fac(Q, 'rightdef', 0, 6);
+RO.fac(Q, 'intl', 0, -4);
+!}
+
+Chernov's circular recognised the committees' transfers, until the Assembly meets. The Kadets protested in the cabinet and in the press. Landowners telegraphed their complaints to every general in the army.
+
+@compromise
+on-arrival: {!
+Q.land_committees = (Q.land_committees || 0) + 1;
+RO.add(Q, {land_pressure: -4, rel_kad: -2});
+RO.boost(Q, {peasants: 2});
+RO.fac(Q, 'intl', 0, 3);
+!}
+
+Chernov issued rules for leases and put the state and Church lands at the committees' disposal. The Kadets accepted it, with a sour face. The peasants noticed that the estates were left alone.
+
+@defer
+on-arrival: {!
+RO.add(Q, {land_pressure: 4, rel_kad: 4});
+RO.boost(Q, {peasants: -3, middle: 1});
+RO.fac(Q, 'intl', 0, 8);
+RO.fac(Q, 'defencist', 0, 3);
+!}
+
+Chernov told the village delegations that the land would be given by the Assembly, and that the government's duty was to wait. The delegations went home. The Left SRs read out the minutes at their meetings, and the peasants in the villages did not wait.

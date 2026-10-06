@@ -7,7 +7,7 @@ tags: soviet_affairs
 view-if: economic_democracy_timer <= 0 and dix >= 28
 on-arrival: month_actions += 1; economic_democracy_timer = 3
 
-Since March 1918 the workers of Petrograd and Moscow have been electing delegates to assemblies of factory representatives, in which the Bolsheviks are a minority. The government has begun to close them.
+Since March 1918 the workers of Petrograd and Moscow have been electing delegates to assemblies of factory representatives, in which the Bolsheviks are a minority, and the Mensheviks, the SRs and the anarchists are not. The government has begun to close them.
 
 - @support: Support the assemblies as the workers' own voice.
 - @rival: Make them a rival to the Bolshevik-controlled soviets.

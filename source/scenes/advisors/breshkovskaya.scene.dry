@@ -1,0 +1,30 @@
+title: Ekaterina Breshko-Breshkovskaya
+is-pinned-card: true
+card-image: img/cards/breshkovskaya.svg
+tags: advisor, rightdef
+new-page: true
+view-if: breshkovskaya_advisor = 1 and player_party = 'sr'
+
+= Ekaterina Breshko-Breshkovskaya
+
+Breshko-Breshkovskaya (1844-1934), the 'grandmother of the revolution', has spent thirty years in prison and exile. She is a Right SR, and the party's greatest symbol.
+
+- @action
+- @root: Return to main
+
+@action
+title: Founding Prestige
+subtitle: The grandmother of the revolution speaks to the peasants and the soldiers.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.boost(Q, {peasants: 4, soldiers: 3, middle: 2}); RO.fac(Q, 'rightdef', 1, -2);
+!}
+
+The old woman toured the front, and the garrison towns. Soldiers who had never read a party leaflet knelt to kiss her hand.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

@@ -2,7 +2,7 @@ title: Independent Georgia
 subtitle: A Menshevik government in Tiflis.
 new-page: true
 tags: event
-view-if: dix >= 34
+view-if: player_party = 'menshevik' and (dix >= 34)
 priority: 15
 max-visits: 1
 on-arrival: {!

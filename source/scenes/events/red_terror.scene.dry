@@ -7,15 +7,23 @@ priority: 30
 max-visits: 1
 on-arrival: {!
 RO.add(Q, {repression: 12, soviet_democracy: -4});
-Q.potresov_advisor = 0;
-RO.fac(Q, 'rightdef', -12, -5);
+if (Q.player_party == 'menshevik') {
+    Q.potresov_advisor = 0;
+    RO.fac(Q, 'rightdef', -12, -5);
+}
+if (Q.player_party == 'sr') {
+    // Kaplan was an SR: the party is held responsible
+    RO.add(Q, {repression: 6, rel_bol: -6});
+    RO.boost(Q, {workers: -3});
+    if (Q.legality > 1) { Q.legality -= 1; }
+}
 !}
 
 = The Red Terror
 
 On 30 August, Lenin was shot and wounded in Moscow by Fanny Kaplan, an SR. On the same day the head of the Petrograd Cheka, Uritsky, was murdered. On 5 September the Soviet government declared a Red Terror: hostages were to be shot, and enemies of the revolution "isolated in concentration camps". In the following weeks, thousands, at least, were killed. The figures that historians give for the Red Terror range from 12,733 to over a million, depending on what is counted.
 
-Alexander Potresov has left the party to join the anti-Bolshevik opposition; Plekhanov's followers have already done so.
+[? if player_party = 'menshevik' : Alexander Potresov has left the party to join the anti-Bolshevik opposition; Plekhanov's followers have already done so. ?][? if player_party = 'sr' : Kaplan was an SR, though her party had not ordered it. The party's offices were raided the same night, and its Moscow leaders arrested. ?]
 
 - @condemn: Condemn the Terror.
 - @bargain: Bargain for readmission.

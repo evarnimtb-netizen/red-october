@@ -16,7 +16,7 @@ The peasants want the landlords' land, and some of them are taking it. The SR mi
 
 @committees
 on-arrival: {!
-RO.add(Q, {land_pressure: -10, rel_kad: -6, rel_sr: 3, right_threat: 3});
+RO.add(Q, {land_pressure: -10, rel_kad: -6, rel_ally: 3, right_threat: 3});
 RO.boost(Q, {peasants: 3, soldiers: 2});
 Q.land_committees = (Q.land_committees || 0) + 1;
 !}
@@ -33,7 +33,7 @@ The land question will be settled by the Constituent Assembly. The peasants say 
 
 @reform
 on-arrival: {!
-RO.add(Q, {land_pressure: -4, rel_kad: -2, rel_sr: 1});
+RO.add(Q, {land_pressure: -4, rel_kad: -2, rel_ally: 1});
 RO.boost(Q, {peasants: 1});
 Q.land_committees = (Q.land_committees || 0) + 1;
 !}

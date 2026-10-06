@@ -89,11 +89,11 @@ Q.last_advisor_action = 0;
 Q.last_cabinet_action = 0;
 
 // ---- relations with the other parties (0-100) ----
-Q.rel_sr = 65;
+Q.rel_ally = 65;
 Q.rel_lsr = 30;
 Q.rel_bol = 25;
 Q.rel_kad = 30;
-Q.ally_sr = 0;
+Q.ally_lvl = 0;
 Q.ally_lsr = 0;
 Q.ally_bol = 0;
 
@@ -127,7 +127,7 @@ Q.timers = ['advisor_action', 'rally', 'fundraising', 'media', 'campaigning', 'i
             'labor_affairs', 'economic_policy', 'foreign_policy', 'agricultural_policy', 'military_policy',
             'constitutional_reform', 'nationalities', 'police',
             'economic_democracy', 'labor_rights', 'social_welfare', 'domestic_enemies', 'judiciary', 'fiscal_policy',
-            'crisis', 'alt_coup', 'right_plot'];
+            'crisis', 'alt_coup', 'right_plot', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -159,7 +159,8 @@ var flags = ['may_crisis_seen', 'larin_seen', 'crisis_count', 'vik_check_1', 'al
              'land_committees', 'bol_freed', 'defended', 'prisoner_deal', 'coops', 'refused_coalition',
              'activists_strength', 'georgia_survives', 'renounced_armed', 'spring_won', 'no_terror',
              'martov_line', 'war_aims_note', 'bol_unity', 'soviet_power_motion', 'reconvene_assembly',
-             'ca_extra', 'prisoners_freed', 'steinberg_line', 'constitution', 'dissent_dummy'];
+             'ca_extra', 'prisoners_freed', 'steinberg_line', 'constitution', 'dissent_dummy',
+             'land_law_draft', 'peasant_organised', 'army_raised', 'komuch_alive', 'chernov_gov', 'lsr_kept', 'ufa_line'];
 for (var fl of flags) { Q[fl] = 0; }
 Q.dues_income = 1;
 
@@ -172,16 +173,42 @@ RO.display(Q);
 !}
 new-page: true
 
-= Choose your difficulty
+= Choose your party
 
-The year is 1917. The Tsar is gone, the war is not, and Russia is in the hands of a dozen competing authorities. You lead the Mensheviks: the Russian Social Democrats, and for now the largest party of the Petrograd Soviet.
+The February Revolution has overthrown the Tsar. Three socialist parties stand outside Lenin's Bolsheviks and, in March 1917, none of them is in power. Each has its own base, its own quarrels and its own road.
+
+- @pick_men: The Mensheviks. Russia's social democrats, with their strength among the workers and railwaymen. *Hard.*
+- @pick_sr: The Socialist Revolutionaries. The largest party in Russia, the party of the peasants and the soldiers. *Normal.*
+
+@pick_men
+on-arrival: {!
+RO.initParty(Q, 'menshevik');
+RO.updateFactions(Q); RO.updatePolls(Q); RO.display(Q);
+!}
+go-to: difficulty
+
+@pick_sr
+on-arrival: {!
+RO.initParty(Q, 'sr');
+RO.updateFactions(Q); RO.updatePolls(Q); RO.display(Q);
+!}
+go-to: difficulty
+
+@difficulty
+new-page: true
+
+= Choose your difficulty
 
 - @easy: Easy. More resources, a bigger hand, and cards can be returned.
 - @normal: Normal.
 - @hard: Hard. Fewer resources, factions that are harder to hold together, and no returning cards.
 
 @easy
-on-arrival: difficulty = -1; resources = 5; dues = 3; hand_size = 4; intl_dissent = 10; rightdef_dissent = 5;
+on-arrival: {!
+Q.difficulty = -1; Q.resources += 2; Q.hand_size = 4;
+for (var f of Q.factions) { Q[f + '_dissent'] = Math.round(Q[f + '_dissent'] * 0.5); }
+RO.updateFactions(Q);
+!}
 go-to: intro
 
 @normal
@@ -189,11 +216,21 @@ on-arrival: difficulty = 0;
 go-to: intro
 
 @hard
-on-arrival: difficulty = 1; resources = 1; dues = 1; discard_disabled = 1; intl_dissent = 30; rightdef_dissent = 20; unions_dissent = 15; rel_sr = 55;
+on-arrival: {!
+Q.difficulty = 1; Q.resources = Math.max(0, Q.resources - 2); Q.discard_disabled = 1;
+for (var f of Q.factions) { Q[f + '_dissent'] += 10; }
+Q.rel_ally -= 10;
+RO.updateFactions(Q);
+!}
 go-to: intro
 
 @intro
 new-page: true
+go-to: intro_men if player_party = 'menshevik'; intro_sr if player_party = 'sr'
+
+@intro_men
+new-page: true
+go-to: intro_common
 
 = March 1917
 
@@ -204,6 +241,22 @@ new-page: true
 The February Revolution has overthrown the monarchy. A Provisional Government of liberals sits in the Tauride Palace, and in the same building a Soviet of Workers' and Soldiers' Deputies, led by Mensheviks and Socialist Revolutionaries, holds the real power: the garrison, the railways and the telegraph obey the Soviet, not the ministers.
 
 Your party has an unusual task. It is Russia's social democracy, in the same International as the German SPD, and it believes that Russia is not ready for socialism. It wants a democratic republic, the end of the war on fair terms, and room for workers to organise. Its rivals say that this is the road to disaster.
+
+@intro_sr
+new-page: true
+go-to: intro_common
+
+= March 1917
+
+> *"In struggle you will win your right."*
+>
+> The motto of the Socialist Revolutionary Party
+
+The February Revolution has overthrown the monarchy. A Provisional Government of liberals sits in the Tauride Palace, and in the same building a Soviet of Workers' and Soldiers' Deputies, led by Socialist Revolutionaries and Mensheviks, holds the real power: the garrison, the railways and the telegraph obey the Soviet, not the ministers. One of your own, the lawyer Kerensky, sits in the cabinet.
+
+Your party is the largest in Russia. In a few months it will have close to a million members, and the votes of most of the peasants and soldiers. It wants the land for those who work it, socialised and not divided; it wants a democratic republic, and a Constituent Assembly to found it. It is also as divided as it is large: the Right SRs (Avksentiev, Breshko-Breshkovskaya), the Centre (Chernov), the Right Centre (Gots, Zenzinov) and the Left SRs (Spiridonova, Kamkov), who think the party has already betrayed the peasants.
+
+@intro_common
 
 Every two weeks you will play a card: a meeting, a campaign, a ministry, an advisor's advice. Between cards, history happens. You lead the party until December 1921. You can lose it to a counter-revolution of the Right, to a Bolshevik one-party state, or to exile. Or you can save something of what was won in February.
 

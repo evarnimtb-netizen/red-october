@@ -4,7 +4,7 @@ subtitle: Axelrod's old idea of a broad non-party labour congress.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: peoples_party_timer <= 0
+view-if: player_party = 'menshevik' and (peoples_party_timer <= 0)
 on-arrival: month_actions += 1; peoples_party_timer = 8
 
 Pavel Axelrod has argued since 1905 that Russian workers need a congress of their own, above the parties: unions, cooperatives, mutual aid societies, the lot. Whether it would be a school of democracy or a rival party is the question.

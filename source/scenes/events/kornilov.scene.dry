@@ -37,7 +37,7 @@ The Soviet set up the Committee, and the Bolshevik leaders were released from pr
 - @kornilov_result: Continue...
 
 @gov
-choose-if: rel_sr >= 50
+choose-if: rel_ally >= 50
 unavailable-subtitle: The SRs will not agree to this.
 on-arrival: {!
 Q.k_bonus = 10;

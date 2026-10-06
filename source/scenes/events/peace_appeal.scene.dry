@@ -13,7 +13,7 @@ On 27 March the Soviet issued an appeal "To the Peoples of the World", calling f
 
 On the same week Irakli Tsereteli returned from Siberian exile and took over the Soviet majority. He argues that Russia must defend the revolution against the German army, while pushing the Allies toward peace. It is called revolutionary defencism.
 
-The Internationalists, led by Martov, who has not yet returned, hold to the line of the Zimmerwald conference: immediate peace.
+The Menshevik Internationalists, led by Martov, who has not yet returned, hold to the line of the Zimmerwald conference: immediate peace.
 
 - @defencism: Adopt revolutionary defencism.
 - @zimmerwald: Hold the Zimmerwald line.
@@ -23,7 +23,7 @@ on-arrival: {!
 Q.war_line += 2;
 RO.fac(Q, 'defencist', 8, 0);
 RO.fac(Q, 'intl', -4, 8);
-RO.add(Q, {rel_kad: 4, rel_sr: 2});
+RO.add(Q, {rel_kad: 4, rel_ally: 2});
 !}
 
 The Soviet adopted Tsereteli's formula. It is, for now, majority policy.

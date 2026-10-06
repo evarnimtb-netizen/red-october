@@ -19,7 +19,7 @@ unavailable-subtitle: We have no resources.
 on-arrival: {!
 RO.pay(Q, 1);
 Q.assembly_early = 1;
-RO.add(Q, {rel_kad: -5, rel_sr: 4, soviet_democracy: 2, bolshevik: -2});
+RO.add(Q, {rel_kad: -5, rel_ally: 4, soviet_democracy: 2, bolshevik: -2});
 RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
 RO.fac(Q, 'intl', 0, -2);
 !}

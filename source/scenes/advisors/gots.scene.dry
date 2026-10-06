@@ -1,0 +1,30 @@
+title: Abram Gots
+is-pinned-card: true
+card-image: img/cards/gots.svg
+tags: advisor, unions
+new-page: true
+view-if: gots_advisor = 1 and player_party = 'sr'
+
+= Abram Gots
+
+Gots (1882-1940), a Right Centre leader, is chairman of the Soviet executive. He holds the Menshevik-SR bloc together, and is an old combat organiser.
+
+- @action
+- @root: Return to main
+
+@action
+title: Soviet Majority
+subtitle: Gots votes the SR delegations together with the Mensheviks.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {rel_ally: 6, soviet_democracy: 1}); RO.boost(Q, {workers: 2, soldiers: 3, railway: 2}); RO.fac(Q, 'unions', 1, -1);
+!}
+
+Gots met Dan and Tsereteli before every session, and the two delegations voted as one. The Bolsheviks call it the Menshevik-SR gang.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

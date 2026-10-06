@@ -2,7 +2,7 @@ title: Larin and the Defectors
 subtitle: Some Internationalists walk toward the Bolsheviks.
 new-page: true
 tags: event
-view-if: dix >= 14 and intl_dissent >= 25 and larin_seen = 0
+view-if: player_party = 'menshevik' and (dix >= 14 and intl_dissent >= 25 and larin_seen = 0)
 priority: 5
 max-visits: 1
 on-arrival: larin_seen = 1;
@@ -18,7 +18,7 @@ Yuri Larin, who has been the party's Internationalist spokesman in the Soviet, h
 @talk
 on-arrival: {!
 RO.fac(Q, 'intl', 0, -10);
-Q.members -= 3;
+Q.members -= 3 * Q.mem_scale;
 RO.add(Q, {rel_lsr: 1});
 !}
 
@@ -26,7 +26,7 @@ Martov's visits kept most circles in the party. A few left anyway.
 
 @shrug
 on-arrival: {!
-Q.members -= 12;
+Q.members -= 12 * Q.mem_scale;
 RO.fac(Q, 'intl', -4, -6);
 RO.add(Q, {bolshevik: 3});
 RO.boost(Q, {workers: -2});

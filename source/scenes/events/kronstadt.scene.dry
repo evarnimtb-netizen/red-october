@@ -16,7 +16,7 @@ In February 1921 the Red Army crossed the border of Georgia, and the Menshevik g
 
 In the same weeks, strikes spread through Petrograd's factories. On 28 February the sailors of the battleship Petropavlovsk adopted a resolution that demanded new elections to the soviets, freedom of speech and press for workers, peasants and the left socialist parties, and the release of political prisoners. On 1 March they were joined by the whole garrison of Kronstadt; the Bolsheviks called it a White conspiracy.
 
-Whether the revolt was an SR and Menshevik plot, or the real voice of the revolutionaries of 1917, the Bolshevik government never doubted. The Cheka arrested hundreds of Mensheviks in Petrograd and Moscow, as precaution.
+Whether the revolt was an SR and Menshevik plot, or the real voice of the revolutionaries of 1917, the Bolshevik government never doubted. The Cheka arrested hundreds of Mensheviks and SRs in Petrograd and Moscow, as a precaution.
 
 - @condemn: Condemn the revolt.
 - @back: Back Kronstadt's programme and press for negotiation.
@@ -31,7 +31,7 @@ RO.fac(Q, 'intl', 0, 4);
 Q.kronstadt_stance = 1;
 !}
 
-The party's Central Committee, on a motion by Dan, said that it had no connection with the Kronstadt revolt, and that an armed revolt, whatever its slogans, could only help the White Guards. The Bolsheviks received this with grim satisfaction.
+The party's Central Committee said that it had no connection with the Kronstadt revolt, and that an armed revolt, whatever its slogans, could only help the White Guards. The Bolsheviks received this with grim satisfaction.
 
 @back
 on-arrival: {!
@@ -41,10 +41,10 @@ RO.fac(Q, 'intl', 3, -4);
 RO.fac(Q, 'rightdef', 0, -2);
 if (Q.legality > 1) { Q.legality -= 1; }
 Q.kronstadt_stance = 2;
-Q.members -= 10;
+Q.members -= 10 * Q.mem_scale;
 !}
 
-Our party's leaflets called on the government to negotiate with Kronstadt on the basis of its fifteen demands, which are our own. The Cheka made arrests within the week. Kronstadt fell on 18 March.
+Our party's leaflets called on the government to negotiate with Kronstadt on the basis of its fifteen demands, which are close to our own. The Cheka made arrests within the week. Kronstadt fell on 18 March.
 
 @quiet
 on-arrival: {!

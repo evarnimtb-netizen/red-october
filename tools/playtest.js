@@ -62,16 +62,20 @@ function playOne(idx) {
     var sid = eng.state.sceneId;
     maxwf = Math.max(maxwf, eng.state.qualities.white_front || 0);
     scenes.push(sid);
-    var watch = {'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1};
+    var watch = {'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1, 'sr_programme_1919': 1};
     if (watch[sid] && !snaps[sid]) {
       var qq = eng.state.qualities;
-      snaps[sid] = {G: Math.round(RO.grievance(qq)), bol: Math.round(qq.bolshevik), rt: Math.round(qq.right_threat), army: Math.round(qq.army_discipline), power: Math.round(RO.bolPower(qq)), war: Math.round(qq.war_weariness), bread: Math.round(qq.bread), land: Math.round(qq.land_pressure), ruble: Math.round(qq.ruble), sd: Math.round(qq.soviet_democracy), men: Math.round(qq.player_poll), mil: qq.militia, rr: Math.round(RO.kornilovResistance(qq, 10)), kf: Math.round(RO.kornilovForce(qq)), relsr: Math.round(qq.rel_sr), relbol: Math.round(qq.rel_bol), rep: Math.round(qq.repression), wf: Math.round(qq.white_front), red: Math.round(qq.red_army), bpow: Math.round(qq.bol_power || 0), homog: qq.homogeneous_gov, ca: qq.ca_elected, lc: qq.land_committees};
+      snaps[sid] = {G: Math.round(RO.grievance(qq)), bol: Math.round(qq.bolshevik), rt: Math.round(qq.right_threat), army: Math.round(qq.army_discipline), power: Math.round(RO.bolPower(qq)), war: Math.round(qq.war_weariness), bread: Math.round(qq.bread), land: Math.round(qq.land_pressure), ruble: Math.round(qq.ruble), sd: Math.round(qq.soviet_democracy), men: Math.round(qq.player_poll), mil: qq.militia, rr: Math.round(RO.kornilovResistance(qq, 10)), kf: Math.round(RO.kornilovForce(qq)), relsr: Math.round(qq.rel_ally), relbol: Math.round(qq.rel_bol), rep: Math.round(qq.repression), wf: Math.round(qq.white_front), red: Math.round(qq.red_army), bpow: Math.round(qq.bol_power || 0), po: qq.peasant_organised || 0, homog: qq.homogeneous_gov, ca: qq.ca_elected, lc: qq.land_committees};
     }
     if (sid.indexOf('root.start_menu') === 0 && Q().started !== 1) {
       if (!pickByTitle(/Start game/)) { break; }
       continue;
     }
     if (sid === 'root.start') {
+      if (!pickByTitle(new RegExp(process.env.PARTY || 'Mensheviks'))) { break; }
+      continue;
+    }
+    if (sid === 'root.difficulty') {
       if (!pickByTitle(new RegExp(process.env.DIFF || 'Normal'))) { break; }
       continue;
     }
@@ -153,7 +157,7 @@ function playOne(idx) {
           bol_regime: q.bol_regime, vikzhel: q.vikzhel_deal, assembly: q.assembly_survives,
           legality: q.legality, sd: Math.round(q.soviet_democracy), members: Math.round(q.members),
           wf: Math.round(maxwf), rt: Math.round(q.right_threat), bol: Math.round(q.bolshevik),
-          dissent: Math.round(q.dissent * 100), bpow_final: Math.round(q.bol_power || 0), homog: q.homogeneous_gov, lc: q.land_committees, ca: q.ca_elected, stock: q.stockholm, bread: Math.round(q.bread), takeover: q.takeover, vs: Math.round(q.vik_score || 0), snaps: snaps, log: log, lastScenes: scenes.slice(-6)};
+          dissent: Math.round(q.dissent * 100), bpow_final: Math.round(q.bol_power || 0), homog: q.homogeneous_gov, lc: q.land_committees, ca: q.ca_elected, stock: q.stockholm, bread: Math.round(q.bread), dbg: {nep: q.nep_early, free: q.free_soviets, leg: q.legality, sd: Math.round(q.soviet_democracy), rep: Math.round(q.repression), po: q.peasant_organised, rb: Math.round(q.rel_bol), prog: q.program_adopted, wa: q.white_aid, prb: Math.round(q.prog_rb || 0), ppo: q.prog_po || 0}, takeover: q.takeover, vs: Math.round(q.vik_score || 0), snaps: snaps, log: log, lastScenes: scenes.slice(-6)};
 }
 
 var results = [];
@@ -178,6 +182,7 @@ Object.keys(agg).forEach(function(k) {
   console.log('MEAN at ' + k + ' (n=' + agg[k].length + '): ' + JSON.stringify(out));
 });
 results.forEach(function(r) { var k = r.game_over ? r.ending : 'STUCK'; counts[k] = (counts[k] || 0) + 1; });
+if (process.env.DBG) { results.forEach(function(r) { console.log(r.ending + ' ' + JSON.stringify(r.dbg)); }); }
 if (process.env.POW) { results.forEach(function(r) { console.log(JSON.stringify({e: r.ending, p: r.bpow_final, h: r.homog, lc: r.lc, ca: r.ca, st: r.stock, tk: r.takeover, vs: r.vs})); }); }
 if (process.env.TEXT) { fs.writeFileSync(process.env.TEXT, allText.join('\n')); }
 console.log('policy=' + policy + ' runs=' + runs + ' errors=' + errors);

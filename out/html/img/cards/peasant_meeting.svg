@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
+<rect width="240" height="340" fill="#8c1d18"/>
+<polygon points="0,0 240,0 240,118 0,188" fill="#f2e6c9" opacity="0.92"/>
+<polygon points="0,188 240,118 240,340 0,340" fill="#1c1c1c"/>
+<circle cx="136" cy="94" r="43" fill="#8c1d18" opacity="0.9"/>
+<polygon points="120.0,68.0 129.9,96.4 159.9,97.0 136.0,115.2 144.7,144.0 120.0,126.8 95.3,144.0 104.0,115.2 80.1,97.0 110.1,96.4" fill="#f2e6c9"/>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
+<text x="120" y="230" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">PEASANT AND</text>
+<text x="120" y="259" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">SOLDIER</text>
+<text x="120" y="288" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">MEETING</text>
+</svg>

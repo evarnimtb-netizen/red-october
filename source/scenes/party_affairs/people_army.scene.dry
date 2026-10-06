@@ -1,0 +1,55 @@
+title: The People's Army
+card-image: img/cards/people_army.svg
+subtitle: Armed struggle against the Bolshevik state.
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: player_party = 'sr' and people_army_timer <= 0 and bol_regime = 1 and dix >= 30
+on-arrival: month_actions += 1; people_army_timer = 4
+
+The Bolsheviks have dispersed the Assembly and fired on its defenders, and the party's old instinct, the combat organisation that killed ministers and governors, has not died. On the Volga the Komuch is raising an army. Others in the party say that every rifle fired at the Bolsheviks is a rifle that helps the generals. (Armed struggle: [? if armed_struggle = 1 : yes ?][? if armed_struggle = 0 : no ?].)
+
+- @raise: Raise the People's Army on the Volga. (1 resource)
+- @militia: Organise peasant self-defence, not an army.
+- @reject: Reject armed struggle against the Soviet government.
+- @easy_discard
+
+@raise
+choose-if: resources >= 1
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+Q.armed_struggle = 1;
+Q.army_raised = (Q.army_raised || 0) + 1;
+if (Q.army_raised <= 2) { Q.white_aid += 1.5; }
+RO.add(Q, {repression: 6, rel_bol: -10, soviet_democracy: -2});
+RO.boost(Q, {peasants: 4, middle: 3, workers: -3});
+RO.fac(Q, 'rightdef', 4, -6);
+RO.fac(Q, 'intl', 0, 10);
+RO.fac(Q, 'bund', 0, 6);
+if (Q.legality > 1) { Q.legality -= 1; }
+!}
+
+The People's Army is a few thousand volunteers, officers and peasants, under a red flag and the tricolour of the Assembly. It is strong where the Bolsheviks are weak. It also makes the Whites stronger, and the Bolsheviks have declared the party an enemy of the people.
+
+@militia
+on-arrival: {!
+Q.white_aid += 0.5;
+RO.boost(Q, {peasants: 2});
+RO.add(Q, {repression: 2, rel_bol: -4});
+RO.fac(Q, 'rightdef', 1, -2);
+RO.fac(Q, 'intl', 0, 3);
+!}
+
+Villages are drilling a self-defence militia against the requisition detachments. It is a quarrel between the peasants and the state, and the party has not raised an army.
+
+@reject
+on-arrival: {!
+Q.armed_struggle = 0;
+RO.fac(Q, 'bund', 6, -3);
+RO.add(Q, {rel_bol: 4, repression: -1});
+RO.fac(Q, 'rightdef', 0, 8);
+RO.fac(Q, 'intl', 0, -3);
+!}
+
+We have said that the party will not take up arms against a Soviet government that the peasants and the workers elected. The Right SRs say that this is surrender; the Left says that it is the only honest line. The Bolsheviks say nothing, and watch.

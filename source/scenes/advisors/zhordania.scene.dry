@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/zhordania.svg
 tags: advisor, defencist
 new-page: true
-view-if: zhordania_advisor = 1
+view-if: zhordania_advisor = 1 and player_party = 'menshevik'
 
 = Noe Zhordania
 

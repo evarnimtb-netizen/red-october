@@ -47,15 +47,15 @@ Soviet democracy: [+ soviet_democracy : level +]
 
 Our relations with:
 
-SRs: [+ rel_sr : relationships +]
+[+ partner_name +]: [+ rel_ally : relationships +]
 
-[? if lsr_split = 1 : Left SRs: [+ rel_lsr : relationships +] ?][? if lsr_split = 0 : Left SRs (inside the SR party): [+ rel_lsr : relationships +] ?]
+[? if player_party = 'menshevik' : [? if lsr_split = 1 : Left SRs: [+ rel_lsr : relationships +] ?][? if lsr_split = 0 : Left SRs (inside the SR party): [+ rel_lsr : relationships +] ?] ?][? if player_party = 'sr' : [? if lsr_split = 0 : The Left SR faction: [+ rel_lsr : relationships +] ?][? if lsr_split = 1 : Left SRs (now a separate party): [+ rel_lsr : relationships +] ?] ?]
 
 Bolsheviks: [+ rel_bol : relationships +]
 
 Kadets: [+ rel_kad : relationships +]
 
-[? if ally_sr >= 1 : Alliance with the SRs: level [+ ally_sr +] ?]
+[? if ally_lvl >= 1 : Alliance with the [+ partner_name +]: level [+ ally_lvl +] ?]
 
 [? if ally_lsr >= 1 : Alliance with the Left SRs: level [+ ally_lsr +] ?]
 
@@ -67,17 +67,15 @@ Kadets: [+ rel_kad : relationships +]
 
 Strength and dissent of each current:
 
-Revolutionary Defencists: [+ d_defencist_strength +]% (dissent [+ d_defencist_dissent +])
+[+ flabel_defencist +]: [+ d_defencist_strength +]% (dissent [+ d_defencist_dissent +])
 
-Internationalists: [+ d_intl_strength +]% (dissent [+ d_intl_dissent +])
+[+ flabel_intl +]: [+ d_intl_strength +]% (dissent [+ d_intl_dissent +])
 
-[? if rightdef_strength > 0 : Right Defencists: [+ d_rightdef_strength +]% (dissent [+ d_rightdef_dissent +]) ?]
+[? if rightdef_strength > 0 : [+ flabel_rightdef +]: [+ d_rightdef_strength +]% (dissent [+ d_rightdef_dissent +]) ?]
 
-Trade unionists and cooperators: [+ d_unions_strength +]% (dissent [+ d_unions_dissent +])
+[? if unions_strength > 0 : [+ flabel_unions +]: [+ d_unions_strength +]% (dissent [+ d_unions_dissent +]) ?]
 
-Bund: [+ d_bund_strength +]% (dissent [+ d_bund_dissent +])
-
-[? if activists_strength > 0 : Activists: [+ activists_strength +]% ?]
+[? if bund_strength > 0 : [+ flabel_bund +]: [+ d_bund_strength +]% (dissent [+ d_bund_dissent +]) ?]
 
 @polls
 

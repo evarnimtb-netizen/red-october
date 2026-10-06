@@ -38,7 +38,7 @@ The Soviet will remain a body of supervision. The government grows weaker with e
 @reshuffle
 on-arrival: {!
 Q.demanded_coalition = 1;
-RO.add(Q, {rel_kad: -2, rel_sr: 3});
+RO.add(Q, {rel_kad: -2, rel_ally: 3});
 RO.fac(Q, 'defencist', 3, 0);
 RO.fac(Q, 'intl', -2, 6);
 !}

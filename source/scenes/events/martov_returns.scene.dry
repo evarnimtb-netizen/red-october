@@ -2,7 +2,7 @@ title: Martov Returns
 subtitle: The Internationalists find their leader.
 new-page: true
 tags: event
-view-if: dix >= 9
+view-if: player_party = 'menshevik' and (dix >= 9)
 priority: 8
 max-visits: 1
 on-arrival: martov_advisor = 1;

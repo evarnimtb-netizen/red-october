@@ -15,7 +15,7 @@ On 18 January (5 January, Old Style) the Constituent Assembly met in the Tauride
 
 The Assembly has been dissolved by decree. Demonstrations in its support were fired on in Petrograd. A few thousand workers were killed or wounded.
 
-[? if ca_moderate = 1 : The moderate socialists and their allies had the majority, and no armed force to defend it. ?]
+[? if ca_moderate = 1 : The moderate socialists and their allies had the majority, and no armed force to defend it. ?][? if player_party = 'sr' : It was your party's Assembly: the largest delegation, the chairman and the land law that was to have been passed that night. ?]
 
 - @protest: Protest, and turn to the soviets.
 - @provinces: Try to reconvene the Assembly in the provinces. (1 resource)

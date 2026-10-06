@@ -7,6 +7,7 @@ var RO = (function() {
   var PARTY_NAMES = {bol: 'Bolsheviks', lsr: 'Left SRs', sr: 'SRs', men: 'Mensheviks', kad: 'Kadets',
                      pop: 'Popular Socialists and Trudoviks', nat: 'National parties', oth: 'Anarchists and others'};
   var FACTIONS = ['defencist', 'intl', 'rightdef', 'unions', 'bund'];
+  var FACTIONS_ALL = FACTIONS;
 
   // Base appeal in March 1917, before any pressure. Columns follow PARTIES.
   var BASE = {
@@ -26,7 +27,7 @@ var RO = (function() {
   };
   // Arena-specific biases: soviet delegates over-represent town parties, the capitals went Bolshevik, etc.
   var ARENA_BIAS = {
-    soviets:    {men: 2.0, bol: 1.3},
+    soviets:    {men: 1.6, bol: 1.3, sr: 1.15},
     dumas:      {bol: 2.2, men: 0.6, kad: 1.1},
     assembly:   {bol: 1.25, men: 0.5, nat: 1.2, sr: 0.97},
     provincial: {}
@@ -34,6 +35,75 @@ var RO = (function() {
   // Historical pressure of the Whites (0-100) by half-month index, used from mid-1918.
   var WHITE_PRESSURE = [[30, 5], [34, 25], [44, 45], [48, 45], [56, 60], [66, 85], [70, 60], [76, 35],
                         [84, 45], [92, 20], [96, 8], [200, 5]];
+
+
+  // ---- the playable parties ----
+  // Factions keep the same five keys in every campaign (their roles are the same: defencist = the
+  // main line, intl = the left wing, rightdef = the right wing, unions = the organisation men, bund =
+  // a late or special current); only the names, sizes and leaders differ.
+  var PARTY = {
+    menshevik: {
+      slot: 'men', name: 'Mensheviks', pname: 'the Mensheviks', partner: 'SRs', partner_slot: 'sr',
+      members: 60, memDiv: 60, memScale: 1, memCap: 400, resources: 3, legality: 3,
+      rel: {ally: 65, lsr: 30, bol: 25, kad: 30, men: 0}, relBase: {ally: 55, lsr: 30, bol: 25, kad: 30},
+      factions: {
+        defencist: [50, 0, 'The Revolutionary Defencists'], intl: [20, 20, 'The Internationalists'],
+        rightdef: [12, 10, 'The Right Defencists'], unions: [10, 5, 'The trade unionists and cooperators'],
+        bund: [8, 5, 'The Bund']
+      },
+      labels: {intl: 'the Internationalists', defencist: 'the Defencists', rightdef: 'the Right Defencists'},
+      advisors: ['dan', 'chkheidze', 'liber', 'lidia', 'abramovich', 'potresov', 'sukhanov', 'khinchuk']
+    },
+    sr: {
+      slot: 'sr', name: 'SRs', pname: 'the SRs', partner: 'Mensheviks', partner_slot: 'men',
+      members: 300, memDiv: 150, memScale: 2.5, memCap: 1200, resources: 3, legality: 3,
+      rel: {ally: 65, lsr: 70, bol: 20, kad: 35, men: 65}, relBase: {ally: 55, lsr: 60, bol: 25, kad: 35},
+      factions: {
+        defencist: [30, 0, 'The Centre (Chernov)'], intl: [20, 25, 'The Left SRs'],
+        rightdef: [25, 5, 'The Right SRs'], unions: [25, 5, 'The Right Centre (Gots, Zenzinov)'],
+        bund: [0, 0, 'The Ufa delegation']
+      },
+      labels: {intl: 'the Left SRs', defencist: 'the Centre', rightdef: 'the Right SRs'},
+      advisors: ['chernov', 'avksentiev', 'breshkovskaya', 'gots', 'zenzinov']
+    }
+  };
+  var ALL_ADVISORS = ['dan', 'chkheidze', 'tsereteli', 'liber', 'lidia', 'abramovich', 'potresov', 'sukhanov',
+    'khinchuk', 'martov', 'skobelev', 'gvozdev', 'axelrod', 'broido', 'batursky', 'zhordania',
+    'chernov', 'avksentiev', 'breshkovskaya', 'gots', 'zenzinov', 'volsky',
+    'spiridonova', 'kamkov', 'natanson', 'steinberg', 'kolegaev', 'proshian', 'aleksandrovich'];
+
+  // Set everything that depends on which party the player leads.
+  function initParty(Q, party) {
+    var c = PARTY[party];
+    Q.player_party = party;
+    Q.player_slot = c.slot;
+    Q.pname = c.name;
+    Q.pname_the = c.pname;
+    Q.partner_name = c.partner;
+    Q.partner_slot = c.partner_slot;
+    Q.members = c.members;
+    Q.mem_div = c.memDiv;
+    Q.mem_scale = c.memScale;
+    Q.mem_cap = c.memCap;
+    Q.resources = c.resources;
+    Q.legality = c.legality;
+    Q.rel_ally = c.rel.ally; Q.rel_lsr = c.rel.lsr; Q.rel_bol = c.rel.bol; Q.rel_kad = c.rel.kad; Q.rel_men = c.rel.men;
+    Q.rel_base_ally = c.relBase.ally; Q.rel_base_lsr = c.relBase.lsr; Q.rel_base_bol = c.relBase.bol; Q.rel_base_kad = c.relBase.kad;
+    Q.factions = Object.keys(c.factions);
+    for (var i = 0; i < FACTIONS.length; i++) {
+      var f = FACTIONS[i], v = c.factions[f];
+      Q[f + '_strength'] = v[0]; Q[f + '_dissent'] = v[1]; Q['flabel_' + f] = v[2];
+    }
+    for (i = 0; i < ALL_ADVISORS.length; i++) { Q[ALL_ADVISORS[i] + '_advisor'] = 0; }
+    for (i = 0; i < c.advisors.length; i++) { Q[c.advisors[i] + '_advisor'] = 1; }
+    Q.dues_income = Math.max(1, Math.round(Q.members / Q.mem_div));
+    // short phrases for prose in shared events
+    var L = c.labels;
+    Q.ilbl = L.intl; Q.dlbl = L.defencist; Q.rlbl = L.rightdef;
+    Q.Ilbl = L.intl.charAt(0).toUpperCase() + L.intl.slice(1);
+    Q.Dlbl = L.defencist.charAt(0).toUpperCase() + L.defencist.slice(1);
+    Q.Rlbl = L.rightdef.charAt(0).toUpperCase() + L.rightdef.slice(1);
+  }
 
   function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
 
@@ -124,8 +194,10 @@ var RO = (function() {
   }
 
   // Faction strengths are shares of 100; dissent is the weighted average of faction dissent.
+  function factionList(Q) { return Q.factions && Q.factions.length ? Q.factions : FACTIONS; }
+
   function updateFactions(Q) {
-    var total = 0, i, f;
+    var total = 0, i, f, FACTIONS = factionList(Q);
     for (i = 0; i < FACTIONS.length; i++) {
       f = FACTIONS[i];
       if (Q[f + '_strength'] < 0) { Q[f + '_strength'] = 0; }
@@ -146,12 +218,12 @@ var RO = (function() {
 
   var STATS = ['bread', 'ruble', 'war_weariness', 'army_discipline', 'land_pressure', 'bolshevik',
                'right_threat', 'soviet_democracy', 'repression', 'red_army', 'white_front', 'members',
-               'rel_sr', 'rel_lsr', 'rel_bol', 'rel_kad'];
+               'rel_ally', 'rel_lsr', 'rel_bol', 'rel_kad'];
   function clampStats(Q) {
     for (var i = 0; i < STATS.length; i++) {
       var s = STATS[i];
       if (Q[s] === undefined) { continue; }
-      Q[s] = clamp(Q[s], 0, STATS[i] === 'members' ? 400 : 100);
+      Q[s] = clamp(Q[s], 0, STATS[i] === 'members' ? (Q.mem_cap || 400) : 100);
     }
     Q.legality = clamp(Math.round(Q.legality), 0, 3);
     if (Q.resources < 0) { Q.resources = 0; }
@@ -192,7 +264,7 @@ var RO = (function() {
       Q.red_army += 1.2 * tl * (Q.red_army < 70 ? 1 : 0);
     }
     // relations with other parties drift back toward where they started unless tended
-    var relBase = {rel_sr: 55, rel_lsr: 30, rel_bol: 25, rel_kad: 30};
+    var relBase = {rel_ally: Q.rel_base_ally || 55, rel_lsr: Q.rel_base_lsr || 30, rel_bol: Q.rel_base_bol || 25, rel_kad: Q.rel_base_kad || 30};
     for (var rk in relBase) {
       Q[rk] += (relBase[rk] - Q[rk]) * 0.08 * tl;
     }
@@ -216,6 +288,7 @@ var RO = (function() {
     for (var i = 0; i < names.length; i++) {
       if (Q[names[i]] !== undefined) { Q['d_' + names[i]] = Math.round(Q[names[i]]); }
     }
+    var FACTIONS = FACTIONS_ALL;
     for (i = 0; i < FACTIONS.length; i++) {
       Q['d_' + FACTIONS[i] + '_strength'] = Math.round(Q[FACTIONS[i] + '_strength']);
       Q['d_' + FACTIONS[i] + '_dissent'] = Math.round(Q[FACTIONS[i] + '_dissent']);
@@ -279,11 +352,11 @@ var RO = (function() {
     return Q.right_threat + 0.25 * (100 - Q.army_discipline) - 10;
   }
   function kornilovResistance(Q, bonus) {
-    return 40 + (bonus || 0) + 5 * Math.min(Q.militia || 0, 4) + 0.2 * (Q.boost_railway || 0) +
-           (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 60) / 8;
+    return 40 + (bonus || 0) + 5 * Math.min(Q.militia || 0, 4) + 0.2 * (Q.boost_railway || 0) + 0.25 * (Q.boost_soldiers || 0) +
+           (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 60) / 8 + (Q.player_party === 'sr' ? 6 : 0);
   }
 
-  return {boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

@@ -13,8 +13,21 @@ Soviets are re-elected often. A campaign costs money for printing, halls and tra
 - @garrisons: Campaign in the garrisons and at the front. (1 resource)
 - @railways: Campaign among the railwaymen and postal workers. (1 resource)
 - @joint: A joint list with our bloc partner. (1 resource)
+- @villages: Campaign in the villages. (1 resource)
 - @speeches: Send speakers out with no printed material.
 - @easy_discard
+
+@villages
+view-if: player_party = 'sr'
+choose-if: resources >= 1
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+RO.boost(Q, {peasants: 7, soldiers: 2});
+RO.fac(Q, 'defencist', 1, 0);
+!}
+
+Speakers went out to the volost assemblies and the village gatherings. The peasants listen to the party that calls itself their own.
 
 @speeches
 on-arrival: {!
@@ -40,6 +53,7 @@ unavailable-subtitle: [? if resources < 1 : We have no resources. ?][? if bol_re
 on-arrival: {!
 RO.pay(Q, 1);
 RO.boost(Q, {soldiers: 6});
+Q.militia = (Q.militia || 0) + 0.5;
 RO.fac(Q, 'defencist', 1, 0);
 !}
 
@@ -57,13 +71,13 @@ RO.fac(Q, 'unions', 2, 0);
 The railwaymen and the telegraph clerks have their own union and their own politics. They trust the party that listens to them.
 
 @joint
-view-if: ally_sr >= 2 or ally_lsr >= 2
+view-if: ally_lvl >= 2 or ally_lsr >= 2
 choose-if: resources >= 1
 unavailable-subtitle: We have no resources.
 on-arrival: {!
 RO.pay(Q, 1);
 RO.boost(Q, {workers: 4, soldiers: 5, peasants: 3, railway: 3});
-RO.add(Q, {rel_sr: 2});
+RO.add(Q, {rel_ally: 2});
 RO.fac(Q, 'intl', 0, 1);
 !}
 

@@ -125,4 +125,50 @@ var whiteaid = {
   }),
   cards: ['reichsbanner', 'campaigning', 'media', 'rally', 'inter_party_relationships', 'fundraising', 'party_disunity', 'economic_democracy', 'labor_rights', 'social_welfare']
 };
-module.exports = {democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};
+var srCommon = {
+  february: [/Demand a Soviet government/, /Back Kerensky/],
+  april_theses: [/joint programme on the land/, /Chernov replies/],
+  first_coalition: [/cabinet without Kadets/, /Chernov takes Agriculture/],
+  sr_chernov_land: [/Legalise/, /Regulate/],
+  sr_left_wing: [/larger place/],
+  sr_chernov_leaves: [/Keep him in/],
+  sr_peasant_congress: [/Hold the Congress/],
+  sr_left_split: [/Reconcile/, /Let them go/],
+  brest: [/Vote against/, /Abstain/],
+  sr_komuch: [/Refuse/, /guarantees/],
+  kolchak: [/Pull out/, /Stay in/],
+  sr_ufa: [/Adopt the Ufa/],
+  sr_congress_1920: [/Demand free/],
+  nep: [/peasants' victory/],
+  land_committees: [/Draft a land socialisation/, /Back the committees/],
+  peasant_congress: [/Call a congress/, /village committees/, /rural cooperatives/],
+  peasant_meeting: [/Land and freedom/, /Whatever/],
+  people_army: [/Reject armed/, /self-defence/],
+  media: [/Land and Freedom/, /Constituent Assembly/],
+  campaigning: [/villages/, /railwaymen/, /garrisons/]
+};
+var sr_land = {
+  choices: merge(merge(democrat.choices, srCommon), {
+    sr_komuch: [/Refuse/], october: [/Leniency/, /Stay in the hall/, /Walk out/], vikzhel: [/Sign/]
+  }),
+  cards: ['land_committees', 'constitutional_reform', 'agricultural_policy', 'peasant_congress', 'inter_party_relationships', 'foreign_policy',
+          'international_relations', 'campaigning', 'peasant_meeting', 'media', 'economic_policy', 'military_policy', 'chernov', 'gots', 'zenzinov',
+          'party_disunity', 'fundraising', 'domestic_enemies', 'judiciary', 'economic_democracy', 'social_welfare', 'rally']
+};
+var sr_komuchbot = {
+  choices: merge(merge(opposition.choices, srCommon), {
+    february: [/Back Kerensky/], first_coalition: [/Chernov takes Agriculture/], october: [/Walk out/], vikzhel: [/Refuse/],
+    sr_komuch: [/Join Komuch, and raise/], kolchak: [/Stay in/], sr_ufa: [/Let the Ufa/], denikin: [/Stay neutral/], people_army: [/Raise the People/]
+  }),
+  cards: ['people_army', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'inter_party_relationships', 'fundraising', 'volsky']
+};
+var sr_peasant = {
+  choices: merge(merge(opposition.choices, srCommon), {
+    inter_party_relationships: [/moderate Bolsheviks/],
+    february: [/Back Kerensky/], first_coalition: [/Chernov takes Agriculture/], october: [/Walk out/], vikzhel: [/Refuse/],
+    sr_komuch: [/Refuse/], sr_ufa: [/Adopt the Ufa/], denikin: [/Mobilise/], expelled: [/Pledge/]
+  }),
+  cards: ['peasant_congress', 'land_committees', 'inter_party_relationships', 'domestic_enemies', 'judiciary', 'campaigning', 'peasant_meeting', 'media',
+          'social_welfare', 'economic_democracy', 'fundraising', 'party_disunity', 'international_relations', 'gots', 'zenzinov']
+};
+module.exports = {sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};

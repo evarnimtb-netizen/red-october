@@ -2,7 +2,7 @@ title: The British Labour Delegation
 subtitle: May 1920.
 new-page: true
 tags: event
-view-if: dix >= 80 and bol_regime = 1
+view-if: player_party = 'menshevik' and (dix >= 80 and bol_regime = 1)
 priority: 20
 max-visits: 1
 

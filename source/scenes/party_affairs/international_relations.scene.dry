@@ -7,7 +7,7 @@ tags: party_affairs
 view-if: international_relations_timer <= 0
 on-arrival: month_actions += 1; international_relations_timer = 6
 
-The Mensheviks belong to the same International as the German SPD, the British Labour Party and the French SFIO. Their opinion matters, to somebody.
+Russia's socialist parties belong to the same International as the German SPD, the British Labour Party and the French SFIO. Their opinion matters, to somebody.
 
 - @stockholm: Press for the Stockholm conference of socialists. (Only while the war lasts)
 - @prisoners: Ask European socialists to protest the arrest of our comrades.

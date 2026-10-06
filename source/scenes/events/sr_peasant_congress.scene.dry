@@ -1,0 +1,49 @@
+title: The Extraordinary Congress of Peasants' Deputies
+subtitle: Lenin courts the Left SRs.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 20
+priority: 20
+max-visits: 1
+
+= The Extraordinary Congress of Peasants' Deputies
+
+On 10 November the Extraordinary Congress of Soviets of Peasants' Deputies opened in Petrograd, with 330 delegates, and went on until the 25th. [? if bol_regime = 1 : The Bolsheviks have taken power in the capital, and Lenin has addressed the Left SR delegates directly, offering them places in the government, and the land decree that they themselves drafted. ?][? if bol_regime = 0 : The Bolsheviks tried to take power in the capital and failed. Lenin has nonetheless sent a delegation to the peasants' deputies, to win the Left SRs. ?]
+
+The Executive Committee of the peasants' soviets, elected by the village, is the party's. Whoever commands its Congress commands the villages, and the Left SRs are now openly asking that the peasants' soviets merge with the workers' and soldiers'.
+
+- @hold: Hold the Congress on the party's terms.
+- @merge: Allow the merger of the peasant and workers' soviets.
+- @boycott: Refuse to attend: the Congress is a Bolshevik trick.
+
+@hold
+on-arrival: {!
+Q.peasant_organised = (Q.peasant_organised || 0) + 1;
+RO.boost(Q, {peasants: 5});
+RO.add(Q, {soviet_democracy: 2, rel_lsr: 2});
+RO.fac(Q, 'rightdef', 0, 8);
+RO.fac(Q, 'intl', 2, 4);
+!}
+
+The Congress met and condemned the Bolshevik coup, and demanded a government of all the socialists. A third of the delegates, the Left SRs, would not vote for the resolution, and held a meeting of their own.
+
+@merge
+on-arrival: {!
+RO.boost(Q, {peasants: 2, workers: 1});
+RO.add(Q, {rel_lsr: 8, rel_bol: 5, soviet_democracy: -1});
+RO.fac(Q, 'intl', 5, -8);
+RO.fac(Q, 'rightdef', -3, 14);
+RO.fac(Q, 'defencist', 0, 6);
+!}
+
+The Congress voted to merge the peasant and workers' soviets into one body, to elect a joint executive and to support the Soviet government. The Left SRs are in the majority, the Right SRs have walked out, and the party's Executive Committee has been dissolved.
+
+@boycott
+on-arrival: {!
+RO.add(Q, {rel_bol: -4, rel_lsr: -6});
+RO.boost(Q, {peasants: -2});
+RO.fac(Q, 'intl', 0, 12);
+RO.fac(Q, 'rightdef', 2, -4);
+!}
+
+The Central Committee refused to send delegates. The Congress was held without us, under the Left SRs, who invited the Bolsheviks.

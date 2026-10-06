@@ -9,14 +9,14 @@ on-arrival: may_crisis_seen = 1;
 
 = The Cabinet in Crisis
 
-The Kadet ministers and the Soviet's ministers disagree about everything: the land, the eight-hour day, the army committees, the date of the Constituent Assembly. The Kadets have begun to talk about resignation. Tsereteli and Skobelev seek the middle ground, and the Internationalists in the party say that the compromise is a surrender.
+The Kadet ministers and the Soviet's ministers disagree about everything: the land, the eight-hour day, the army committees, the date of the Constituent Assembly. The Kadets have begun to talk about resignation. Tsereteli and Skobelev seek the middle ground, and [+ ilbl +] in the party say that the compromise is a surrender.
 
 - @keep: Keep the cabinet together, whatever the price.
 - @no_kadets: Move toward a government of the Soviet parties alone.
 
 @keep
 on-arrival: {!
-RO.add(Q, {rel_kad: 4, rel_sr: -2});
+RO.add(Q, {rel_kad: 4, rel_ally: -2});
 RO.fac(Q, 'defencist', 2, 0);
 RO.fac(Q, 'intl', 0, 6);
 !}
@@ -24,7 +24,7 @@ RO.fac(Q, 'intl', 0, 6);
 The cabinet holds. The party's ministers have given up more than the Kadets did.
 
 @no_kadets
-choose-if: rel_sr >= 55
+choose-if: rel_ally >= 55
 unavailable-subtitle: The SRs will not agree to this.
 on-arrival: {!
 Q.gov_kadets = 0;

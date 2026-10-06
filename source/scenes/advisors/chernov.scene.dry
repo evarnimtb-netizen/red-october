@@ -1,0 +1,30 @@
+title: Viktor Chernov
+is-pinned-card: true
+card-image: img/cards/chernov.svg
+tags: advisor, defencist
+new-page: true
+view-if: chernov_advisor = 1 and player_party = 'sr'
+
+= Viktor Chernov
+
+Chernov (1873-1952) is the party's leader and its theorist of land socialisation. He is Minister of Agriculture from May to August 1917 and will be elected chairman of the Constituent Assembly.
+
+- @action
+- @root: Return to main
+
+@action
+title: Land Socialisation
+subtitle: Chernov pushes the land law forward.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+Q.land_law_draft = 1; RO.add(Q, {land_pressure: -6, rel_kad: -3}); RO.boost(Q, {peasants: 5, soldiers: 1}); RO.fac(Q, 'rightdef', 0, 5); RO.fac(Q, 'defencist', 1, -1);
+!}
+
+Chernov's draft law is circulated to the land committees and the peasant soviets. It is the best argument that the party has, and the Kadets know it.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

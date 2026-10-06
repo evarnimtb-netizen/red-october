@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/tsereteli.svg
 tags: advisor, defencist
 new-page: true
-view-if: tsereteli_advisor = 1
+view-if: tsereteli_advisor = 1 and player_party = 'menshevik'
 
 = Irakli Tsereteli
 
@@ -21,7 +21,7 @@ on-arrival: {!
 Q.advisor_action_timer = 6;
 Q.last_advisor_action = 1;
 Q.month_actions += 1;
-RO.add(Q, {rel_kad: 5, rel_sr: 4, right_threat: -2}); RO.fac(Q, 'intl', 0, 3); RO.fac(Q, 'defencist', 1, -1);
+RO.add(Q, {rel_kad: 5, rel_ally: 4, right_threat: -2}); RO.fac(Q, 'intl', 0, 3); RO.fac(Q, 'defencist', 1, -1);
 !}
 
 Tsereteli's patience has kept the coalition together for another few weeks. The Internationalists complain that he is protecting the Kadets.

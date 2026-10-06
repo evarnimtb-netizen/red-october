@@ -34,7 +34,7 @@ RO.add(Q, {rel_kad: 3});
 RO.boost(Q, {middle: 2, soldiers: -2});
 !}
 
-We did not oppose the offensive, but we said that it must be limited. The Internationalists said we had done what the Allies wanted.
+We did not oppose the offensive, but we said that it must be limited. [+ Ilbl +] said we had done what the Allies wanted.
 
 @withhold
 on-arrival: {!

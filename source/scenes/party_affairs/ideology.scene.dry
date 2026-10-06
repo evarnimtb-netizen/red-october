@@ -1,18 +1,31 @@
-title: Defencism or Internationalism
+title: The Party Line
+subtitle: Move the party's line on the war and the government.
 card-image: img/cards/ideology.svg
-subtitle: Move the party's line on the war.
 new-page: true
 is-card: true
 tags: party_affairs
 view-if: ideology_timer <= 0
 on-arrival: month_actions += 1; ideology_timer = 4
 
-The party has no single line. The Revolutionary Defencists want to defend the revolution against the Kaiser and keep the alliance with the liberals. The Internationalists want an immediate general peace and a government of the socialists alone. [? if at_war = 0 : The war with Germany is over; the question is now how to treat the Bolshevik state. ?]
+[? if player_party = 'menshevik' : The party has no single line. The Revolutionary Defencists want to defend the revolution against the Kaiser and keep the alliance with the liberals. The Internationalists want an immediate general peace and a government of the socialists alone. ?][? if player_party = 'sr' : The party has no single line. The Right SRs want the war carried on and the coalition kept. Chernov's Centre wants a defensive war and a quick road to a general peace, and the land now. The Left SRs want an immediate peace, and no more compromise with the liberals. ?][? if at_war = 0 : The war with Germany is over; the question is now how to treat the Bolshevik state. ?]
 
-- @defencist: Move toward the Defencists.
-- @intl: Move toward the Internationalists.
-- @balance: Hold the middle and calm both wings.
+- @right: Move toward [+ flabel_rightdef +].
+- @defencist: Move toward [+ flabel_defencist +].
+- @intl: Move toward [+ flabel_intl +].
+- @balance: Hold the middle and calm all wings.
 - @easy_discard
+
+@right
+view-if: rightdef_strength > 0
+on-arrival: {!
+RO.fac(Q, 'rightdef', 5, -3);
+RO.fac(Q, 'defencist', -1, 2);
+RO.fac(Q, 'intl', -4, 8);
+Q.war_line += 2;
+RO.add(Q, {rel_kad: 3});
+!}
+
+The line hardens toward war to victory and toward the liberals. [+ flabel_intl +] are alarmed, and some of their younger members are looking at Lenin's paper.
 
 @defencist
 on-arrival: {!
@@ -20,10 +33,10 @@ RO.fac(Q, 'defencist', 5, 0);
 RO.fac(Q, 'rightdef', 2, -2);
 RO.fac(Q, 'intl', -3, 6);
 Q.war_line += 1;
-RO.add(Q, {rel_kad: 3, rel_sr: 1});
+RO.add(Q, {rel_kad: 3, rel_ally: 1});
 !}
 
-The majority is pleased. The Internationalists issued a statement of regret, and some of their younger members are looking at Lenin's paper.
+The majority is pleased. [+ flabel_intl +] issued a statement of regret.
 
 @intl
 on-arrival: {!
@@ -34,13 +47,11 @@ Q.war_line -= 1;
 RO.add(Q, {rel_kad: -3, rel_lsr: 2, rel_bol: 2});
 !}
 
-Martov's wing is happy. Potresov's wing is not, and has begun to write letters to the newspapers.
+The left wing is happy. [+ flabel_rightdef +] are not, and have begun to write letters to the newspapers.
 
 @balance
 on-arrival: {!
-RO.fac(Q, 'defencist', 0, -3);
-RO.fac(Q, 'intl', 0, -4);
-RO.fac(Q, 'rightdef', 0, -2);
+for (var f of Q.factions) { RO.fac(Q, f, 0, -3); }
 !}
 
 A carefully worded resolution satisfied nobody and offended nobody. For now.

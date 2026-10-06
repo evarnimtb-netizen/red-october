@@ -28,7 +28,7 @@ Q.july_repressed = 1;
 Loyal units dispersed the crowd, and the Bolshevik leaders went into hiding or to prison. It was a victory, and a bitter one: socialists arrested socialists. The Bolsheviks will not forget it.
 
 @power
-choose-if: rel_sr >= 60 and (militia >= 1 or army_discipline >= 45)
+choose-if: rel_ally >= 60 and (militia >= 1 or army_discipline >= 45)
 unavailable-subtitle: We lack the armed force and the SR's support for this.
 on-arrival: {!
 Q.took_power_july = 1;
@@ -56,4 +56,4 @@ RO.fac(Q, 'defencist', 0, 6);
 RO.fac(Q, 'rightdef', 0, 6);
 !}
 
-We refused to turn the Soviet against the Bolsheviks and the Soviet declined to sanction the arrest of the leaders. The Defencists say that we protect the people who tried to overthrow the revolution.
+We refused to turn the Soviet against the Bolsheviks and the Soviet declined to sanction the arrest of the leaders. [+ Dlbl +] say that we protect the people who tried to overthrow the revolution.

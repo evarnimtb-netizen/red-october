@@ -1,0 +1,50 @@
+title: The Eighth Congress of Soviets
+subtitle: The peasants' deputies.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 94 and bol_regime = 1
+priority: 30
+max-visits: 1
+
+= The Eighth Congress of Soviets
+
+In December 1920, the Eighth All-Russia Congress of Soviets met in Moscow. The delegates of the peasant soviets that the party still counts as its own spoke of the requisitions, of the shortage of seed and of the revolts in Tambov and the Volga. They were heard with attention, interrupted, and not answered.
+
+The war is won, and the state that won it is a party dictatorship. The question for the party is whether it can ask for a reform, or whether it must demand one.
+
+- @loyal: Speak as a loyal opposition.
+- @demand: Demand free elections to the peasant soviets.
+
+@loyal
+on-arrival: {!
+RO.add(Q, {repression: -1, rel_bol: 1});
+RO.boost(Q, {peasants: 1});
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+The peasants' delegates spoke as a loyal opposition, and were heard.
+
+@demand
+on-arrival: {!
+Q.free_ok = (Q.soviet_democracy >= 55 && Q.rel_bol >= 35 && Q.peasant_organised >= 2) ? 1 : 0;
+if (Q.free_ok) {
+    Q.free_soviets = 1;
+    RO.add(Q, {soviet_democracy: 10, repression: -6, rel_bol: 2});
+    RO.boost(Q, {peasants: 6, workers: 2});
+} else {
+    RO.add(Q, {soviet_democracy: 2, repression: 7, rel_bol: -5});
+    RO.boost(Q, {peasants: 4});
+    if (Q.legality > 1 && Q.repression >= 35) { Q.legality -= 1; }
+}
+RO.fac(Q, 'rightdef', 0, 4);
+RO.fac(Q, 'intl', 1, -2);
+!}
+go-to: sr_free_yes if free_ok = 1; sr_free_no if free_ok = 0
+
+@sr_free_yes
+
+The motion for free elections to the peasant soviets was introduced by the party's delegates and passed on a show of hands, with the support of the delegates of the Workers' Opposition. The Central Committee has agreed to hold new soviet elections in the spring, with opposition parties allowed to stand.
+
+@sr_free_no
+
+The motion was heard in silence and defeated. The delegates were told that they had made a speech that would be remembered. Several of them were arrested the same week.

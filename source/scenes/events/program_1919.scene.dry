@@ -2,7 +2,7 @@ title: The Economic Programme
 subtitle: Summer 1919.
 new-page: true
 tags: event
-view-if: dix >= 60 and bol_regime = 1
+view-if: player_party = 'menshevik' and (dix >= 60 and bol_regime = 1)
 priority: 25
 max-visits: 1
 on-arrival: {!

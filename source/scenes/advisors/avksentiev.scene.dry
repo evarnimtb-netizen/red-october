@@ -1,0 +1,30 @@
+title: Nikolai Avksentiev
+is-pinned-card: true
+card-image: img/cards/avksentiev.svg
+tags: advisor, rightdef
+new-page: true
+view-if: avksentiev_advisor = 1 and player_party = 'sr'
+
+= Nikolai Avksentiev
+
+Avksentiev (1878-1943) is a Right SR, Minister of the Interior in the summer of 1917 and chairman of the Pre-Parliament. In 1918 he will head the Ufa Directory.
+
+- @action
+- @root: Return to main
+
+@action
+title: Order and Republic
+subtitle: Avksentiev steadies the government, and angers the left.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {right_threat: -4, rel_kad: 3, soviet_democracy: -1}); RO.fac(Q, 'rightdef', 1, -3); RO.fac(Q, 'intl', 0, 6);
+!}
+
+Avksentiev's circular to the provincial commissars told them to uphold the law, and to arrest those who seized land by force. The Left SRs called it an outrage.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

@@ -1,0 +1,48 @@
+title: Vladimir Volsky
+is-pinned-card: true
+card-image: img/cards/volsky.svg
+tags: advisor, bund
+new-page: true
+view-if: volsky_advisor = 1 and player_party = 'sr'
+
+= Vladimir Volsky
+
+Volsky (1877-1946) is chairman of Komuch in Samara in 1918, and later the leader of the Ufa delegation that rejects armed struggle against the Bolsheviks.
+
+- @action
+- @action2
+- @root: Return to main
+
+@action
+title: Komuch
+subtitle: Volsky builds a government on the Volga with an armed force.
+choose-if: advisor_action_timer <= 0 and bol_regime = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (bol_regime = 1) : There is no Bolshevik government to fight. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+Q.armed_struggle = 1; Q.white_aid += 1; Q.komuch_alive = 1; RO.add(Q, {rel_bol: -6, repression: 4}); RO.boost(Q, {peasants: 3, middle: 2}); RO.fac(Q, 'rightdef', 2, -4); RO.fac(Q, 'intl', 0, 5);
+!}
+
+Volsky's Komuch has a government, a flag and an army of volunteers. It also has to rely on foreign bayonets.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.
+
+@action2
+title: Compromise
+subtitle: Volsky opens talks with the soviets.
+choose-if: advisor_action_timer <= 0 and bol_regime = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (bol_regime = 1) : There is no Bolshevik government to talk to. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {rel_bol: 6, repression: -2}); RO.fac(Q, 'bund', 3, -3); RO.fac(Q, 'rightdef', 0, 6); RO.fac(Q, 'intl', 0, -3);
+!}
+
+Volsky sent word to the Soviet government that the party was ready to talk. The Right SRs call it a betrayal, and the peasants call it common sense.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

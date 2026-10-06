@@ -1,0 +1,43 @@
+title: The Left Stands Out
+subtitle: Spiridonova at the First Congress of Soviets.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 11
+priority: 6
+max-visits: 1
+
+= The Left Stands Out
+
+At the First Congress of Soviets and at the party's own Third Congress, the Left SRs are a force: Maria Spiridonova, the revolutionary of 1906, who shot a governor and was tortured for it, Boris Kamkov, the party's expert on the village, Mark Natanson, the old populist. They call for an immediate peace, for the land without compensation, and for the party to quit the coalition.
+
+They do not yet call for a separate party. They have, however, begun to hold their own meetings.
+
+- @room: Give the Left SRs a larger place in the party.
+- @discipline: Remind them of party discipline.
+- @ignore: Say nothing.
+
+@room
+on-arrival: {!
+RO.fac(Q, 'intl', 6, -8);
+RO.fac(Q, 'rightdef', 0, 8);
+RO.fac(Q, 'defencist', -2, 2);
+RO.add(Q, {rel_lsr: 6});
+!}
+
+Spiridonova and Kamkov were given places on the Central Committee and their own column in the party's paper. The Right SRs were not pleased. The Left SRs are, for the moment, content.
+
+@discipline
+on-arrival: {!
+RO.fac(Q, 'intl', -4, 10);
+RO.fac(Q, 'rightdef', 0, -4);
+RO.add(Q, {rel_lsr: -8});
+!}
+
+A resolution of the Central Committee condemned factional meetings. The Left SRs held another one the next evening, and invited the press.
+
+@ignore
+on-arrival: {!
+RO.fac(Q, 'intl', 0, 4);
+!}
+
+We said nothing. The Left SRs took our silence for what it was.

@@ -4,7 +4,7 @@ subtitle: Speak to the factories and the garrison.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: rally_timer <= 0
+view-if: player_party = 'menshevik' and (rally_timer <= 0)
 on-arrival: month_actions += 1; rally_timer = 3
 go-to: bol_crowd if bolshevik >= 55 and bol_regime = 0 and phase <= 2; cheka_crowd if repression >= 30 and bol_regime = 1; main_rally if (bolshevik < 55 or bol_regime = 1 or phase > 2) and (repression < 30 or bol_regime = 0)
 
@@ -102,7 +102,7 @@ The soldiers cheered. The phrase "peace without annexations" is the Soviet's own
 @democracy
 on-arrival: {!
 RO.boost(Q, {workers: 2, railway: 3, soldiers: 1});
-RO.add(Q, {soviet_democracy: 2, rel_sr: 3, rel_lsr: 1});
+RO.add(Q, {soviet_democracy: 2, rel_ally: 3, rel_lsr: 1});
 !}
 
 We spoke for the Soviets as the free organs of the whole people, from the Mensheviks to the Left SRs. The railwaymen applauded the loudest.

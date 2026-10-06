@@ -1,6 +1,6 @@
 title: The Party Press
 card-image: img/cards/media.svg
-subtitle: [? if dix < 34 : Rabochaya Gazeta ?][? if dix >= 34 : Vsegda Vpered ?]
+subtitle: [? if player_party = 'menshevik' and dix < 34 : Rabochaya Gazeta ?][? if player_party = 'menshevik' and dix >= 34 : Vsegda Vpered ?][? if player_party = 'sr' : Delo Naroda ?]
 new-page: true
 is-card: true
 tags: party_affairs
@@ -14,6 +14,7 @@ on-arrival: month_actions += 1; media_timer = 3
 - @bolsheviks: Against the Bolsheviks.
 - @assembly: The Constituent Assembly and the land.
 - @soviets: Defence of soviet democracy.
+- @land: Land and Freedom: the land to those who work it.
 - @easy_discard
 
 @defence
@@ -48,10 +49,20 @@ A series of articles took apart the Bolshevik programme point by point. It was c
 @assembly
 on-arrival: {!
 RO.boost(Q, {peasants: 3, middle: 2, nations: 1});
-RO.add(Q, {rel_sr: 2, land_pressure: -1});
+RO.add(Q, {rel_ally: 2, land_pressure: -1});
 !}
 
 The Constituent Assembly will settle the land question, the form of the state and the war. The paper insisted that nothing should be settled before it.
+
+@land
+view-if: player_party = 'sr'
+on-arrival: {!
+RO.boost(Q, {peasants: 6, soldiers: 2});
+RO.add(Q, {land_pressure: -1, rel_kad: -1});
+RO.fac(Q, 'intl', 0, -2);
+!}
+
+The paper printed the land programme in plain words, with a cartoon of a landlord's estate carved into plots. It is read aloud in the villages by the one literate man.
 
 @soviets
 on-arrival: {!

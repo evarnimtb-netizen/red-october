@@ -4,7 +4,7 @@ subtitle: Arm the workers to defend our meetings and the revolution.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: reichsbanner_timer <= 0 and legality >= 1
+view-if: player_party = 'menshevik' and (reichsbanner_timer <= 0 and legality >= 1)
 on-arrival: month_actions += 1; reichsbanner_timer = 5
 
 [? if bol_regime = 0 : The Red Guard is Bolshevik, and the army is uncertain. The Right talks of order. A workers' militia answering to the Soviet is a weapon that the party can use without waiting for orders. ?][? if bol_regime = 1 : Arming workers against the Bolshevik state would be an act of civil war. Arming them against the Whites is another matter. ?]

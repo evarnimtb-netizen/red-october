@@ -1,0 +1,42 @@
+title: Chernov Leaves the Government
+subtitle: The Kadets' price.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 15 and chernov_gov = 1
+priority: 15
+max-visits: 1
+
+= Chernov Leaves the Government
+
+In the first days of August, after weeks of attacks by the Kadet and right-wing press, which accused him of defeatism and of land seizures, and of a speech about the Ukraine, Viktor Chernov submitted his resignation as Minister of Agriculture. Kerensky accepted it. The land law that he had been preparing was left unfinished.
+
+The Soviet and the party are alarmed. If the government can drive out the one minister the peasants trust, the peasants will draw the obvious conclusion.
+
+- @keep: Keep him in, at the price of the Kadets.
+- @let_go: Let him go, and keep the Kadets.
+
+@keep
+choose-if: rel_ally >= 50
+unavailable-subtitle: The Mensheviks will not agree to a government without the Kadets.
+on-arrival: {!
+Q.gov_kadets = 0;
+Q.homogeneous_gov = 1;
+Q.in_coalition = 1;
+RO.add(Q, {rel_kad: -10, right_threat: 4, soviet_democracy: 2});
+RO.boost(Q, {peasants: 3});
+RO.fac(Q, 'rightdef', 0, 8);
+RO.fac(Q, 'intl', 0, -4);
+!}
+
+The party and the Soviet told Kerensky that Chernov stays, and the Kadets do not. Kerensky has agreed, sulking. For the first time since February the cabinet has no liberals in it.
+
+@let_go
+on-arrival: {!
+Q.chernov_gov = 0;
+RO.add(Q, {rel_kad: 4, land_pressure: 3});
+RO.boost(Q, {peasants: -3});
+RO.fac(Q, 'intl', 3, 8);
+RO.fac(Q, 'defencist', -2, 4);
+!}
+
+Chernov has gone back to the party, and the land question has gone back to the Assembly. The Left SRs say that the party has thrown away its only minister.

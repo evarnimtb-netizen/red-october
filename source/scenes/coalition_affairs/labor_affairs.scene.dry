@@ -7,7 +7,7 @@ tags: coalition_affairs
 view-if: labor_affairs_timer <= 0
 on-arrival: month_actions += 1; labor_affairs_timer = 3
 
-Skobelev's ministry handles the strikes that sweep every industrial city. Employers want order and the factory committees want control. The party is both the workers' party and a party of government.
+The Ministry of Labour, in the Menshevik Skobelev's hands, handles the strikes that sweep every industrial city. Employers want order and the factory committees want control. The socialists are both the workers' parties and parties of government.
 
 - @arbitrate: Arbitrate the strikes through conciliation boards.
 - @committees: Legalise the factory committees and the eight-hour day.

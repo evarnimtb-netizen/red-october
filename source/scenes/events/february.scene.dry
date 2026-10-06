@@ -18,17 +18,22 @@ What should the party do?
 - @control: Lead the Soviet as a control body, and stay out of the government.
 - @enter: Take ministries in the first cabinet.
 - @soviet_gov: Demand a Soviet government now.
+- @sr_outside: Back Kerensky as the Soviet's man, and keep the party out of the government.
+- @sr_enter: Take ministries for the party.
+- @sr_soviet_gov: Demand a Soviet government now.
 
 @control
+view-if: player_party = 'menshevik'
 on-arrival: {!
 Q.in_coalition = 0;
-RO.add(Q, {rel_kad: 3, rel_sr: 3});
+RO.add(Q, {rel_kad: 3, rel_ally: 3});
 RO.fac(Q, 'defencist', 2, 0);
 !}
 
 Our reading of the revolution is that it is a bourgeois one, and that the bourgeoisie must govern. The Soviet will watch, advise and, when necessary, restrain it. It is a role that is both powerful and irresponsible.
 
 @enter
+view-if: player_party = 'menshevik'
 on-arrival: {!
 Q.in_coalition = 1;
 Q.gov_kadets = 1;
@@ -38,10 +43,11 @@ RO.fac(Q, 'intl', -2, 10);
 Q.resources += 1;
 !}
 
-Chkheidze was offered the Ministry of Labour. We have chosen to share responsibility with the liberals from the first day. The Internationalists object that we will share the blame as well.
+Chkheidze was offered the Ministry of Labour. We have chosen to share responsibility with the liberals from the first day. [+ Ilbl +] object that we will share the blame as well.
 
 @soviet_gov
-choose-if: rel_sr >= 60
+view-if: player_party = 'menshevik'
+choose-if: rel_ally >= 60
 unavailable-subtitle: The SRs will not agree to this.
 on-arrival: {!
 Q.in_coalition = 1;
@@ -55,3 +61,45 @@ RO.fac(Q, 'rightdef', 0, 10);
 !}
 
 The Menshevik and SR leaders have formed a government of the Soviet parties. The officers are alarmed and the Allies have withheld recognition. The Marxist doctrine that the revolution is a bourgeois one has been set aside, and nobody can say what will replace it.
+
+@sr_outside
+view-if: player_party = 'sr'
+on-arrival: {!
+Q.in_coalition = 0;
+RO.add(Q, {rel_kad: 3, rel_ally: 3});
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'rightdef', 0, 4);
+!}
+
+Kerensky has joined the cabinet as Minister of Justice, as an individual and without asking his party. The Party Council has said that the party will not follow him in, and has made clear that it will not turn him out, either. He is the Soviet's man in the government, and the Soviet's chosen hostage.
+
+@sr_enter
+view-if: player_party = 'sr'
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 1;
+RO.add(Q, {rel_kad: 6, bolshevik: 2});
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'rightdef', 3, -3);
+RO.fac(Q, 'intl', -2, 10);
+Q.resources += 1;
+!}
+
+The party has taken ministries, beside Kerensky and the liberals. The Right SRs call it a historic duty. The Left SRs say that the party has sold the revolution before it has begun.
+
+@sr_soviet_gov
+view-if: player_party = 'sr'
+choose-if: rel_ally >= 60
+unavailable-subtitle: The Mensheviks will not agree to this.
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 0;
+Q.homogeneous_gov = 1;
+RO.add(Q, {rel_kad: -20, right_threat: 12, ruble: -5, soviet_democracy: 3, army_discipline: 2});
+RO.boost(Q, {workers: 3, soldiers: 3, middle: -5});
+RO.fac(Q, 'intl', 4, -5);
+RO.fac(Q, 'defencist', 2, 3);
+RO.fac(Q, 'rightdef', -3, 10);
+!}
+
+The SR and Menshevik leaders have formed a government of the Soviet parties. The officers are alarmed and the Allies have withheld recognition. The party that has the votes of the peasants has taken the responsibility of power in the first week of the revolution.

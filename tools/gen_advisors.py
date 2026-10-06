@@ -9,7 +9,7 @@ ADVISORS = [
  ('martov', 'Julius Martov', 'intl', 'martov_advisor',
   "Martov (1873-1923) is the leader of the Internationalists and the old friend and opponent of Lenin. He proposed an all-socialist government on the night of the October Revolution.",
   'All-Socialist Government', 'Martov opens talks with the SRs, Left SRs and moderate Bolsheviks.', '', '',
-  "RO.add(Q, {rel_sr: 4, rel_lsr: 6, rel_bol: 6}); RO.fac(Q, 'intl', 2, -2); RO.fac(Q, 'rightdef', 0, 4);",
+  "RO.add(Q, {rel_ally: 4, rel_lsr: 6, rel_bol: 6}); RO.fac(Q, 'intl', 2, -2); RO.fac(Q, 'rightdef', 0, 4);",
   "Martov's circle has sent word to the Left SRs, to the moderate Bolsheviks and to the Chernov group of the SRs. The Right Defencists are not pleased."),
  ('dan', 'Fyodor Dan', 'defencist', 'dan_advisor',
   "Dan (1871-1947) is a physician and a leading figure in the Soviet executive. He will be the party's speaker at the 1919 and 1920 Congresses of Soviets.",
@@ -19,7 +19,7 @@ ADVISORS = [
  ('tsereteli', 'Irakli Tsereteli', 'defencist', 'tsereteli_advisor',
   "Tsereteli (1881-1959), a Georgian Menshevik returned from Siberian exile, is the architect of revolutionary defencism and the coalition. He is Minister of Posts and Telegraphs.",
   'Coalition Broker', 'Tsereteli keeps the cabinet together and smooths over disputes with the Kadets.', 'in_coalition = 1 and bol_regime = 0', 'We are not in a coalition government.',
-  "RO.add(Q, {rel_kad: 5, rel_sr: 4, right_threat: -2}); RO.fac(Q, 'intl', 0, 3); RO.fac(Q, 'defencist', 1, -1);",
+  "RO.add(Q, {rel_kad: 5, rel_ally: 4, right_threat: -2}); RO.fac(Q, 'intl', 0, 3); RO.fac(Q, 'defencist', 1, -1);",
   "Tsereteli's patience has kept the coalition together for another few weeks. The Internationalists complain that he is protecting the Kadets."),
  ('chkheidze', 'Nikolai Chkheidze', 'defencist', 'chkheidze_advisor',
   "Chkheidze (1864-1926), a Georgian Menshevik, is the Chairman of the Petrograd Soviet. He has the gavel and, for now, the room.",
@@ -59,7 +59,7 @@ ADVISORS = [
  ('broido', 'Eva Broido', 'intl', 'broido_advisor',
   "Eva Broido (1876-1941), an Internationalist, becomes the party's secretary in August 1917 and organises women workers.",
   'Party Secretary', "Broido strengthens the party's organisation and its work among women workers.", '', '',
-  "Q.members += 8; RO.boost(Q, {workers: 2, middle: 1}); RO.fac(Q, 'intl', 1, -2);",
+  "Q.members += 8 * Q.mem_scale; RO.boost(Q, {workers: 2, middle: 1}); RO.fac(Q, 'intl', 1, -2);",
   "Broido has opened new party branches and a women workers' circle. Membership is growing."),
  ('lidia', 'Lidia Dan', 'intl', 'lidia_advisor',
   "Lidia Dan (1878-1963) is Martov's sister and Fyodor Dan's wife, so she stands at the point where the party's two circles meet.",
@@ -88,8 +88,45 @@ ADVISORS = [
   "A delegation to Tiflis has seen a democratic republic with land reform, free elections and a working railway system. It is our best argument."),
 ]
 
-def esc_title(s):
-    return s
+MENSHEVIK = {'martov','dan','tsereteli','chkheidze','skobelev','gvozdev','potresov','axelrod','abramovich','liber','broido','lidia','sukhanov','batursky','khinchuk','zhordania'}
+
+# extra advisors for other parties: id, title, faction tag, flag, bio, party, [actions]
+# each action: (title, subtitle, extra choose-if, unavailable text, js, result)
+OTHERS = [
+ ('chernov', 'Viktor Chernov', 'defencist', 'chernov_advisor',
+  "Chernov (1873-1952) is the party's leader and its theorist of land socialisation. He is Minister of Agriculture from May to August 1917 and will be elected chairman of the Constituent Assembly.", 'sr',
+  [("Land Socialisation", "Chernov pushes the land law forward.", '', '',
+    "Q.land_law_draft = 1; RO.add(Q, {land_pressure: -6, rel_kad: -3}); RO.boost(Q, {peasants: 5, soldiers: 1}); RO.fac(Q, 'rightdef', 0, 5); RO.fac(Q, 'defencist', 1, -1);",
+    "Chernov's draft law is circulated to the land committees and the peasant soviets. It is the best argument that the party has, and the Kadets know it.")]),
+ ('avksentiev', 'Nikolai Avksentiev', 'rightdef', 'avksentiev_advisor',
+  "Avksentiev (1878-1943) is a Right SR, Minister of the Interior in the summer of 1917 and chairman of the Pre-Parliament. In 1918 he will head the Ufa Directory.", 'sr',
+  [("Order and Republic", "Avksentiev steadies the government, and angers the left.", '', '',
+    "RO.add(Q, {right_threat: -4, rel_kad: 3, soviet_democracy: -1}); RO.fac(Q, 'rightdef', 1, -3); RO.fac(Q, 'intl', 0, 6);",
+    "Avksentiev's circular to the provincial commissars told them to uphold the law, and to arrest those who seized land by force. The Left SRs called it an outrage.")]),
+ ('breshkovskaya', 'Ekaterina Breshko-Breshkovskaya', 'rightdef', 'breshkovskaya_advisor',
+  "Breshko-Breshkovskaya (1844-1934), the 'grandmother of the revolution', has spent thirty years in prison and exile. She is a Right SR, and the party's greatest symbol.", 'sr',
+  [("Founding Prestige", "The grandmother of the revolution speaks to the peasants and the soldiers.", '', '',
+    "RO.boost(Q, {peasants: 4, soldiers: 3, middle: 2}); RO.fac(Q, 'rightdef', 1, -2);",
+    "The old woman toured the front, and the garrison towns. Soldiers who had never read a party leaflet knelt to kiss her hand.")]),
+ ('gots', 'Abram Gots', 'unions', 'gots_advisor',
+  "Gots (1882-1940), a Right Centre leader, is chairman of the Soviet executive. He holds the Menshevik-SR bloc together, and is an old combat organiser.", 'sr',
+  [("Soviet Majority", "Gots votes the SR delegations together with the Mensheviks.", '', '',
+    "RO.add(Q, {rel_ally: 6, soviet_democracy: 1}); RO.boost(Q, {workers: 2, soldiers: 3, railway: 2}); RO.fac(Q, 'unions', 1, -1);",
+    "Gots met Dan and Tsereteli before every session, and the two delegations voted as one. The Bolsheviks call it the Menshevik-SR gang.")]),
+ ('zenzinov', 'Vladimir Zenzinov', 'unions', 'zenzinov_advisor',
+  "Zenzinov (1880-1953) is a member of the Central Committee and the party's organiser. In 1918 he will sit in the Directory, and be arrested in Kolchak's coup.", 'sr',
+  [("Party Machine", "Zenzinov builds the party's organisation and its membership.", '', '',
+    "Q.members += 20 * Q.mem_scale; RO.boost(Q, {peasants: 2, workers: 1}); RO.fac(Q, 'unions', 1, -4);",
+    "Zenzinov opened a dozen new provincial committees and put the old ones in order. The party's membership is growing.")]),
+ ('volsky', 'Vladimir Volsky', 'bund', 'volsky_advisor',
+  "Volsky (1877-1946) is chairman of Komuch in Samara in 1918, and later the leader of the Ufa delegation that rejects armed struggle against the Bolsheviks.", 'sr',
+  [("Komuch", "Volsky builds a government on the Volga with an armed force.", 'bol_regime = 1', 'There is no Bolshevik government to fight.',
+    "Q.armed_struggle = 1; Q.white_aid += 1; Q.komuch_alive = 1; RO.add(Q, {rel_bol: -6, repression: 4}); RO.boost(Q, {peasants: 3, middle: 2}); RO.fac(Q, 'rightdef', 2, -4); RO.fac(Q, 'intl', 0, 5);",
+    "Volsky's Komuch has a government, a flag and an army of volunteers. It also has to rely on foreign bayonets."),
+   ("Compromise", "Volsky opens talks with the soviets.", 'bol_regime = 1', 'There is no Bolshevik government to talk to.',
+    "RO.add(Q, {rel_bol: 6, repression: -2}); RO.fac(Q, 'bund', 3, -3); RO.fac(Q, 'rightdef', 0, 6); RO.fac(Q, 'intl', 0, -3);",
+    "Volsky sent word to the Soviet government that the party was ready to talk. The Right SRs call it a betrayal, and the peasants call it common sense.")]),
+]
 
 def main():
     os.makedirs(OUT, exist_ok=True)
@@ -103,7 +140,7 @@ is-pinned-card: true
 card-image: img/cards/{aid}.svg
 tags: advisor, {tag}
 new-page: true
-view-if: {flag} = 1
+view-if: {flag} = 1 and player_party = 'menshevik'
 
 = {title}
 
@@ -131,6 +168,50 @@ Q.month_actions += 1;
 """
         with open(os.path.join(OUT, aid + '.scene.dry'), 'w', encoding='utf-8') as f:
             f.write(text)
-    print('wrote', len(ADVISORS), 'advisors')
+    for (aid, title, tag, flag, bio, party, actions) in OTHERS:
+        acts = ''
+        scenes = ''
+        for i, (atitle, asub, cond, unavail, js, result) in enumerate(actions):
+            choose = 'advisor_action_timer <= 0' + (' and ' + cond if cond else '')
+            un = '[? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]'
+            if cond:
+                un += '[? if not (' + cond + ') : ' + unavail + ' ?]'
+            sid = 'action' if i == 0 else 'action%d' % (i + 1)
+            acts += '- @%s\n' % sid
+            scenes += f"""@{sid}
+title: {atitle}
+subtitle: {asub}
+choose-if: {choose}
+unavailable-subtitle: {un}
+on-arrival: {{!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+{js}
+!}}
+
+{result}
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.
+
+"""
+        text = f"""title: {title}
+is-pinned-card: true
+card-image: img/cards/{aid}.svg
+tags: advisor, {tag}
+new-page: true
+view-if: {flag} = 1 and player_party = '{party}'
+
+= {title}
+
+{bio}
+
+{acts}- @root: Return to main
+
+{scenes}"""
+        with open(os.path.join(OUT, aid + '.scene.dry'), 'w', encoding='utf-8') as f:
+            f.write(text.rstrip() + '\n')
+    print('wrote', len(ADVISORS), '+', len(OTHERS), 'advisors')
 
 main()

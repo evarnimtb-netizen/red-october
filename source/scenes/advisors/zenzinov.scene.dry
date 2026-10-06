@@ -1,0 +1,30 @@
+title: Vladimir Zenzinov
+is-pinned-card: true
+card-image: img/cards/zenzinov.svg
+tags: advisor, unions
+new-page: true
+view-if: zenzinov_advisor = 1 and player_party = 'sr'
+
+= Vladimir Zenzinov
+
+Zenzinov (1880-1953) is a member of the Central Committee and the party's organiser. In 1918 he will sit in the Directory, and be arrested in Kolchak's coup.
+
+- @action
+- @root: Return to main
+
+@action
+title: Party Machine
+subtitle: Zenzinov builds the party's organisation and its membership.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+Q.members += 20 * Q.mem_scale; RO.boost(Q, {peasants: 2, workers: 1}); RO.fac(Q, 'unions', 1, -4);
+!}
+
+Zenzinov opened a dozen new provincial committees and put the old ones in order. The party's membership is growing.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

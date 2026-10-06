@@ -4,7 +4,7 @@ subtitle: Fight for trade unions free of the state.
 new-page: true
 is-card: true
 tags: soviet_affairs
-view-if: labor_rights_timer <= 0
+view-if: player_party = 'menshevik' and labor_rights_timer <= 0
 on-arrival: month_actions += 1; labor_rights_timer = 3
 
 Boris Batursky and the union men argue that unions must not become the state's instrument. The Bolsheviks say a workers' state needs no independent union to defend workers against it.

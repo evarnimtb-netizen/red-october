@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/liber.svg
 tags: advisor, bund
 new-page: true
-view-if: liber_advisor = 1
+view-if: liber_advisor = 1 and player_party = 'menshevik'
 
 = Mark Liber
 

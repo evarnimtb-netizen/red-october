@@ -6,15 +6,15 @@ view-if: dix >= 21 and bol_regime = 1
 priority: 40
 max-visits: 1
 on-arrival: {!
-Q.vik_score = Q.rel_bol * 0.4 + Q.rel_lsr * 0.2 + Q.rel_sr * 0.15 + (Q.stayed_in_congress ? 10 : 0) + (Q.ally_bol >= 1 ? 5 : 0) + Q.soviet_democracy * 0.08 + (Q.insight ? 3 : 0);
+Q.vik_score = Q.rel_bol * 0.4 + Q.rel_lsr * 0.2 + Q.rel_ally * 0.15 + (Q.stayed_in_congress ? 10 : 0) + (Q.ally_bol >= 1 ? 5 : 0) + Q.soviet_democracy * 0.08 + (Q.insight ? 3 : 0);
 Q.vik_score_d = Math.round(Q.vik_score);
 !}
 
 = The Vikzhel Talks
 
-On 11 November the executive of the All-Russian Union of Railway Workers, Vikzhel, threatened a general rail strike unless the socialist parties formed a joint government. The Mensheviks, the SRs, the Left SRs, the Bolsheviks and the Vikzhel leaders sat down in a room.
+On 11 November the executive of the All-Russian Union of Railway Workers, Vikzhel, threatened a general rail strike unless the socialist parties formed a joint government. The Mensheviks, the SRs, the Left SRs, the Bolsheviks and the Vikzhel leaders sat down in a room. [? if player_party = 'sr' : Chernov was proposed as head of the new government. ?]
 
-The railway union has no army. It has no need of one: its members run the trains that bring Kerensky's troops to the capital, and the Bolsheviks' reinforcements to Moscow. Within a week, a draft agreement was reached for a government of all the socialist parties, without Lenin and Trotsky. The Central Committee of the Mensheviks split 12 to 11 on whether to sign.
+The railway union has no army. It has no need of one: its members run the trains that bring Kerensky's troops to the capital, and the Bolsheviks' reinforcements to Moscow. Within a week, a draft agreement was reached for a government of all the socialist parties, without Lenin and Trotsky. The Menshevik Central Committee split 12 to 11 on whether to sign.
 
 Kamenev, Rykov and several others resigned from the Bolshevik Central Committee on 17 November, in protest at Lenin's refusal to share power. The Bolsheviks in Moscow, meanwhile, are about to win the street fighting.
 
@@ -28,7 +28,7 @@ RO.fac(Q, 'intl', 0, 10);
 RO.fac(Q, 'defencist', 2, 0);
 !}
 
-The Menshevik delegation left the talks. The railway union lost its nerve. The Bolsheviks, having won in Moscow, have no need to talk.
+Our delegation left the talks. The railway union lost its nerve. The Bolsheviks, having won in Moscow, have no need to talk.
 
 @sign
 on-arrival: {!
@@ -42,7 +42,7 @@ if (Q.vik_ok) {
     Q.bolshevik = 40;
     Q.repression = 0;
     Q.soviet_democracy += 8;
-    RO.add(Q, {rel_bol: 8, rel_lsr: 6, rel_sr: 4});
+    RO.add(Q, {rel_bol: 8, rel_lsr: 6, rel_ally: 4});
     RO.fac(Q, 'intl', 2, -4);
     RO.fac(Q, 'defencist', -3, 6);
     RO.fac(Q, 'rightdef', 0, 12);

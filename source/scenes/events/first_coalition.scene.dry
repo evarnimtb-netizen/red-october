@@ -10,29 +10,33 @@ max-visits: 1
 
 On 18 May the first coalition cabinet was formed. Prince Lvov remains Prime Minister. Kerensky becomes Minister of War. The SR leader Viktor Chernov takes Agriculture, Tsereteli takes Posts and Telegraphs, and Skobelev takes Labour. Six socialist ministers sit with ten non-socialists.
 
-The Soviet executive is divided. Dan and Tsereteli say that dual power cannot continue. Martov and the Internationalists, and the Bolsheviks, say that the socialists will carry the blame for a policy that they cannot control.
+The Soviet executive is divided. Dan and Tsereteli say that dual power cannot continue. Martov and the Menshevik Internationalists, and the Bolsheviks, say that the socialists will carry the blame for a policy that they cannot control.
 
 - @enter: Enter the coalition.
 - @stay_out: Stay out, as a control body.
 - @no_kadets: Demand a cabinet without Kadets.
+- @sr_enter: Chernov takes Agriculture: enter the coalition.
+- @sr_stay_out: Leave the ministries to individuals, and stay out.
 
 @enter
+view-if: player_party = 'menshevik'
 on-arrival: {!
 Q.in_coalition = 1;
 Q.gov_kadets = 1;
 Q.skobelev_advisor = 1;
-RO.add(Q, {rel_kad: 4, rel_sr: 2, bolshevik: 2});
+RO.add(Q, {rel_kad: 4, rel_ally: 2, bolshevik: 2});
 RO.fac(Q, 'defencist', 4, 0);
 RO.fac(Q, 'intl', -2, 10);
 Q.resources += 1;
 !}
 
-The party has ministers in the government. The Defencists call it a historic duty. The Internationalists call it a hostage-taking.
+The party has ministers in the government. [+ Dlbl +] call it a historic duty. [+ Ilbl +] call it a hostage-taking.
 
 @stay_out
+view-if: player_party = 'menshevik'
 on-arrival: {!
 Q.in_coalition = 0;
-RO.add(Q, {rel_kad: -3, rel_sr: -5, right_threat: 2});
+RO.add(Q, {rel_kad: -3, rel_ally: -5, right_threat: 2});
 RO.fac(Q, 'intl', 5, -4);
 RO.fac(Q, 'defencist', -4, 10);
 !}
@@ -40,7 +44,8 @@ RO.fac(Q, 'defencist', -4, 10);
 We have stayed out of the cabinet. The SRs have entered without us, and it is no longer certain that the two parties act as one.
 
 @no_kadets
-choose-if: rel_sr >= 60 and ally_sr >= 2
+view-if: (player_party = 'menshevik' or player_party = 'sr')
+choose-if: rel_ally >= 60 and ally_lvl >= 2
 unavailable-subtitle: This needs a formal bloc with the SRs. (Alliance level 2.)
 on-arrival: {!
 Q.in_coalition = 1;
@@ -55,3 +60,30 @@ RO.fac(Q, 'rightdef', 0, 8);
 !}
 
 The Menshevik and SR leaders have formed a purely socialist government. The Kadets are in opposition. The bourgeoisie say that they will not support a government that has no place for them.
+
+@sr_enter
+view-if: player_party = 'sr'
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 1;
+Q.chernov_gov = 1;
+RO.add(Q, {rel_kad: 4, rel_ally: 2, bolshevik: 2});
+RO.fac(Q, 'defencist', 3, 0);
+RO.fac(Q, 'rightdef', 2, -2);
+RO.fac(Q, 'intl', -2, 10);
+Q.resources += 1;
+!}
+
+Chernov is Minister of Agriculture, and Kerensky is Minister of War. The party has the first chance in its history to carry out its programme, and the first risk of being blamed for failing to.
+
+@sr_stay_out
+view-if: player_party = 'sr'
+on-arrival: {!
+Q.in_coalition = 0;
+RO.add(Q, {rel_kad: -3, rel_ally: -5, right_threat: 2});
+RO.fac(Q, 'intl', 4, -3);
+RO.fac(Q, 'defencist', -4, 8);
+RO.fac(Q, 'rightdef', -3, 12);
+!}
+
+The Mensheviks have entered the cabinet without us, and Kerensky is there as an individual. Chernov, in the corridor, says that this is a mistake that history will not forgive; the Left SRs say the same, for the opposite reason.

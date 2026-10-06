@@ -1,0 +1,36 @@
+title: The Peasant Programme
+subtitle: Summer 1919.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 60 and bol_regime = 1
+priority: 25
+max-visits: 1
+on-arrival: {!
+Q.nep_early = 0;
+Q.prog_rb = Q.rel_bol;
+Q.prog_po = Q.peasant_organised;
+if (Q.peasant_organised >= 2 && Q.rel_bol >= 33 && Q.dix < 72) {
+    Q.nep_early = 1;
+    RO.add(Q, {bread: 10, soviet_democracy: 5, repression: -8, land_pressure: -5});
+    RO.boost(Q, {peasants: 5, workers: 2, middle: 3});
+}
+!}
+go-to: prog_nep if nep_early = 1; prog_none if nep_early = 0
+
+@prog_nep
+
+= The Peasant Programme Is Heard
+
+In the summer of 1919, with Denikin's armies advancing and the villages in revolt against the requisitions, Lenin and the Central Committee had to look for support among the peasants. The party's peasant congresses and its village committees, which had been organised for a year and a half, put forward a programme: end the requisitioning, give the peasants the right to sell their grain, leave the land with the village communities.
+
+Several of Lenin's colleagues, Bukharin and Rykov among them, had read it already. The Council of People's Commissars did not adopt it as such, but it did not condemn it. In July, the grain requisition was replaced by a fixed tax in kind in the provinces nearest the front; the experiment will be extended in the spring.
+
+It was called, in later years, "the NEP before the NEP".
+
+@prog_none
+
+= No Peasant Programme
+
+The summer of 1919 is a season of crisis: Denikin is advancing, the villages are in revolt against the requisitions, the cities are hungry. The party has no organised peasant movement behind it that the Bolsheviks need to listen to, or no contact with the Bolsheviks that would let it say so. The peasants rise by themselves, and are shot by themselves.
+
+*(Peasant congresses and a working relation with the moderate Bolsheviks make the programme possible.)*

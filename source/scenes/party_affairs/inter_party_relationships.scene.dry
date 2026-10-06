@@ -1,36 +1,37 @@
 title: Relations with Other Parties
+subtitle: Talks with the other socialists and with the Kadets.
 card-image: img/cards/inter_party_relationships.svg
-subtitle: Talks with the SRs, the Left SRs, the Bolsheviks and the Kadets.
 new-page: true
 is-card: true
 tags: party_affairs
 view-if: inter_party_relationships_timer <= 0
 on-arrival: month_actions += 1; inter_party_relationships_timer = 3
 
-The Menshevik-SR bloc is the Soviet majority, and every party is calculating how long it will last.
+The bloc of the Mensheviks and the SRs is the Soviet majority, and every party is calculating how long it will last.
 
-- @sr: Talks with the SRs. (Relations: [+ rel_sr : relationships +])
+- @partner: Talks with the [+ partner_name +]. (Relations: [+ rel_ally : relationships +])
 - @lsr: Talks with the Left SRs. (Relations: [+ rel_lsr : relationships +])
 - @bol: Talks with the moderate Bolsheviks. (Relations: [+ rel_bol : relationships +])
 - @kad: Talks with the Kadets. (Relations: [+ rel_kad : relationships +])
 - @formalize: Formalize an alliance with a partner.
 - @easy_discard
 
-@sr
+@partner
 on-arrival: {!
-RO.add(Q, {rel_sr: 8});
+RO.add(Q, {rel_ally: 8});
 RO.fac(Q, 'intl', 0, 1);
 !}
 
-Chernov and Gots came to a meeting of the two Soviet delegations. We agreed on the war, the Assembly and everything except the land.
+Delegations of the two parties met in the Soviet executive. We agreed on the war, the Assembly and everything except the land.
 
 @lsr
 on-arrival: {!
 RO.add(Q, {rel_lsr: 8, rel_kad: -1});
 RO.fac(Q, 'rightdef', 0, 1);
+if (Q.player_party == 'sr') { RO.fac(Q, 'intl', 0, -2); }
 !}
 
-Spiridonova and Kamkov are not our natural allies, but they speak for the villages and the Baltic Fleet, and they are not afraid to speak to us.
+[? if player_party = 'menshevik' : Spiridonova and Kamkov are not our natural allies, but they speak for the villages and the Baltic Fleet, and they are not afraid to speak to us. ?][? if player_party = 'sr' : Spiridonova and Kamkov are inside our party, and they say that the party has forgotten the peasants. We have listened, and promised to listen again. ?]
 
 @bol
 on-arrival: {!
@@ -54,23 +55,24 @@ The Kadets are the coalition's only serious bourgeois party. Milyukov listened p
 
 Formal alliances need relations of 40 for cooperation, 60 for a bloc and 75 for a coalition. Whom do you propose it to?
 
-- @form_sr: The SRs.
+- @form_partner: The [+ partner_name +].
 - @form_lsr: The Left SRs.
 - @form_bol: The Bolsheviks.
 - @back: Never mind.
 
-@form_sr
+@form_partner
 on-arrival: {!
 var lvl = 0;
-if (Q.rel_sr >= 75 && (Q.in_coalition || Q.assembly_survives || Q.vikzhel_deal)) { lvl = 3; }
-else if (Q.rel_sr >= 60) { lvl = 2; }
-else if (Q.rel_sr >= 40) { lvl = 1; }
-if (lvl > Q.ally_sr) { Q.ally_sr = lvl; Q.alliance_msg = 1; } else { Q.alliance_msg = 0; }
+if (Q.rel_ally >= 75 && (Q.in_coalition || Q.assembly_survives || Q.vikzhel_deal)) { lvl = 3; }
+else if (Q.rel_ally >= 60) { lvl = 2; }
+else if (Q.rel_ally >= 40) { lvl = 1; }
+if (lvl > Q.ally_lvl) { Q.ally_lvl = lvl; Q.alliance_msg = 1; } else { Q.alliance_msg = 0; }
 Q.alliance_level = lvl;
 !}
 go-to: formalized if alliance_msg = 1; not_formalized if alliance_msg = 0
 
 @form_lsr
+view-if: player_party = 'menshevik'
 on-arrival: {!
 var lvl = 0;
 if (Q.rel_lsr >= 75 && (Q.in_coalition || Q.assembly_survives || Q.vikzhel_deal)) { lvl = 3; }

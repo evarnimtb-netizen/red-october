@@ -4,7 +4,7 @@ subtitle: The party's own programme for the Soviet economy.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: neorevisionism_timer <= 0 and bol_regime = 1 and dix >= 44 and program_adopted = 0
+view-if: player_party = 'menshevik' and (neorevisionism_timer <= 0 and bol_regime = 1 and dix >= 44 and program_adopted = 0)
 on-arrival: month_actions += 1; neorevisionism_timer = 2
 
 The Bolshevik economic policy, War Communism, takes grain from the peasants by force. The factories are idle, the cities are starving and the party's economists have drafted an alternative: end requisitioning, allow free trade in grain, give the unions independence and restore a regulated market.

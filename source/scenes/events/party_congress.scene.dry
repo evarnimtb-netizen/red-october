@@ -2,7 +2,7 @@ title: The Extraordinary Party Congress
 subtitle: Martov's line, or the Defencists'?
 new-page: true
 tags: event
-view-if: dix >= 22
+view-if: player_party = 'menshevik' and (dix >= 22)
 priority: 20
 max-visits: 1
 on-arrival: lsr_split = 1;
@@ -38,7 +38,7 @@ RO.fac(Q, 'rightdef', 4, -6);
 RO.fac(Q, 'intl', -8, 20);
 Q.war_line += 1;
 Q.martov_line = 0;
-Q.members -= 8;
+Q.members -= 8 * Q.mem_scale;
 RO.add(Q, {rel_bol: -4, rel_kad: 3});
 !}
 

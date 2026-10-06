@@ -2,7 +2,7 @@ title: The Eighth Congress of Soviets
 subtitle: Dan's speech.
 new-page: true
 tags: event
-view-if: dix >= 94 and bol_regime = 1
+view-if: player_party = 'menshevik' and (dix >= 94 and bol_regime = 1)
 priority: 30
 max-visits: 1
 

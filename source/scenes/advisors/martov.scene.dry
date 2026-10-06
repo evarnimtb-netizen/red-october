@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/martov.svg
 tags: advisor, intl
 new-page: true
-view-if: martov_advisor = 1
+view-if: martov_advisor = 1 and player_party = 'menshevik'
 
 = Julius Martov
 
@@ -21,7 +21,7 @@ on-arrival: {!
 Q.advisor_action_timer = 6;
 Q.last_advisor_action = 1;
 Q.month_actions += 1;
-RO.add(Q, {rel_sr: 4, rel_lsr: 6, rel_bol: 6}); RO.fac(Q, 'intl', 2, -2); RO.fac(Q, 'rightdef', 0, 4);
+RO.add(Q, {rel_ally: 4, rel_lsr: 6, rel_bol: 6}); RO.fac(Q, 'intl', 2, -2); RO.fac(Q, 'rightdef', 0, 4);
 !}
 
 Martov's circle has sent word to the Left SRs, to the moderate Bolsheviks and to the Chernov group of the SRs. The Right Defencists are not pleased.

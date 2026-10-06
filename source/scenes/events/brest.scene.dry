@@ -20,8 +20,11 @@ Martov and Kamkov, the Left SR leader, both spoke against ratification. The Left
 - @against: Martov speaks against ratification.
 - @joint: Propose a joint defence programme with the Left SRs.
 - @accept: Accept the treaty as a necessity.
+- @sr_against: Vote against ratification with the Left SRs.
+- @sr_abstain: Abstain, and say that the peasants have not been asked.
 
 @against
+view-if: player_party = 'menshevik'
 on-arrival: {!
 RO.add(Q, {rel_lsr: 6, rel_bol: -2});
 RO.fac(Q, 'intl', 2, -2);
@@ -32,6 +35,7 @@ RO.boost(Q, {soldiers: 1, middle: 1});
 Martov spoke for the opposition: "the treaty is a shame, but your signing it is a disaster". It was the best speech of the Congress, and it was heard by nobody who mattered.
 
 @joint
+view-if: player_party = 'menshevik'
 choose-if: rel_lsr >= 45
 unavailable-subtitle: The Left SRs will not talk to us.
 on-arrival: {!
@@ -52,3 +56,25 @@ RO.fac(Q, 'defencist', 1, 0);
 !}
 
 We accepted the treaty as a fact. The Left SRs called it a betrayal of the revolution, and left the government.
+
+@sr_against
+view-if: player_party = 'sr'
+on-arrival: {!
+RO.add(Q, {rel_lsr: 6, rel_bol: -3});
+RO.boost(Q, {soldiers: 1, middle: 1});
+RO.fac(Q, 'intl', 2, -4);
+RO.fac(Q, 'rightdef', 0, 4);
+!}
+
+The SR delegates voted with the Left SRs against the treaty. It is a shameful peace; nobody in the party disagrees about that. The question is what the party proposes in its place, and the answer is a revolutionary war that nobody has the soldiers for.
+
+@sr_abstain
+view-if: player_party = 'sr'
+on-arrival: {!
+RO.add(Q, {rel_bol: 1});
+RO.fac(Q, 'intl', 0, 8);
+RO.fac(Q, 'rightdef', 0, 2);
+RO.boost(Q, {peasants: 1});
+!}
+
+We abstained, and said that a peace which the peasants and soldiers have not been asked about is the Assembly's business. The Left SRs called it cowardice.

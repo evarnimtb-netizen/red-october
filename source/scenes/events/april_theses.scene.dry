@@ -14,8 +14,11 @@ Even most Bolsheviks thought the theses mad. Plekhanov called them "delirium". M
 
 - @dismiss: Dismiss the theses. This is anarchism, not Marxism.
 - @unity: Invite Kamenev's wing to a unity conference.
+- @sr_denounce: Chernov replies: the Bolsheviks have copied our land programme and spoiled the rest.
+- @sr_land: Offer the Bolshevik left a joint programme on the land.
 
 @dismiss
+view-if: player_party = 'menshevik'
 on-arrival: {!
 RO.add(Q, {bolshevik: 2, rel_bol: -3});
 RO.fac(Q, 'defencist', 1, 0);
@@ -25,6 +28,7 @@ RO.fac(Q, 'intl', 0, 1);
 Sukhanov remarked that Lenin would be left alone, outside the revolution. This was an error: Lenin was outside the Soviet's consensus, and so was the whole population.
 
 @unity
+view-if: player_party = 'menshevik'
 on-arrival: {!
 RO.add(Q, {rel_bol: 8, bolshevik: -3});
 RO.fac(Q, 'rightdef', 0, 6);
@@ -33,3 +37,25 @@ Q.bol_unity = 1;
 !}
 
 A unity conference was held with the local Bolsheviks in Tiflis, Moscow and a number of provincial towns. Lenin ignored the results. Kamenev's wing, pleased with the contact, has become more critical of him.
+
+@sr_denounce
+view-if: player_party = 'sr'
+on-arrival: {!
+RO.add(Q, {bolshevik: 1, rel_bol: -4});
+RO.boost(Q, {peasants: 2, middle: 1});
+RO.fac(Q, 'rightdef', 1, -2);
+RO.fac(Q, 'intl', 0, 2);
+!}
+
+Chernov wrote, in the party's paper, that Lenin's land programme was lifted from the SRs word for word, and that the rest of the theses were anarchism. It is true on both counts. It is also an advertisement for the programme.
+
+@sr_land
+view-if: player_party = 'sr'
+on-arrival: {!
+RO.add(Q, {rel_bol: 6, bolshevik: -1});
+RO.fac(Q, 'rightdef', 0, 8);
+RO.fac(Q, 'intl', 2, -4);
+Q.bol_unity = 1;
+!}
+
+Some Bolsheviks have come to the Left SRs with a proposal for a common platform on the land. Lenin, who calls the SRs petty bourgeois, has not objected. The Right SRs are scandalised.

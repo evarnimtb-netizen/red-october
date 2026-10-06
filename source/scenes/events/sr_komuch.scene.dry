@@ -1,0 +1,64 @@
+title: Komuch
+subtitle: A government on the Volga.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 33 and bol_regime = 1
+priority: 30
+max-visits: 1
+on-arrival: {!
+Q.volsky_advisor = 1;
+!}
+
+= Komuch
+
+In late May a Czechoslovak Legion of about 40,000 men, travelling east on the Trans-Siberian railway to rejoin the Allies, clashed with local Soviet authorities and took the towns along the line. On 8 June, in Samara, a group of SR members of the dissolved Constituent Assembly, under the party's Vladimir Volsky, proclaimed a Committee of Members of the Constituent Assembly, Komuch, under the Legion's protection. Komuch has declared itself the government of Russia, flies the red flag and is calling up an army.
+
+It is the party's own government. It has a programme: the Assembly, the land to the peasants, the eight-hour day. It also has foreign bayonets, and every officer in the neighbourhood.
+
+- @join: Join Komuch, and raise an army.
+- @guarantees: Join Komuch, but only with the Mensheviks' guarantees for the workers.
+- @refuse: Refuse: there will be no armed struggle against the soviets.
+
+@join
+on-arrival: {!
+Q.armed_struggle = 1;
+Q.komuch_alive = 1;
+Q.white_aid += 2;
+RO.add(Q, {rel_bol: -15, repression: 8, soviet_democracy: -3});
+RO.boost(Q, {peasants: 4, middle: 4, workers: -4});
+RO.fac(Q, 'rightdef', 4, -8);
+RO.fac(Q, 'intl', 0, 20);
+RO.fac(Q, 'bund', 0, 6);
+Q.members -= 12 * Q.mem_scale;
+if (Q.legality > 1) { Q.legality -= 1; }
+!}
+
+The party's Central Committee has endorsed Komuch and called on its members to join the People's Army. The Bolsheviks have declared the party an enemy of the Soviet power, and will treat its members in Moscow as hostages.
+
+@guarantees
+choose-if: rel_ally >= 55 and ally_lvl >= 1
+unavailable-subtitle: The Mensheviks will not give guarantees to a party they are not allied with.
+on-arrival: {!
+Q.armed_struggle = 1;
+Q.komuch_alive = 1;
+Q.white_aid += 1;
+RO.add(Q, {rel_ally: 6, rel_bol: -10, repression: 4});
+RO.boost(Q, {peasants: 3, workers: 1, middle: 2});
+RO.fac(Q, 'rightdef', 2, -4);
+RO.fac(Q, 'intl', 0, 12);
+Q.members -= 6 * Q.mem_scale;
+!}
+
+Komuch has been persuaded to publish a labour programme, drafted by the Mensheviks: the eight-hour day, union freedoms, no return of the landowners' estates. The Mensheviks have sent a delegation to Samara, and have said that they will not fight beside the generals. The Bolsheviks have not noticed the difference.
+
+@refuse
+on-arrival: {!
+Q.armed_struggle = 0;
+RO.fac(Q, 'bund', 5, -3);
+RO.add(Q, {rel_bol: 2});
+RO.fac(Q, 'rightdef', 0, 10);
+RO.fac(Q, 'intl', 0, -3);
+RO.boost(Q, {middle: -2});
+!}
+
+The Central Committee has said that the party will not take up arms against a Soviet government that millions of peasants and workers voted for, and will not shelter under the Czech bayonets. Volsky has gone to Samara anyway. The Right SRs are furious.

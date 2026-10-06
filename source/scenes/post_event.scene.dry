@@ -44,9 +44,9 @@ if (Q.month_actions >= 1) {
     // membership follows the party's popularity and its legal status
     RO.clampStats(Q);
     RO.updatePolls(Q);
-    Q.members += Q.turn_length * (0.7 * (Q.player_poll - 9) - (3 - Q.legality) * 1.5 - Q.repression / 25);
+    Q.members += Q.turn_length * Q.mem_scale * (0.7 * (Q.player_poll - 9) - (3 - Q.legality) * 1.5 - Q.repression / 25);
     if (Q.members < 3) { Q.members = 3; }
-    Q.dues_income = Math.max(1, Math.round(Q.members / 60));
+    Q.dues_income = Math.max(1, Math.round(Q.members / Q.mem_div));
 }
 RO.clampStats(Q);
 RO.updateFactions(Q);
@@ -57,7 +57,7 @@ RO.display(Q);
 if (!Q.game_end) {
     if (Q.bol_regime && Q.white_front >= 72) {
         Q.game_end = 1; Q.ending = 'white';
-    } else if (Q.bol_regime && Q.legality <= 0 && Q.members <= 12) {
+    } else if (Q.bol_regime && Q.legality <= 0 && Q.members <= 12 * Q.mem_scale) {
         Q.game_end = 1; Q.ending = 'exile';
     } else if (Q.year >= 1922) {
         Q.game_end = 1; Q.ending = 'final';

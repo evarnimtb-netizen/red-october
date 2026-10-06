@@ -15,9 +15,11 @@ It is a retreat in the economy, and an advance in the politics: a revolution tha
 [? if nep_early = 1 : The Mensheviks' programme of 1919 had been listened to, in part, two years earlier. The policy that is now called the NEP has been in practice in some provinces since then. ?]
 
 - @claim: Claim the NEP as our own programme.
+- @sr_claim: Say that the NEP is the peasants' victory.
 - @demand: Demand political freedom to match.
 
 @claim
+view-if: player_party = 'menshevik'
 on-arrival: {!
 RO.boost(Q, {workers: 3, peasants: 3, middle: 4});
 RO.add(Q, {bread: 4, rel_bol: -2});
@@ -37,3 +39,14 @@ if (Q.repression >= 30 && Q.legality > 1) { Q.legality -= 1; }
 !}
 
 We said that a market without freedom was half a policy. The Bolsheviks, who agree that it is half a policy, regard the other half as a luxury.
+
+@sr_claim
+view-if: player_party = 'sr'
+on-arrival: {!
+RO.boost(Q, {peasants: 4, middle: 3, workers: 1});
+RO.add(Q, {bread: 4, rel_bol: -2});
+if (Q.peasant_organised >= 2) { RO.boost(Q, {peasants: 3}); Q.soviet_democracy += 2; }
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+We said that the peasants' revolts and the party's peasant congresses had forced the Bolsheviks to give way, and that the tax in kind and the market were the first fruit of the land programme of 1917. The villages agree. The Bolsheviks do not like to be reminded.

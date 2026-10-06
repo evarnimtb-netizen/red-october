@@ -16,7 +16,7 @@ The Constituent Assembly is drafting a constitution. The structure of the state 
 
 @federal
 on-arrival: {!
-RO.add(Q, {soviet_democracy: 6, rel_sr: 2, rel_kad: -3, right_threat: -2});
+RO.add(Q, {soviet_democracy: 6, rel_ally: 2, rel_kad: -3, right_threat: -2});
 RO.boost(Q, {workers: 3, nations: 4, peasants: 2});
 RO.fac(Q, 'unions', 1, -2);
 Q.constitution = 1;
@@ -37,7 +37,7 @@ The Assembly adopted a presidency. The generals will not like it, and they will 
 
 @assembly
 on-arrival: {!
-RO.add(Q, {soviet_democracy: 3, right_threat: 4, rel_sr: 3});
+RO.add(Q, {soviet_democracy: 3, right_threat: 4, rel_ally: 3});
 RO.boost(Q, {peasants: 3, workers: 1});
 Q.constitution = 3;
 !}

@@ -1,0 +1,67 @@
+title: Peasant and Soldier Meeting
+card-image: img/cards/peasant_meeting.svg
+subtitle: Speak to the village assembly and the regiment.
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: player_party = 'sr' and peasant_meeting_timer <= 0
+on-arrival: month_actions += 1; peasant_meeting_timer = 3
+
+The party's voice carries furthest in the villages and the barracks, where almost everyone who can vote has already decided that they are an SR. What is the theme?
+
+- @land: Land and freedom: the land to those who work it.
+- @assembly: Wait for the Constituent Assembly, and trust it.
+- @defence: Defend the revolution, and the army that defends it.
+- @peace: Peace without annexations.
+- @local: Whatever the audience is asking about.
+- @easy_discard
+
+@land
+on-arrival: {!
+RO.boost(Q, {peasants: 5, soldiers: 2});
+RO.add(Q, {land_pressure: -1, rel_kad: -1});
+RO.fac(Q, 'intl', 0, -3);
+RO.fac(Q, 'rightdef', 0, 2);
+!}
+
+The assembly of the village listened in silence and then voted a resolution. The land, they said, is God's and the people's, and the landowner's claim is a bad joke.
+
+@assembly
+on-arrival: {!
+RO.boost(Q, {peasants: 3, middle: 2, nations: 1});
+RO.add(Q, {rel_kad: 1});
+RO.fac(Q, 'rightdef', 1, -2);
+RO.fac(Q, 'intl', 0, 4);
+!}
+
+We told the peasants that the Assembly will settle the land question fairly, and that nobody should take the law into their own hands. A few village elders agreed. Several younger men did not.
+
+@defence
+view-if: at_war = 1
+on-arrival: {!
+RO.boost(Q, {soldiers: 3, peasants: 2, middle: 2});
+Q.militia = (Q.militia || 0) + 0.5;
+RO.fac(Q, 'rightdef', 2, -1);
+RO.fac(Q, 'intl', -1, 4);
+RO.add(Q, {rel_kad: 2, war_weariness: 1});
+!}
+
+The regiment cheered for Kerensky, and the revolution, and the cause of the Allies, in that order. They would like to go home.
+
+@peace
+view-if: at_war = 1
+on-arrival: {!
+RO.boost(Q, {soldiers: 4, peasants: 3});
+RO.fac(Q, 'intl', 3, -3);
+RO.fac(Q, 'rightdef', -1, 3);
+RO.add(Q, {army_discipline: -1});
+!}
+
+The soldiers shouted themselves hoarse. A general peace is the only subject on which the regiment and its colonel disagree entirely.
+
+@local
+on-arrival: {!
+RO.boost(Q, {peasants: 3, soldiers: 1, middle: 1});
+!}
+
+We answered what we were asked: the price of salt, the horses requisitioned for the army, the soldiers' families' allowances.

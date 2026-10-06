@@ -1,0 +1,47 @@
+title: Peasant Congress
+card-image: img/cards/peasant_congress.svg
+subtitle: Fight for the peasant soviets.
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: (player_party = 'sr' or player_party = 'lsr') and peasant_congress_timer <= 0
+on-arrival: month_actions += 1; peasant_congress_timer = 5
+
+The Soviets of Peasants' Deputies are the party's own organisations, and the Bolsheviks have none of their own. Whoever controls them controls the villages. (Peasants organised so far: [+ peasant_organised +].)
+
+- @call: Call a congress of peasants' deputies. (1 resource)
+- @committees: Work through the village committees and the volost soviets.
+- @coops: Support rural cooperatives and peasant credit.
+- @easy_discard
+
+@call
+choose-if: resources >= 1
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+RO.boost(Q, {peasants: 6, soldiers: 2});
+RO.add(Q, {soviet_democracy: 2});
+RO.fac(Q, 'defencist', 1, -1);
+Q.peasant_organised = (Q.peasant_organised || 0) + 1;
+!}
+
+Delegates from the provincial peasant soviets met for a week, and voted resolutions on the land, the war and the Assembly. It is the closest the party has to a parliament of its own.
+
+@committees
+on-arrival: {!
+RO.boost(Q, {peasants: 4});
+RO.add(Q, {land_pressure: -1});
+Q.peasant_organised = (Q.peasant_organised || 0) + 0.5;
+!}
+
+Our agitators have worked the volost soviets, one by one, as they have always done. It is slow, and no other party can match it.
+
+@coops
+on-arrival: {!
+RO.boost(Q, {peasants: 3, middle: 2});
+RO.add(Q, {bread: 1, ruble: 1});
+Q.resources += 1;
+Q.coops = (Q.coops || 0) + 1;
+!}
+
+The rural cooperatives lend, buy and sell for the villages. They are the best argument for the party's land programme.

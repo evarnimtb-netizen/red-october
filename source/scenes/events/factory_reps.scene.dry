@@ -2,7 +2,7 @@ title: The Factory Representatives
 subtitle: The workers elect their own assemblies.
 new-page: true
 tags: event
-view-if: dix >= 28 and bol_regime = 1
+view-if: player_party = 'menshevik' and (dix >= 28 and bol_regime = 1)
 priority: 5
 max-visits: 1
 

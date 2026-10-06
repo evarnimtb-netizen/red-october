@@ -36,10 +36,10 @@ RO.boost(Q, {middle: 1});
 The Congress endorsed the coalition by a large majority. The Congress established a Central Executive Committee: the party has a hundred and twenty-three of the three hundred and twenty places.
 
 @power
-choose-if: rel_sr >= 50
+choose-if: rel_ally >= 50
 unavailable-subtitle: The SRs will not support this.
 on-arrival: {!
-RO.add(Q, {rel_kad: -5, soviet_democracy: 3, rel_sr: 2, rel_lsr: 4, rel_bol: 3, right_threat: 3});
+RO.add(Q, {rel_kad: -5, soviet_democracy: 3, rel_ally: 2, rel_lsr: 4, rel_bol: 3, right_threat: 3});
 RO.boost(Q, {workers: 2, soldiers: 2, railway: 1});
 RO.fac(Q, 'intl', 3, -4);
 RO.fac(Q, 'defencist', -2, 5);

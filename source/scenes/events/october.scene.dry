@@ -34,7 +34,7 @@ At the Smolny Institute, the Second Congress of Soviets opened under Bolshevik c
 
 The Bolsheviks govern in the name of the Soviets. Trotsky told the Mensheviks as they left that they had been "swept into the dustbin of history".
 
-- @walkout: Walk out with the Defencists and SRs.
+- @walkout: Walk out with the other moderate socialists.
 - @stay: Stay in the hall and fight for a coalition.
 
 @walkout
@@ -42,25 +42,25 @@ on-arrival: {!
 RO.fac(Q, 'defencist', 2, 0);
 RO.fac(Q, 'intl', 0, 10);
 RO.fac(Q, 'rightdef', 2, 6);
-RO.add(Q, {rel_bol: -8, rel_sr: 2, soviet_democracy: -3});
+RO.add(Q, {rel_bol: -8, rel_ally: 2, soviet_democracy: -3});
 Q.stayed_in_congress = 0;
 !}
 
-The Mensheviks and the SRs walked out and left the Congress to the Bolsheviks and the Left SRs. Martov and the Internationalists stayed long enough to propose an all-socialist government. It has never been clear whether it was a mistake to leave.
+The Mensheviks and the SRs walked out and left the Congress to the Bolsheviks and the Left SRs. Martov, who was not a Bolshevik and not a Defencist, stayed long enough to propose an all-socialist government. It has never been clear whether it was a mistake to leave.
 
 @stay
 choose-if: rel_lsr >= 35 or rel_bol >= 35
 unavailable-subtitle: Neither the Left SRs nor the Bolsheviks would listen.
 on-arrival: {!
 Q.stayed_in_congress = 1;
-RO.add(Q, {rel_bol: 5, rel_lsr: 4, rel_sr: -3, soviet_democracy: 1});
+RO.add(Q, {rel_bol: 5, rel_lsr: 4, rel_ally: -3, soviet_democracy: 1});
 RO.boost(Q, {workers: 2});
 RO.fac(Q, 'defencist', 0, 10);
 RO.fac(Q, 'rightdef', 0, 14);
 RO.fac(Q, 'intl', 3, -4);
 !}
 
-We stayed in the hall. The Right Defencists and the SRs left without us; the Left SRs listened to our proposal for a coalition and half of the Bolsheviks nodded. Lenin did not. We are still in the Soviet, and still, formally, in the revolution.
+We stayed in the hall. [? if player_party = 'menshevik' : [+ Rlbl +] and the SRs left without us; ?][? if player_party = 'sr' : The Right SRs and the Mensheviks left without us; ?]the Left SRs listened to our proposal for a coalition and half of the Bolsheviks nodded. Lenin did not. We are still in the Soviet, and still, formally, in the revolution.
 
 @oct_failed
 
@@ -83,7 +83,7 @@ RO.fac(Q, 'intl', 1, -4);
 Q.no_terror = 1;
 !}
 
-Leniency was unpopular among the Defencists, who said that it would invite another attempt. It may. But the Bolsheviks' own claim to be the champions of democracy is hard to keep up, if their leaders were pardoned by the party that they said had betrayed it.
+Leniency was unpopular among [+ dlbl +], who said that it would invite another attempt. It may. But the Bolsheviks' own claim to be the champions of democracy is hard to keep up, if their leaders were pardoned by the party that they said had betrayed it.
 
 @repress
 on-arrival: {!
@@ -94,4 +94,4 @@ RO.fac(Q, 'rightdef', 2, -4);
 Q.no_terror = 0;
 !}
 
-The party was banned and its leaders imprisoned. The Internationalists said that it was the first act of a regime of terror, and the Right said that it was only a start.
+The party was banned and its leaders imprisoned. [+ Ilbl +] said that it was the first act of a regime of terror, and the Right said that it was only a start.

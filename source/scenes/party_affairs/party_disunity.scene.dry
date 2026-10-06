@@ -1,19 +1,19 @@
 title: Party Unity
-card-image: img/cards/party_disunity.svg
 subtitle: Manage the party's quarrels.
+card-image: img/cards/party_disunity.svg
 new-page: true
 is-card: true
 tags: party_affairs
 view-if: party_disunity_timer <= 0
 on-arrival: month_actions += 1; party_disunity_timer = 4
 
-Menshevism has always been a party of tendencies, and the tendencies do not like one another. Whom will you spend the time to reassure? (Internal dissent: [+ d_dissent : dissent +].)
+The party has always been a party of tendencies, and the tendencies do not like one another. Whom will you spend the time to reassure? (Internal dissent: [+ d_dissent : dissent +].)
 
-- @intl: The Internationalists.
-- @defencist: The Revolutionary Defencists.
-- @rightdef: The Right Defencists.
-- @unions: The trade unionists and cooperators.
-- @bund: The Bund.
+- @intl: [+ flabel_intl +].
+- @defencist: [+ flabel_defencist +].
+- @rightdef: [+ flabel_rightdef +].
+- @unions: [+ flabel_unions +].
+- @bund: [+ flabel_bund +].
 - @all: A party conference for everyone.
 - @easy_discard
 
@@ -23,7 +23,7 @@ RO.fac(Q, 'intl', 0, -10);
 RO.fac(Q, 'defencist', 0, 2);
 !}
 
-Martov and Sukhanov were given a column in the paper and a place on the Soviet committee. They are, for a time, content.
+A column in the paper and a place on the executive committee have been found for [+ flabel_intl +]. They are, for a time, content.
 
 @defencist
 on-arrival: {!
@@ -31,7 +31,7 @@ RO.fac(Q, 'defencist', 0, -8);
 RO.fac(Q, 'intl', 0, 2);
 !}
 
-Tsereteli's circle has been reassured that the party will not leave the coalition. The Internationalists are suspicious.
+[+ flabel_defencist +] have been reassured that the line will not change. The left wing is suspicious.
 
 @rightdef
 view-if: rightdef_strength > 0
@@ -40,22 +40,24 @@ RO.fac(Q, 'rightdef', 0, -10);
 RO.fac(Q, 'intl', 0, 3);
 !}
 
-Potresov was flattered with an invitation to write the editorial. He will not stay flattered long.
+[+ flabel_rightdef +] were flattered with an invitation to write the editorial. They will not stay flattered long.
 
 @unions
+view-if: unions_strength > 0
 on-arrival: {!
 RO.fac(Q, 'unions', 0, -8);
 !}
 
-The union men want to be left alone to run their unions, and we have promised to leave them alone.
+[+ flabel_unions +] want to be consulted on every important decision, and have been promised that they will be.
 
 @bund
+view-if: bund_strength > 0
 on-arrival: {!
 RO.fac(Q, 'bund', 0, -8);
 RO.fac(Q, 'defencist', 0, 1);
 !}
 
-The Bund is a party inside our party, with its own press, its own members and its own memory of the pogroms. We have promised to speak for it in the Soviet.
+[+ flabel_bund +] are a current with its own press, its own members and its own memory. They have been promised a voice in the committee.
 
 @all
 choose-if: resources >= 1

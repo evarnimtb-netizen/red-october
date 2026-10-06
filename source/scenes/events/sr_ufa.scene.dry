@@ -1,0 +1,41 @@
+title: The Ufa Delegation
+subtitle: A group in the party rejects armed struggle.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 66 and bol_regime = 1
+priority: 25
+max-visits: 1
+
+= The Ufa Delegation
+
+In the autumn of 1919, with Kolchak routed and Denikin at Orel, a delegation of the party's members who had been in the Ufa Directory returned to Soviet Russia. Led by Volsky, it told the party that armed struggle against the Bolsheviks had only helped the generals, that the party should lay down its arms and ask for the soviets to be reformed from the inside.
+
+They have asked the Central Committee to accept their line for the whole party. If it will not, they say, they will found a party of their own, the Minority SR Party.
+
+- @adopt: Adopt the Ufa line for the whole party.
+- @expel: Let the Ufa delegation go to form its own party.
+
+@adopt
+on-arrival: {!
+Q.armed_struggle = 0;
+Q.white_aid = 0;
+Q.ufa_line = 1;
+RO.add(Q, {rel_bol: 6, repression: -4});
+RO.fac(Q, 'bund', 10, -5);
+RO.fac(Q, 'rightdef', 0, 12);
+RO.fac(Q, 'intl', 0, -4);
+if (Q.rel_bol >= 30 && Q.legality < 2) { Q.legality = 2; }
+!}
+
+The Central Committee voted by a narrow margin to renounce armed struggle against the Soviet government and to ask for readmission to the soviets. The Right SRs, in exile, call it a surrender.
+
+@expel
+on-arrival: {!
+Q.members -= 10 * Q.mem_scale;
+Q.bund_strength = 0;
+RO.fac(Q, 'rightdef', 2, 0);
+RO.add(Q, {rel_bol: -2});
+RO.boost(Q, {peasants: -2});
+!}
+
+The Ufa delegation left and formed the Minority SR Party. It will be legal for a few months, and will be a prop of the Bolshevik state for a few years. The Majority SRs go on as before.

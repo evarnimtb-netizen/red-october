@@ -1,6 +1,6 @@
 title: Reshuffle the Leadership
-card-image: img/cards/shuffle_leadership.svg
 subtitle: Change the balance on the Central Committee.
+card-image: img/cards/shuffle_leadership.svg
 new-page: true
 is-card: true
 tags: party_affairs
@@ -9,10 +9,11 @@ on-arrival: month_actions += 1; shuffle_leadership_timer = 6
 
 The Central Committee decides the party's line between congresses, and its balance of currents decides the line. Whom will you promote?
 
-- @defencist: The Revolutionary Defencists.
-- @intl: The Internationalists.
-- @unions: The trade unionists.
-- @bund: The Bund.
+- @defencist: [+ flabel_defencist +].
+- @intl: [+ flabel_intl +].
+- @rightdef: [+ flabel_rightdef +].
+- @unions: [+ flabel_unions +].
+- @bund: [+ flabel_bund +].
 - @easy_discard
 
 @defencist
@@ -24,7 +25,7 @@ RO.fac(Q, 'unions', -1, 1);
 RO.fac(Q, 'bund', -1, 1);
 !}
 
-Dan and Tsereteli have a firmer hold on the committee.
+[+ flabel_defencist +] have a firmer hold on the committee.
 
 @intl
 on-arrival: {!
@@ -35,9 +36,22 @@ RO.fac(Q, 'unions', -1, 0);
 RO.fac(Q, 'bund', -1, 0);
 !}
 
-Martov and Sukhanov have more votes on the committee.
+[+ flabel_intl +] have more votes on the committee.
+
+@rightdef
+view-if: rightdef_strength > 0
+on-arrival: {!
+RO.fac(Q, 'rightdef', 6, -5);
+RO.fac(Q, 'defencist', -2, 2);
+RO.fac(Q, 'intl', -3, 6);
+RO.fac(Q, 'unions', -1, 0);
+RO.fac(Q, 'bund', -1, 0);
+!}
+
+[+ flabel_rightdef +] have more seats on the committee, and the left wing is uneasy.
 
 @unions
+view-if: unions_strength > 0
 on-arrival: {!
 RO.fac(Q, 'unions', 5, -5);
 RO.fac(Q, 'defencist', -2, 2);
@@ -45,9 +59,10 @@ RO.fac(Q, 'intl', -2, 2);
 RO.fac(Q, 'bund', -1, 0);
 !}
 
-Gvozdev and the union men have a larger say.
+[+ flabel_unions +] have a larger say.
 
 @bund
+view-if: bund_strength > 0
 on-arrival: {!
 RO.fac(Q, 'bund', 5, -5);
 RO.fac(Q, 'defencist', -2, 1);
@@ -55,4 +70,4 @@ RO.fac(Q, 'intl', -2, 1);
 RO.fac(Q, 'unions', -1, 0);
 !}
 
-Liber and Abramovich have a larger say in the committee, which is a fair reward for being the party's most reliable bloc.
+[+ flabel_bund +] have a larger say in the committee.

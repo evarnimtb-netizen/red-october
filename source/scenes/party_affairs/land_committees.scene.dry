@@ -1,0 +1,48 @@
+title: Land Committees
+card-image: img/cards/land_committees.svg
+subtitle: Back the peasants' land committees now, or hold the land for the Assembly?
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: player_party = 'sr' and land_committees_timer <= 0 and land_decree = 0
+on-arrival: month_actions += 1; land_committees_timer = 4
+
+In every volost the peasants have set up committees to take stock of the landowners' estates, and in some they have begun to divide them. Chernov wants the transfers regulated through the committees, in the interest of the whole village, and the final settlement left to the Assembly. The Kadets want nothing done at all. (Land pressure: [+ land_pressure : level +].)
+
+- @back: Back the committees' temporary transfers of land.
+- @hold: Hold the land for the Assembly.
+- @bill: Draft a land socialisation law.
+- @easy_discard
+
+@back
+on-arrival: {!
+RO.add(Q, {land_pressure: -8, rel_kad: -3, right_threat: 2, rel_lsr: 3});
+RO.boost(Q, {peasants: 5, soldiers: 2});
+RO.fac(Q, 'intl', -2, -3);
+RO.fac(Q, 'rightdef', 0, 6);
+Q.land_committees = (Q.land_committees || 0) + 1;
+!}
+
+The committees' transfers of land were declared legal until the Assembly meets. Landowners are alarmed, and so are their friends in the officer corps.
+
+@hold
+on-arrival: {!
+RO.add(Q, {land_pressure: 3, rel_kad: 2});
+RO.boost(Q, {peasants: -2, middle: 1});
+RO.fac(Q, 'intl', 0, 8);
+RO.fac(Q, 'rightdef', 0, -2);
+!}
+
+We told the peasants to wait. The Left SRs told them that the party had again sold the land to the Kadets.
+
+@bill
+view-if: land_law_draft = 0
+on-arrival: {!
+Q.land_law_draft = 1;
+RO.boost(Q, {peasants: 3});
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'intl', 0, -3);
+RO.fac(Q, 'rightdef', 0, 4);
+!}
+
+Chernov's draft law abolishes the private ownership of land and puts it in the hands of the people, to be allocated by the village communities according to labour and need. The draft is ready for the Assembly, and for the first time the party has a land programme that can be read in full.

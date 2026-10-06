@@ -2,7 +2,7 @@ title: Readmitted to the Soviets
 subtitle: 30 November 1918.
 new-page: true
 tags: event
-view-if: dix >= 44 and bol_regime = 1 and expelled = 1
+view-if: player_party = 'menshevik' and (dix >= 44 and bol_regime = 1 and expelled = 1)
 priority: 20
 max-visits: 1
 

@@ -1,0 +1,44 @@
+title: The Left SRs Break Away
+subtitle: The party's left wing founds its own party.
+new-page: true
+tags: event
+view-if: player_party = 'sr' and dix >= 22
+priority: 20
+max-visits: 1
+
+= The Left SRs Break Away
+
+In the second half of November the Left SRs, who have held their own congress, declared that the party's Central Committee no longer spoke for the peasants, and that they would form a party of their own. The Central Committee has expelled them for forming a separate organisation. The Left SRs have called a founding congress for early December: 116 delegates from 99 organisations. [? if bol_regime = 1 : They will take seven seats in Lenin's government before the month is out. ?]
+
+The party's left wing is a fifth of its members, and nearly all of its voters in the Baltic Fleet, in the Petrograd garrison and in many a village.
+
+- @reconcile: Reconcile with the Left SRs, and keep the party whole.
+- @letgo: Let them go.
+
+@reconcile
+choose-if: intl_dissent < 45 and rel_lsr >= 55
+unavailable-subtitle: The Left SRs are too angry, or the party has not been listening.
+on-arrival: {!
+Q.lsr_kept = 1;
+Q.lsr_split = 0;
+RO.fac(Q, 'intl', 0, -15);
+RO.add(Q, {rel_lsr: 6});
+RO.fac(Q, 'rightdef', 0, 8);
+RO.fac(Q, 'defencist', 0, 3);
+!}
+
+A party conference gave the Left SRs the places they asked for on the Central Committee, a pledge to oppose the Treaty with Germany and the Bolshevik repression, and a promise of a Peasant Congress. The Left SRs withdrew their expulsion, and the party is, narrowly, whole.
+
+@letgo
+on-arrival: {!
+Q.lsr_kept = 0;
+Q.lsr_split = 1;
+Q.intl_strength = Q.intl_strength * 0.3;
+Q.intl_dissent = 0;
+RO.add(Q, {rel_lsr: -10});
+RO.boost(Q, {peasants: -4, soldiers: -3});
+RO.fac(Q, 'rightdef', 0, -6);
+Q.members -= 20 * Q.mem_scale;
+!}
+
+The Left SRs held their founding congress and walked out of the party, taking the Baltic Fleet, the Petrograd garrison and a part of the villages. The party that remains is more united, and a good deal smaller.

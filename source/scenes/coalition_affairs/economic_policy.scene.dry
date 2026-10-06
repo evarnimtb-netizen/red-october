@@ -18,7 +18,7 @@ The state grain monopoly was declared in March. The peasants hold their grain ba
 on-arrival: {!
 RO.add(Q, {bread: 4});
 RO.boost(Q, {peasants: -3, workers: 1});
-RO.add(Q, {rel_sr: -1});
+RO.add(Q, {rel_ally: -1});
 !}
 
 The grain monopoly was enforced in the provinces nearest the front. The peasants are angry, but the bread queues are shorter.
@@ -37,7 +37,7 @@ RO.add(Q, {bread: 6, repression: 1, soviet_democracy: -2, land_pressure: 2});
 RO.boost(Q, {peasants: -7, workers: 2});
 RO.fac(Q, 'unions', 0, 2);
 RO.fac(Q, 'intl', 0, 3);
-RO.add(Q, {rel_sr: -3});
+RO.add(Q, {rel_ally: -3});
 !}
 
 Armed food detachments left for the grain provinces. They brought back grain, and the villages will not forget how.

@@ -9,6 +9,7 @@ on-arrival: {!
 Q.assembly_survives = 1;
 Q.land_decree = 1;
 RO.add(Q, {soviet_democracy: 6, bolshevik: -4, land_pressure: -15, war_weariness: -3});
+if (Q.land_law_draft) { RO.add(Q, {land_pressure: -10, soviet_democracy: 2}); Q.land_socialised = 1; }
 RO.boost(Q, {peasants: 4, middle: 3, workers: 2});
 this.achieve('all_power_to_the_assembly');
 !}

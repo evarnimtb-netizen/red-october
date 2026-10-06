@@ -18,7 +18,7 @@ The empire's peoples want autonomy or independence: the Ukrainian Central Rada, 
 @rada
 on-arrival: {!
 RO.boost(Q, {nations: 4});
-RO.add(Q, {rel_kad: -4, right_threat: 2, rel_sr: 1});
+RO.add(Q, {rel_kad: -4, right_threat: 2, rel_ally: 1});
 RO.fac(Q, 'rightdef', 0, 3);
 !}
 
