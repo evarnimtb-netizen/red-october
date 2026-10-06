@@ -21,8 +21,14 @@ on-arrival: {!
 Q.started = 1;
 // time elapsed (in months)
 Q.time = 1;
-Q.year = 1928;
-Q.month = 1;
+Q.year = 1917;
+Q.month = 3;
+// turns are half a month until the calendar reform (February 1918), then a month
+Q.turn = 1;
+Q.turn_length = 0.5;
+// 0 = first half of the month, 1 = second half
+Q.half_month = 0;
+Q.month_complete = false;
 // how many actions have been taken this month?
 Q.month_actions = 0;
 

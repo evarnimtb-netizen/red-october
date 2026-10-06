@@ -1,0 +1,16 @@
+title: The New Calendar
+subtitle: 31 January is followed by 14 February
+new-page: true
+tags: event
+priority: 3
+view-if: year = 1918 and month >= 2 and turn_length < 1
+on-departure: turn_length = 1
+max-visits: 1
+
+= The New Calendar
+
+The Soviet government has decreed that Russia will adopt the Gregorian calendar. The day after 31 January will be 14 February, and Russia will keep the same dates as the rest of Europe.
+
+From now on, events will be counted in whole months. The year of the revolution is behind us, and the long struggle ahead moves more slowly.
+
+*(Game note: turns now last a month instead of two weeks.)*

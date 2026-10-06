@@ -99,21 +99,33 @@ if (Q.dissent < 0) {
 }
 
 // 1. update dates
+// A turn is half a month until the calendar reform (Q.turn_length = 0.5), then a full month.
+// Q.time, Q.month and Q.year only advance when a month is complete.
+Q.month_complete = false;
 if (Q.month_actions >= 1) {
-    Q.time += 1;
     Q.month_actions = 0;
+    Q.turn += 1;
+    // timers are measured in months, so each turn subtracts the turn length
+    for (timer of Q.timers) {
+        if (Q[timer+'_timer'] && Q[timer+'_timer'] > 0) {
+            Q[timer+'_timer'] = Math.max(0, Q[timer+'_timer'] - Q.turn_length);
+        }
+    }
+    if (Q.turn_length < 1 && Q.half_month == 0) {
+        Q.half_month = 1;
+    } else {
+        Q.half_month = 0;
+        Q.month_complete = true;
+    }
+}
+if (Q.month_complete) {
+    Q.time += 1;
     Q.month += 1;
     if (Q.month >= 13) {
         Q.month = 1;
         Q.year += 1;
         if (Q.annual_income > 0) {
             Q.resources += Q.annual_income;
-        }
-    }
-    // decrement timers
-    for (timer of Q.timers) {
-        if (Q[timer+'_timer'] && Q[timer+'_timer'] > 0) {
-            Q[timer+'_timer'] -= 1;
         }
     }
     // append to historical party support records
@@ -486,7 +498,7 @@ if (typeof window !== "undefined" && window.generateBar) {
 !}
 go-to: events_choice if has_event = 1; main if has_event = 0 and (difficulty >= 0 or hand_size == 3); main.main_easy if has_event = 0 and (difficulty < 0 or hand_size == 4)
 
-= [+ month : month +] [+ year +]
+= [? if turn_length < 1 : [+ half_month : half_month +] ?][+ month : month +] [+ year +]
 
 @events_choice
 
