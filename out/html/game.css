@@ -706,3 +706,6 @@ body.dark-mode .card-tooltip { color: #eee; background-color: rgba(30, 30, 30, 0
 .parl-key.mine { font-weight: bold; }
 .parl-key i { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 50%; margin-right: 0.3em; vertical-align: -0.05em; }
 .parl-key small { opacity: 0.7; }
+
+.parl-svg { display: block; margin: 0.3em auto 0 auto; overflow: visible; }
+.parl-caption { text-align: center; font-size: 0.85em; opacity: 0.75; margin-bottom: 0.3em; }

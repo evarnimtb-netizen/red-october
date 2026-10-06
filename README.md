@@ -36,6 +36,8 @@ Not yet done from the design plan: public-domain period images and music (the ol
 
 [jquery v1.11.1](https://releases.jquery.com/)
 
+[d3.js v7](https://d3js.org) (ISC licence) and [d3-parliament](https://github.com/geoffreybr/d3-parliament) by Geoffrey Brossard (MIT licence), which draw the parliament charts, as in the original game.
+
 ## Credits
 
 The engine, the interface and the structure of the cards, advisors and elections are the work of Autumn Chen: see `LICENSE`, and `credits_images.txt` and `credits_music.txt` for the assets of the original game, which are not included in this fork. Dendry, the game engine, is by Ian Millington and Autumn Chen.

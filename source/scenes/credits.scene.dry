@@ -5,6 +5,8 @@ Many works were referenced in the making of this game.
 
 Red October is a fork of *Social Democracy: An Alternate History* by Autumn Chen (MIT licence, https://github.com/aucchen/social_democracy_alternate_history). The engine, the interface and the structure of the cards, advisors and elections are hers.
 
+Parliament charts are drawn with d3.js (ISC licence) and d3-parliament by Geoffrey Brossard (MIT licence), as in the original game.
+
 - @books: Books
 - @links: Web sources
 - @images: Image sources

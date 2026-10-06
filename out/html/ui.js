@@ -366,10 +366,35 @@
     return {seats: seats, dot: spacing * 0.43};
   }
 
+  // The seats are drawn by d3-parliament (the library the original game used); if d3 is missing, a plain SVG fallback is drawn.
   function drawParliament(el, rec, Q) {
+    var i;
+    var legendHtml = '<div class="parl-legend">';
+    var rows = rec.rows.slice().sort(function(a, b) { return b[2] - a[2]; });
+    for (i = 0; i < rows.length; i++) {
+      var q = rows[i][0], mine = (q === Q.player_slot);
+      var name = PARTY_SHORT[q] + (q === 'sr' && rec.lsrIn ? ' (with the Left SRs)' : '');
+      legendHtml += '<span class="parl-key' + (mine ? ' mine' : '') + '"><i style="background:' + PARTY_COLORS[q] + '"></i>' + esc(name) + ' <b>' + rows[i][2] + '</b> <small>' + (Math.round(rows[i][1] * 10) / 10) + '%</small></span>';
+    }
+    legendHtml += '</div>';
+    var caption = '<div class="parl-caption">' + rec.total + (rec.total === 100 ? ' points of the vote' : ' seats') + ' · majority ' + (Math.floor(rec.total / 2) + 1) + '</div>';
+    var width = Math.max(220, Math.min(500, $('#content').width() - 30));
+    if (window.d3 && window.d3.parliament) {
+      $(el).html('<div class="parl-title">' + esc(rec.title) + '</div><svg class="parl-svg" style="width:' + width + 'px;height:' + Math.round(width / 2 + 6) + 'px"></svg>' + caption + legendHtml).attr('data-done', '1');
+      var data = rec.rows.map(function(r) {
+        return {id: r[0], name: PARTY_SHORT[r[0]], legend: PARTY_SHORT[r[0]], seats: r[2], color: PARTY_COLORS[r[0]]};
+      });
+      var parliament = window.d3.parliament();
+      parliament.width(width).height(width).innerRadiusCoef(0.4);
+      parliament.enter.fromCenter(true).smallToBig(true);
+      parliament.exit.toCenter(false).bigToSmall(true);
+      window.d3.select($(el).find('svg.parl-svg')[0]).datum(data).call(parliament);
+      return;
+    }
+    // fallback: our own hemicycle
     var layout = hemicycle(rec.total), W = 480, H = 262, cx = W / 2, cy = H - 22, R = 215;
     var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(rec.title) + '">';
-    var idx = 0, i, k;
+    var idx = 0, k;
     for (i = 0; i < rec.rows.length; i++) {
       var p = rec.rows[i][0], n = rec.rows[i][2];
       for (k = 0; k < n && idx < layout.seats.length; k++, idx++) {
@@ -377,19 +402,8 @@
         svg += '<circle cx="' + (cx + st.x * R).toFixed(1) + '" cy="' + (cy - st.y * R).toFixed(1) + '" r="' + (layout.dot * R).toFixed(1) + '" fill="' + PARTY_COLORS[p] + '"/>';
       }
     }
-    // the majority mark
-    svg += '<line x1="' + cx + '" y1="' + (cy - R * 0.30) + '" x2="' + cx + '" y2="' + (cy - R * 1.04) + '" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>';
-    svg += '<text x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle" font-size="30" fill="currentColor" font-family="Georgia, serif">' + rec.total + '</text>';
-    svg += '<text x="' + cx + '" y="' + (cy + 14) + '" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7" font-family="Georgia, serif">' + (rec.total === 100 ? 'points of the vote' : 'seats') + ' · majority ' + (Math.floor(rec.total / 2) + 1) + '</text></svg>';
-    var leg = '<div class="parl-legend">';
-    var rows = rec.rows.slice().sort(function(a, b) { return b[2] - a[2]; });
-    for (i = 0; i < rows.length; i++) {
-      var q = rows[i][0], mine = (q === Q.player_slot);
-      var name = PARTY_SHORT[q] + (q === 'sr' && rec.lsrIn ? ' (with the Left SRs)' : '');
-      leg += '<span class="parl-key' + (mine ? ' mine' : '') + '"><i style="background:' + PARTY_COLORS[q] + '"></i>' + esc(name) + ' <b>' + rows[i][2] + '</b> <small>' + (Math.round(rows[i][1] * 10) / 10) + '%</small></span>';
-    }
-    leg += '</div>';
-    $(el).html('<div class="parl-title">' + esc(rec.title) + '</div>' + svg + leg).attr('data-done', '1');
+    svg += '</svg>';
+    $(el).html('<div class="parl-title">' + esc(rec.title) + '</div>' + svg + caption + legendHtml).attr('data-done', '1');
   }
 
   function renderParliaments() {
