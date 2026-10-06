@@ -23,7 +23,7 @@ RO.fac(Q, 'intl', 0, -10);
 RO.fac(Q, 'defencist', 0, 2);
 !}
 
-A column in the paper and a place on the executive committee have been found for [+ flabel_intl +]. They are, for a time, content.
+A column in the paper and a place on the executive committee have been found for [+ ilbl +]. They are, for a time, content.
 
 @defencist
 on-arrival: {!
@@ -31,7 +31,7 @@ RO.fac(Q, 'defencist', 0, -8);
 RO.fac(Q, 'intl', 0, 2);
 !}
 
-[+ flabel_defencist +] have been reassured that the line will not change. The left wing is suspicious.
+[+ Dlbl +] have been reassured that the line will not change. The left wing is suspicious.
 
 @rightdef
 view-if: rightdef_strength > 0
@@ -40,7 +40,7 @@ RO.fac(Q, 'rightdef', 0, -10);
 RO.fac(Q, 'intl', 0, 3);
 !}
 
-[+ flabel_rightdef +] were flattered with an invitation to write the editorial. They will not stay flattered long.
+[+ Rlbl +] were flattered with an invitation to write the editorial. They will not stay flattered long.
 
 @unions
 view-if: unions_strength > 0
