@@ -1,0 +1,62 @@
+title: The Liberals Strike Back
+subtitle: The Kadets and the propertied classes answer our policy.
+new-page: true
+tags: event
+view-if: opp_kad_ev = 1
+priority: 24
+on-arrival: {!
+Q.opp_kad_ev = 0;
+Q.opp_kad_timer = 4;
+Q.opp_kad_n = (Q.opp_kad_n || 0) + 1;
+Q.opp_why = RO.mainGrievance(Q, 'kad');
+!}
+
+= The Liberals Strike Back
+
+The Kadet central committee, the bankers of the Moscow Exchange Committee and the landowners' union have met in the same room, which is rare. They will not tolerate [+ opp_why +]. Rech has called it robbery. The banks have stopped discounting the government's paper, and the donors who paid for half the newspapers in Petrograd are asking for their money back.
+
+Miliukov has said that the party "will use every means at its disposal". The Kadets cannot send an army yet, but they can still make our lives difficult. How do we answer?
+
+- @concede: Give way to the liberals.
+- @firm: Hold firm.
+- @soviet: Appeal to the Soviet and the factories over their heads.
+- @bargain: Negotiate through the banks and the Allied ambassadors.
+
+@concede
+on-arrival: {!
+Q.opp_gave = RO.rollback(Q, 'kad');
+Q.opp_gave_flag = Q.opp_gave ? 1 : 0;
+RO.add(Q, {ant_kad: -25, rel_kad: 6, right_threat: -2});
+RO.boost(Q, {middle: 2, workers: -1, peasants: -1});
+!}
+
+[? if opp_gave_flag = 1 : We have given up [+ opp_gave +]. ?][? if opp_gave_flag = 0 : There was nothing left to give up, so we have made a public statement of our moderation. ?]The Kadet press has called it "a return to reason", and the banks have begun to discount again. In the factories and the villages it is called a surrender.
+
+@firm
+on-arrival: {!
+var r = Math.random();
+Q.opp_s = (Q.gov_kadets && r < 0.5) ? 2 : (r < 0.75 ? 0 : 1);
+if (Q.opp_s === 0) { RO.add(Q, {ruble: -4, resources: -1, ant_gen: 3}); }
+if (Q.opp_s === 1) { RO.add(Q, {soviet_democracy: -1, rel_kad: -4, ant_gen: 3}); RO.boost(Q, {middle: -4}); }
+if (Q.opp_s === 2) { Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -10, right_threat: 4, ruble: -3, ant_gen: 3}); RO.boost(Q, {middle: -2}); }
+!}
+
+We have not moved. The Kadets have answered. [? if opp_s = 0 : The banks have closed their credit, the ruble has fallen on the exchange, and a number of the donors have stopped giving. ?][? if opp_s = 1 : A press campaign has begun in every liberal paper, and the shopkeepers, the clerks and the professors who read them have begun to turn. ?][? if opp_s = 2 : The Kadet ministers have resigned from the cabinet, with a statement that they cannot be part of a government that "has lost the sense of the nation". The generals have noticed. ?]
+
+@soviet
+on-arrival: {!
+RO.add(Q, {ant_kad: 8, rel_kad: -4, right_threat: 2, soviet_democracy: 1});
+RO.boost(Q, {workers: 3, soldiers: 1, middle: -2});
+!}
+
+We have taken our case to the Soviet, and the factory committees have passed resolutions in our support in an afternoon. The liberals say that the Soviet is a mob; the Soviet says that the liberals are the people who profit from the war. Both are now more certain of it.
+
+@bargain
+choose-if: resources >= 2
+unavailable-subtitle: We cannot afford it.
+on-arrival: {!
+Q.resources -= 2;
+RO.add(Q, {ant_kad: -12, rel_kad: 4, ruble: 2});
+!}
+
+Through the ambassadors and a Petrograd banker who is not a Kadet, we have made it known that the party will respect property in everything but name. It was not a lie, exactly. The sanctions have eased, and the leaders of the Kadets remain suspicious.

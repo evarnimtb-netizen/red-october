@@ -1,0 +1,78 @@
+title: The Landowners Rise
+subtitle: The propertied classes take up arms against us.
+new-page: true
+tags: event
+view-if: opp_kad_ev = 2
+priority: 26
+on-arrival: {!
+Q.opp_kad_ev = 0;
+Q.opp_kad_timer = 6;
+Q.opp_kad_n = (Q.opp_kad_n || 0) + 1;
+Q.opp_why = RO.mainGrievance(Q, 'kad');
+RO.add(Q, {right_threat: 5});
+!}
+
+= The Landowners Rise
+
+Sanctions were not enough. The Kadet leaders have left Petrograd for the Don and the Kuban, and landowners, officers and Cossack atamans in a dozen provinces have taken up arms against [+ opp_why +]. Estates have been garrisoned with hired men. Officers who have taken no side until now are arriving in Novocherkassk by the trainload.
+
+It is not yet a march on the capital, but it is a civil war in the countryside, and it will become a larger one if it is not put down now.
+
+- @crush: Send the loyal garrisons and the committees against them.
+- @concede: Give in: restore the old order.
+- @bols: Ask the Bolsheviks' Red Guards to help.
+
+@crush
+on-arrival: {!
+Q.opp_force = RO.kornilovForce(Q) - 4 + (Q.ant_kad - 70) / 3;
+Q.opp_resist = RO.kornilovResistance(Q, 8);
+Q.opp_win = Q.opp_force > Q.opp_resist ? 0 : 1;
+if (Q.opp_win) {
+    RO.add(Q, {ant_kad: -35, right_threat: -8, army_discipline: -2, soviet_democracy: 1, rel_kad: -5});
+    RO.boost(Q, {peasants: 2, soldiers: 1});
+} else {
+    RO.add(Q, {right_threat: 12, army_discipline: -8, soviet_democracy: -2, ant_gen: 10});
+    RO.boost(Q, {middle: 2, soldiers: -2});
+    if (Q.right_threat >= 65) { Q.game_end = 1; Q.ending = 'right_coup'; }
+}
+!}
+go-to: crush_won if opp_win = 1; crush_lost_end if opp_win = 0 and game_end = 1; crush_lost if opp_win = 0 and game_end = 0
+
+@crush_won
+
+The garrisons moved faster than the landowners expected, and the village committees knew where the landowners' men were sleeping. Within three weeks the rising had been broken, and its leaders had fled to the Don or into the arms of the militia. It has cost the army something, and the Kadets will not soon try the same again.
+
+@crush_lost
+
+The troops sent against the rising did not all arrive, and not all of those who arrived fought. The landowners have kept their estates, and the officers who joined them have been joined by others. The Right is stronger than it has been since February, and the army is more divided than before.
+
+@crush_lost_end
+
+The troops sent against the rising did not arrive, and half of those who did joined it. On a night in the autumn the officers' league arrested the government and dissolved the Soviets, in the name of order and of the Kadet programme. General Alexeyev has declared a military dictatorship.
+
+The party's leaders have been arrested, or have fled abroad.
+
+@concede
+on-arrival: {!
+Q.pol_land = 0;
+Q.pol_labour = 0;
+if (Q.pol_war === 1) { Q.pol_war = 0; }
+Q.land_committees = Math.min(Q.land_committees || 0, 1);
+RO.add(Q, {ant_kad: -45, ant_gen: -5, land_pressure: 8, soviet_democracy: -2, rel_kad: 10, right_threat: -6});
+RO.boost(Q, {peasants: -6, workers: -3, middle: 3});
+RO.fac(Q, 'rightdef', 0, 6);
+!}
+
+We have restored the old order of the land, withdrawn the labour decrees and told the committees to wait for the Assembly. The rising died the day that the news reached the Don. In the villages nobody believes that the land will ever be divided, and in the factories nobody believes in the government.
+
+@bols
+choose-if: rel_bol >= 25
+unavailable-subtitle: We are no longer on speaking terms with the Bolsheviks.
+on-arrival: {!
+Q.bol_armed = 1;
+RO.add(Q, {bolshevik: 10, rel_bol: 6, ant_kad: -15, right_threat: -6});
+RO.boost(Q, {workers: 2});
+RO.fac(Q, 'rightdef', 0, 6);
+!}
+
+The Red Guards of the Putilov works and the Vyborg district were sent south by train, with the Soviet's blessing and their own banners. They found the landowners' men and broke them. They also found that they liked being armed, and they will not forget that we armed them.

@@ -155,6 +155,15 @@ var sr_land = {
           'international_relations', 'campaigning', 'peasant_meeting', 'media', 'economic_policy', 'military_policy', 'chernov', 'gots', 'zenzinov',
           'party_disunity', 'fundraising', 'domestic_enemies', 'judiciary', 'economic_democracy', 'social_welfare', 'rally']
 };
+var socializer = {
+  choices: merge(merge(democrat.choices, srCommon), {
+    sr_komuch: [/Refuse/], october: [/Leniency/, /Stay in the hall/, /Walk out/], vikzhel: [/Sign/],
+    cabinet: [/Socialise the land/, /committees regulate/, /Kadet/],
+    opp_kad_sanction: [/Hold firm/], opp_kad_revolt: [/Send the loyal/], opp_gen_ultimatum: [/Refuse the memorandum/],
+    opp_gen_coup: [/stop the trains/], opp_bol_agitation: [/Debate/], opp_bol_strike: [/Offer the Bolsheviks/]
+  }),
+  cards: ['cabinet', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'fundraising', 'rally']
+};
 var sr_komuchbot = {
   choices: merge(merge(opposition.choices, srCommon), {
     february: [/Back Kerensky/], first_coalition: [/Chernov takes Agriculture/], october: [/Walk out/], vikzhel: [/Refuse/],
@@ -216,4 +225,4 @@ var persuader = {
   choices: merge(opposition.choices, { komuch: [/Persuade/, /Neither/], inter_party_relationships: [/Formalize/, /Talks with the SRs/] }),
   cards: ['inter_party_relationships', 'neorevisionism', 'peoples_party', 'international_relations', 'domestic_enemies', 'judiciary', 'campaigning', 'rally', 'media', 'party_disunity', 'fundraising']
 };
-module.exports = {persuader: persuader, lsr_coalition: lsr_coalition_bot, lsr_rising: lsr_rising_bot, sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};
+module.exports = {socializer: socializer, persuader: persuader, lsr_coalition: lsr_coalition_bot, lsr_rising: lsr_rising_bot, sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};

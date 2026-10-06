@@ -204,14 +204,97 @@
     return h;
   }
 
+  // ---------- the Parliament tab: the parliament as elected, or as it would be if it voted today ----------
+  var parlArena = null, parlMode = 'elected', panelRec = null;
+  var PARL_ARENAS = [['soviets', 'Soviets'], ['assembly', 'Assembly'], ['dumas', 'City dumas']];
+  var ELECTED = {soviets: 'parl_congress', assembly: 'parl_assembly'};
+
+  function renderParliamentTab(Q) {
+    if (!parlArena) { var cur = window.RO.currentArena(Q); parlArena = (cur === 'provincial') ? 'soviets' : cur; }
+    var h = '<div class="sb-section">Parliament</div><div class="pp-pills">';
+    PARL_ARENAS.forEach(function(a) {
+      h += '<button class="pp-pill' + (a[0] === parlArena ? ' active' : '') + '" data-arena="' + a[0] + '">' + a[1] + '</button>';
+    });
+    h += '</div>';
+    var elected = Q[ELECTED[parlArena]] || null;
+    var proj = window.RO.projectParliament(Q, parlArena);
+    var showElected = elected && parlMode === 'elected';
+    panelRec = showElected ? elected : proj;
+    if (elected) {
+      h += '<div class="pp-pills"><button class="pp-pill pp-mode' + (showElected ? ' active' : '') + '" data-mode="elected">As elected</button>' +
+           '<button class="pp-pill pp-mode' + (!showElected ? ' active' : '') + '" data-mode="projected">If it voted today</button></div>';
+    }
+    h += '<div class="parliament pp-chart"></div>';
+    var rec = panelRec, mine = null, i;
+    for (i = 0; i < rec.rows.length; i++) { if (rec.rows[i][0] === Q.player_slot) { mine = rec.rows[i]; } }
+    var maj = Math.floor(rec.total / 2) + 1;
+    var youSeats = mine ? mine[2] : 0;
+    if (Q.player_slot === 'lsr' && !Q.lsr_split) { youSeats = rec.lsrIn; }
+    h += '<div class="pp-sum">' + esc(youLabel(Q)) + ': <b>' + youSeats + '</b> of ' + rec.total + ' seats (majority ' + maj + ')</div>';
+    var sorted = rec.rows.slice().sort(function(a, b) { return b[2] - a[2]; });
+    if (sorted.length && sorted[0][2] < maj) {
+      h += '<div class="sb-note">No party has a majority. The largest, ' + esc(PARTY_SHORT[sorted[0][0]]) + ', holds ' + sorted[0][2] + '.</div>';
+    } else if (sorted.length) {
+      h += '<div class="sb-note">' + esc(PARTY_SHORT[sorted[0][0]]) + ' hold a majority.</div>';
+    }
+    if (showElected && parlArena === 'assembly' && Q.assembly_survives === 0 && Q.ca_elected) {
+      h += '<div class="sb-note">This Assembly has been dispersed; the seats are shown as they were elected.</div>';
+    }
+    if (!showElected) {
+      h += '<div class="sb-note">A projection: what the ' + esc(rec.title) + ' would look like if the electorate voted today. It moves every turn.</div>';
+    }
+    return h;
+  }
+
+  function drawPanelParliament() {
+    var el = $('#support_panel .pp-chart');
+    if (!el.length || !panelRec) { return; }
+    var Q = qualities();
+    drawParliament(el[0], panelRec, Q, {width: Math.max(200, ($('#support_panel').width() || 240) - 16), still: true});
+  }
+
+  // ---------- the Opposition tab: the camps that answer your policies ----------
+  function antWord(a) { return a < 20 ? 'Calm' : (a < 40 ? 'Uneasy' : (a < 70 ? 'Hostile' : 'On the brink')); }
+  function renderOpposition(Q) {
+    var camps = window.RO.opposition(Q);
+    var h = '<div class="sb-section">Opposition</div><div class="sb-note">The camps that answer your policies. At ' + window.RO.SANCTION_AT + ' they try to sanction you; at ' + window.RO.REVOLT_AT + ' they take up arms.</div>';
+    if (!camps.length) { return h + '<div class="sb-note">No camp is organised against you now.</div>'; }
+    camps.forEach(function(c) {
+      var a = Math.round(c.ant), objects = c.why.filter(function(w) { return w.s > 0; }).slice(0, 3);
+      var likes = c.why.filter(function(w) { return w.s < 0; }).slice(0, 1);
+      h += '<div class="opp-camp"><div class="sb-label"><span>' + esc(c.name) + '</span><span class="sb-word">' + antWord(a) + ' · ' + a + '</span></div>' +
+           '<div class="sb-bar opp-bar"><div class="sb-fill" style="width:' + clamp(a, 0, 100) + '%;background:#9a3b2e"></div>' +
+           '<i class="opp-tick" style="left:' + window.RO.SANCTION_AT + '%"></i><i class="opp-tick" style="left:' + window.RO.REVOLT_AT + '%"></i></div>';
+      if (c.pending) { h += '<div class="rs-meta opp-alert">' + (c.pending === 2 ? 'An uprising is under way.' : 'Sanctions are coming.') + '</div>'; }
+      else if (c.cooling) { h += '<div class="rs-meta">It has just acted, and is regrouping.</div>'; }
+      if (objects.length) { h += '<div class="rs-meta">Objects to: ' + objects.map(function(w) { return esc(w.t); }).join('; ') + '.</div>'; }
+      else { h += '<div class="rs-meta">Has no quarrel with your policies for now.</div>'; }
+      if (likes.length) { h += '<div class="rs-meta">Likes: ' + esc(likes[0].t) + '.</div>'; }
+      h += '</div>';
+    });
+    h += '<div class="sb-note">Hostility moves towards what each camp objects to in your policies (the Cabinet card, the land committees, the decrees) and eases when you give way.</div>';
+    return h;
+  }
+
   function renderRight() {
     var Q = qualities();
     var side = $('#support_sidebar');
     if (!Q || Q.started !== 1 || !window.RO || sceneId().indexOf('root.') === 0) { side.hide(); return; }
     side.show();
-    var html = rightTab === 'popularity' ? renderPopularity(Q) : renderClasses(Q);
+    var html;
+    panelRec = null;
+    if (rightTab === 'popularity') { html = renderPopularity(Q); }
+    else if (rightTab === 'parliament') { html = renderParliamentTab(Q); }
+    else if (rightTab === 'opposition') { html = renderOpposition(Q); }
+    else { html = renderClasses(Q); }
     $('#support_panel').empty().append('<div class="sb">' + html + '</div>');
+    if (rightTab === 'parliament') { drawPanelParliament(); }
+    var hot = 0;
+    try { window.RO.opposition(Q).forEach(function(c) { hot = Math.max(hot, c.ant); }); } catch (e) { /* no model yet */ }
+    $('#rt_opp').toggleClass('alert', hot >= window.RO.SANCTION_AT);
   }
+  $(document).on('click', '.pp-pill:not(.pp-mode)', function() { parlArena = $(this).data('arena'); parlMode = 'elected'; renderRight(); });
+  $(document).on('click', '.pp-mode', function() { parlMode = $(this).data('mode'); renderRight(); });
   window.changeRightTab = function(tab, btn) {
     rightTab = tab;
     $('#support_sidebar .tab_button').removeClass('active');
@@ -260,7 +343,8 @@
     ['army_discipline', 'Army discipline', true, 1], ['land_pressure', 'Land pressure', false, 1],
     ['bolshevik', 'Bolshevik strength', false, 1], ['right_threat', 'Threat from the Right', false, 1],
     ['soviet_democracy', 'Soviet democracy', true, 1], ['repression', 'Repression', false, 1],
-    ['resources', 'Resources', true, 1], ['white_front', 'The front', false, 1]
+    ['resources', 'Resources', true, 1], ['white_front', 'The front', false, 1],
+    ['ant_kad', 'Kadet hostility', false, 1], ['ant_gen', 'Hostility of the generals', false, 1], ['ant_bol', 'Bolshevik hostility', false, 1]
   ];
   var BOOSTS = [['workers', "Workers' support"], ['soldiers', "Soldiers' support"], ['peasants', "Peasants' support"],
                 ['middle', "Middle strata's support"], ['railway', "Railwaymen's support"], ['nations', "Minorities' support"]];
@@ -367,7 +451,8 @@
   }
 
   // The seats are drawn by d3-parliament (the library the original game used); if d3 is missing, a plain SVG fallback is drawn.
-  function drawParliament(el, rec, Q) {
+  function drawParliament(el, rec, Q, opts) {
+    opts = opts || {};
     var i;
     var legendHtml = '<div class="parl-legend">';
     var rows = rec.rows.slice().sort(function(a, b) { return b[2] - a[2]; });
@@ -378,15 +463,15 @@
     }
     legendHtml += '</div>';
     var caption = '<div class="parl-caption">' + rec.total + (rec.total === 100 ? ' points of the vote' : ' seats') + ' · majority ' + (Math.floor(rec.total / 2) + 1) + '</div>';
-    var width = Math.max(220, Math.min(500, $('#content').width() - 30));
+    var width = opts.width || Math.max(220, Math.min(500, $('#content').width() - 30));
     if (window.d3 && window.d3.parliament) {
-      $(el).html('<div class="parl-title">' + esc(rec.title) + '</div><svg class="parl-svg" style="width:' + width + 'px;height:' + Math.round(width / 2 + 6) + 'px"></svg>' + caption + legendHtml).attr('data-done', '1');
+      $(el).html((opts.still ? '' : '<div class="parl-title">' + esc(rec.title) + '</div>') + '<svg class="parl-svg" style="width:' + width + 'px;height:' + Math.round(width / 2 + 6) + 'px"></svg>' + caption + legendHtml).attr('data-done', '1');
       var data = rec.rows.map(function(r) {
         return {id: r[0], name: PARTY_SHORT[r[0]], legend: PARTY_SHORT[r[0]], seats: r[2], color: PARTY_COLORS[r[0]]};
       });
       var parliament = window.d3.parliament();
       parliament.width(width).height(width).innerRadiusCoef(0.4);
-      parliament.enter.fromCenter(true).smallToBig(true);
+      parliament.enter.fromCenter(!opts.still).smallToBig(!opts.still);
       parliament.exit.toCenter(false).bigToSmall(true);
       window.d3.select($(el).find('svg.parl-svg')[0]).datum(data).call(parliament);
       return;

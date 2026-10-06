@@ -1,0 +1,49 @@
+title: Pravda Names Us
+subtitle: The Bolsheviks campaign against our policy.
+new-page: true
+tags: event
+view-if: opp_bol_ev = 1
+priority: 22
+on-arrival: {!
+Q.opp_bol_ev = 0;
+Q.opp_bol_timer = 4;
+Q.opp_bol_n = (Q.opp_bol_n || 0) + 1;
+Q.opp_why = RO.mainGrievance(Q, 'bol');
+!}
+
+= Pravda Names Us
+
+The Bolsheviks have found their cause. Every issue of Pravda carries a front-page article on [+ opp_why +], and Bolshevik agitators are in every barracks and every factory meeting with the same message: that the government is the bourgeoisie's, and that we are its hirelings.
+
+They are not wrong that it is a weakness. The question is what to do about it.
+
+- @concede: Adopt their demand.
+- @debate: Debate them in the Soviet.
+- @ignore: Ignore them.
+
+@concede
+on-arrival: {!
+Q.opp_gave = RO.rollback(Q, 'bol');
+Q.opp_gave_flag = Q.opp_gave ? 1 : 0;
+RO.add(Q, {ant_bol: -25, rel_bol: 5, bolshevik: 3, ant_kad: 5});
+RO.boost(Q, {workers: 2});
+!}
+
+[? if opp_gave_flag = 1 : We have changed [+ opp_gave +]. ?][? if opp_gave_flag = 0 : We have said that we share their concern, though there was nothing more to give. ?]Pravda says that it is a victory for the workers, which is what it would say whatever we did.
+
+@debate
+on-arrival: {!
+Q.opp_won_debate = RO.chance(0.35 + (Q.soviet_democracy - 50) / 150) ? 1 : 0;
+if (Q.opp_won_debate) { RO.add(Q, {ant_bol: -12, bolshevik: -2}); RO.boost(Q, {workers: 2}); }
+else { RO.add(Q, {ant_bol: 3, bolshevik: 3}); RO.boost(Q, {workers: -1}); }
+!}
+
+The debate was held in the Soviet's plenary, in front of the delegates and the press. [? if opp_won_debate = 1 : Our speaker was better prepared, and the Soviet voted by a clear majority to endorse the government's course. ?][? if opp_won_debate = 0 : The Bolshevik speaker was better prepared, and the hall cheered him to the end. ?]
+
+@ignore
+on-arrival: {!
+RO.add(Q, {bolshevik: 5});
+RO.boost(Q, {workers: -3, soldiers: -2});
+!}
+
+We said nothing, and the Bolsheviks said everything. The garrisons and the factories are listening to them, and they are not listening to us.

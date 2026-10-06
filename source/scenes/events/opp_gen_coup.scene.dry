@@ -1,0 +1,82 @@
+title: The Generals Move
+subtitle: Troops march on the capital.
+new-page: true
+tags: event
+view-if: opp_gen_ev = 2 and dix >= 6
+priority: 26
+on-arrival: {!
+Q.opp_gen_ev = 0;
+Q.opp_gen_timer = 8;
+Q.opp_gen_n = (Q.opp_gen_n || 0) + 1;
+Q.opp_why = RO.mainGrievance(Q, 'gen');
+Q.opp_bonus = 0;
+!}
+
+= The Generals Move
+
+Having failed to change [+ opp_why +] by memorandum, the generals have decided to do it by other means. Two cavalry divisions and a number of shock battalions are moving on Petrograd and Moscow, "to restore order". Their officers have promised the Kadets that no one will be hanged unless they deserve it.
+
+The railwaymen's union is divided, and the garrisons are doubtful. How should the democracy meet the generals?
+
+- @committees: Form a committee for the defence of the revolution, with the Bolsheviks.
+- @railways: Call on the railwaymen and the Soviet to stop the trains.
+- @loyal: Rely on the garrisons that have stayed loyal.
+
+@committees
+choose-if: rel_bol >= 20
+unavailable-subtitle: The Bolsheviks will not help us.
+on-arrival: {!
+Q.opp_bonus = 14;
+Q.bol_armed = 1;
+RO.add(Q, {rel_bol: 8, bolshevik: 10});
+!}
+
+The committee was formed in a night, and the Bolshevik leaders sat on it with the others. Workers were armed from the arsenals, and agitators were sent to meet the troops.
+
+- @coup_result: Continue...
+
+@railways
+on-arrival: {!
+Q.opp_bonus = 10;
+RO.add(Q, {soviet_democracy: 1});
+RO.boost(Q, {railway: 3});
+!}
+
+The railwaymen's executive ordered that no train carry troops against the Soviet, and the stationmasters, for once, obeyed. Soviet agitators went out to meet the troops on every siding.
+
+- @coup_result: Continue...
+
+@loyal
+on-arrival: {!
+Q.opp_bonus = 5;
+RO.add(Q, {army_discipline: 2});
+!}
+
+The government telegraphed to the garrisons that it was still the government. Most of them replied that it was.
+
+- @coup_result: Continue...
+
+@coup_result
+on-arrival: {!
+Q.opp_force = RO.kornilovForce(Q) + (Q.ant_gen - 70) / 4;
+Q.opp_resist = RO.kornilovResistance(Q, Q.opp_bonus);
+Q.opp_win = Q.opp_force > Q.opp_resist ? 0 : 1;
+if (Q.opp_win) {
+    RO.add(Q, {ant_gen: -40, right_threat: -18, army_discipline: -4, soviet_democracy: 3});
+    RO.boost(Q, {soldiers: 1, workers: 1});
+} else {
+    Q.game_end = 1;
+    Q.ending = 'right_coup';
+}
+!}
+go-to: coup_defeated if opp_win = 1; coup_won if opp_win = 0
+
+@coup_defeated
+
+The divisions stopped at a siding outside the capital, and their men would not go further. Their generals were arrested by their own officers, or fled. It was a victory, and the army has not recovered from it. The generals have nothing left to ask, and nothing left to hope for.
+
+@coup_won
+
+The committees were too few and the troops too many. On a night in the autumn the generals took the capital and dissolved the Soviets. The Assembly has been told to adjourn. General Alexeyev has declared a military dictatorship.
+
+The party's leaders have been arrested, or have fled abroad.

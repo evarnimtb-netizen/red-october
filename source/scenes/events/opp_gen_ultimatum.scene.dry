@@ -1,0 +1,50 @@
+title: The Generals' Ultimatum
+subtitle: Stavka demands a change of course.
+new-page: true
+tags: event
+view-if: opp_gen_ev = 1
+priority: 24
+on-arrival: {!
+Q.opp_gen_ev = 0;
+Q.opp_gen_timer = 4;
+Q.opp_gen_n = (Q.opp_gen_n || 0) + 1;
+Q.opp_why = RO.mainGrievance(Q, 'gen');
+!}
+
+= The Generals' Ultimatum
+
+The Union of Officers and the generals of Stavka have sent a memorandum to the government. They are not pleased with [+ opp_why +]. They demand that the authority of officers be restored, that the soldiers' committees be limited to the kitchen and the stores, and that "the sentimentality of the Soviet leaders" be put aside.
+
+The memorandum is signed by men who command armies. It does not say what will happen if it is refused. Everyone knows what it does not say.
+
+- @concede: Restore the officers' authority.
+- @firm: Refuse the memorandum.
+- @purge: Dismiss the most hostile generals.
+
+@concede
+on-arrival: {!
+Q.opp_gave = RO.rollback(Q, 'gen');
+Q.opp_gave_flag = Q.opp_gave ? 1 : 0;
+RO.add(Q, {ant_gen: -25, army_discipline: 6, repression: 1, soviet_democracy: -1});
+RO.boost(Q, {soldiers: -4});
+!}
+
+The committees have been limited, and officers again give the orders. [? if opp_gave_flag = 1 : We have also given up [+ opp_gave +]. ?]The Stavka has been polite in its thanks. In the barracks the soldiers say that the officers have won the revolution back from the people who made it.
+
+@firm
+on-arrival: {!
+RO.add(Q, {right_threat: 5, army_discipline: -4, ant_gen: 3});
+RO.boost(Q, {soldiers: 1});
+!}
+
+We have sent the memorandum back with a note that the government is accountable to the Soviet. A number of colonels have resigned their commissions, and some of them are talking in the Officers' Union about "the future of Russia". The soldiers' committees applaud us. The generals do not.
+
+@purge
+choose-if: army_discipline >= 40
+unavailable-subtitle: The army would not stand for it.
+on-arrival: {!
+RO.add(Q, {right_threat: -6, ant_gen: -5, army_discipline: -5, rel_kad: -3});
+RO.boost(Q, {soldiers: 2});
+!}
+
+The commander of the northern front and two army commanders were dismissed in one afternoon, and replaced with men from the commissars' lists. It has frightened the others, for now. It has also made sure that the men who were dismissed have the leisure to talk to each other.

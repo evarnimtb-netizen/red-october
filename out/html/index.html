@@ -6,14 +6,14 @@
     <meta prefix="ifiction: http://babel.ifarchive.org/protocol/iFiction/"
         property="ifiction:ifid" content="3E9B08B2-65FC-4DC1-8CEA-47269AFAA2AF">
     <title>Red October: Fall of Empire</title>
-    <link rel="stylesheet" type="text/css" href="game.css?v=11">
+    <link rel="stylesheet" type="text/css" href="game.css?v=14">
     <script src="jquery-1.11.1.min.js"></script>
-        <script src="d3.v7.min.js?v=11"></script>
-    <script src="d3-parliament.js?v=11"></script>
-    <script src="model.js?v=11"></script>
+        <script src="d3.v7.min.js?v=14"></script>
+    <script src="d3-parliament.js?v=14"></script>
+    <script src="model.js?v=14"></script>
     <script src="core.js"></script>
-    <script src="game.js?v=11"></script>
-    <script src="ui.js?v=11"></script>
+    <script src="game.js?v=14"></script>
+    <script src="ui.js?v=14"></script>
   </head>
   <body>
     <div class="background" id="bg2">
@@ -346,7 +346,7 @@
                     <a id="stats-link" onclick="window.showStats();" href="#">Library</a>
                     <a onclick="dendryUI.showSaveSlots();" href="#">Save/Load</a>
                     <a onclick="window.showOptions();" href="#">Options</a>
-                    <a id="support-link" onclick="window.toggleSupport();" href="#">Support by class</a>
+                    <a id="support-link" onclick="window.toggleSupport();" href="#">Support and parliament</a>
                 </div>
             </header>
             <div id="tools_wrapper">
@@ -364,6 +364,8 @@
                     <div class="tab_container">
                         <button class="tab_button active" id="rt_classes" onclick="window.changeRightTab('classes', 'rt_classes');">Classes</button>
                         <button class="tab_button" id="rt_pop" onclick="window.changeRightTab('popularity', 'rt_pop');">Popularity</button>
+                        <button class="tab_button" id="rt_parl" onclick="window.changeRightTab('parliament', 'rt_parl');">Parliament</button>
+                        <button class="tab_button" id="rt_opp" onclick="window.changeRightTab('opposition', 'rt_opp');">Opposition</button>
                     </div>
                     <div id="support_panel">
                     </div>

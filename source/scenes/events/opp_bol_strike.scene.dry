@@ -1,0 +1,52 @@
+title: The Factories Walk Out
+subtitle: The Bolsheviks bring out the workers and the garrison.
+new-page: true
+tags: event
+view-if: opp_bol_ev = 2
+priority: 25
+on-arrival: {!
+Q.opp_bol_ev = 0;
+Q.opp_bol_timer = 6;
+Q.opp_bol_n = (Q.opp_bol_n || 0) + 1;
+Q.opp_why = RO.mainGrievance(Q, 'bol');
+RO.add(Q, {bolshevik: 4});
+!}
+
+= The Factories Walk Out
+
+The Bolsheviks have won the Putilov works, the Vyborg district committees and two regiments of the garrison, and they have called them out. The workers have laid down their tools to protest against [+ opp_why +]. A march on the Tauride Palace is expected tomorrow.
+
+It could be a protest, or the beginning of something. The Bolshevik leaders themselves are said to be divided about which.
+
+- @concede: Concede the demands.
+- @coopt: Offer the Bolsheviks seats in the Soviet executive.
+- @suppress: Disperse the march and arrest the agitators.
+
+@concede
+on-arrival: {!
+Q.opp_gave = RO.rollback(Q, 'bol');
+Q.opp_gave_flag = Q.opp_gave ? 1 : 0;
+RO.add(Q, {ant_bol: -30, rel_bol: 8, bolshevik: 5, ant_kad: 8, ant_gen: 4});
+RO.boost(Q, {workers: 3, middle: -2});
+!}
+
+[? if opp_gave_flag = 1 : We have changed [+ opp_gave +], and the strike has ended. ?][? if opp_gave_flag = 0 : We have promised to consider their demands, and the strike has ended. ?]The Bolsheviks have shown that they can bring out the factories, and that it works.
+
+@coopt
+choose-if: rel_bol >= 20
+unavailable-subtitle: The Bolsheviks will not talk to us.
+on-arrival: {!
+RO.add(Q, {ant_bol: -25, bolshevik: 6, rel_bol: 8, right_threat: 2});
+RO.boost(Q, {workers: 1});
+!}
+
+Three seats on the executive were offered to the Bolsheviks, and accepted. The strike ended, and the march was a celebration. The Bolshevik leaders will now be able to attend every meeting that we hold, and report on all of it.
+
+@suppress
+on-arrival: {!
+RO.add(Q, {ant_bol: -10, repression: 3, rel_bol: -12, bolshevik: -6, right_threat: -2, soviet_democracy: -2});
+RO.boost(Q, {workers: -3, middle: 1});
+Q.july_repressed = 1;
+!}
+
+The march was stopped at the bridges by loyal troops, and the leaders arrested at their lodgings. Pravda has been closed under a different name for the third time this year. In the workers' districts people say that the revolution is shooting at its own.

@@ -29,6 +29,7 @@ if (Q.month_actions >= 1) {
     RO.drift(Q, Q.turn_length);
     RO.alliancesTurn(Q, Q.turn_length);
     RO.policyDrift(Q, Q.turn_length);
+    RO.oppositionTurn(Q, Q.turn_length);
     if (Q.month_complete) {
         Q.time += 1;
         Q.month += 1;

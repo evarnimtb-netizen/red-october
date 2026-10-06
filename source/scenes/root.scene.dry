@@ -133,7 +133,7 @@ Q.timers = ['advisor_action', 'rally', 'fundraising', 'media', 'campaigning', 'i
             'labor_affairs', 'economic_policy', 'foreign_policy', 'agricultural_policy', 'military_policy',
             'constitutional_reform', 'nationalities', 'police',
             'economic_democracy', 'labor_rights', 'social_welfare', 'domestic_enemies', 'judiciary', 'fiscal_policy',
-            'crisis', 'alt_coup', 'right_plot', 'council', 'cabinet', 'inside_sr', 'the_split', 'sovnarkom_seats', 'cheka_board', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army'];
+            'crisis', 'alt_coup', 'right_plot', 'council', 'cabinet', 'inside_sr', 'the_split', 'sovnarkom_seats', 'cheka_board', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army', 'opp_kad', 'opp_gen', 'opp_bol'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -170,7 +170,8 @@ var flags = ['may_crisis_seen', 'larin_seen', 'crisis_count', 'vik_check_1', 'al
              'lsr_in_gov', 'lsr_seats', 'lsr_backs_bol', 'lsr_survives', 'split_planned', 'cheka_shield', 'seven_commissars', 'lsr_squeezed',
              'kolchak_seen', 'land_socialised', 'prog_rb', 'prog_po', 'cheka_seats', 'lsr_rising', 'anti_brest', 'early_split', 'blocs', 'bloc_lean', 'dissent_extra',
              'turmoil_men', 'turmoil_sr', 'turmoil_lsr', 'turmoil_bol', 'komuch_averted', 'lsr_uprising_averted',
-             'split_alliance_done', 'anti_brest_front', 'lent_chernov', 'lent_dan', 'lent_spiridonova', 'lent_martov'];
+             'split_alliance_done', 'anti_brest_front', 'lent_chernov', 'lent_dan', 'lent_spiridonova', 'lent_martov',
+             'ant_kad', 'ant_gen', 'ant_bol', 'opp_kad_ev', 'opp_gen_ev', 'opp_bol_ev', 'opp_kad_n', 'opp_gen_n', 'opp_bol_n'];
 Q.fault_text = '';
 Q.fault_flag = 0;
 // standing policies of the Cabinet: land, food, war, order, labour (food starts at the grain monopoly)

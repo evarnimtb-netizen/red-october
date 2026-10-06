@@ -709,3 +709,20 @@ body.dark-mode .card-tooltip { color: #eee; background-color: rgba(30, 30, 30, 0
 
 .parl-svg { display: block; margin: 0.3em auto 0 auto; overflow: visible; }
 .parl-caption { text-align: center; font-size: 0.85em; opacity: 0.75; margin-bottom: 0.3em; }
+
+/* right panel: four tabs, parliament tab and opposition tab */
+#support_sidebar .tab_container { display: flex; flex-wrap: wrap; }
+#support_sidebar .tab_button { flex: 1 1 50%; padding: 7px 4px; font-size: 0.9em; }
+#support_sidebar .tab_button.alert::after { content: " \25CF"; color: #b3261e; font-size: 0.8em; }
+.pp-pills { display: flex; flex-wrap: wrap; gap: 0.3em; margin: 0.3em 0; }
+.pp-pill { font-family: "Minion Pro", Georgia, serif; font-size: 0.8em; padding: 0.15em 0.6em; border: 1px solid #876; border-radius: 1em;
+  background: transparent; color: var(--text-color); cursor: pointer; }
+.pp-pill.active { background: rgba(120, 90, 40, 0.3); font-weight: bold; }
+.pp-pill:hover { background: rgba(120, 90, 40, 0.18); }
+.pp-chart .parl-legend { font-size: 0.78em; gap: 0.1em 0.7em; }
+.pp-chart .parl-caption { display: none; }
+.pp-sum { text-align: center; margin-top: 0.4em; font-size: 0.9em; }
+.opp-camp { margin-bottom: 0.7em; }
+.opp-bar { position: relative; }
+.opp-tick { position: absolute; top: -2px; bottom: -2px; width: 1px; background: #876; }
+.opp-alert { color: #b3261e; font-weight: bold; opacity: 1; }

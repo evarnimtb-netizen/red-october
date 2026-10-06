@@ -704,28 +704,170 @@ var RO = (function() {
   }
 
 
-  // Remember an election result for the parliament chart: Q.parl_<name> = {title, total, rows: [[party, percent, seats]], lsrIn}.
-  // Seats are rounded by the largest remainder so that they add up to the total.
+  // Seats by the largest remainder: shares is {party: percent}; returns {party: seats} adding up to total.
   var PARL_ORDER = ['bol', 'lsr', 'oth', 'sr', 'men', 'pop', 'nat', 'kad'];
-  function recordParliament(Q, name, title) {
-    var total = Q.seats_total || 100, seats = {}, rem = [], sum = 0, i;
+  function seatRows(shares, total) {
+    var seats = {}, rem = [], sum = 0, i;
     PARL_ORDER.forEach(function(p) {
-      var v = (Q['res_' + p] || 0) * total / 100;
+      var v = (shares[p] || 0) * total / 100;
       seats[p] = Math.floor(v); sum += seats[p]; rem.push([v - seats[p], p]);
     });
     rem.sort(function(a, b) { return b[0] - a[0]; });
     for (i = 0; sum < total; i++) { seats[rem[i % rem.length][1]]++; sum++; }
-    Q['parl_' + name] = {
+    return seats;
+  }
+  function parlRecord(title, total, shares, lsrInPercent) {
+    var seats = seatRows(shares, total);
+    return {
       title: title, total: total,
-      rows: PARL_ORDER.filter(function(p) { return seats[p] > 0; }).map(function(p) { return [p, Q['res_' + p] || 0, seats[p]]; }),
-      lsrIn: Q.lsr_split ? 0 : Math.round((Q.res_lsr_in || 0) * total / 100)
+      rows: PARL_ORDER.filter(function(p) { return seats[p] > 0; }).map(function(p) { return [p, shares[p] || 0, seats[p]]; }),
+      lsrIn: Math.round((lsrInPercent || 0) * total / 100)
     };
+  }
+
+  // Remember an election result for the parliament chart: Q.parl_<name> = {title, total, rows: [[party, percent, seats]], lsrIn}.
+  function recordParliament(Q, name, title) {
+    var shares = {};
+    PARL_ORDER.forEach(function(p) { shares[p] = (p === 'lsr' && !Q.lsr_split) ? 0 : (Q['res_' + p] || 0); });
+    Q['parl_' + name] = parlRecord(title, Q.seats_total || 100, shares, Q.lsr_split ? 0 : (Q.res_lsr_in || 0));
+  }
+
+  // The parliament as it would be if the arena voted today, for the Parliament tab. Sizes follow the real bodies.
+  var PARL_SIZE = {soviets: 650, assembly: 703, dumas: 200, provincial: 400};
+  var PARL_TITLE = {soviets: 'Congress of Soviets', assembly: 'Constituent Assembly', dumas: 'City dumas', provincial: 'City soviets'};
+  function projectParliament(Q, arena) {
+    var r = arenaResult(Q, arena), shares = {};
+    PARL_ORDER.forEach(function(p) { shares[p] = (p === 'lsr' && !Q.lsr_split) ? 0 : (r[p] || 0); });
+    var rec = parlRecord(PARL_TITLE[arena], PARL_SIZE[arena], shares, Q.lsr_split ? 0 : r.lsr_in);
+    rec.projected = true;
+    return rec;
   }
 
   // A weighted coin for the decisions that no stat can settle.
   function chance(p) { return Math.random() < clamp(p, 0, 1); }
 
-  return {recordParliament: recordParliament, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  // ---- the opposition: the camps that answer the party's policies with sanctions and revolts ----
+  // Each camp has a hostility (Q.ant_<camp>, 0 to 100) that moves, month by month, towards ten times what its members
+  // object to in the party's policies. At 40 the camp tries to sanction the party; at 70 it revolts. The events that carry
+  // this out are opp_*.scene.dry; their flags are set here (Q.opp_<camp>_ev = 1 or 2) and the events clear them.
+  var CAMPS = ['kad', 'gen', 'bol'];
+  var CAMP_NAMES = {kad: 'The Kadets and the propertied classes', gen: 'The generals and the Right', bol: 'The Bolsheviks'};
+  var SANCTION_AT = 40, REVOLT_AT = 70;
+
+  function campActive(Q, k) {
+    if (Q.bol_regime) { return false; }
+    if (k === 'bol') { return Q.dix >= 7; }
+    return true;
+  }
+
+  // What each camp objects to. Returns {camp: {score, why: [{s, t, area}]}}; a negative s is something the camp likes.
+  function offence(Q) {
+    var land = Q.pol_land || 0, labour = Q.pol_labour || 0, war = Q.pol_war || 0, order = Q.pol_order || 0;
+    var food = Q.pol_food === undefined ? 1 : Q.pol_food, lc = Math.min(Q.land_committees || 0, 4);
+    var gov = !!Q.in_coalition, atWar = !!Q.at_war, out = {};
+    function put(k, s, t, area) { if (s !== 0) { out[k].why.push({s: s, t: t, area: area}); } }
+    CAMPS.forEach(function(k) { out[k] = {score: 0, why: []}; });
+    // the Kadets and the propertied
+    if (land === 2) { put('kad', 4.5, 'the socialisation of the land', 'land'); }
+    else if (land === 1) { put('kad', 1.5, 'land committees redistributing the estates', 'land'); }
+    if (Q.land_decree || Q.land_socialised) { put('kad', 3, 'the land decree', 'decree'); }
+    if (lc > 0 && land < 2) { put('kad', Math.min(0.7 * lc, 2.5), 'the peasants\' land committees', 'committees'); }
+    if (labour === 1) { put('kad', 1.5, 'the eight-hour day and the factory committees', 'labour'); }
+    if (labour === 2) { put('kad', 2.5, 'state regulation of industry', 'labour'); }
+    if (war === 1 && atWar) { put('kad', 2, 'the push for a peace without annexations', 'war'); }
+    if (order === 2) { put('kad', 0.5, 'the amnesty', 'order'); }
+    if (order === 1) { put('kad', -0.5, 'the emergency measures', 'order'); }
+    if (gov && !Q.gov_kadets && Q.homogeneous_gov) { put('kad', 1.5, 'a cabinet without Kadets', 'kadets'); }
+    if (gov && Q.gov_kadets) { put('kad', -1.5, 'their ministers in the cabinet', 'kadets'); }
+    if (Q.rel_kad < 20) { put('kad', 1, 'a broken relationship', 'none'); }
+    // the generals and the Right
+    if (land === 2) { put('gen', 2.5, 'the socialisation of the land', 'land'); }
+    else if (land === 1) { put('gen', 0.8, 'land committees redistributing the estates', 'land'); }
+    if (Q.land_decree || Q.land_socialised) { put('gen', 2, 'the land decree', 'decree'); }
+    if (lc > 0 && land < 2) { put('gen', Math.min(0.4 * lc, 1.5), 'the peasants\' land committees', 'committees'); }
+    if (order === 2) { put('gen', 1.5, 'broad liberties and the amnesty', 'order'); }
+    if (order === 1) { put('gen', -1.5, 'the emergency measures', 'order'); }
+    if (war === 1 && atWar) { put('gen', 2.5, 'the push for a peace without annexations', 'war'); }
+    if (war === 2 && atWar) { put('gen', -1, 'the preparations for an offensive', 'war'); }
+    if ((Q.stockholm || 0) >= 2 && atWar && war !== 1) { put('gen', 1.5, 'the talks at Stockholm', 'none'); }
+    if (labour >= 1) { put('gen', 0.5, 'concessions to the workers', 'labour'); }
+    if (gov && !Q.gov_kadets && Q.homogeneous_gov) { put('gen', 1, 'a cabinet of the Soviet parties alone', 'kadets'); }
+    if (Q.army_discipline < 35) { put('gen', 1.5, 'the soldiers\' committees', 'none'); }
+    // the Bolsheviks
+    if (gov) { put('bol', 1.5, 'sharing power with the bourgeoisie', 'none'); }
+    if (gov && Q.gov_kadets) { put('bol', 2, 'the Kadets in the cabinet', 'kadets'); }
+    if (order === 1) { put('bol', 3, 'the emergency measures', 'order'); }
+    if (order === 2) { put('bol', -1.5, 'the amnesty', 'order'); }
+    if (war === 2 && atWar) { put('bol', 3, 'the preparations for an offensive', 'war'); }
+    if (war === 1 && atWar) { put('bol', -1.5, 'the push for peace', 'war'); }
+    if (war === 0 && atWar && gov) { put('bol', 1, 'the continuation of the war', 'war'); }
+    if (food === 0) { put('bol', 2, 'the free grain trade', 'none'); }
+    if (labour === 0 && gov) { put('bol', 1.5, 'the employers\' hold on industry', 'labour'); }
+    if (labour === 2) { put('bol', -1, 'state regulation of industry', 'labour'); }
+    if (land === 2) { put('bol', -1.5, 'the socialisation of the land', 'land'); }
+    if (Q.july_repressed) { put('bol', 2, 'the arrests of July', 'none'); }
+    CAMPS.forEach(function(k) {
+      var t = 0;
+      out[k].why.forEach(function(w) { t += w.s; });
+      out[k].score = Math.max(0, t);
+      out[k].why.sort(function(a, b) { return b.s - a.s; });
+    });
+    return out;
+  }
+
+  // The main grievance of a camp, as words: used by the events.
+  function mainGrievance(Q, k) {
+    var w = offence(Q)[k].why;
+    return (w.length && w[0].s > 0) ? w[0].t : 'the direction the government has taken';
+  }
+
+  // Give way to a camp on its main grievance, where the party has a policy to give up. Returns what was given up, or ''.
+  function rollback(Q, k) {
+    var w = offence(Q)[k].why, i, a;
+    for (i = 0; i < w.length; i++) {
+      if (w[i].s <= 0) { break; }
+      a = w[i].area;
+      if (a === 'land' && (Q.pol_land || 0) > 0) { Q.pol_land = Math.max(0, Q.pol_land - 1); return 'the land policy'; }
+      if (a === 'committees') { Q.land_committees = Math.max(0, (Q.land_committees || 0) - 2); return 'the land committees\' powers'; }
+      if (a === 'labour' && (Q.pol_labour || 0) > 0) { Q.pol_labour = 0; return 'the labour policy'; }
+      if (a === 'war' && (Q.pol_war || 0) > 0) { Q.pol_war = (k === 'bol') ? 1 : 0; return 'the war policy'; }
+      if (a === 'order' && (Q.pol_order || 0) > 0) { Q.pol_order = 0; return 'the policy on order'; }
+      if (a === 'kadets') {
+        if (k === 'bol') { Q.gov_kadets = 0; Q.homogeneous_gov = 1; } else { Q.gov_kadets = 1; Q.homogeneous_gov = 0; }
+        return 'the make-up of the cabinet';
+      }
+    }
+    return '';
+  }
+
+  function oppositionTurn(Q, tl) {
+    var off = offence(Q);
+    CAMPS.forEach(function(k) {
+      var key = 'ant_' + k, cur = Q[key] || 0;
+      var target = campActive(Q, k) ? clamp(10 * off[k].score, 0, 100) : 0;
+      Q[key] = clamp(cur + (target - cur) * Math.min(1, 0.3 * tl), 0, 100);
+      var a = Q[key];
+      if (!campActive(Q, k) || Q.game_end || Q['opp_' + k + '_ev'] || (Q['opp_' + k + '_timer'] || 0) > 0) { return; }
+      var stage = 0, thr = SANCTION_AT;
+      if (a >= REVOLT_AT && ((Q['opp_' + k + '_n'] || 0) >= 1 || a >= 85)) { stage = 2; thr = REVOLT_AT; }
+      else if (a >= SANCTION_AT) { stage = 1; }
+      if (stage && chance((0.3 + (a - thr) / 60) * Math.min(1, tl))) { Q['opp_' + k + '_ev'] = stage; }
+    });
+  }
+
+  // For the Opposition tab.
+  function opposition(Q) {
+    var off = offence(Q), out = [];
+    CAMPS.forEach(function(k) {
+      if (!campActive(Q, k)) { return; }
+      out.push({id: k, name: CAMP_NAMES[k], ant: Q['ant_' + k] || 0, why: off[k].why, pending: Q['opp_' + k + '_ev'] || 0,
+                cooling: (Q['opp_' + k + '_timer'] || 0) > 0});
+    });
+    return out;
+  }
+
+
+  return {recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,
