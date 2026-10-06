@@ -1,40 +1,40 @@
-title: Fundraising
+title: Party Dues
+subtitle: Collect dues and keep the press going.
 new-page: true
-view-if: fundraising_timer <= 0 and (not historical_mode)
-on-arrival: fundraising_timer = 6; month_actions += 1
-frequency: 300
 is-card: true
-card-image: img/poster_2.jpg
 tags: party_affairs
+view-if: fundraising_timer <= 0
+on-arrival: month_actions += 1; fundraising_timer = 4
 
-= Fundraising
+Dues are the party's lifeblood. They are paid in kopecks, in factories and in unions, and not always on time.
 
-For better or for worse, the party cannot exist without money.
-
-- @maintain: Maintain our current dues.
-- @reduce: Reduce dues.
-- @increase: Increase dues.
+- @dues: Ordinary dues. [? if members < 60 : (Few members are left to pay.) ?]
+- @appeal: A special appeal to the members.
+- @coops: Ask the cooperatives and the unions for support.
 - @easy_discard
 
-@maintain
-subtitle: [+ dues +] resources gained.
-on-arrival: resources += dues;
+@dues
+on-arrival: {!
+Q.resources += Math.max(1, Math.round(Q.members / 60));
+!}
 
-We maintain our current dues.
+The collectors made their rounds. The money arrives slowly, but it arrives.
 
-@reduce
-subtitle: [+ dues - 1 +] resources gained.
-choose-if: dues > 1
-on-arrival: dues -= 1; resources += dues; left_dissent -= 8; center_dissent -= 8; reformist_dissent -= 8; labor_dissent -= 8
+@appeal
+on-arrival: {!
+Q.resources += Math.max(2, Math.round(Q.members / 40));
+RO.fac(Q, 'unions', 0, 2);
+RO.fac(Q, 'intl', 0, 2);
+!}
 
-Our current members appreciate this, but no one decides to join a party because of the low dues.
+A special appeal brought in more, and a few members complained about being asked.
 
-@increase
-subtitle: [+ dues + 1 +] resources gained. [? if unemployed >= 15 : Given the present economic situation, this may be painful. ?][? if dues >= 4 : Dues are already rather high; increasing them might reduce our membership. ?]
-on-arrival: dues += 1; resources += dues; workers_spd -= 3; unemployed_spd -= 3; workers_spd -= 10 if unemployed >= 15; unemployed_spd -= 10 if unemployed >= 15; workers_spd -= 3*dues if dues >= 5; unemployed_spd -= 3*dues if dues >= 5
-view-if: dues <= 4
+@coops
+view-if: unions_strength >= 5
+on-arrival: {!
+Q.resources += 2;
+RO.fac(Q, 'unions', 2, 0);
+RO.add(Q, {bread: 1});
+!}
 
-Our members grumble at this, and some of the less committed members leave. But now, we have access to additional resources. 
-
-[? if unemployed >= 15 : Because of the presently high unemployment, our members are feeling the extra burden hard. ?]
-
+The cooperatives are friendly to us, and have lent a hall, some paper and a little money. The union leaders expect that we will remember it.

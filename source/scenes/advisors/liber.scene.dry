@@ -1,0 +1,29 @@
+title: Mark Liber
+is-pinned-card: true
+tags: advisor, bund
+new-page: true
+view-if: liber_advisor = 1
+
+= Mark Liber
+
+Liber (1880-1937) is a Bundist and a member of the Soviet executive. He will head the Menshevik list in Petrograd in November 1917.
+
+- @action
+- @root: Return to main
+
+@action
+title: Jewish Workers' Link
+subtitle: Liber rallies the Jewish workers' organisations.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.boost(Q, {nations: 4, workers: 2}); RO.fac(Q, 'bund', 1, -5);
+!}
+
+The Bund's network of unions, clubs and mutual aid societies has rallied to our side in the towns of the Pale.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

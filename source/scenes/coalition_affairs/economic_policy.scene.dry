@@ -1,0 +1,42 @@
+title: Food Supply
+subtitle: The grain monopoly, fixed prices and rationing.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: economic_policy_timer <= 0
+on-arrival: month_actions += 1; economic_policy_timer = 3
+
+The state grain monopoly was declared in March. The peasants hold their grain back, because the ruble buys less every month. The cities have a few days of flour left. (Bread supply: [+ bread : bread +].)
+
+- @monopoly: Enforce the monopoly and the fixed prices.
+- @prices: Raise the fixed price of grain.
+- @requisition: Send detachments to the villages to take grain.
+- @easy_discard
+
+@monopoly
+on-arrival: {!
+RO.add(Q, {bread: 4});
+RO.boost(Q, {peasants: -3, workers: 1});
+RO.add(Q, {rel_sr: -1});
+!}
+
+The grain monopoly was enforced in the provinces nearest the front. The peasants are angry, but the bread queues are shorter.
+
+@prices
+on-arrival: {!
+RO.add(Q, {bread: 3, ruble: -4});
+RO.boost(Q, {peasants: 1});
+!}
+
+A higher price brought out grain, but it also set off another round of inflation.
+
+@requisition
+on-arrival: {!
+RO.add(Q, {bread: 6, repression: 1, soviet_democracy: -2, land_pressure: 2});
+RO.boost(Q, {peasants: -7, workers: 2});
+RO.fac(Q, 'unions', 0, 2);
+RO.fac(Q, 'intl', 0, 3);
+RO.add(Q, {rel_sr: -3});
+!}
+
+Armed food detachments left for the grain provinces. They brought back grain, and the villages will not forget how.

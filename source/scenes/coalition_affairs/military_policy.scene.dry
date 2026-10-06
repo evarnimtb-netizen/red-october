@@ -1,0 +1,43 @@
+title: Army Committees
+subtitle: Discipline against the soldiers' trust.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: military_policy_timer <= 0 and at_war = 1
+on-arrival: month_actions += 1; military_policy_timer = 3
+
+Order No. 1 gave the soldiers' committees power over their units. The army is held together by committees and by habit. (Army discipline: [+ army_discipline : level +].)
+
+- @authority: Restore officers' authority; keep the committees only for supply.
+- @trust: Trust the committees and send commissars to every unit.
+- @death_penalty: Restore the death penalty at the front.
+- @easy_discard
+
+@authority
+on-arrival: {!
+RO.add(Q, {army_discipline: 6, bolshevik: 2, right_threat: 2, rel_kad: 3});
+RO.boost(Q, {soldiers: -3});
+RO.fac(Q, 'defencist', 1, 0);
+RO.fac(Q, 'intl', 0, 2);
+!}
+
+Officers regained their authority over operational orders. The committees have been told to concern themselves with food and boots.
+
+@trust
+on-arrival: {!
+RO.add(Q, {army_discipline: 2, right_threat: 3, rel_kad: -2});
+RO.boost(Q, {soldiers: 4});
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+Government commissars now sit with the committees in every regiment. The soldiers like the arrangement more than the officers do.
+
+@death_penalty
+on-arrival: {!
+RO.add(Q, {army_discipline: 8, bolshevik: 4, rel_kad: 4, right_threat: 3});
+RO.boost(Q, {soldiers: -6, workers: -2});
+RO.fac(Q, 'intl', 0, 8);
+RO.fac(Q, 'defencist', 0, 2);
+!}
+
+The death penalty at the front was restored for desertion and treason. The Bolshevik press called it "the gallows of the Menshevik ministers".

@@ -1,0 +1,70 @@
+title: The Vikzhel Talks
+subtitle: The railway union demands an all-socialist government.
+new-page: true
+tags: event
+view-if: dix >= 21 and bol_regime = 1
+priority: 40
+max-visits: 1
+on-arrival: {!
+Q.vik_score = Q.rel_bol * 0.4 + Q.rel_lsr * 0.2 + Q.rel_sr * 0.15 + (Q.stayed_in_congress ? 10 : 0) + (Q.ally_bol >= 1 ? 5 : 0) + Q.soviet_democracy * 0.08 + (Q.insight ? 3 : 0);
+Q.vik_score_d = Math.round(Q.vik_score);
+!}
+
+= The Vikzhel Talks
+
+On 11 November the executive of the All-Russian Union of Railway Workers, Vikzhel, threatened a general rail strike unless the socialist parties formed a joint government. The Mensheviks, the SRs, the Left SRs, the Bolsheviks and the Vikzhel leaders sat down in a room.
+
+The railway union has no army. It has no need of one: its members run the trains that bring Kerensky's troops to the capital, and the Bolsheviks' reinforcements to Moscow. Within a week, a draft agreement was reached for a government of all the socialist parties, without Lenin and Trotsky. The Central Committee of the Mensheviks split 12 to 11 on whether to sign.
+
+Kamenev, Rykov and several others resigned from the Bolshevik Central Committee on 17 November, in protest at Lenin's refusal to share power. The Bolsheviks in Moscow, meanwhile, are about to win the street fighting.
+
+- @refuse: Refuse the deal, and walk out of the talks.
+- @sign: Sign the draft agreement before the Bolsheviks win Moscow.
+
+@refuse
+on-arrival: {!
+RO.add(Q, {rel_bol: -5, rel_lsr: -3});
+RO.fac(Q, 'intl', 0, 10);
+RO.fac(Q, 'defencist', 2, 0);
+!}
+
+The Menshevik delegation left the talks. The railway union lost its nerve. The Bolsheviks, having won in Moscow, have no need to talk.
+
+@sign
+on-arrival: {!
+Q.vik_ok = Q.vik_score >= 62 ? 1 : 0;
+if (Q.vik_ok) {
+    Q.vikzhel_deal = 1;
+    Q.bol_regime = 0;
+    Q.in_coalition = 1;
+    Q.homogeneous_gov = 1;
+    Q.gov_kadets = 0;
+    Q.bolshevik = 40;
+    Q.repression = 0;
+    Q.soviet_democracy += 8;
+    RO.add(Q, {rel_bol: 8, rel_lsr: 6, rel_sr: 4});
+    RO.fac(Q, 'intl', 2, -4);
+    RO.fac(Q, 'defencist', -3, 6);
+    RO.fac(Q, 'rightdef', 0, 12);
+    this.achieve('vikzhel');
+} else {
+    RO.add(Q, {rel_bol: -4, soviet_democracy: -2});
+    RO.fac(Q, 'intl', 0, 4);
+    RO.fac(Q, 'defencist', 0, 6);
+}
+!}
+go-to: vik_yes if vik_ok = 1; vik_no if vik_ok = 0
+
+@vik_yes
+
+The agreement was signed on 22 November. Lenin and Trotsky are out; Chernov is to head the government, with ministers from all of the socialist parties, and the Congress of Soviets as the supreme authority. The Bolsheviks who resigned in protest have been persuaded to return to the Central Committee, on condition that the agreement hold. The Mensheviks are in a government with the party that overthrew the Provisional Government, and neither side trusts the other.
+
+*(Vikzhel deal score: [+ vik_score_d +].)*
+
+@vik_no
+
+The Bolsheviks received the Menshevik delegation, heard it out, and in the following days the news reached Moscow that the Kremlin had fallen. Lenin has said that he will agree to no deal that excludes him.
+
+The signature on the draft was worth nothing. Our delegation was too far from the other socialists, and the Bolsheviks too close to the victory.
+
+*(Vikzhel deal score: [+ vik_score_d +]; at least 62 was needed.)*

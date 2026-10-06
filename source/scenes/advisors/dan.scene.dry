@@ -1,0 +1,29 @@
+title: Fyodor Dan
+is-pinned-card: true
+tags: advisor, defencist
+new-page: true
+view-if: dan_advisor = 1
+
+= Fyodor Dan
+
+Dan (1871-1947) is a physician and a leading figure in the Soviet executive. He will be the party's speaker at the 1919 and 1920 Congresses of Soviets.
+
+- @action
+- @root: Return to main
+
+@action
+title: Soviet Floor Manager
+subtitle: Dan whips the votes in the Soviet and prepares the speeches.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.boost(Q, {workers: 3, soldiers: 3, railway: 2}); RO.add(Q, {soviet_democracy: 1}); RO.fac(Q, 'defencist', 1, -1);
+!}
+
+Dan has organised the speakers, the resolutions and the votes. The Soviet runs a little more smoothly, and our delegates are better prepared.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

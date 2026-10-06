@@ -1,0 +1,49 @@
+title: The First Congress of Soviets
+subtitle: "There is such a party."
+new-page: true
+tags: event
+view-if: dix >= 10
+priority: 15
+max-visits: 1
+on-arrival: {!
+RO.setResults(Q, 'soviets', null, 777);
+Q.seat_other = Q.seats_total - Q.seat_bol - Q.seat_lsr - Q.seat_sr - Q.seat_men - Q.seat_kad;
+Q.congress_moderate = (Q.res_men + Q.res_sr + Q.res_lsr) >= 55 ? 1 : 0;
+Q.brought_july = 0;
+!}
+
+= The First Congress of Soviets
+
+On 16 June the First All-Russia Congress of Soviets opened in Petrograd. Over 1,000 delegates were present, 777 with a vote. The moderate socialists hold a majority. When Tsereteli declared that "there is at present no political party in Russia that would say: give the power into our hands, go away, we will take your place", Lenin shouted from the floor: "There is such a party!"
+
+The delegates, by our reckoning:
+
+SRs: [+ seat_sr +]. Mensheviks: [+ seat_men +]. Bolsheviks: [+ seat_bol +]. Others and unaffiliated: [+ seat_other +].
+
+(A decision for or against the coalition is on the floor.)
+
+- @back: Back the coalition.
+- @power: Propose that the Congress take power, in a democratic coalition.
+
+@back
+on-arrival: {!
+RO.add(Q, {rel_kad: 3, soviet_democracy: 1});
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'intl', 0, 3);
+RO.boost(Q, {middle: 1});
+!}
+
+The Congress endorsed the coalition by a large majority. The Congress established a Central Executive Committee: the party has a hundred and twenty-three of the three hundred and twenty places.
+
+@power
+choose-if: rel_sr >= 50
+unavailable-subtitle: The SRs will not support this.
+on-arrival: {!
+RO.add(Q, {rel_kad: -5, soviet_democracy: 3, rel_sr: 2, rel_lsr: 4, rel_bol: 3, right_threat: 3});
+RO.boost(Q, {workers: 2, soldiers: 2, railway: 1});
+RO.fac(Q, 'intl', 3, -4);
+RO.fac(Q, 'defencist', -2, 5);
+Q.soviet_power_motion = 1;
+!}
+
+A motion for Soviet power in a democratic coalition was introduced and lost, narrowly, to a motion of confidence. It was the Bolsheviks' own slogan; we have said it, and meant it differently.

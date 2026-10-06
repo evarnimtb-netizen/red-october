@@ -1,0 +1,59 @@
+title: War Aims
+subtitle: Peace without annexations, the Stockholm conference and the offensive.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: foreign_policy_timer <= 0 and at_war = 1
+on-arrival: month_actions += 1; foreign_policy_timer = 3
+
+The Allies want the offensive. The soldiers want peace. The Soviet's formula is peace without annexations or indemnities, but nobody has agreed to negotiate on it.
+
+- @note: Send a new note to the Allies on war aims.
+- @stockholm: Back the Stockholm conference of the International.
+- @offensive: Prepare the offensive with the Allies.
+- @separate: Sound out Germany through neutral intermediaries.
+- @easy_discard
+
+@note
+on-arrival: {!
+RO.add(Q, {war_weariness: -2, rel_kad: -2});
+RO.boost(Q, {soldiers: 2, workers: 1});
+Q.war_aims_note = 1;
+!}
+
+A note on war aims went to London and Paris. They replied politely, and not at all.
+
+@stockholm
+on-arrival: {!
+Q.stockholm = (Q.stockholm || 0) + 1;
+RO.add(Q, {war_weariness: -4, rel_kad: -4, army_discipline: -1});
+RO.boost(Q, {soldiers: 3, workers: 2});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 4);
+!}
+
+The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?]
+
+@offensive
+on-arrival: {!
+Q.offensive_prepared = 1;
+RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 4});
+RO.boost(Q, {middle: 3, soldiers: -3});
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'intl', 0, 4);
+!}
+
+Kerensky is visiting the front, and the Soviet has given its blessing. The army is getting ready for an offensive that it does not want.
+
+@separate
+choose-if: stockholm >= 2
+unavailable-subtitle: We must first have shown our commitment to a general peace at Stockholm.
+on-arrival: {!
+Q.separate_feelers = 1;
+RO.add(Q, {war_weariness: -6, rel_kad: -6, right_threat: 3});
+RO.boost(Q, {soldiers: 3});
+RO.fac(Q, 'rightdef', -2, 6);
+RO.fac(Q, 'intl', 0, -1);
+!}
+
+An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious.

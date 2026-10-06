@@ -1,0 +1,41 @@
+title: Independent Georgia
+subtitle: A Menshevik government in Tiflis.
+new-page: true
+tags: event
+view-if: dix >= 34
+priority: 15
+max-visits: 1
+on-arrival: {!
+Q.zhordania_advisor = 1;
+Q.georgia_free = 1;
+RO.fac(Q, 'defencist', -6, 0);
+!}
+
+= Independent Georgia
+
+On 26 May the Georgian National Council declared Georgia an independent republic. The Menshevik party of Georgia, led by Noe Zhordania, forms its government, the only Menshevik government in the world. It has the support of the peasants, thanks to its land reform, and of the workers, thanks to the Mensheviks' long local pedigree. Germany first, then Britain, protects it, and the Bolsheviks have signed a treaty with it, for the moment.
+
+The Georgian Social Democrats are the party's most reliable voters, and its best leaders: Tsereteli, Chkheidze and Zhordania himself. Their party is now a party of a state, with its own concerns.
+
+- @model: Treat Georgia as the model and refuge of Russian social democracy.
+- @distance: Keep Georgia at a distance; our fight is in Russia.
+
+@model
+on-arrival: {!
+Q.resources += 1;
+RO.boost(Q, {nations: 3, workers: 1});
+RO.add(Q, {soviet_democracy: 1, rel_bol: -1});
+RO.fac(Q, 'defencist', 1, -2);
+Q.georgia_support = (Q.georgia_support || 0) + 2;
+!}
+
+Georgia has opened its doors to Menshevik exiles and its press to Menshevik writers. It is a promise that a free social democracy is possible, somewhere.
+
+@distance
+on-arrival: {!
+RO.fac(Q, 'defencist', 0, 3);
+RO.add(Q, {rel_bol: 1});
+Q.georgia_support = (Q.georgia_support || 0) + 0;
+!}
+
+We said that the party's struggle was in Russia, where the workers are. The Georgian comrades did not argue, but noted it.

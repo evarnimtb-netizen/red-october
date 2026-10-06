@@ -1,0 +1,59 @@
+title: The Czechoslovak Revolt and Komuch
+subtitle: A government on the Volga.
+new-page: true
+tags: event
+view-if: dix >= 33 and bol_regime = 1
+priority: 30
+max-visits: 1
+on-arrival: {!
+Q.activists_strength = 0;
+!}
+
+= The Czechoslovak Revolt and Komuch
+
+In late May, a Czechoslovak Legion of about 40,000 men, travelling east on the Trans-Siberian railway to rejoin the Allies, clashed with local Soviet authorities and took the towns along the line. On 8 June, in Samara, a group of SR members of the dissolved Constituent Assembly, under Vladimir Volsky, proclaimed a Committee of Members of the Constituent Assembly, Komuch, with the Legion's protection. It has declared itself the government of Russia, and is calling up an army.
+
+It is the first anti-Bolshevik socialist government, and it is protected by foreign bayonets. Our Menshevik comrades in the Volga region are asked to join. Ivan Maisky, a Menshevik Internationalist, has gone to Samara and accepted a ministry. Most of the party leadership would say that it is a crime to cooperate with a force of interventionists; some say that it is a crime to refuse.
+
+- @neither: "Neither side." Expel Maisky.
+- @join: Join Komuch.
+- @delegation: Send a delegation with a labour programme.
+
+@neither
+on-arrival: {!
+Q.activists_strength = 4;
+RO.fac(Q, 'rightdef', 0, 8);
+RO.add(Q, {rel_sr: -4, rel_bol: 2});
+RO.fac(Q, 'intl', 1, -3);
+Q.maisky_expelled = 1;
+!}
+
+Maisky was expelled from the party. We have said that we are for neither side. It is a position that nobody on the Volga can understand.
+
+@join
+on-arrival: {!
+Q.armed_struggle = 1;
+Q.white_aid += 2;
+Q.activists_strength = 12;
+RO.add(Q, {rel_sr: 10, rel_bol: -15, repression: 8, soviet_democracy: -3});
+RO.boost(Q, {peasants: 4, middle: 4, workers: -4});
+RO.fac(Q, 'rightdef', 4, -8);
+RO.fac(Q, 'intl', -4, 20);
+RO.fac(Q, 'defencist', 0, 10);
+Q.members -= 12;
+if (Q.legality > 1) { Q.legality -= 1; }
+!}
+
+A Menshevik delegation joined Komuch in Samara. The Bolsheviks have taken it as a declaration of war, and will treat our members in Moscow as hostages.
+
+@delegation
+on-arrival: {!
+Q.white_aid += 0.5;
+Q.activists_strength = 6;
+RO.add(Q, {rel_sr: 3, rel_bol: -6, repression: 3});
+RO.boost(Q, {peasants: 2, workers: 1});
+RO.fac(Q, 'rightdef', 2, -3);
+RO.fac(Q, 'intl', 0, 8);
+!}
+
+A Menshevik delegation, led by Maisky's friends, has gone to Samara with a programme of workers' demands: restoration of the eight-hour day, trade union freedoms and no restoration of private estates. It is a middle position, and is attacked on both sides.

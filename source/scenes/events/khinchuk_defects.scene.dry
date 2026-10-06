@@ -1,0 +1,17 @@
+title: Khinchuk Goes Over
+subtitle: The Moscow cooperative leader changes sides.
+new-page: true
+tags: event
+view-if: dix >= 56 and bol_regime = 1 and khinchuk_advisor = 1
+priority: 5
+max-visits: 1
+on-arrival: {!
+Q.khinchuk_advisor = 0;
+RO.fac(Q, 'unions', -2, 4);
+RO.boost(Q, {middle: -2});
+RO.add(Q, {bread: -1});
+!}
+
+= Khinchuk Goes Over
+
+Lev Khinchuk, the former chairman of the Moscow Soviet's executive, has accepted a post in the Soviet government's cooperative administration. He will serve it, in later years, as ambassador to Berlin and to London. The cooperatives that he led have lost their patron, and our party its best contact among the Moscow businessmen.

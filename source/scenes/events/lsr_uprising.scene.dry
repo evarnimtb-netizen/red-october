@@ -1,0 +1,50 @@
+title: The Left SR Uprising
+subtitle: The German ambassador is murdered.
+new-page: true
+tags: event
+view-if: dix >= 36 and bol_regime = 1
+priority: 40
+max-visits: 1
+on-arrival: {!
+Q.lsr_can_stop = (Q.rel_lsr >= 55 && Q.ally_lsr >= 1) ? 1 : 0;
+!}
+
+= The Left SR Uprising
+
+On 6 July the Left SRs, who have left the government in protest at Brest-Litovsk and at the requisitioning of grain in the villages, assassinated the German ambassador, Count Mirbach, in Moscow. The Central Committee of the Left SRs had ordered it, in the hope of breaking the treaty and restarting the war. Their detachments seized the telegraph office. Within a day, the rising had been put down by Latvian riflemen: it was the work of one afternoon. Hundreds of Left SRs were arrested, and the party's deputies in the Congress of Soviets were seized in the hall.
+
+The Left SRs were the last of the parties that shared the Soviet government with the Bolsheviks. By the end of the summer, they will be a party without a seat.
+
+- @nopart: Take no part.
+- @defend: Defend the Left SRs as repressed socialists.
+- @warn: Warn the Left SRs against the rising, before it happens.
+
+@nopart
+on-arrival: {!
+RO.add(Q, {rel_lsr: -5, rel_bol: 1});
+RO.fac(Q, 'rightdef', 0, -2);
+!}
+
+The Left SRs went down without us. Their leaders were shot or hunted. Our members said that it was not our business, and it was not.
+
+@defend
+on-arrival: {!
+RO.add(Q, {rel_lsr: 8, rel_bol: -4, repression: 3, soviet_democracy: 1});
+RO.boost(Q, {peasants: 1, workers: 1});
+RO.fac(Q, 'intl', 1, -2);
+RO.fac(Q, 'rightdef', 0, 4);
+!}
+
+We said that arresting the representatives of the peasants at a Congress of Soviets was an assault on every party. Our press was closed for a week.
+
+@warn
+choose-if: lsr_can_stop = 1
+unavailable-subtitle: The Left SRs would not have listened to us.
+on-arrival: {!
+Q.lsr_uprising_averted = 1;
+RO.add(Q, {rel_lsr: 6, rel_bol: 3, soviet_democracy: 3, repression: -2});
+RO.boost(Q, {peasants: 2, workers: 1});
+RO.fac(Q, 'defencist', 0, 4);
+!}
+
+Our contacts in the Left SR Central Committee, who trusted us, talked them out of it at the last moment. The ambassador lived. The treaty was not broken, and the Left SRs have not been crushed. They are a party of opposition, and they are alive.

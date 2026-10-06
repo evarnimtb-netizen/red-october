@@ -1,0 +1,38 @@
+title: Readmitted to the Soviets
+subtitle: 30 November 1918.
+new-page: true
+tags: event
+view-if: dix >= 44 and bol_regime = 1 and expelled = 1
+priority: 20
+max-visits: 1
+
+= Readmitted to the Soviets
+
+On 30 November 1918 the Central Executive Committee, a month after the German revolution and the armistice, decided to readmit the Mensheviks to the soviets, on the ground that they had condemned armed intervention and the Czechoslovak revolt. The decision did not extend to the party's press. Our delegates have a place in the Congress of Soviets again, and the right to be arrested for what they say there.
+
+- @accept: Accept readmission.
+- @refuse: Refuse, until the Terror ends.
+
+@accept
+on-arrival: {!
+Q.legality = 2;
+RO.add(Q, {repression: -3, soviet_democracy: 2, rel_bol: 2});
+RO.boost(Q, {workers: 3, railway: 2});
+RO.fac(Q, 'intl', 1, -3);
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+Our delegates took their places in the Soviet, and Dan was given the floor. It was the first time in six months that the party's voice has been heard, and tolerated.
+
+@refuse
+choose-if: repression >= 15
+unavailable-subtitle: There is no principled reason to refuse; the terror is over.
+on-arrival: {!
+RO.boost(Q, {workers: 3, middle: 2});
+RO.add(Q, {rel_bol: -5});
+RO.fac(Q, 'intl', 0, 4);
+RO.fac(Q, 'defencist', 0, 4);
+Q.refused_readmission = 1;
+!}
+
+We refused. We said that a party that has been outlawed for six months and has been told that its members will be shot, has the right to ask for a guarantee that this will not recur. The Bolsheviks were unmoved.

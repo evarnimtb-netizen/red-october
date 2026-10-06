@@ -1,0 +1,29 @@
+title: Eva Broido
+is-pinned-card: true
+tags: advisor, intl
+new-page: true
+view-if: broido_advisor = 1
+
+= Eva Broido
+
+Eva Broido (1876-1941), an Internationalist, becomes the party's secretary in August 1917 and organises women workers.
+
+- @action
+- @root: Return to main
+
+@action
+title: Party Secretary
+subtitle: Broido strengthens the party's organisation and its work among women workers.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+Q.members += 8; RO.boost(Q, {workers: 2, middle: 1}); RO.fac(Q, 'intl', 1, -2);
+!}
+
+Broido has opened new party branches and a women workers' circle. Membership is growing.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

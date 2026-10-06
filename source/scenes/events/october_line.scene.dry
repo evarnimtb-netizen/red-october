@@ -1,0 +1,40 @@
+title: "October Was Historically Necessary"
+subtitle: The Central Committee changes its line.
+new-page: true
+tags: event
+view-if: dix >= 42 and bol_regime = 1
+priority: 20
+max-visits: 1
+
+= "October Was Historically Necessary"
+
+In October 1918, the party's Central Committee, led by Martov, passed a resolution on the revolution: that October had been a historical necessity, that the party opposed any armed struggle against the Soviet power, and that it called for the democratisation of the Soviet system by peaceful means. The party that had called the Bolshevik takeover a crime recognised it as a stage in the revolution.
+
+The Right Defencists leave. The Internationalists are content. The Bolsheviks say that it is an attempt to regain legality by writing words.
+
+- @martov: Adopt Martov's resolution.
+- @assembly: Keep the Constituent Assembly line.
+
+@martov
+on-arrival: {!
+Q.october_necessary = 1;
+RO.add(Q, {rel_bol: 8});
+RO.fac(Q, 'intl', 5, -6);
+RO.fac(Q, 'rightdef', -2, 15);
+RO.fac(Q, 'defencist', -2, 5);
+Q.readmission_hope = 1;
+!}
+
+The resolution was adopted. The party that said that the revolution had gone wrong has now said that it was inevitable, and that its task is to repair it.
+
+@assembly
+on-arrival: {!
+Q.october_necessary = 0;
+RO.add(Q, {rel_bol: -5, repression: 2});
+RO.fac(Q, 'rightdef', 3, -5);
+RO.fac(Q, 'intl', -3, 8);
+RO.boost(Q, {middle: 2});
+Q.ca_line = 1;
+!}
+
+The Central Committee reaffirmed the party's attachment to the Constituent Assembly, and to the democratic republic. The Bolsheviks noted that the party remained, in their words, a counter-revolutionary one.

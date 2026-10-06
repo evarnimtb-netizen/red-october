@@ -1,0 +1,29 @@
+title: Boris Batursky
+is-pinned-card: true
+tags: advisor, unions
+new-page: true
+view-if: batursky_advisor = 1
+
+= Boris Batursky
+
+Batursky (1879-1920) is a trade union leader who argues that unions must remain independent of the state.
+
+- @action
+- @root: Return to main
+
+@action
+title: Independent Unions
+subtitle: Batursky builds union influence and argues the case for independence.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.boost(Q, {workers: 3, railway: 3}); RO.fac(Q, 'unions', 3, -3); RO.add(Q, {repression: 1});
+!}
+
+Batursky's pamphlet on union independence was read at the metalworkers' union and the printers'. The authorities have taken note.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

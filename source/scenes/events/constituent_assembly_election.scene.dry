@@ -1,0 +1,74 @@
+title: The Constituent Assembly Election
+subtitle: [? if assembly_early = 1 : The election, brought forward to October. ?][? if assembly_early = 0 : The election of 25 November. ?]
+new-page: true
+tags: event
+view-if: (assembly_early = 0 and dix >= 21) or (assembly_early = 1 and dix >= 19)
+priority: 45
+max-visits: 1
+
+= The Constituent Assembly Election
+
+[? if assembly_early = 1 : The Provisional Government, under pressure from the Soviet, brought the elections forward. ?][? if assembly_early = 0 : The elections to the Constituent Assembly, postponed twice by the Provisional Government, have been held in the middle of a revolution. ?] Voting took place over several weeks, in 70 electoral districts. The election was the freest in Russia's history: some 44 million people voted.
+
+The Mensheviks cannot count on the villages. The SRs will win the peasants, the Bolsheviks the capitals and the northern front, the national parties their regions. Our votes are in the towns, among the railwaymen, in Georgia. The question is whether to run alone.
+
+- @alone: Run our own lists.
+- @joint: Run a joint list with the SRs. (Alliance level 2 or relations of 60 or better.)
+- @united: Run a united list of all moderate socialists.
+
+@alone
+on-arrival: {!
+Q.ca_extra = 0;
+!}
+go-to: ca_results
+
+@joint
+choose-if: ally_sr >= 2 or rel_sr >= 60
+unavailable-subtitle: The SRs will not agree to a joint list.
+on-arrival: {!
+Q.ca_extra = 1;
+RO.add(Q, {rel_sr: 3});
+RO.fac(Q, 'intl', 0, 2);
+!}
+go-to: ca_results
+
+@united
+choose-if: (ally_sr >= 2 and (ally_lsr >= 1 or rel_lsr >= 45)) or ally_sr >= 3
+unavailable-subtitle: This needs a bloc with the SRs and relations with the Left SRs.
+on-arrival: {!
+Q.ca_extra = 2;
+RO.add(Q, {rel_sr: 5, rel_lsr: 3});
+RO.fac(Q, 'intl', 0, 3);
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+go-to: ca_results
+
+@ca_results
+on-arrival: {!
+var extra = null;
+if (Q.ca_extra == 1) { extra = {men: 1.7}; }
+if (Q.ca_extra == 2) { extra = {men: 2.4, sr: 1.05}; }
+RO.setResults(Q, 'assembly', extra, 703);
+Q.ca_elected = 1;
+Q.ca_moderate = (Q.res_men + Q.res_sr + Q.res_lsr + Q.res_pop + Q.res_nat >= 55) ? 1 : 0;
+Q.ca_men_pct = Q.res_men;
+if (Q.assembly_early) { RO.add(Q, {bolshevik: -10, soviet_democracy: 2}); }
+!}
+
+= The Results
+
+The results, by our count:
+
+SRs (including the Left SRs, who ran on the SR lists): [+ res_sr +]%, [+ seat_sr +] seats.
+
+Bolsheviks: [+ res_bol +]%, [+ seat_bol +] seats.
+
+National parties (Ukrainian SRs, the Dashnaks, Musavat, Alash Orda and others): [+ res_nat +]%, [+ seat_nat +] seats.
+
+Kadets: [+ res_kad +]%, [+ seat_kad +] seats.
+
+Mensheviks: [+ res_men +]%, [+ seat_men +] seats.
+
+Others (Popular Socialists, Trudoviks and the rest): [+ res_pop +]%, [+ res_oth +]%.
+
+[? if ca_moderate = 1 : The moderate socialists and the national parties have a clear majority. The Assembly is theirs, if it meets. ?][? if ca_moderate = 0 : The moderate socialists do not have a majority. The Assembly will be a quarrelsome place. ?]

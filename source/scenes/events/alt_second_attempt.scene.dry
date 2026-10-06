@@ -1,0 +1,44 @@
+title: A Second Bolshevik Attempt
+subtitle: The Bolsheviks try again.
+new-page: true
+tags: event
+view-if: dix >= 34 and bol_regime = 0 and vikzhel_deal = 0 and alt_coup_n < 3 and alt_coup_timer <= 0
+priority: 45
+on-arrival: {!
+Q.alt_coup_n = (Q.alt_coup_n || 0) + 1;
+Q.alt_coup_timer = 14;
+Q.bol_power2 = Q.bolshevik + 0.5 * (RO.grievance(Q) - 55) - (Q.assembly_survives ? 8 : 0) - (Q.land_decree ? 5 : 0) - (Q.no_terror ? 4 : 0);
+Q.bol_power2_d = Math.round(Q.bol_power2);
+Q.coup2 = Q.bol_power2 >= 55 ? 1 : 0;
+if (Q.coup2) {
+    Q.bol_regime = 1;
+    Q.assembly_survives = 0;
+    Q.in_coalition = 0;
+    Q.homogeneous_gov = 0;
+    Q.bolshevik = 70;
+    Q.repression = 4;
+    Q.land_decree = 1;
+    Q.soviet_democracy -= 15;
+    RO.add(Q, {rel_bol: -6});
+} else {
+    Q.bolshevik -= 6;
+    Q.soviet_democracy += 1;
+}
+!}
+go-to: coup_yes if coup2 = 1; coup_no if coup2 = 0
+
+@coup_yes
+
+= The Bolsheviks Take Power
+
+The hunger, the war weariness and the discontent in the factories have given the Bolsheviks a new opening. In a night of arrests, the Red Guards seized the government's offices and the Soviet executive. The Assembly was dissolved, by decree.
+
+The experiment in democratic government is over. The party is now an opposition party in a one-party state, with a strong democratic past.
+
+@coup_no
+
+= The Bolsheviks Fail Again
+
+The Bolsheviks tried again, in the factory districts, and the Soviet government prevailed. A mood of discontent has never been a plan, and the government has proven that it can hold its own. Their leaders are under arrest, or abroad.
+
+*(The government's strength will be tested again.)*

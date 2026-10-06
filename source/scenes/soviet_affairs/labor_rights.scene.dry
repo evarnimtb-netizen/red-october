@@ -1,0 +1,42 @@
+title: Union Independence
+subtitle: Fight for trade unions free of the state.
+new-page: true
+is-card: true
+tags: soviet_affairs
+view-if: labor_rights_timer <= 0
+on-arrival: month_actions += 1; labor_rights_timer = 3
+
+Boris Batursky and the union men argue that unions must not become the state's instrument. The Bolsheviks say a workers' state needs no independent union to defend workers against it.
+
+- @petition: Petition for the union's independence through the Soviet.
+- @strike: Back a railway and printers' strike in defence of union rights.
+- @compromise: Accept a compromise: the unions advise but do not oppose.
+- @easy_discard
+
+@petition
+on-arrival: {!
+RO.boost(Q, {workers: 3, railway: 3});
+RO.fac(Q, 'unions', 2, -3);
+RO.add(Q, {soviet_democracy: 1, repression: 1});
+!}
+
+The Soviet debated the petition for a whole afternoon. It was rejected, but the union men noticed who supported it.
+
+@strike
+on-arrival: {!
+RO.boost(Q, {workers: 6, railway: 6});
+RO.add(Q, {bread: -3, repression: 5, soviet_democracy: 2, rel_bol: -4});
+RO.fac(Q, 'unions', 3, -4);
+if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
+!}
+
+The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own.
+
+@compromise
+on-arrival: {!
+RO.boost(Q, {workers: -3, railway: -2});
+RO.add(Q, {repression: -2, rel_bol: 2});
+RO.fac(Q, 'unions', -2, 4);
+!}
+
+The union leaders accepted an advisory role. They will say it was the best they could get.

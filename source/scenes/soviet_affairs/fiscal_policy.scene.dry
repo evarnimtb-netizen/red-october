@@ -1,0 +1,33 @@
+title: Famine Relief
+subtitle: The 1921 relief committee.
+new-page: true
+is-card: true
+tags: soviet_affairs
+view-if: fiscal_policy_timer <= 0 and dix >= 108 and famine_relief = 0
+on-arrival: month_actions += 1; fiscal_policy_timer = 2
+
+The Volga is starving. Maxim Gorky has proposed a committee of public figures, including socialists and Kadets, to collect relief at home and abroad. The government has agreed to allow it, for the moment.
+
+- @join: Join the committee, and send our members to work for it.
+- @decline: Leave it to the government.
+- @easy_discard
+
+@join
+on-arrival: {!
+Q.famine_relief = 1;
+RO.add(Q, {bread: 3, repression: 3, soviet_democracy: 1});
+RO.boost(Q, {workers: 4, peasants: 5, middle: 5});
+RO.fac(Q, 'unions', 2, -2);
+if (Q.foreign_pressure >= 1) { Q.foreign_pressure += 1; }
+!}
+
+The committee began collecting money and grain. It is the first time since 1917 that Kadets, socialists and engineers have worked together. It cannot last.
+
+@decline
+on-arrival: {!
+Q.famine_relief = 2;
+RO.boost(Q, {peasants: -3, middle: -3});
+RO.add(Q, {repression: -1});
+!}
+
+We declined to join, and said we would not cooperate with a regime that was not free. Several of our members signed up as individuals.

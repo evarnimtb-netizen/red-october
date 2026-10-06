@@ -1,0 +1,95 @@
+title: The Kornilov Affair
+subtitle: The General marches on Petrograd.
+new-page: true
+tags: event
+view-if: dix >= 16
+priority: 30
+max-visits: 1
+on-arrival: {!
+Q.k_force = RO.kornilovForce(Q);
+Q.k_force_d = Math.round(Q.k_force);
+!}
+
+= The Kornilov Affair
+
+On 9 September, General Lavr Kornilov, the commander-in-chief, ordered the Third Cavalry Corps to march on Petrograd. Whether Kerensky had asked for the troops or had been misled by an intermediary is not clear; by the time the matter was clear Kerensky had dismissed the general, and the general had refused to go.
+
+The troops are a few days from the capital. The railways are in the hands of unions that favour the Soviet. The garrison is in the hands of committees that distrust the Soviet. The Bolsheviks, a few weeks after being hunted, can bring several thousand armed men to the capital's defence.
+
+The Right is stronger than it has been since February, and the democracy is weaker. How should the Soviet respond?
+
+- @committee: Form a Committee for the Struggle against Counter-Revolution, with the Bolsheviks.
+- @gov: Use the crisis to form a government without the Kadets.
+- @kerensky: Defend the government and leave the Soviet's role to Kerensky.
+
+@committee
+on-arrival: {!
+Q.k_bonus = 20;
+RO.add(Q, {rel_bol: 8, bolshevik: 10});
+Q.bol_armed = 1;
+RO.fac(Q, 'intl', 1, -2);
+RO.fac(Q, 'defencist', 0, 6);
+RO.fac(Q, 'rightdef', 0, 8);
+!}
+
+The Soviet set up the Committee, and the Bolshevik leaders were released from prison to sit on it. The railwaymen stopped the cavalry's trains, and Soviet agitators went out to meet the troops.
+
+- @kornilov_result: Continue...
+
+@gov
+choose-if: rel_sr >= 50
+unavailable-subtitle: The SRs will not agree to this.
+on-arrival: {!
+Q.k_bonus = 10;
+Q.gov_kadets = 0;
+Q.homogeneous_gov = 1;
+Q.in_coalition = 1;
+RO.add(Q, {rel_kad: -15, bolshevik: 4, soviet_democracy: 2});
+RO.fac(Q, 'defencist', -2, 5);
+RO.fac(Q, 'intl', 2, -3);
+RO.fac(Q, 'rightdef', 0, 8);
+!}
+
+The Kadets have resigned in protest at the dismissal of the General. The Soviet parties form a government without them.
+
+- @kornilov_result: Continue...
+
+@kerensky
+on-arrival: {!
+Q.k_bonus = 4;
+RO.add(Q, {rel_kad: 2, right_threat: 2});
+RO.fac(Q, 'intl', 0, 4);
+!}
+
+The Soviet will not take the lead. Kerensky, who is now both the cause and the commander of the defence, takes charge of it.
+
+- @kornilov_result: Continue...
+
+@kornilov_result
+on-arrival: {!
+Q.k_resist = RO.kornilovResistance(Q, Q.k_bonus);
+Q.k_resist_d = Math.round(Q.k_resist);
+Q.k_force_d = Math.round(Q.k_force);
+if (Q.k_force > Q.k_resist) {
+    Q.kornilov_won = 1;
+    Q.game_end = 1;
+    Q.ending = 'kornilov';
+} else {
+    Q.kornilov_won = 0;
+    RO.add(Q, {right_threat: -22, army_discipline: -6, soviet_democracy: 3});
+    RO.boost(Q, {soldiers: 1, workers: 1});
+}
+!}
+go-to: kornilov_lost if kornilov_won = 1; kornilov_defeated if kornilov_won = 0
+
+@kornilov_defeated
+
+The cavalry corps stopped at Luga and dissolved. Kornilov was arrested at Mogilev. The officers who supported him are ashamed or in hiding.
+
+Everyone has lost something. The army has lost its last illusions about its officers. The Soviet parties have lost their right wing, and the support of everyone in the middle. The Bolsheviks have gained arms, and a halo.
+
+@kornilov_lost
+
+The Soviet's committees were too few, and the General's troops too many. On 14 September cavalry units entered the capital. The Soviet was dissolved, and the party's leaders were arrested or fled. Kornilov has declared himself the head of a National Defence Council.
+
+Russia is now a military dictatorship.

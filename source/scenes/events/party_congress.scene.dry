@@ -1,0 +1,53 @@
+title: The Extraordinary Party Congress
+subtitle: Martov's line, or the Defencists'?
+new-page: true
+tags: event
+view-if: dix >= 22
+priority: 20
+max-visits: 1
+on-arrival: lsr_split = 1;
+
+= The Extraordinary Party Congress
+
+In the first half of December the party met in Petrograd in an extraordinary congress. The question was the party's attitude to the Bolshevik takeover: whether it was, in some sense, a historical development, to be criticised but not fought; or a conspiracy, a betrayal of the revolution, to be resisted by every means.
+
+Martov's Internationalists, with the support of the provincial delegates, argue for the first. Potresov, Tsereteli's circle and the Right Defencists argue for the second. [? if bol_regime = 0 : The Bolsheviks are no longer a threat, and the question is more theoretical: what is the party's attitude to the Soviet parties that govern? ?]
+
+The Left SRs held their own founding congress on the same days, with 116 delegates from 99 organisations.
+
+- @martov: Adopt Martov's line.
+- @defencist: Adopt the Defencist line.
+- @balance: Try to hold both sides together.
+
+@martov
+on-arrival: {!
+RO.fac(Q, 'intl', 14, -12);
+RO.fac(Q, 'defencist', -10, 12);
+RO.fac(Q, 'rightdef', -4, 15);
+Q.war_line -= 2;
+Q.martov_line = 1;
+RO.add(Q, {rel_bol: 3, rel_lsr: 3});
+!}
+
+Martov's line won, narrowly. The Defencists resigned from the Central Committee. The party has a new leadership, and fewer friends on the Right.
+
+@defencist
+on-arrival: {!
+RO.fac(Q, 'defencist', 8, -6);
+RO.fac(Q, 'rightdef', 4, -6);
+RO.fac(Q, 'intl', -8, 20);
+Q.war_line += 1;
+Q.martov_line = 0;
+Q.members -= 8;
+RO.add(Q, {rel_bol: -4, rel_kad: 3});
+!}
+
+The Defencists carried the day, and a number of Internationalist circles left the party.
+
+@balance
+on-arrival: {!
+for (var f of Q.factions) { RO.fac(Q, f, 0, 4); }
+Q.martov_line = 0;
+!}
+
+A compromise resolution was adopted. Nobody is satisfied, but nobody resigned.

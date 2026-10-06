@@ -1,0 +1,62 @@
+title: The Spring Soviet Elections
+subtitle: Nineteen of thirty.
+new-page: true
+tags: event
+view-if: dix >= 30 and bol_regime = 1
+priority: 30
+max-visits: 1
+on-arrival: {!
+var extra = {men: 1.0 + 0.004 * Q.soviet_democracy, sr: 1.0 + 0.003 * Q.soviet_democracy, bol: 1.0 + Q.repression / 150};
+RO.setResults(Q, 'provincial', extra, 100);
+Q.opp_share = Q.res_men + Q.res_sr + Q.res_lsr + Q.res_oth * 0.5;
+Q.capitals_won = Math.round(30 * RO.clamp((Q.opp_share - 30) / 32, 0, 1));
+Q.spring_honoured = 0;
+Q.poll_men_d = Math.round(Q.res_men);
+!}
+
+= The Spring Soviet Elections
+
+During the spring of 1918, soviets across Russia held new elections. The Bolsheviks had expected to win; in a majority of the provincial capitals they did not. In the cities where the Soviet government had been recognised, the opposition (the Mensheviks, the SRs and their allies) won majorities in [+ capitals_won +] of the 30 provincial capitals where elections were held. In the second half of the spring, the new soviets were dispersed by force, on the ground that the "mood of the masses had been misread".
+
+By our count, the vote was:
+
+Bolsheviks: [+ res_bol +]%. Mensheviks: [+ res_men +]%. SRs and Left SRs: [+ res_sr +]%, [+ res_lsr +]%. Others: the rest.
+
+- @protest: Accept the annulment, and protest.
+- @renounce: Offer to renounce armed struggle in return for the results being honoured.
+
+@protest
+on-arrival: {!
+RO.add(Q, {soviet_democracy: -3, repression: 2, rel_bol: -3});
+RO.boost(Q, {workers: 3, railway: 2});
+RO.fac(Q, 'intl', 1, -2);
+if (Q.capitals_won >= 19) { Q.spring_won = 1; }
+!}
+
+The results were annulled in town after town. Menshevik delegates were turned out of the soviets and their newspapers closed. We protested, and published the results.
+
+@renounce
+on-arrival: {!
+Q.renounced_armed = 1;
+Q.honour_ok = (Q.soviet_democracy >= 50 && Q.rel_bol >= 30 && Q.capitals_won >= 10) ? 1 : 0;
+if (Q.honour_ok) {
+    Q.spring_honoured = 1;
+    RO.add(Q, {soviet_democracy: 5, repression: -3, rel_bol: 4});
+    RO.boost(Q, {workers: 4, railway: 3});
+} else {
+    RO.add(Q, {soviet_democracy: -2, rel_bol: -2});
+    RO.boost(Q, {workers: 1});
+}
+if (Q.capitals_won >= 19) { Q.spring_won = 1; }
+RO.fac(Q, 'rightdef', 0, 8);
+RO.fac(Q, 'intl', 1, -3);
+!}
+go-to: spring_deal if honour_ok = 1; spring_no_deal if honour_ok = 0
+
+@spring_deal
+
+The Central Executive Committee has agreed, under pressure from the Left SRs and a section of the Bolsheviks, to honour most of the results in return for a pledge from the opposition parties that they would not take up arms against the government. Many soviets have been allowed to continue.
+
+@spring_no_deal
+
+The Bolsheviks listened politely, and said that the soviets would be dissolved anyway. The pledge has been given, and, for the time being, it is worth nothing.

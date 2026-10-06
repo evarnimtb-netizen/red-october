@@ -1,0 +1,29 @@
+title: Lev Khinchuk
+is-pinned-card: true
+tags: advisor, unions
+new-page: true
+view-if: khinchuk_advisor = 1
+
+= Lev Khinchuk
+
+Khinchuk (1868-1939), a Menshevik and cooperator, is the chairman of the Moscow Soviet's executive in 1917 and an expert on cooperatives.
+
+- @action
+- @root: Return to main
+
+@action
+title: Moscow Machine
+subtitle: Khinchuk mobilises food and cooperative networks in Moscow.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {bread: 3}); RO.boost(Q, {workers: 2, middle: 2}); RO.fac(Q, 'unions', 1, -1);
+!}
+
+The Moscow cooperatives have stretched their grain stores, and the Moscow workers know whose men run them.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

@@ -1,29 +1,43 @@
-title: Confronting Antisemitism
+title: Answering the Pogroms
+subtitle: Respond to antisemitic attacks and smears.
 new-page: true
 is-card: true
-view-if: iron_front_formed == 1 and nazi_urgency >= 3
-on-arrival: confronting_antisemitism += 1; month_actions += 1
-card-image: img/iron_front.png
-tags: party_affairs, antifascism
-max-visits: 1
+tags: party_affairs
+view-if: response_to_antisemitism_timer <= 0
+on-arrival: month_actions += 1; response_to_antisemitism_timer = 8
 
-= Confronting Antisemitism
+Many of the Menshevik leaders are Jews, and their enemies know it. Soldiers are told that the Soviet is run by Jews, pamphlets are circulated in the villages and, in 1919, the pogroms in Ukraine are the worst in a century.
 
-Antisemitism has long been a latent feature of German society, but since the beginning of the economic depression, it has grown to a horrifying extent. The Nazis are the worst of it, but all the right-wing parties are deeply antisemitic. Regarding the SPD specifically, our right-wing enemies love to deploy their racist rhetoric against our many Jewish comrades, magnifying criticism of any minor transgression, and they call the entire SPD a Jewish party. We are a favorite target of their invectives.
+- @confront: Confront it publicly, and name the authors.
+- @ignore: Say nothing; it would only draw attention.
+- @protect: Organise defence and relief for the victims. (1 resource)
+- @easy_discard
 
-- @socialism_of_fools: Antisemitism is the "socialism of fools". We will defeat them with real socialism.
-- @if: Antisemitism is a crisis. Direct the full force of the Iron Front against antisemitism.
-- @all: All Germans will suffer from fascism, not just the Jews. We do not need a separate policy for them.
+@confront
+on-arrival: {!
+RO.fac(Q, 'bund', 0, -6);
+RO.boost(Q, {soldiers: -1, peasants: -1});
+RO.add(Q, {right_threat: -1, rel_sr: 1});
+!}
 
-@socialism_of_fools
+A public declaration named the authors and the printers of the smears. The Black Hundred press replied with more of the same.
 
-The best policy to deal with this sort of irrational, senseless hatred is to ignore it. Few are swayed by racist rhetoric; the best way to combat it is to provide economic security so that people do not turn to antisemitism.
+@ignore
+on-arrival: {!
+RO.fac(Q, 'bund', 0, 6);
+RO.boost(Q, {soldiers: 1});
+!}
 
-@if
-on-arrival: confronting_antisemitism += 2; sa_strength -= 20; democratization += 1; pacifism += 1; nationalism -= 5*(1-dissent); workers_nsdap -= 6*(1-dissent);
+We said nothing. Some members of the Bund have said that they will remember it.
 
-We develop an entire campaign against antisemitism under the auspices of the Iron Front. Hopefully our campaign can sway the workers away from Nazism.
+@protect
+choose-if: resources >= 1
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+RO.fac(Q, 'bund', 2, -10);
+RO.boost(Q, {nations: 3, workers: 1});
+RO.add(Q, {rel_sr: 1});
+!}
 
-@all
-
-We do not need any special treatment for minorities.
+Self-defence units and a relief fund for the victims. The Bund is grateful, and so are many who are not Jews.

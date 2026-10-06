@@ -1,0 +1,29 @@
+title: Alexander Potresov
+is-pinned-card: true
+tags: advisor, rightdef
+new-page: true
+view-if: potresov_advisor = 1
+
+= Alexander Potresov
+
+Potresov (1869-1934), co-founder of the Russian social democratic movement and Lenin's old comrade, edits the newspaper Den. He is the Right Defencists' spokesman.
+
+- @action
+- @root: Return to main
+
+@action
+title: Den Editorial
+subtitle: Potresov writes a sharp editorial against the Bolsheviks.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {bolshevik: -4, rel_bol: -3}); RO.boost(Q, {middle: 3, workers: 1}); RO.fac(Q, 'rightdef', 2, 5); RO.fac(Q, 'intl', 0, 3);
+!}
+
+Potresov's editorial was reprinted in every anti-Bolshevik paper. It also drew a sharp reply from Martov.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

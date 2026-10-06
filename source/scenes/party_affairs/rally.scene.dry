@@ -1,121 +1,123 @@
-title: Political Rally
+title: Workers' Meeting
+subtitle: Speak to the factories and the garrison.
 new-page: true
 is-card: true
 tags: party_affairs
 view-if: rally_timer <= 0
-on-arrival: month_actions += 1; rally_timer = 6
-card-image: img/protest.jpg
-go-to: main_rally; sa_disrupt if sa_strength > 180 and not sa_banned and not return_to_normalcy
+on-arrival: month_actions += 1; rally_timer = 3
+go-to: bol_crowd if bolshevik >= 55 and bol_regime = 0 and phase <= 2; cheka_crowd if repression >= 30 and bol_regime = 1; main_rally if (bolshevik < 55 or bol_regime = 1 or phase > 2) and (repression < 30 or bol_regime = 0)
 
-@sa_disrupt
+@bol_crowd
 
-The Nazi SA has disrupted our rally! Their street troops are preventing us from meeting.
+Bolshevik agitators have packed the hall. The soldiers in the front rows have been told that we are the party of the offensive and the bourgeoisie. They are shouting down the platform.
 
-- @police_protect: Call the police to protect our rally.
-- @rb_protect: Use the Reichsbanner to protect our rally.
-- @both_protect: The police and Reichsbanner should work together to protect our rally.
-- @cancel: Cancel the rally.
+- @appeal: Stay on the platform and argue it out.
+- @militia_guard: Have the workers' militia clear the hall.
+- @cancel: Cancel the meeting.
+- @easy_discard
 
-@police_protect
-view-if: spd_prussia == 1
-on-arrival: police_protect_success = prussian_police_loyalty * prussian_police_militancy * prussian_police_strength*2 - sa_militancy*sa_strength;
-go-to: police_protect_win if police_protect_success >= 0; police_protect_lose if police_protect_success < 0
+@appeal
+on-arrival: {!
+RO.boost(Q, {workers: 2, soldiers: -1});
+RO.add(Q, {bolshevik: -1});
+RO.fac(Q, 'intl', 1, 0);
+!}
 
-@police_protect_win
-go-to: main_rally
+We stayed, and we were heard out by about half of the hall. A speech to a hostile crowd does not win it over, but a few workers who came to jeer left asking questions.
 
-The police successfully protected our rally, so it can go ahead as usual.
+@militia_guard
+on-arrival: {!
+RO.boost(Q, {workers: -2, soldiers: -2});
+RO.add(Q, {bolshevik: 2, soviet_democracy: -1});
+!}
 
-@police_protect_lose
-on-arrival: strife += 1; workers_nsdap += 3
-
-Unfortunately, the police were unable or unwilling to hold back the SA mob. The Nazis have won this show of strength.
-
-@rb_protect
-on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy; strife += 1
-go-to: rb_protect_win if rb_success >= 0; rb_protect_lose if rb_success < 0
-
-@rb_protect_win
-go-to: main_rally
-
-The Reichsbanner has successfully protected our rally against the SA! Our meeting can go ahead as usual.
-
-@rb_protect_lose
-on-arrival: workers_nsdap += 3; rb_strength -= 50
-
-Unfortunately, the Reichsbanner was not able to hold back the SA mob. The Nazis have won this show of strength.
-
-@both_protect
-view-if: spd_prussia
-choose-if: prussian_police_training > 0
-unavailable-subtitle: The loyal sections of the police have never coordinated with the Reichsbanner before.
-on-arrival: rb_success = rb_strength*rb_militancy - sa_strength*sa_militancy + prussian_police_loyalty*prussian_police_militancy*prussian_police_strength*2; strife += 1
-go-to: both_protect_win if rb_success >= 0; both_protect_lose if rb_success < 0
-
-@both_protect_win
-go-to: main_rally
-
-The police and Reichsbanner have successfully protected our rally against the SA! Our meeting can go ahead as usual.
-
-@both_protect_lose
-on-arrival: workers_nsdap += 3; rb_strength -= 50
-
-Unfortunately, the police and Reichsbanner were not able to hold back the SA mob. The Nazis have won this show of strength.
-
+The militia cleared the hall. By the evening, the Bolshevik papers were writing that the Mensheviks had set armed guards on workers.
 
 @cancel
-on-arrival: workers_nsdap += 3;
+on-arrival: {!
+RO.boost(Q, {workers: -2});
+RO.add(Q, {bolshevik: 1});
+!}
 
-The SA have won this show of strength.
+The hall was left to the crowd. It is a defeat, and everyone knows it.
+
+@cheka_crowd
+
+A detachment of the Cheka has arrived at the factory gates and is asking for the names of the speakers.
+
+- @speak_anyway: Speak anyway.
+- @cancel_cheka: Cancel the meeting.
+- @easy_discard
+
+@speak_anyway
+on-arrival: {!
+RO.boost(Q, {workers: 3});
+RO.add(Q, {repression: 2, soviet_democracy: 1});
+RO.fac(Q, 'unions', 0, 2);
+!}
+
+The meeting went ahead. The workers heard us out, and the Cheka took down the names of those who stayed to ask questions. Some will pay for it.
+
+@cancel_cheka
+on-arrival: {!
+RO.boost(Q, {workers: -1});
+!}
+
+We will find a hall that does not have the Cheka at the gate.
 
 @main_rally
 
-Mass rallies are a common feature of social democratic life, especially in the lead-up to an election. What is the primary theme of this rally?
+A meeting at a factory or a barracks is the party's oldest form of political education. What is the theme?
 
-- @class_struggle: The class struggle of the proletariat against the bourgeoisie.
-- @welfare: Sozialpolitik - the maintenance and expansion of social welfare programs.
-- @democracy: Expanding our nascent democracy and defending it against dictatorship and fascism.
-- @pacifism: Opposing war, nationalism, and militarism at all costs.
-- @wtb: Support the WTB plan!
-- @local: A mixture of various local and national concerns that resonate most with the audience.
+- @defence: Defend the revolution, and the army that defends it.
+- @peace: Peace without annexations, and bread.
+- @democracy: Unity of the whole democracy, and the Soviets as its organs.
+- @unions: The eight-hour day, the unions and the factory committees.
+- @local: Whatever the audience is asking about.
 - @easy_discard
 
-@class_struggle
-on-arrival: workers_spd += 4*(1-dissent); unemployed_spd += 3*(1-dissent) if left_strength > reformist_strength; workers_spd += 4*(1-dissent) if nationalization_progress > 0; unemployed_spd += 3*(1-dissent) if nationalization_progress > 0; left_strength += 5; left_dissent -= 5; old_middle_spd -= 3; new_middle_spd -= 2;
+@defence
+view-if: at_war = 1
+on-arrival: {!
+RO.boost(Q, {workers: 2, soldiers: 2, middle: 3});
+RO.fac(Q, 'defencist', 3, 0);
+RO.fac(Q, 'intl', -1, 4);
+RO.add(Q, {rel_kad: 2, war_weariness: 1});
+!}
 
-Our message of class struggle appeals to the left wing of the working class, while potentially alienating the middle class. [? if nationalization_progress > 0 : Our achievements in nationalization have assisted our messaging. ?]
+The defencist line fits the mood of the officers and the educated public. It does not fit the mood of the trenches.
 
-@welfare
-on-arrival: workers_spd += 3*(1-dissent); workers_spd += 3*(1-dissent) if welfare > 0; unemployed_spd += 3*(1-dissent) if welfare > 0; unemployed_spd += 4*(1-dissent) if welfare > 1; reformist_strength += 3; labor_strength += 4; reformist_dissent -= 3; labor_dissent -= 3;
+@peace
+view-if: at_war = 1
+on-arrival: {!
+RO.boost(Q, {workers: 4, soldiers: 4});
+RO.fac(Q, 'intl', 3, -3);
+RO.fac(Q, 'defencist', -1, 3);
+RO.add(Q, {army_discipline: -1});
+!}
 
-The reformist message appeals to the organized workers, whose benefits are the accomplishments of social democracy. [? if welfare > 1 : Our achievements in expanding welfare have made this message more effective. ?]
+The soldiers cheered. The phrase "peace without annexations" is the Soviet's own and nobody can call it Bolshevik.
 
 @democracy
-on-arrival: democratization += 1; pro_republic += 2*(1 - dissent); workers_spd += 4*(1-dissent) if democratization >= 3; unemployed_spd += 3*(1-dissent) if democratization >= 3; pro_republic += 4*(1 - dissent) if democratization >= 3; new_middle_spd += 4*(1-dissent) if democratization >= 3 
+on-arrival: {!
+RO.boost(Q, {workers: 2, railway: 3, soldiers: 1});
+RO.add(Q, {soviet_democracy: 2, rel_sr: 3, rel_lsr: 1});
+!}
 
-Our speakers defend the republican system and rail against the monarchists and authoritarians who threaten it.
+We spoke for the Soviets as the free organs of the whole people, from the Mensheviks to the Left SRs. The railwaymen applauded the loudest.
 
-[? if democratization < 3 : Talk of democracy does not excite the workers as much as more practical issues. But that may change; part of our job is to provide political education to the proletariat. ?]
-[? if democratization >= 3 : Since we have consistently made democratization a theme of our campaign, the workers are enthusiastic about our message. ?]
+@unions
+on-arrival: {!
+RO.boost(Q, {workers: 5, railway: 3});
+RO.fac(Q, 'unions', 3, -3);
+RO.add(Q, {ruble: -1, rel_kad: -1});
+!}
 
-@pacifism
-on-arrival: pacifism += 1; nationalism -= 2*(1 - dissent); workers_spd += 4*(1 - dissent) if pacifism >= 3; unemployed_spd += 3*(1-dissent) if pacifism >= 3; nationalism -= 3*(1-dissent) if pacifism >= 3; new_middle_spd += 4*(1-dissent) if pacifism >= 3
-
-Our speakers denounce the military establishment and all the spending entering that black hole. Some adventurous speakers question the responsibility of the military elites in organizing the Great War.
-
-[? if pacifism < 3 : Given the volume of nationalist indoctrination in our society, it is difficult to argue so vehemently against the military. ?]
-[? if pacifism >= 3 : Since we have consistently made pacifism a theme of our campaign, the workers are enthusiastic about our message. ?]
-
-@wtb
-view-if: wtb_adopted = 1
-choose-if: return_to_normalcy = 0
-unavailable-subtitle: The economic crisis is largely over now, and the public is no longer interested in hearing about it.
-on-arrival: wtb_support += 1; workers_spd += 6*(1-dissent); unemployed_spd += 6*(1-dissent); rural_spd += 3*(1-dissent); new_middle_spd += 3*(1-dissent); old_middle_spd += 3*(1-dissent);
-
-The WTB plan has become a popular rallying cry for our party. The workers are eager to go back to work, and that is exactly what the plan promises.
-
+The factory committees and the unions are the workers' own organisations. They like to be told so, and employers like to hear it less.
 
 @local
-on-arrival: workers_spd += 3*(1-dissent); old_middle_spd += 1*(1-dissent); new_middle_spd += 2*(1-dissent); unemployed_spd += 3*(1-dissent);
+on-arrival: {!
+RO.boost(Q, {workers: 3, soldiers: 1, railway: 1});
+!}
 
-Our speakers have gauged the mood and are speaking to the issues that seem to most affect the workers in this moment.
+We answered the questions that were asked: prices, the bread queue, the soldiers' families. It was not a great speech, but it was heard.

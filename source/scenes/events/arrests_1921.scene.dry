@@ -1,0 +1,24 @@
+title: The Arrests of 1921
+subtitle: The famine relief committee is broken up.
+new-page: true
+tags: event
+view-if: dix >= 110 and bol_regime = 1
+priority: 40
+max-visits: 1
+on-arrival: {!
+Q.dan_advisor = 0;
+Q.lidia_advisor = 0;
+Q.khinchuk_advisor = 0;
+Q.batursky_advisor = 0;
+RO.add(Q, {repression: 6});
+if (Q.legality > 0 && (Q.repression >= 40 || !Q.program_adopted)) { Q.legality -= 1; }
+Q.members -= 15;
+!}
+
+= The Arrests of 1921
+
+In August 1921, the Cheka arrested most of the members of the public famine relief committee, the Pomgol, that had been set up in July. Its members, writers, engineers, Kadets and Mensheviks had been working to collect grain and funds for the starving regions of the Volga. Gorky wrote to Lenin, in vain. Dan and Lidia Dan were arrested, and the remaining leaders of the party were arrested in the weeks that followed, by the hundred.
+
+The last legal opposition party in Russia is on the point of being dissolved. The party's leaders will be exiled in January 1922; the party's newspaper will be published in Berlin.
+
+The game ends in December.

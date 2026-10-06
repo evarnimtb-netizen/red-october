@@ -1,0 +1,29 @@
+title: Lidia Dan
+is-pinned-card: true
+tags: advisor, intl
+new-page: true
+view-if: lidia_advisor = 1
+
+= Lidia Dan
+
+Lidia Dan (1878-1963) is Martov's sister and Fyodor Dan's wife, so she stands at the point where the party's two circles meet.
+
+- @action
+- @root: Return to main
+
+@action
+title: Family Bridge
+subtitle: Lidia Dan mediates between the Martov and Dan circles.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.fac(Q, 'intl', 0, -8); RO.fac(Q, 'defencist', 0, -4);
+!}
+
+Over many cups of tea, Lidia Dan reminded two men that they are brothers-in-law. The party's two leaders are speaking again.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

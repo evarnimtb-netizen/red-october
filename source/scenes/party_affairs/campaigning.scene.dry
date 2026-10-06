@@ -1,70 +1,61 @@
-title: Campaigning
+title: Soviet Election Campaign
+subtitle: Contest the factory and city soviets.
 new-page: true
-on-arrival: month_actions += 1
-max-visits: 36
 is-card: true
-card-image: img/flags.jpg
-frequency: 100
 tags: party_affairs
+view-if: campaigning_timer <= 0
+on-arrival: month_actions += 1; campaigning_timer = 3
 
-= Campaigning
+Soviets are re-elected often. A campaign costs money for printing, halls and travel. [? if resources < 1 : We have nothing to spend. ?]
 
-Whether or not we are in an electoral campaign, the party is always trying to broaden its voter base. Who should we focus our campaign efforts on?
-
-- @workers: The urban working class, our traditional support base.
-- @new_middle: The "new middle class" of government employees and white-collar workers.
-- @old_middle: The "old middle class" of small independent businessmen and artisans.
-- @rural: Rural workers and small farmers, who have felt neglected by us in the past.
-- @unemployed: The unemployed.
-- @catholics: Catholics, who typically support the Center Party.
-- @root: We either don't want to or cannot campaign right now.
+- @factories: Campaign in the factories. (1 resource)
+- @garrisons: Campaign in the garrisons and at the front. (1 resource)
+- @railways: Campaign among the railwaymen and postal workers. (1 resource)
+- @joint: A joint list with our bloc partner. (1 resource)
 - @easy_discard
 
-@workers
-subtitle: -1 resources
+@factories
 choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: workers_spd += 6*(1-dissent); workers_spd -= 2 if unemployed >= 15; workers_spd -= 2 if unemployed >= 25; workers_spd += 6*(1-dissent) if wtb_adopted = 1; resources -= 1; workers_spd += 3*(1-dissent) if nationalization_progress >= 1;
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+RO.boost(Q, {workers: 6});
+RO.add(Q, {soviet_democracy: 1});
+!}
 
-We have increased our campaigning among the workers. [? if unemployed >= 15: The high levels of unemployment make our campaign more difficult. ?][? if wtb_adopted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract workers. ?]
+Every shop floor that elects its deputies hears our speakers first.
 
-@new_middle
-subtitle: -1 resources
+@garrisons
+choose-if: resources >= 1 and bol_regime = 0
+unavailable-subtitle: [? if resources < 1 : We have no resources. ?][? if bol_regime = 1 : There is no garrison left that we may enter. ?]
+on-arrival: {!
+RO.pay(Q, 1);
+RO.boost(Q, {soldiers: 6});
+RO.fac(Q, 'defencist', 1, 0);
+!}
+
+The soldiers' committees are less patient than the workers', but they still listen to the Soviet's own party.
+
+@railways
 choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: new_middle_spd += 6*(1-dissent); new_middle_spd -= 4 if socialism <= 49 and peoples_party == 0; resources -= 1; peoples_party_support += 1;
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+RO.boost(Q, {railway: 7, workers: 1});
+RO.fac(Q, 'unions', 2, 0);
+!}
 
-We have increased our campaigning among the new middle class. [? if socialism <= 49 and peoples_party == 0: The popular antipathy towards socialism among this group makes our campaign more difficult. ?] [? if peoples_party > 0: As a people's party, we have an easier time increasing support among the middle class than before. ?]
+The railwaymen and the telegraph clerks have their own union and their own politics. They trust the party that listens to them.
 
-@old_middle
-subtitle: -1 resources
+@joint
+view-if: ally_sr >= 2 or ally_lsr >= 2
 choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: old_middle_spd += 5*(1-dissent); resources -= 1; old_middle_spd -= 3 if nationalism >= 51 and peoples_party == 0; peoples_party_support += 1
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+RO.boost(Q, {workers: 4, soldiers: 5, peasants: 3, railway: 3});
+RO.add(Q, {rel_sr: 2});
+RO.fac(Q, 'intl', 0, 1);
+!}
 
-We have increased our campaigning among the old middle class. [? if nationalism >= 51 and peoples_party == 0: The high levels of nationalism among this group make our campaign more difficult. ?] [? if peoples_party > 0: As a people's party, we have an easier time increasing support among the middle class than before. ?]
-
-@rural
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: rural_spd += 5*(1-dissent); rural_spd -= 3*(1-dissent) if peoples_party == 0; resources -= 1; peoples_party_support += 1; rural_spd += 3*(1-dissent) if rural_policy >= 2
-
-We have increased our campaigning among farmers. [? if peoples_party == 0: We have not historically campaigned much among the farmers, and they do not trust us. ?][? if peoples_party > 0: As a people's party, we have an easier time increasing support among farmers than before. ?][? if rural_policy >= 2 : Our rural policies have made it easier for us to build support among farmers. ?]
-
-@unemployed
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: unemployed_spd += 6*(1-dissent); resources -= 1; unemployed_spd -= 3 if welfare < 0; unemployed_spd += 6*(1-dissent) if wtb_adopted = 1; unemployed_spd += 3*(1-dissent) if welfare >= 2;
-
-We have increased our campaigning among the unemployed. [? if welfare < 0: The welfare cuts and resultant poverty make our campaign more difficult, since we are associated with the government that enacted these cuts, and our campaign may even backfire. ?][? if wtb_adopted = 1 : Adopting the WTB plan gives us a new rallying point around which to attract support from the unemployed. ?]
-
-@catholics
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-view-if: peoples_party == 1
-on-arrival: catholics_spd += 6*(1-dissent); resources -= 1
-
-We have increased our campaigning among Catholics.
+A joint list showed one democracy instead of two parties. The Bolsheviks called it a deal between bureaucrats.

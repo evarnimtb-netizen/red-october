@@ -1,0 +1,52 @@
+title: War or Peace?
+subtitle: The spring of 1918.
+new-page: true
+tags: event
+view-if: dix >= 28 and bol_regime = 0 and at_war = 1
+priority: 40
+max-visits: 1
+on-arrival: {!
+Q.peace_ok = (Q.stockholm >= 3 || Q.separate_feelers || Q.war_weariness <= 55) ? 1 : 0;
+Q.army_collapse = (Q.war_weariness >= 80 && Q.army_discipline < 30) ? 1 : 0;
+!}
+go-to: war_peace if peace_ok = 1; war_collapse if army_collapse = 1; war_goes_on if peace_ok = 0 and army_collapse = 0
+
+@war_peace
+on-arrival: {!
+Q.at_war = 0;
+RO.add(Q, {war_weariness: -25, bolshevik: -6, soviet_democracy: 2, right_threat: -3});
+RO.boost(Q, {soldiers: 3, workers: 2});
+RO.fac(Q, 'intl', 3, -4);
+!}
+
+= An Armistice
+
+The Stockholm conference and the quiet negotiations through neutral intermediaries have led to a result. Germany, with her own revolution brewing at home and her armies short of men, has agreed to an armistice on the Eastern Front: no annexations, no indemnities, with plebiscites in the disputed territories.
+
+The war on the Eastern Front is over. The party's internationalists say that the war was ended by a socialist initiative. The Defencists do not argue.
+
+@war_collapse
+on-arrival: {!
+Q.at_war = 0;
+RO.add(Q, {war_weariness: -10, right_threat: 10, bolshevik: 8, soviet_democracy: -2, rel_kad: -4});
+RO.boost(Q, {soldiers: -3, middle: -2});
+RO.fac(Q, 'defencist', -2, 6);
+!}
+
+= The Front Collapses
+
+By March the army can no longer fight. The Germans attacked in February, and the front dissolved. The government has signed what it must: a peace on harsh terms, in which Russia loses Poland, the Baltic provinces and much of Ukraine.
+
+The government is blamed for the peace, and the army for the defeat.
+
+@war_goes_on
+on-arrival: {!
+RO.add(Q, {war_weariness: 4, bolshevik: 4, bread: -2});
+RO.boost(Q, {soldiers: -1});
+!}
+
+= The War Goes On
+
+The war on the Eastern Front is in its fourth year. The army is exhausted, but it holds the line, in a world in which the Allied offensive in the west has begun to bite. The soldiers say that there will be peace when the Kaiser falls.
+
+The Bolsheviks and the Left are arguing for an immediate peace. The government has no answer for them.

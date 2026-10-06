@@ -1,0 +1,34 @@
+title: Martov Returns
+subtitle: The Internationalists find their leader.
+new-page: true
+tags: event
+view-if: dix >= 9
+priority: 8
+max-visits: 1
+on-arrival: martov_advisor = 1;
+
+= Martov Returns
+
+Julius Martov reached Petrograd on 9 May, having travelled through Germany like Lenin, on a train arranged for the exiles. He was received with the warmth due to the party's conscience, and without enthusiasm by Tsereteli and Dan, who have been running the party without him.
+
+Martov opposes the coalition, opposes the war and opposes any attempt to ally the party with the bourgeoisie. By the end of the summer his Internationalists may be a third of the party.
+
+- @include: Bring him into the leadership.
+- @arm: Keep him at arm's length.
+
+@include
+on-arrival: {!
+RO.fac(Q, 'intl', 8, -8);
+RO.fac(Q, 'defencist', 0, 4);
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+Martov was elected to the Central Committee, and his group has a voice in the party's decisions.
+
+@arm
+on-arrival: {!
+RO.fac(Q, 'intl', 6, 8);
+RO.fac(Q, 'defencist', 0, -2);
+!}
+
+Martov leads his own circle, and edits the Internationalists' newspaper Novaya Zhizn. He has not left the party, but nobody can say that he is part of it.

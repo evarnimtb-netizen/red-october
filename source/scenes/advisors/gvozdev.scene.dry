@@ -1,0 +1,29 @@
+title: Kuzma Gvozdev
+is-pinned-card: true
+tags: advisor, unions
+new-page: true
+view-if: gvozdev_advisor = 1
+
+= Kuzma Gvozdev
+
+Gvozdev (1880-?), a lathe worker and chairman of the Central War Industries Committee's workers' group, becomes Minister of Labour in the last coalition.
+
+- @action
+- @root: Return to main
+
+@action
+title: Defence-Industry Pact
+subtitle: Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones.
+choose-if: advisor_action_timer <= 0 and at_war = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (at_war = 1) : The war is over. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.boost(Q, {workers: 4, railway: 1}); RO.add(Q, {bolshevik: 1, ruble: 1}); RO.fac(Q, 'unions', 2, -2);
+!}
+
+The war-industry workers have a wage agreement and a minister of their own. The metalworkers of the Vyborg side called it a sell-out.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

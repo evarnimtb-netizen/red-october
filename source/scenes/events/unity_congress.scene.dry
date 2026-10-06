@@ -1,0 +1,39 @@
+title: The Menshevik Unity Congress
+subtitle: Defencists and Internationalists in one hall.
+new-page: true
+tags: event
+view-if: dix >= 17
+priority: 10
+max-visits: 1
+on-arrival: broido_advisor = 1; axelrod_advisor = 1;
+
+= The Unity Congress
+
+The party's unity congress was held in the late summer, the dates given vary, and brought together the Defencists, the Internationalists and a dozen provincial organisations. The Internationalists, who say that they have a third of the delegates, demand a change in the party's line on the war and the coalition. Eva Broido has been elected party secretary. Pavel Axelrod, in poor health, has left for Western Europe to lobby the socialist parties.
+
+The Defencists have a majority, but there will not be a party if the Internationalists leave.
+
+- @majority: Keep the Defencist majority line.
+- @concede: Concede to the Internationalists to stop defections.
+
+@majority
+on-arrival: {!
+RO.fac(Q, 'defencist', 3, -2);
+RO.fac(Q, 'intl', -2, 10);
+RO.fac(Q, 'rightdef', 0, -4);
+Q.members += 10;
+!}
+
+The congress confirmed the policy of revolutionary defencism and the coalition. The Internationalists issued a statement of dissent. They did not leave.
+
+@concede
+on-arrival: {!
+RO.fac(Q, 'intl', 6, -10);
+RO.fac(Q, 'defencist', -4, 8);
+RO.fac(Q, 'rightdef', -2, 10);
+Q.war_line -= 1;
+Q.members += 10;
+RO.add(Q, {rel_kad: -3, rel_lsr: 2});
+!}
+
+The congress agreed to a new line: conditional support for the coalition, an immediate offer of peace, and a government of the Soviet parties. Potresov's circle protested.

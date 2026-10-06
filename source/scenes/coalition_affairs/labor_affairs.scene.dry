@@ -1,0 +1,44 @@
+title: Ministry of Labour
+subtitle: Strike arbitration, the eight-hour day and the factory committees.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: labor_affairs_timer <= 0
+on-arrival: month_actions += 1; labor_affairs_timer = 3
+
+Skobelev's ministry handles the strikes that sweep every industrial city. Employers want order and the factory committees want control. The party is both the workers' party and a party of government.
+
+- @arbitrate: Arbitrate the strikes through conciliation boards.
+- @committees: Legalise the factory committees and the eight-hour day.
+- @circular: Restrain the factory committees (the Circular 421 line).
+- @easy_discard
+
+@arbitrate
+on-arrival: {!
+RO.boost(Q, {workers: 1});
+RO.add(Q, {ruble: 2, rel_kad: 2});
+RO.fac(Q, 'unions', 2, -1);
+RO.fac(Q, 'intl', 0, 1);
+!}
+
+Conciliation boards settled the worst strikes in Petrograd and the Urals. The employers are grateful. The factory committees are less so.
+
+@committees
+on-arrival: {!
+RO.boost(Q, {workers: 5, railway: 2});
+RO.add(Q, {ruble: -3, rel_kad: -4, bolshevik: -1});
+RO.fac(Q, 'unions', 2, -2);
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+The committees are recognised in law and the eight-hour day is guaranteed. The factory owners say they will close the plants. A few have.
+
+@circular
+on-arrival: {!
+RO.boost(Q, {workers: -4});
+RO.add(Q, {ruble: 2, bolshevik: 3, rel_kad: 3});
+RO.fac(Q, 'intl', 0, 4);
+RO.fac(Q, 'defencist', 0, -1);
+!}
+
+Skobelev's circular forbade the committees from interfering with management. The Bolsheviks have printed it in full, with their own comments.

@@ -1,0 +1,33 @@
+title: The Moscow State Conference
+subtitle: The old order and the new, in one hall.
+new-page: true
+tags: event
+view-if: dix >= 15
+priority: 8
+max-visits: 1
+
+= The Moscow State Conference
+
+Kerensky convened a State Conference in the Bolshoi Theatre, on 25 to 28 August. Over two thousand delegates came: the Duma, the cooperatives, the generals, the industrialists, the Soviets. The Right seated on one side of the hall and the socialists on the other. The Bolsheviks stayed out; Moscow's workers held a one-day strike against the conference. General Kornilov arrived at the station to cheering crowds, and the Kadets treated him as the saviour of Russia.
+
+- @defend: Attend, and defend the soviets.
+- @boycott: Boycott the conference.
+
+@defend
+on-arrival: {!
+RO.add(Q, {rel_kad: -3, right_threat: 2, soviet_democracy: 1});
+RO.boost(Q, {middle: 1, workers: 1});
+RO.fac(Q, 'defencist', 1, 0);
+!}
+
+Chkheidze spoke for the Soviet, Tsereteli for the coalition. The generals heard them in silence, and applauded Kornilov at the end.
+
+@boycott
+on-arrival: {!
+RO.add(Q, {rel_kad: -8, right_threat: 3, bolshevik: -1, rel_bol: 2});
+RO.boost(Q, {workers: 2});
+RO.fac(Q, 'intl', 2, -3);
+RO.fac(Q, 'defencist', -2, 4);
+!}
+
+A boycott gave the hall to the Right. The Soviet's absence was noted, and so was the generals' attitude to it.

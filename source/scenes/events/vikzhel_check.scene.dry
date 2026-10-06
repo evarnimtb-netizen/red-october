@@ -1,0 +1,39 @@
+title: The All-Socialist Government Is Tested
+subtitle: Will the coalition with the Bolsheviks hold?
+new-page: true
+tags: event
+view-if: dix >= 28 and vikzhel_deal = 1 and bol_regime = 0 and vik_check_1 = 0
+priority: 45
+max-visits: 1
+on-arrival: {!
+Q.vik_check_1 = 1;
+Q.vik_holds = (Q.rel_bol >= 50 && Q.rel_lsr >= 45 && Q.soviet_democracy >= 60 && Q.dissent < 0.3) ? 1 : 0;
+if (!Q.vik_holds) {
+    Q.vikzhel_deal = 0;
+    Q.bol_regime = 1;
+    Q.in_coalition = 0;
+    Q.homogeneous_gov = 0;
+    Q.assembly_survives = 0;
+    Q.bolshevik = 70;
+    Q.repression = 4;
+    Q.soviet_democracy -= 12;
+    RO.add(Q, {rel_bol: -10});
+}
+!}
+go-to: vik_holds_yes if vik_holds = 1; vik_holds_no if vik_holds = 0
+
+@vik_holds_yes
+
+= The Coalition Holds
+
+The first test of the all-socialist government came in the early spring, over the treaty with Germany and the requisitioning of grain. In the Council of Ministers, Lenin demanded to be made chairman, and the Mensheviks, the SRs and the Left SRs said that they would walk out. Kamenev, speaking for the moderate Bolsheviks, sided with the majority.
+
+The coalition holds. It is a government in which the parties sit in the same room and cannot stand each other, which is what a democratic government looks like.
+
+@vik_holds_no
+
+= The Coalition Collapses
+
+The first test of the all-socialist government came in the early spring, over the treaty with Germany and the requisitioning of grain. The Bolsheviks demanded that the government adopt their policy. When the other parties refused, Lenin withdrew the Bolshevik ministers, and on the same night the Red Guards took the ministries.
+
+The coalition is over. The Bolsheviks rule alone, again, and the party that had signed the agreement with them has been left to explain why it had trusted them.

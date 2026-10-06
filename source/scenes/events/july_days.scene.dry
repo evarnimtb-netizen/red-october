@@ -1,0 +1,59 @@
+title: The July Days
+subtitle: Soldiers and workers in the streets.
+new-page: true
+tags: event
+view-if: dix >= 13
+priority: 20
+max-visits: 1
+
+= The July Days
+
+On 16 July, the First Machine Gun Regiment, the Kronstadt sailors and tens of thousands of Putilov workers marched on the Tauride Palace demanding that the Soviet take power. The Bolshevik leaders hesitated, then joined, hoping to steer it. Chernov was seized by the crowd, and a sailor shouted at him that he should take power. Troops loyal to the government and a Soviet appeal broke up the demonstration by the 18th. Documents have appeared claiming that Lenin is a German agent, and the government has ordered the arrest of the Bolshevik leaders.
+
+The Soviet leaders, with the crowd in front of them and the government behind them, must choose: whom to call on, and whom to blame.
+
+- @troops: Call on loyal troops, and refuse power.
+- @power: Take power from the crowd.
+- @shield: Shield the Bolsheviks from arrest.
+
+@troops
+on-arrival: {!
+RO.add(Q, {bolshevik: -8, rel_bol: -10, right_threat: 6, soviet_democracy: -2, rel_kad: 3});
+RO.boost(Q, {soldiers: -2, workers: -1, middle: 2});
+RO.fac(Q, 'defencist', 3, 0);
+RO.fac(Q, 'intl', 0, 8);
+Q.july_repressed = 1;
+!}
+
+Loyal units dispersed the crowd, and the Bolshevik leaders went into hiding or to prison. It was a victory, and a bitter one: socialists arrested socialists. The Bolsheviks will not forget it.
+
+@power
+choose-if: rel_sr >= 60 and (militia >= 1 or army_discipline >= 45)
+unavailable-subtitle: We lack the armed force and the SR's support for this.
+on-arrival: {!
+Q.took_power_july = 1;
+Q.homogeneous_gov = 1;
+Q.in_coalition = 1;
+Q.gov_kadets = 0;
+RO.add(Q, {rel_kad: -20, right_threat: 12, soviet_democracy: 4, bolshevik: -4, rel_bol: -3});
+RO.boost(Q, {workers: -3, soldiers: 2});
+RO.fac(Q, 'defencist', -4, 6);
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 14);
+this.achieve('there_is_such_a_party');
+!}
+
+The Soviet declared itself the government. In the eyes of the soldiers and the crowd it was a plain assumption of power. The Kadets have left the cabinet, and Kerensky has been given a title but no authority. "There is such a party": we are it.
+
+@shield
+choose-if: rel_bol >= 20
+unavailable-subtitle: We are no longer on speaking terms with the Bolsheviks.
+on-arrival: {!
+Q.bol_freed = 1;
+RO.add(Q, {rel_bol: 10, bolshevik: 3, right_threat: -2, soviet_democracy: 3, rel_kad: -4});
+RO.fac(Q, 'intl', 0, -4);
+RO.fac(Q, 'defencist', 0, 6);
+RO.fac(Q, 'rightdef', 0, 6);
+!}
+
+We refused to turn the Soviet against the Bolsheviks and the Soviet declined to sanction the arrest of the leaders. The Defencists say that we protect the people who tried to overthrow the revolution.

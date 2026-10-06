@@ -1,0 +1,57 @@
+title: Georgia, the Strikes and Kronstadt
+subtitle: February and March 1921.
+new-page: true
+tags: event
+view-if: dix >= 98 and bol_regime = 1
+priority: 40
+max-visits: 1
+on-arrival: {!
+Q.georgia_survives = (Q.foreign_pressure >= 4 && Q.georgia_support >= 2) ? 1 : 0;
+if (!Q.georgia_survives) { Q.georgia_free = 0; Q.zhordania_advisor = 0; }
+!}
+
+= Georgia, the Strikes and Kronstadt
+
+In February 1921 the Red Army crossed the border of Georgia, and the Menshevik government of Zhordania fled to Constantinople. [? if georgia_survives = 1 : In this world it did not: the diplomatic pressure from Europe, and the strength of the Georgian army, led Moscow to postpone the invasion. Georgia is, so far, free. ?]
+
+In the same weeks, strikes spread through Petrograd's factories. On 28 February the sailors of the battleship Petropavlovsk adopted a resolution that demanded new elections to the soviets, freedom of speech and press for workers, peasants and the left socialist parties, and the release of political prisoners. On 1 March they were joined by the whole garrison of Kronstadt; the Bolsheviks called it a White conspiracy.
+
+Whether the revolt was an SR and Menshevik plot, or the real voice of the revolutionaries of 1917, the Bolshevik government never doubted. The Cheka arrested hundreds of Mensheviks in Petrograd and Moscow, as precaution.
+
+- @condemn: Condemn the revolt.
+- @back: Back Kronstadt's programme and press for negotiation.
+- @quiet: Stay silent.
+
+@condemn
+on-arrival: {!
+RO.add(Q, {rel_bol: 4, soviet_democracy: -2, repression: -2});
+RO.boost(Q, {workers: -1});
+RO.fac(Q, 'rightdef', 0, 4);
+RO.fac(Q, 'intl', 0, 4);
+Q.kronstadt_stance = 1;
+!}
+
+The party's Central Committee, on a motion by Dan, said that it had no connection with the Kronstadt revolt, and that an armed revolt, whatever its slogans, could only help the White Guards. The Bolsheviks received this with grim satisfaction.
+
+@back
+on-arrival: {!
+RO.add(Q, {rel_bol: -10, soviet_democracy: 3, repression: 10});
+RO.boost(Q, {workers: 5, railway: 3, soldiers: 3});
+RO.fac(Q, 'intl', 3, -4);
+RO.fac(Q, 'rightdef', 0, -2);
+if (Q.legality > 1) { Q.legality -= 1; }
+Q.kronstadt_stance = 2;
+Q.members -= 10;
+!}
+
+Our party's leaflets called on the government to negotiate with Kronstadt on the basis of its fifteen demands, which are our own. The Cheka made arrests within the week. Kronstadt fell on 18 March.
+
+@quiet
+on-arrival: {!
+RO.fac(Q, 'intl', 0, 5);
+RO.fac(Q, 'defencist', 0, 3);
+RO.boost(Q, {workers: -1});
+Q.kronstadt_stance = 0;
+!}
+
+We said nothing. The party's silence was noted on both sides, and approved by neither.

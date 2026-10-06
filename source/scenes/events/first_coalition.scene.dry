@@ -1,0 +1,57 @@
+title: The First Coalition
+subtitle: Tsereteli and Skobelev become ministers.
+new-page: true
+tags: event
+view-if: dix >= 9 and in_coalition = 0
+priority: 15
+max-visits: 1
+
+= The First Coalition
+
+On 18 May the first coalition cabinet was formed. Prince Lvov remains Prime Minister. Kerensky becomes Minister of War. The SR leader Viktor Chernov takes Agriculture, Tsereteli takes Posts and Telegraphs, and Skobelev takes Labour. Six socialist ministers sit with ten non-socialists.
+
+The Soviet executive is divided. Dan and Tsereteli say that dual power cannot continue. Martov and the Internationalists, and the Bolsheviks, say that the socialists will carry the blame for a policy that they cannot control.
+
+- @enter: Enter the coalition.
+- @stay_out: Stay out, as a control body.
+- @no_kadets: Demand a cabinet without Kadets.
+
+@enter
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 1;
+Q.skobelev_advisor = 1;
+RO.add(Q, {rel_kad: 4, rel_sr: 2, bolshevik: 2});
+RO.fac(Q, 'defencist', 4, 0);
+RO.fac(Q, 'intl', -2, 10);
+Q.resources += 1;
+!}
+
+The party has ministers in the government. The Defencists call it a historic duty. The Internationalists call it a hostage-taking.
+
+@stay_out
+on-arrival: {!
+Q.in_coalition = 0;
+RO.add(Q, {rel_kad: -3, rel_sr: -5, right_threat: 2});
+RO.fac(Q, 'intl', 5, -4);
+RO.fac(Q, 'defencist', -4, 10);
+!}
+
+We have stayed out of the cabinet. The SRs have entered without us, and it is no longer certain that the two parties act as one.
+
+@no_kadets
+choose-if: rel_sr >= 60 and ally_sr >= 2
+unavailable-subtitle: This needs a formal bloc with the SRs. (Alliance level 2.)
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 0;
+Q.homogeneous_gov = 1;
+Q.skobelev_advisor = 1;
+RO.add(Q, {rel_kad: -15, right_threat: 8, ruble: -3, soviet_democracy: 3});
+RO.boost(Q, {workers: 3, soldiers: 2, middle: -4});
+RO.fac(Q, 'defencist', -3, 6);
+RO.fac(Q, 'intl', 3, -5);
+RO.fac(Q, 'rightdef', 0, 8);
+!}
+
+The Menshevik and SR leaders have formed a purely socialist government. The Kadets are in opposition. The bourgeoisie say that they will not support a government that has no place for them.

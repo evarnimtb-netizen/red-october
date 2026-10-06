@@ -1,0 +1,18 @@
+title: The Armistice in the West
+subtitle: The war is over.
+new-page: true
+tags: event
+view-if: dix >= 44 and bol_regime = 0 and at_war = 1
+priority: 30
+max-visits: 1
+on-arrival: {!
+Q.at_war = 0;
+RO.add(Q, {war_weariness: -25, ruble: 3, bread: 5, bolshevik: -4});
+RO.boost(Q, {soldiers: 3, workers: 2});
+!}
+
+= The Armistice in the West
+
+On 11 November 1918, Germany signed the Armistice. The Kaiser has fled, and a socialist republic has been proclaimed in Berlin. The Russian Republic has outlasted the war.
+
+The army is being demobilised, and the soldiers go home with their weapons. The cost of the war is a debt that the Allies expect Russia to honour.

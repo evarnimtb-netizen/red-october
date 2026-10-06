@@ -1,0 +1,40 @@
+title: Militia and Police
+subtitle: Replace the tsarist police.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: police_timer <= 0
+on-arrival: month_actions += 1; police_timer = 4
+
+The police were swept away in February, and the replacement militias were improvised in the streets. Order is uncertain, and every party has an opinion about who should keep it.
+
+- @democratic: Build a militia answerable to the city dumas and the soviets.
+- @old: Recall the experienced police officers.
+- @workers: Rely on the workers' guards.
+- @easy_discard
+
+@democratic
+on-arrival: {!
+RO.add(Q, {right_threat: -3, soviet_democracy: 2, rel_kad: -1});
+RO.boost(Q, {workers: 1, middle: 2});
+!}
+
+A militia chosen and supervised by the city dumas has taken shape. It is poorly armed and slow, but it answers to the elected authorities.
+
+@old
+on-arrival: {!
+RO.add(Q, {right_threat: 3, rel_kad: 3, soviet_democracy: -1, repression: 1});
+RO.boost(Q, {workers: -3, middle: 2});
+RO.fac(Q, 'intl', 0, 3);
+!}
+
+Many old officers were recalled. They are more experienced. They are also less trusted by the workers.
+
+@workers
+on-arrival: {!
+RO.add(Q, {right_threat: -2, bolshevik: 2, rel_kad: -3});
+RO.boost(Q, {workers: 3});
+Q.militia = (Q.militia || 0) + 1;
+!}
+
+The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them.

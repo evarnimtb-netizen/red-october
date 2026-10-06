@@ -1,0 +1,42 @@
+title: The Economic Programme
+subtitle: Summer 1919.
+new-page: true
+tags: event
+view-if: dix >= 60 and bol_regime = 1
+priority: 25
+max-visits: 1
+on-arrival: {!
+Q.nep_early = 0;
+if (Q.program_adopted && Q.rel_bol >= 40 && Q.dix < 72) {
+    Q.nep_early = 1;
+    RO.add(Q, {bread: 10, soviet_democracy: 5, repression: -8, land_pressure: -5});
+    RO.boost(Q, {peasants: 5, workers: 3, middle: 3});
+}
+!}
+go-to: prog_nep if nep_early = 1; prog_adopted if program_adopted = 1 and nep_early = 0; prog_none if program_adopted = 0
+
+@prog_nep
+
+= The Economic Programme Is Heard
+
+In the summer of 1919, with Denikin's armies advancing and the villages in revolt, Lenin and the Central Committee were forced to look for support among the peasants. A report was commissioned on the party's own economists' proposal: end requisitioning, give the peasants the right to sell grain, give the unions independence, and restore a regulated market.
+
+Several of Lenin's colleagues, Bukharin and Rykov among them, had read it already. The Council of People's Commissars did not adopt it as such, but it did not condemn it. In July, the grain requisition was replaced by a fixed tax in kind, for the provinces nearest the front; the experiment will be extended in the spring.
+
+It is the first time in the history of the revolution that a party of the opposition has made policy. It was called, in later years, "the NEP before the NEP".
+
+@prog_adopted
+
+= The Economic Programme Is Ignored
+
+In the summer of 1919, our programme was published, and ignored. The Council of People's Commissars did not respond. The Cheka confiscated the pamphlets, and a number of the economists were arrested for a week.
+
+The programme will remain available. It will be needed.
+
+@prog_none
+
+= No Programme
+
+The summer of 1919 is a season of crisis: Denikin is advancing, the villages are in revolt, the cities are hungry. The party has no programme of its own to offer. The workers are asking what we would do, and we have only criticism to offer.
+
+*(The "What Is to Be Done?" card in the Party Affairs deck unlocks the party's economic programme.)*

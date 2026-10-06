@@ -1,0 +1,29 @@
+title: Irakli Tsereteli
+is-pinned-card: true
+tags: advisor, defencist
+new-page: true
+view-if: tsereteli_advisor = 1
+
+= Irakli Tsereteli
+
+Tsereteli (1881-1959), a Georgian Menshevik returned from Siberian exile, is the architect of revolutionary defencism and the coalition. He is Minister of Posts and Telegraphs.
+
+- @action
+- @root: Return to main
+
+@action
+title: Coalition Broker
+subtitle: Tsereteli keeps the cabinet together and smooths over disputes with the Kadets.
+choose-if: advisor_action_timer <= 0 and in_coalition = 1 and bol_regime = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (in_coalition = 1 and bol_regime = 0) : We are not in a coalition government. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {rel_kad: 5, rel_sr: 4, right_threat: -2}); RO.fac(Q, 'intl', 0, 3); RO.fac(Q, 'defencist', 1, -1);
+!}
+
+Tsereteli's patience has kept the coalition together for another few weeks. The Internationalists complain that he is protecting the Kadets.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

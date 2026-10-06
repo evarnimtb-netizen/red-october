@@ -1,0 +1,29 @@
+title: Raphael Abramovich
+is-pinned-card: true
+tags: advisor, bund
+new-page: true
+view-if: abramovich_advisor = 1
+
+= Raphael Abramovich
+
+Abramovich (1880-1963) of the Bund is a member of the Soviet executive. In 1918 foreign socialists' appeals will help save him from the firing squad.
+
+- @action
+- @root: Return to main
+
+@action
+title: Bridge-Builder
+subtitle: Abramovich eases tension between the party currents.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+for (var f of Q.factions) { RO.fac(Q, f, 0, -6); }
+!}
+
+Abramovich sat up with Internationalists and Defencists in turn. Nobody has changed their mind, but people are on speaking terms again.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

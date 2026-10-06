@@ -1,0 +1,32 @@
+title: The Republic at Two
+subtitle: Recovery or hunger?
+new-page: true
+tags: event
+view-if: dix >= 72 and bol_regime = 0
+priority: 20
+max-visits: 1
+on-arrival: {!
+Q.recovered = (Q.bread >= 40 && Q.ruble >= 25) ? 1 : 0;
+if (Q.recovered) {
+    RO.add(Q, {bread: 8, ruble: 8, soviet_democracy: 2, bolshevik: -4, right_threat: -2});
+} else {
+    RO.add(Q, {bread: -3, bolshevik: 5, right_threat: 4, soviet_democracy: -2});
+}
+!}
+go-to: rec_yes if recovered = 1; rec_no if recovered = 0
+
+@rec_yes
+
+= The Republic Is Recovering
+
+By 1920 the harvest has recovered, the railways run and the ruble has stopped falling. The republic has an army that is no longer a danger to itself, a land law that the peasants accept, and an opposition that has to say something other than "Soviet power".
+
+It is not a prosperous country. It is a country in which the bread supply is no longer the first topic of conversation.
+
+@rec_no
+
+= The Republic Is Struggling
+
+By 1920 the harvest is poor, the railways are failing and the ruble has lost most of its remaining value. The republic is a legal government in a hungry country, and every month the opposition on the Left and on the Right says that the experiment has failed.
+
+A government that cannot feed its cities will not survive for ever.

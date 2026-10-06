@@ -1,0 +1,42 @@
+title: Factory Representatives
+subtitle: The assemblies of factory delegates.
+new-page: true
+is-card: true
+tags: soviet_affairs
+view-if: economic_democracy_timer <= 0 and dix >= 28
+on-arrival: month_actions += 1; economic_democracy_timer = 3
+
+Since March 1918 the workers of Petrograd and Moscow have been electing delegates to assemblies of factory representatives, in which the Bolsheviks are a minority. The government has begun to close them.
+
+- @support: Support the assemblies as the workers' own voice.
+- @rival: Make them a rival to the Bolshevik-controlled soviets.
+- @stay_out: Keep the party out of it.
+- @easy_discard
+
+@support
+on-arrival: {!
+RO.boost(Q, {workers: 5, railway: 2});
+RO.add(Q, {soviet_democracy: 2, repression: 2});
+RO.fac(Q, 'unions', 2, -2);
+!}
+
+Our members stood for election as delegates. The assemblies met, passed resolutions on bread and the eight-hour day, and were told to stop meeting.
+
+@rival
+on-arrival: {!
+RO.boost(Q, {workers: 7, railway: 3});
+RO.add(Q, {soviet_democracy: 3, repression: 5, rel_bol: -5});
+RO.fac(Q, 'intl', 0, 5);
+if (Q.legality > 1) { Q.legality -= 1; }
+!}
+
+We tried to turn the assemblies into a rival to the soviets. It was a bold move, and the Bolsheviks answered with arrests and banned delegates from the factory gates.
+
+@stay_out
+on-arrival: {!
+RO.boost(Q, {workers: -2});
+RO.fac(Q, 'unions', 0, 3);
+RO.add(Q, {repression: -1});
+!}
+
+We stayed out, and said so. Some of our own members signed up regardless.

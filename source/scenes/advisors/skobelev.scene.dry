@@ -1,0 +1,29 @@
+title: Matvei Skobelev
+is-pinned-card: true
+tags: advisor, defencist
+new-page: true
+view-if: skobelev_advisor = 1
+
+= Matvei Skobelev
+
+Skobelev (1885-1938) is the Minister of Labour in the first coalition cabinet, a young Social Democrat from Baku.
+
+- @action
+- @root: Return to main
+
+@action
+title: Labour Arbitration
+subtitle: Skobelev settles a strike through conciliation boards.
+choose-if: advisor_action_timer <= 0 and in_coalition = 1 and bol_regime = 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (in_coalition = 1 and bol_regime = 0) : We are not in a coalition government. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {ruble: 2, rel_kad: 2}); RO.boost(Q, {workers: -1}); RO.fac(Q, 'unions', 1, -1);
+!}
+
+Skobelev's boards settled a transport strike on compromise terms. The employers are grateful, and the strikers feel cheated.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

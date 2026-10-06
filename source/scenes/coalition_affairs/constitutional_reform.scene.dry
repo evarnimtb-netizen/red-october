@@ -1,0 +1,34 @@
+title: Convene the Constituent Assembly
+subtitle: Bring the election forward from November.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: constitutional_reform_timer <= 0 and assembly_early = 0 and dix <= 19 and in_coalition = 1
+on-arrival: month_actions += 1; constitutional_reform_timer = 4
+
+The Provisional Government set the Constituent Assembly elections for 12 November (New Style 25 November), and has postponed them twice. The Kadets prefer delay, the SRs and the Mensheviks want the Assembly now, and the Bolsheviks say that the Assembly is a trap.
+
+- @bring_forward: Demand an election in the first half of October. (1 resource)
+- @keep: Keep the date, and spend the time on preparations.
+- @easy_discard
+
+@bring_forward
+choose-if: resources >= 1
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+Q.assembly_early = 1;
+RO.add(Q, {rel_kad: -5, rel_sr: 4, soviet_democracy: 2, bolshevik: -2});
+RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
+RO.fac(Q, 'intl', 0, -2);
+!}
+
+The Provisional Government, under pressure from the Soviet, has moved the elections to the first half of October. The Kadets protested, and voted for it.
+
+@keep
+on-arrival: {!
+RO.fac(Q, 'defencist', 1, 0);
+RO.add(Q, {rel_kad: 2});
+!}
+
+The elections will be held on the date already announced. We will use the time.

@@ -1,0 +1,29 @@
+title: Pavel Axelrod
+is-pinned-card: true
+tags: advisor, unions
+new-page: true
+view-if: axelrod_advisor = 1
+
+= Pavel Axelrod
+
+Axelrod (1850-1928) is an elder of Russian Marxism and the founder of the idea of a broad workers' congress. He went to Western Europe in August 1917, where he lobbies the socialist parties.
+
+- @action
+- @root: Return to main
+
+@action
+title: Western Socialist Network
+subtitle: Axelrod lobbies the Western socialists for pressure and aid.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {soviet_democracy: 1, repression: -1}); Q.resources += 2; Q.foreign_pressure = (Q.foreign_pressure || 0) + 1;
+!}
+
+Axelrod met the leaders of the British Labour Party and the German Independent Social Democrats. They have promised pressure, and some money.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

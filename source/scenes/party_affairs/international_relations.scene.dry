@@ -1,68 +1,55 @@
-title: International Relations
+title: Appeal to the International
+subtitle: Foreign socialist pressure.
 new-page: true
 is-card: true
 tags: party_affairs
 view-if: international_relations_timer <= 0
-on-arrival: month_actions += 1; international_relations_timer += 12;
-card-image: img/international.jpg
-max-visits: 4
-#subtitle: Building ties with our fraternal socialist parties.
+on-arrival: month_actions += 1; international_relations_timer = 6
 
-At the Labor and Socialist International, we can forge contacts with our fraternal socialist parties in Europe and across the world.
+The Mensheviks belong to the same International as the German SPD, the British Labour Party and the French SFIO. Their opinion matters, to somebody.
 
-- @fr_uk: Build relationships with the French SFIO and British Labour Party to move their governments in Germany's favor.
-- @austria: Learn organization and street fighting from the Austrian SDAPÖ.
-- @scandi: Learn the path of economics and reform from the Scandinavian social democrats.
-- @comintern: Forget the second international - embed a spy in the Comintern's conference.
-- @america: Contact the Socialist party of America.
-- @return: We do not need international contacts at the moment.
+- @stockholm: Press for the Stockholm conference of socialists. (Only while the war lasts)
+- @prisoners: Ask European socialists to protest the arrest of our comrades.
+- @press: Send a delegate to the Western socialists.
+- @aid: Appeal for money and paper.
 - @easy_discard
-- @cancel_advisor_action
 
-@fr_uk
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1; west_relation += 1; reformist_strength += 5; pacifism += 1; moderate_plan_support += 1
+@stockholm
+view-if: at_war = 1
+on-arrival: {!
+Q.stockholm = (Q.stockholm || 0) + 1;
+RO.add(Q, {war_weariness: -3, rel_kad: -3});
+RO.boost(Q, {soldiers: 2, workers: 1});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 3);
+!}
 
-The socialists of France and Britain can influence their governments to be friendlier towards Germany. Hopefully they will reduce our reparations burden.
+The Soviet has invited the European socialists to meet in Stockholm to find a common peace programme. The Allied governments refuse passports. [? if stockholm >= 3 : The conference is now a real prospect. ?]
 
-@austria
-subtitle: -1 resources [? if austrian_parliament_seen and not austrian_civil_war_seen: - We will also help the Austrians oppose their dictatorship. ?]
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-audio: shuffle music/communist/workers_of_vienna_normalized.mp3
-on-arrival: left_strength += 5; radicalization += 1; rb_militancy += 0.03; resources -= 1; austria_relation += 1; sdapo_strength += 1 if austrian_parliament_seen = 1
+@prisoners
+view-if: bol_regime = 1
+on-arrival: {!
+RO.add(Q, {repression: -3});
+if (Q.legality <= 1 && Q.stockholm_ok) { Q.legality += 0; }
+RO.fac(Q, 'intl', 1, -2);
+Q.foreign_pressure = (Q.foreign_pressure || 0) + 1;
+!}
 
-Our Reichsbanner can learn much in paramilitary organization and training from the Austrian Republikanischer Schutzbund (Republican Protection Units), the paramilitary branch of the Austrian social democrats.
+A telegram from the Second International and a letter from the British Labour Party made it harder for the authorities to ignore the arrests.
 
-[? if austrian_parliament_seen and not austrian_civil_war_seen: We are also helping the Austrian Social Democratic Worker's Party build up their resources in preparation for a future struggle, legally and illegally. ?]
+@press
+on-arrival: {!
+RO.add(Q, {soviet_democracy: 1});
+Q.resources += 1;
+RO.fac(Q, 'defencist', 1, -1);
+!}
 
+Axelrod, in Europe since August 1917, lobbied socialist parties on our behalf. He is the party's best-known name abroad.
 
-@scandi
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: reformist_strength += 8; wtb_support += 1; resources -= 1; moderate_plan_support += 1
+@aid
+on-arrival: {!
+Q.resources += 2;
+RO.fac(Q, 'unions', 0, 1);
+!}
 
-The programs of the Nordic socialists involve active government intervention in the economy. We can learn from their economic strategies, and how they moved beyond their working-class base to attract a broader set of constituents.
-
-@comintern
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1; kpd_relation += 5*(1-dissent); communist_coalition += 1 if comintern_seen == 0; comintern_seen += 1
-
-The Stalinists of the KPD insists on calling us "social fascists", suggesting that we social democrats are as bad or worse than actual fascists. Needless to say, this is not good for our relationship with the Communists. By observing the Comintern, we can better understand the KPD, enabling us to potentially improve relations, or counter the KPD if it may come to that.
-
-@america
-subtitle: -1 resources
-choose-if: resources >= 1
-unavailable-subtitle: Not enough resources.
-on-arrival: resources -= 1
-
-The Socialist Party of America is tiny and has limited support. There is not much we can do for them, and conversely, not much they can do for us.
-
-@reduce
-
-We do not need the international contacts at the moment.
+The European socialist press raised some money for us. It is not much, but it comes in foreign currency.

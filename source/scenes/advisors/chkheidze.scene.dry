@@ -1,0 +1,29 @@
+title: Nikolai Chkheidze
+is-pinned-card: true
+tags: advisor, defencist
+new-page: true
+view-if: chkheidze_advisor = 1
+
+= Nikolai Chkheidze
+
+Chkheidze (1864-1926), a Georgian Menshevik, is the Chairman of the Petrograd Soviet. He has the gavel and, for now, the room.
+
+- @action
+- @root: Return to main
+
+@action
+title: Chairman's Gavel
+subtitle: Chkheidze calms a split or steers a Soviet session.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+for (var f of Q.factions) { RO.fac(Q, f, 0, -4); } RO.add(Q, {soviet_democracy: 1});
+!}
+
+Chkheidze ruled a heated session out of order and then spent an hour in the corridors. Tempers are lower.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

@@ -1,0 +1,47 @@
+title: Defend the Revolution
+subtitle: The Whites are advancing. Where does the party stand?
+new-page: true
+is-card: true
+tags: soviet_affairs
+view-if: domestic_enemies_timer <= 0 and dix >= 34
+on-arrival: month_actions += 1; domestic_enemies_timer = 3
+
+Whatever our quarrel with the Bolsheviks, a victory for Kolchak or Denikin would mean the end of every labour organisation, and of every socialist party. The question is what to do about it. (The front: [+ white_front : front +].)
+
+- @mobilise: Send our members to the Red Army, as a gesture of loyalty.
+- @neither: Say that we are for neither side.
+- @conditions: Support the defence, if the prisoners are released first.
+- @easy_discard
+
+@mobilise
+on-arrival: {!
+Q.red_army += 5;
+RO.add(Q, {repression: -3, rel_bol: 4, soviet_democracy: -1});
+RO.boost(Q, {workers: 2, soldiers: 2});
+RO.fac(Q, 'rightdef', 0, 4);
+RO.fac(Q, 'intl', 0, 1);
+Q.defended = (Q.defended || 0) + 1;
+if (Q.legality < 3 && Q.defended >= 2 && Q.dix >= 66) { Q.legality += 1; }
+!}
+
+Our members enlisted in the Red Army and our veterans took commissions. The Bolsheviks have noticed, and some of the arrests have stopped.
+
+@neither
+on-arrival: {!
+RO.boost(Q, {middle: 2, peasants: 1});
+RO.add(Q, {repression: 1, rel_bol: -2});
+RO.fac(Q, 'rightdef', 0, 5);
+RO.fac(Q, 'intl', 0, -2);
+!}
+
+"Neither Kolchak nor Lenin." The slogan is exact, and it gives satisfaction to nobody who is on a front.
+
+@conditions
+on-arrival: {!
+Q.red_army += 3;
+RO.add(Q, {repression: -2, rel_bol: 1});
+RO.boost(Q, {workers: 1});
+Q.prisoner_deal = 1;
+!}
+
+We offered support for the defence of the cities, if a dozen of our imprisoned leaders were freed. Some were; others were not.

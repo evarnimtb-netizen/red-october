@@ -1,0 +1,34 @@
+title: The Generals' Plot
+subtitle: The officers' conspiracy.
+new-page: true
+tags: event
+view-if: dix >= 40 and bol_regime = 0 and right_plot_n < 2 and right_plot_timer <= 0
+priority: 45
+on-arrival: {!
+Q.right_plot_n = (Q.right_plot_n || 0) + 1;
+Q.right_plot_timer = 18;
+Q.right_coup = Q.right_threat >= 65 ? 1 : 0;
+if (Q.right_coup) {
+    Q.game_end = 1;
+    Q.ending = 'right_coup';
+} else {
+    Q.right_threat -= 8;
+}
+!}
+go-to: plot_coup if right_coup = 1; plot_foiled if right_coup = 0
+
+@plot_coup
+
+= The Generals Take Power
+
+On a night in the autumn, a group of generals and Kadet politicians, with the support of the Cossacks and of part of the garrison, arrested the government and dissolved the Soviets. The Assembly has been told to adjourn. General Alexeyev has declared a military dictatorship.
+
+The party's leaders have been arrested. Dan, Martov and Chernov will go abroad, if they are lucky.
+
+@plot_foiled
+
+= The Plot Is Foiled
+
+A conspiracy of officers and politicians, planning to arrest the government in the autumn, has been uncovered. The leaders are under arrest, and the Cossack regiments that were to support them have gone back to their barracks.
+
+The republic is safe, for now. Not many officers will risk their careers a second time.

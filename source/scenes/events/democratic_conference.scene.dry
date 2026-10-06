@@ -1,0 +1,52 @@
+title: The Democratic Conference
+subtitle: Coalition or a socialist government?
+new-page: true
+tags: event
+view-if: dix >= 18
+priority: 25
+max-visits: 1
+
+= The Democratic Conference
+
+Between 27 September and 5 October, 1,500 delegates from the soviets, the unions, the cooperatives, the zemstvos and the dumas met at the Alexandrinsky Theatre. The conference was convened by the Soviet executive to decide the future of the government. It ended in a muddle: the delegates voted for a coalition, then voted against coalition with the Kadets, then voted for the original formula with the Kadets, in a form that Kerensky later called a joke.
+
+The party's two leaders disagree. Tsereteli wants a coalition, with the Kadets, on the grounds that without the propertied classes, Russia will not be governed. Dan wants a homogeneous socialist government. In the corridors, Trotsky sits and watches.
+
+- @coalition: Back coalition with the liberals, as before.
+- @socialist: Force a homogeneous socialist government.
+- @pre: Take seats in the Pre-Parliament, as a loyal opposition.
+
+@coalition
+on-arrival: {!
+Q.in_coalition = 1;
+RO.fac(Q, 'defencist', 3, 0);
+RO.fac(Q, 'intl', -2, 8);
+RO.add(Q, {rel_kad: 4, rel_sr: -2, bolshevik: 3});
+!}
+
+The Conference declared for coalition. The party's Defencists are satisfied. Kerensky's cabinet is nonetheless the same.
+
+@socialist
+choose-if: rel_sr >= 55
+unavailable-subtitle: The SRs will not support this.
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 0;
+Q.homogeneous_gov = 1;
+RO.add(Q, {rel_kad: -10, right_threat: 4, bolshevik: -3, soviet_democracy: 2});
+RO.fac(Q, 'defencist', -3, 10);
+RO.fac(Q, 'intl', 3, -5);
+RO.fac(Q, 'rightdef', 0, 10);
+!}
+
+The Menshevik Defencists and Internationalists have, for once, agreed. A government of the Soviet parties, without the liberals, will be formed.
+
+@pre
+on-arrival: {!
+RO.add(Q, {rel_kad: 2, soviet_democracy: -1});
+RO.boost(Q, {middle: 1, workers: -1});
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'intl', 0, 4);
+!}
+
+We entered the Pre-Parliament, which is a body of advice without a mandate, to be elected by nobody. The Bolsheviks walked out, loudly.

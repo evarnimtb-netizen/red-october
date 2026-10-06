@@ -1,0 +1,50 @@
+title: Denikin at Orel
+subtitle: Yudenich at the gates of Petrograd.
+new-page: true
+tags: event
+view-if: dix >= 66 and bol_regime = 1
+priority: 40
+max-visits: 1
+
+= Denikin at Orel
+
+In October 1919, General Denikin's Volunteer Army took Orel, 380 kilometres from Moscow, the closest the Whites have come. In the north, Yudenich's army stands twenty kilometres from Petrograd. The Soviet government has declared that the Socialist Fatherland is in danger, and called for every worker who can hold a rifle.
+
+A victory by Denikin would mean the destruction of every labour organisation in Russia, the end of every socialist party, and the return of the landlords. Whatever our quarrels, the Mensheviks and the Bolsheviks have a common enemy.
+
+- @mobilise: Mobilise our members for the Red Army.
+- @neutral: Stay neutral.
+- @prisoners: Demand the release of our prisoners first.
+
+@mobilise
+on-arrival: {!
+Q.red_army += 8;
+Q.defended = (Q.defended || 0) + 1;
+RO.add(Q, {rel_bol: 6, repression: -5, soviet_democracy: -1});
+RO.boost(Q, {workers: 3, soldiers: 3});
+RO.fac(Q, 'rightdef', 0, 4);
+RO.fac(Q, 'intl', 0, -2);
+if (Q.legality < 3) { Q.legality += 1; }
+!}
+
+The party's Central Committee called on its members to join the defence of Petrograd and Moscow. Hundreds of members enlisted. The Cheka released many of our arrested comrades, and in some cities our delegates were readmitted to the soviets.
+
+@neutral
+on-arrival: {!
+RO.add(Q, {repression: 3, rel_bol: -4});
+RO.boost(Q, {middle: 2, workers: -2});
+RO.fac(Q, 'rightdef', 0, 4);
+RO.fac(Q, 'intl', 0, 4);
+!}
+
+We said that this was not our war. The crowds in the factory districts did not agree, and the Bolsheviks noted it.
+
+@prisoners
+on-arrival: {!
+Q.red_army += 3;
+RO.add(Q, {repression: -2, rel_bol: -2});
+RO.boost(Q, {workers: 1});
+Q.prisoner_deal = 1;
+!}
+
+We offered to take up arms against Denikin if our prisoners were freed. A good many were. The rest are still in prison.

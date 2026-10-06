@@ -1,0 +1,44 @@
+title: Order No. 1
+subtitle: The soldiers' committees.
+new-page: true
+tags: event
+view-if: dix >= 5
+priority: 10
+max-visits: 1
+
+= Order No. 1
+
+On 14 March the Soviet executive issued an order to the Petrograd garrison. It created elected soldiers' committees in every unit, put weapons under the committees' control, ended the compulsory salute off duty and told the soldiers to obey only those orders of the Duma's Military Commission that did not contradict the Soviet. The order was written in an afternoon, mostly by Sukhanov and Sokolov.
+
+It has already reached the front. Within weeks, between 100,000 and 150,000 men will have left their units.
+
+- @ok: Leave the order as it is.
+- @limit: Declare that it applies to the Petrograd garrison only.
+- @tie: Add that soldiers must obey operational orders.
+
+@ok
+on-arrival: {!
+RO.add(Q, {army_discipline: -5, right_threat: 4});
+RO.boost(Q, {soldiers: 3});
+!}
+
+The order stands. The soldiers take it as their charter. The officers do not.
+
+@limit
+on-arrival: {!
+RO.add(Q, {army_discipline: -2, right_threat: 1});
+RO.boost(Q, {soldiers: 1});
+RO.fac(Q, 'defencist', 1, 0);
+!}
+
+A clarification went out to the front, but it came a few days too late for many regiments.
+
+@tie
+on-arrival: {!
+RO.add(Q, {army_discipline: -1, right_threat: 0});
+RO.boost(Q, {soldiers: -1});
+RO.fac(Q, 'defencist', 1, 0);
+RO.fac(Q, 'intl', 0, 2);
+!}
+
+Operational orders must be obeyed. The Soviet adds that committees remain in charge of everything else. It is the best that can be done after the fact.

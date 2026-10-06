@@ -1,0 +1,47 @@
+title: Larin and the Defectors
+subtitle: Some Internationalists walk toward the Bolsheviks.
+new-page: true
+tags: event
+view-if: dix >= 14 and intl_dissent >= 25 and larin_seen = 0
+priority: 5
+max-visits: 1
+on-arrival: larin_seen = 1;
+
+= Larin and the Defectors
+
+Yuri Larin, who has been the party's Internationalist spokesman in the Soviet, has announced that he will join the Bolsheviks. He is not alone. Trotsky has already gone. Some of the younger Internationalists in the factory districts are discussing whether the line of "critical support" for the coalition can be held, and whether Lenin is not right after all.
+
+- @talk: Send Martov to speak at every Internationalist circle.
+- @shrug: Let them go.
+- @concede: Concede to the Internationalists' demands for a new party line.
+
+@talk
+on-arrival: {!
+RO.fac(Q, 'intl', 0, -10);
+Q.members -= 3;
+RO.add(Q, {rel_lsr: 1});
+!}
+
+Martov's visits kept most circles in the party. A few left anyway.
+
+@shrug
+on-arrival: {!
+Q.members -= 12;
+RO.fac(Q, 'intl', -4, -6);
+RO.add(Q, {bolshevik: 3});
+RO.boost(Q, {workers: -2});
+RO.fac(Q, 'defencist', 0, 2);
+!}
+
+The Larin group, and about a dozen district organisations, went over to the Bolsheviks. The party is more united, and a good deal smaller.
+
+@concede
+on-arrival: {!
+RO.fac(Q, 'intl', 5, -12);
+RO.fac(Q, 'defencist', -3, 8);
+RO.fac(Q, 'rightdef', -1, 8);
+Q.war_line -= 1;
+RO.add(Q, {rel_kad: -3});
+!}
+
+The party's line shifted toward the Internationalists. The Defencists are uneasy.

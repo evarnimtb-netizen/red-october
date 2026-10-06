@@ -1,0 +1,45 @@
+title: The Constitution of the Republic
+subtitle: Federal republic, or something else?
+new-page: true
+tags: event
+view-if: dix >= 48 and bol_regime = 0 and assembly_survives = 1
+priority: 20
+max-visits: 1
+
+= The Constitution of the Republic
+
+The Constituent Assembly is drafting a constitution. The structure of the state is not decided: a presidency or a collective executive, a single chamber or two, a federation of peoples or a unitary state with provincial autonomy. The SRs favour a strong Assembly, the Kadets a presidency, the national parties a federation, the Mensheviks the soviets as local self-government.
+
+- @federal: A federal republic, with the soviets as organs of local government.
+- @presidential: A republic with a strong president.
+- @assembly: A republic governed by the Assembly alone.
+
+@federal
+on-arrival: {!
+RO.add(Q, {soviet_democracy: 6, rel_sr: 2, rel_kad: -3, right_threat: -2});
+RO.boost(Q, {workers: 3, nations: 4, peasants: 2});
+RO.fac(Q, 'unions', 1, -2);
+Q.constitution = 1;
+!}
+
+The Assembly adopted the federal formula. The soviets are recognised in law as local organs of self-government, in the factories and the villages. It is a form that nobody has seen before.
+
+@presidential
+on-arrival: {!
+RO.add(Q, {soviet_democracy: -2, right_threat: -6, rel_kad: 6});
+RO.boost(Q, {middle: 4, workers: -2});
+RO.fac(Q, 'intl', 0, 6);
+RO.fac(Q, 'rightdef', 0, -4);
+Q.constitution = 2;
+!}
+
+The Assembly adopted a presidency. The generals will not like it, and they will like the alternative less.
+
+@assembly
+on-arrival: {!
+RO.add(Q, {soviet_democracy: 3, right_threat: 4, rel_sr: 3});
+RO.boost(Q, {peasants: 3, workers: 1});
+Q.constitution = 3;
+!}
+
+The Assembly adopted a parliamentary republic. The ministers are chosen by the Assembly and responsible to it. It is a form that has served other republics well, in other countries.

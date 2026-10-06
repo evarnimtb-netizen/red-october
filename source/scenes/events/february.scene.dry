@@ -1,0 +1,57 @@
+title: The February Revolution
+subtitle: The Soviet and the Provisional Government.
+new-page: true
+tags: event
+view-if: dix >= 4
+priority: 20
+max-visits: 1
+on-arrival: dual_power = 1;
+
+= The February Revolution
+
+Eight days of strikes, bread riots and mutinies have overthrown the Romanov dynasty. Nicholas II abdicated on 15 March. In the Tauride Palace two authorities have appeared: a Provisional Government of liberals under Prince Lvov, and the Petrograd Soviet of Workers' and Soldiers' Deputies, in which the Mensheviks and the SRs hold the majority, with Chkheidze in the chair.
+
+The Soviet commands the garrison, the railways and the telegraph. The government commands the ministries. Neither can do without the other. The Kadet leader Milyukov is Foreign Minister, and the only socialist in the cabinet is the SR lawyer Kerensky, who joined without asking the Soviet.
+
+What should the party do?
+
+- @control: Lead the Soviet as a control body, and stay out of the government.
+- @enter: Take ministries in the first cabinet.
+- @soviet_gov: Demand a Soviet government now.
+
+@control
+on-arrival: {!
+Q.in_coalition = 0;
+RO.add(Q, {rel_kad: 3, rel_sr: 3});
+RO.fac(Q, 'defencist', 2, 0);
+!}
+
+Our reading of the revolution is that it is a bourgeois one, and that the bourgeoisie must govern. The Soviet will watch, advise and, when necessary, restrain it. It is a role that is both powerful and irresponsible.
+
+@enter
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 1;
+RO.add(Q, {rel_kad: 6, bolshevik: 2});
+RO.fac(Q, 'defencist', 4, 0);
+RO.fac(Q, 'intl', -2, 10);
+Q.resources += 1;
+!}
+
+Chkheidze was offered the Ministry of Labour. We have chosen to share responsibility with the liberals from the first day. The Internationalists object that we will share the blame as well.
+
+@soviet_gov
+choose-if: rel_sr >= 60
+unavailable-subtitle: The SRs will not agree to this.
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 0;
+Q.homogeneous_gov = 1;
+RO.add(Q, {rel_kad: -20, right_threat: 12, ruble: -5, soviet_democracy: 3, army_discipline: 2});
+RO.boost(Q, {workers: 3, soldiers: 3, middle: -5});
+RO.fac(Q, 'intl', 4, -5);
+RO.fac(Q, 'defencist', -4, 8);
+RO.fac(Q, 'rightdef', 0, 10);
+!}
+
+The Menshevik and SR leaders have formed a government of the Soviet parties. The officers are alarmed and the Allies have withheld recognition. The Marxist doctrine that the revolution is a bourgeois one has been set aside, and nobody can say what will replace it.

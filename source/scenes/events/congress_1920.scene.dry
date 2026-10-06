@@ -1,0 +1,50 @@
+title: The Eighth Congress of Soviets
+subtitle: Dan's speech.
+new-page: true
+tags: event
+view-if: dix >= 94 and bol_regime = 1
+priority: 30
+max-visits: 1
+
+= The Eighth Congress of Soviets
+
+In December 1920, the Eighth All-Russia Congress of Soviets met in Moscow. Fyodor Dan spoke for the Mensheviks, as he had in 1919: he criticised the economic policy, called for an end to the Cheka's terror and for a restoration of free elections to the soviets. He was heard with attention, interrupted, and not answered.
+
+The war is won, and the state that won it is a party dictatorship. The question for the opposition is whether it can ask for a reform, or whether it must demand one.
+
+- @loyal: Speak as a loyal opposition.
+- @demand: Demand free soviet elections now.
+
+@loyal
+on-arrival: {!
+RO.add(Q, {repression: -1, rel_bol: 1});
+RO.boost(Q, {workers: 1});
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+Dan spoke as a member of a loyal opposition, and was heard.
+
+@demand
+on-arrival: {!
+Q.free_ok = (Q.soviet_democracy >= 55 && Q.rel_bol >= 40 && Q.program_adopted) ? 1 : 0;
+if (Q.free_ok) {
+    Q.free_soviets = 1;
+    RO.add(Q, {soviet_democracy: 10, repression: -6, rel_bol: 2});
+    RO.boost(Q, {workers: 5, railway: 4, peasants: 3});
+} else {
+    RO.add(Q, {soviet_democracy: 2, repression: 7, rel_bol: -5});
+    RO.boost(Q, {workers: 4, railway: 3});
+    if (Q.legality > 1 && Q.repression >= 35) { Q.legality -= 1; }
+}
+RO.fac(Q, 'rightdef', 0, 4);
+RO.fac(Q, 'intl', 1, -2);
+!}
+go-to: free_yes if free_ok = 1; free_no if free_ok = 0
+
+@free_yes
+
+The motion for free elections to the soviets was introduced by Dan and passed on a show of hands, with the support of the delegates from the Left Bolshevik opposition and the Workers' Opposition. The Central Committee has agreed to hold new soviet elections in the spring, with opposition parties allowed to stand.
+
+@free_no
+
+The motion was heard in silence and defeated. Dan was told that he had made a speech that would be remembered. Several Mensheviks were arrested the same week.

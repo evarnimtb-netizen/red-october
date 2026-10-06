@@ -1,0 +1,71 @@
+title: Expelled from the Soviet Executive
+subtitle: 14 June 1918.
+new-page: true
+tags: event
+view-if: dix >= 34 and bol_regime = 1
+priority: 40
+max-visits: 1
+on-arrival: {!
+Q.expelled_check = (Q.ally_bol >= 2 || (Q.soviet_democracy >= 65 && Q.spring_honoured)) ? 0 : 1;
+if (Q.expelled_check) {
+    if (Q.legality > 1) { Q.legality = 1; }
+    Q.expelled = 1;
+    RO.add(Q, {repression: 4, soviet_democracy: -4});
+}
+!}
+go-to: expel_yes if expelled_check = 1; expel_no if expelled_check = 0
+
+@expel_yes
+
+= Expelled
+
+On 14 June the Central Executive Committee, on a motion by Sverdlov, expelled the Mensheviks (the "Menshevik-Defencists") from its membership, on the ground that they were linked to the counter-revolutionary forces on the Volga. The decision is later extended to the SRs, and, in July, to the soviets as a whole.
+
+Our press has been closed in a dozen cities and our deputies expelled from the soviets of a dozen more. The party is not banned. It is not legal either.
+
+- @protest: Protest, and stay legal.
+- @underground: Go underground.
+- @pledge: Pledge non-violence in return for readmission.
+
+@protest
+on-arrival: {!
+RO.add(Q, {rel_bol: -3});
+RO.boost(Q, {workers: 2});
+RO.fac(Q, 'intl', 1, -2);
+!}
+
+We protested in the press, and went on holding meetings in those factories where they would let us.
+
+@underground
+on-arrival: {!
+Q.underground = 1;
+Q.members -= 18;
+for (var g of RO.GROUPS) { Q['boost_' + g] = (Q['boost_' + g] || 0) * 0.5; }
+RO.add(Q, {repression: -3});
+Q.resources += 1;
+RO.fac(Q, 'intl', 0, 4);
+RO.fac(Q, 'rightdef', 0, 4);
+!}
+
+The party printing presses are in cellars and its meetings in apartments. We are safe from the Cheka's attention, and invisible to everybody else.
+
+@pledge
+choose-if: armed_struggle = 0
+unavailable-subtitle: We have been in touch with Komuch, and nobody would believe the pledge.
+on-arrival: {!
+Q.readmission_hope = 1;
+RO.add(Q, {rel_bol: 4, repression: -1});
+RO.fac(Q, 'rightdef', 0, 10);
+RO.fac(Q, 'intl', 1, -3);
+RO.fac(Q, 'defencist', 0, 4);
+!}
+
+The Central Committee has pledged that the party will never resort to armed struggle against the Soviet government, and asked to be readmitted. The Bolsheviks have said that they will consider it. The Right Defencists are aghast.
+
+@expel_no
+
+= The Expulsion Is Averted
+
+On 14 June the Central Executive Committee considered a motion to expel the Mensheviks. It was opposed by the Left SRs, by the moderate Bolsheviks who are allied to us, and by the evidence of the spring elections, which showed that the Mensheviks speak for a large part of the workers. The motion was withdrawn.
+
+We remain a legal party in the soviets, with all our rights, and the knowledge that nobody has any rights for long.

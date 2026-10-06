@@ -1,0 +1,54 @@
+title: Brest-Litovsk
+subtitle: The treaty, and the Left SRs.
+new-page: true
+tags: event
+view-if: dix >= 28 and bol_regime = 1 and at_war = 1
+priority: 40
+max-visits: 1
+on-arrival: {!
+Q.at_war = 0;
+RO.add(Q, {war_weariness: -20, army_discipline: 0, land_pressure: -5});
+Q.lsr_left_gov = 1;
+!}
+
+= Brest-Litovsk
+
+On 3 March the Soviet government signed the Treaty of Brest-Litovsk with Germany and her allies: Russia lost Poland, the Baltic provinces, Ukraine and a quarter of her population, and a third of her industry. Lenin had to threaten to resign to get it ratified: Trotsky's formula, "neither war nor peace", had failed and the Germans had advanced on Petrograd.
+
+Martov and Kamkov, the Left SR leader, both spoke against ratification. The Left SRs left the government on 19 March, over the treaty; the Soviet Congress ratified the treaty by 784 votes to 261. The war with Germany is over, for now.
+
+- @against: Martov speaks against ratification.
+- @joint: Propose a joint defence programme with the Left SRs.
+- @accept: Accept the treaty as a necessity.
+
+@against
+on-arrival: {!
+RO.add(Q, {rel_lsr: 6, rel_bol: -2});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 5);
+RO.boost(Q, {soldiers: 1, middle: 1});
+!}
+
+Martov spoke for the opposition: "the treaty is a shame, but your signing it is a disaster". It was the best speech of the Congress, and it was heard by nobody who mattered.
+
+@joint
+choose-if: rel_lsr >= 45
+unavailable-subtitle: The Left SRs will not talk to us.
+on-arrival: {!
+RO.add(Q, {rel_lsr: 12, rel_bol: -3});
+if (Q.ally_lsr < 1) { Q.ally_lsr = 1; }
+RO.fac(Q, 'rightdef', 0, 5);
+RO.fac(Q, 'defencist', 0, 3);
+Q.anti_brest_front = 1;
+!}
+
+An anti-Brest front of Mensheviks and Left SRs has been formed, on paper. It has a common programme for a revolutionary defence: a people's militia, not a standing army, and a refusal to ratify.
+
+@accept
+on-arrival: {!
+RO.add(Q, {rel_bol: 3, rel_lsr: -3});
+RO.fac(Q, 'intl', 0, 8);
+RO.fac(Q, 'defencist', 1, 0);
+!}
+
+We accepted the treaty as a fact. The Left SRs called it a betrayal of the revolution, and left the government.

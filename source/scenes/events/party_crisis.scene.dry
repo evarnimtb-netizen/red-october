@@ -1,0 +1,29 @@
+title: A Current Walks Out
+subtitle: The party's quarrels come to a head.
+new-page: true
+tags: event
+view-if: dissent >= 0.4 and crisis_count < 2 and crisis_timer <= 0
+priority: 35
+on-arrival: {!
+Q.crisis_count = (Q.crisis_count || 0) + 1;
+Q.crisis_timer = 12;
+// the most dissenting current leaves
+var worst = null, wd = -1;
+for (var f of Q.factions) {
+    var v = Q[f + '_dissent'] * Math.sqrt(Q[f + '_strength']);
+    if (v > wd) { wd = v; worst = f; }
+}
+Q.crisis_faction = worst;
+Q.members -= Math.round(Q.members * 0.15);
+Q[worst + '_strength'] = Q[worst + '_strength'] * 0.4;
+for (var f of Q.factions) { Q[f + '_dissent'] = Math.max(0, Q[f + '_dissent'] - 20); }
+if (worst == 'intl') { Q.bolshevik += 4; RO.add(Q, {rel_bol: 5}); }
+if (worst == 'rightdef' || worst == 'defencist') { Q.right_threat += 3; RO.add(Q, {rel_kad: 4}); }
+RO.boost(Q, {workers: -3});
+!}
+
+= A Current Walks Out
+
+The party's quarrels have gone past the point of speeches. One of its currents has left the party in a body, with its local organisations, its press and its funds. The remaining members hold a meeting and agree on a common line.
+
+The party is smaller, and much more united.

@@ -4,13 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta prefix="ifiction: http://babel.ifarchive.org/protocol/iFiction/"
-        property="ifiction:ifid" content="7FCDF039-2B77-4179-B795-CBAFA65253AA">
+        property="ifiction:ifid" content="3E9B08B2-65FC-4DC1-8CEA-47269AFAA2AF">
     <title>Red October: An Alternate History</title>
     <link rel="stylesheet" type="text/css" href="game.css">
     <script src="jquery-1.11.1.min.js"></script>
-    <script src="d3.v7.min.js"></script>
-    <script src="d3-parliament.js"></script>
-    <script src="d3-linegraph.js"></script>
+        <script src="model.js"></script>
     <script src="core.js"></script>
     <script src="game.js"></script>
   </head>
@@ -351,9 +349,9 @@
                 <div id='stats_sidebar' class='tools left'>
                     <div class="tab_container">
                         <button class="tab_button active" id="main_tab" onclick="window.changeTab('status', 'main_tab');">Main</button>
-                        <button class="tab_button" id="politics_tab" onclick="window.changeTab('status.politics', 'politics_tab');">Politics</button>
-                        <button class="tab_button" id="paramilitary_tab" onclick="window.changeTab('status.paramilitaries', 'paramilitary_tab');">Defense</button>
-                        <button class="tab_button" id="poll_tab" onclick="window.changeTab('status.polls', 'poll_tab');">Polls</button>
+                        <button class="tab_button" id="politics_tab" onclick="window.changeTab('status.politics', 'politics_tab');">Parties</button>
+                        <button class="tab_button" id="paramilitary_tab" onclick="window.changeTab('status.paramilitaries', 'paramilitary_tab');">Currents</button>
+                        <button class="tab_button" id="poll_tab" onclick="window.changeTab('status.polls', 'poll_tab');">Support</button>
                     </div>
                     <div id="qualities">
                     </div>

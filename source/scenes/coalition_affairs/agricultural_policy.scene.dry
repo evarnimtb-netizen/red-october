@@ -1,0 +1,40 @@
+title: The Land Question
+subtitle: Land committees now, or wait for the Constituent Assembly.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: agricultural_policy_timer <= 0 and land_decree = 0
+on-arrival: month_actions += 1; agricultural_policy_timer = 3
+
+The peasants want the landlords' land, and some of them are taking it. The SR minister Chernov wants to regulate the transfers through the land committees; the Kadets say that nothing should be done until the Assembly meets. (Land pressure: [+ land_pressure : level +].)
+
+- @committees: Back the land committees' temporary transfers now.
+- @wait: Wait for the Constituent Assembly.
+- @reform: Move state and Church lands to the committees at once.
+- @easy_discard
+
+@committees
+on-arrival: {!
+RO.add(Q, {land_pressure: -10, rel_kad: -6, rel_sr: 3, right_threat: 3});
+RO.boost(Q, {peasants: 3, soldiers: 2});
+Q.land_committees = (Q.land_committees || 0) + 1;
+!}
+
+The land committees regulate the transfers of land until the Assembly meets. Landowners are alarmed, and so are their friends in the officer corps.
+
+@wait
+on-arrival: {!
+RO.add(Q, {land_pressure: 3, rel_kad: 3, right_threat: -1});
+RO.boost(Q, {peasants: -2, middle: 1});
+!}
+
+The land question will be settled by the Constituent Assembly. The peasants say that they are tired of waiting.
+
+@reform
+on-arrival: {!
+RO.add(Q, {land_pressure: -4, rel_kad: -2, rel_sr: 1});
+RO.boost(Q, {peasants: 1});
+Q.land_committees = (Q.land_committees || 0) + 1;
+!}
+
+State, appanage and Church lands were put at the committees' disposal. The private estates are still untouched. It is a gesture, and the peasants know it.

@@ -1,0 +1,29 @@
+title: Nikolai Sukhanov
+is-pinned-card: true
+tags: advisor, intl
+new-page: true
+view-if: sukhanov_advisor = 1
+
+= Nikolai Sukhanov
+
+Sukhanov (1882-1940), an Internationalist writer and a founding member of the Soviet executive, writes the best chronicle of the revolution as it happens. His wife is a Bolshevik.
+
+- @action
+- @root: Return to main
+
+@action
+title: Insider Chronicler
+subtitle: Sukhanov's table talk reveals what the other parties intend.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+Q.insight = (Q.insight || 0) + 1; RO.add(Q, {rel_lsr: 2, rel_bol: 2});
+!}
+
+Sukhanov told us what he heard at the Bolshevik meeting, and what the Left SRs are saying in the corridors. We will be better informed the next time a crisis breaks.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

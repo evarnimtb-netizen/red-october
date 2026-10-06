@@ -1,0 +1,34 @@
+title: The Petrograd Soviet Changes Hands
+subtitle: 519 to 412.
+new-page: true
+tags: event
+view-if: dix >= 17
+priority: 15
+max-visits: 1
+on-arrival: {!
+Q.lost_petrosoviet = (Q.bolshevik >= 40) ? 1 : 0;
+if (Q.lost_petrosoviet) {
+    Q.chkheidze_advisor = 0;
+    RO.add(Q, {bolshevik: 5, soviet_democracy: -1});
+    RO.boost(Q, {workers: -2});
+} else {
+    RO.add(Q, {bolshevik: -2});
+}
+!}
+go-to: ps_lost if lost_petrosoviet = 1; ps_held if lost_petrosoviet = 0
+
+@ps_lost
+
+= The Petrograd Soviet Changes Hands
+
+On 22 September the Petrograd Soviet passed a Bolshevik resolution on power by 519 votes to 414, with 67 abstentions. The Presidium resigned, and Chkheidze and Tsereteli with it; the new chairman is Leon Trotsky.
+
+The workers of the capital and the soldiers of its garrison have given the Soviet to the party that said "All power to the Soviets" and meant it. Menshevik speakers are heard in silence, or not at all.
+
+@ps_held
+
+= The Petrograd Soviet Holds
+
+The Bolsheviks put a resolution on power to the Petrograd Soviet and lost, narrowly. The party's speakers were heard, and Chkheidze remains in the chair.
+
+It is a reprieve rather than a victory. The Bolsheviks have called for new elections to the Soviet.

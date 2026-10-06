@@ -1,0 +1,41 @@
+title: Peace Without Annexations
+subtitle: Tsereteli returns.
+new-page: true
+tags: event
+view-if: dix >= 6
+priority: 10
+max-visits: 1
+on-arrival: tsereteli_advisor = 1;
+
+= Peace Without Annexations
+
+On 27 March the Soviet issued an appeal "To the Peoples of the World", calling for a democratic peace without annexations or indemnities. The Provisional Government has not repeated it. Milyukov reassured the Allies that Russia will honour her treaties.
+
+On the same week Irakli Tsereteli returned from Siberian exile and took over the Soviet majority. He argues that Russia must defend the revolution against the German army, while pushing the Allies toward peace. It is called revolutionary defencism.
+
+The Internationalists, led by Martov, who has not yet returned, hold to the line of the Zimmerwald conference: immediate peace.
+
+- @defencism: Adopt revolutionary defencism.
+- @zimmerwald: Hold the Zimmerwald line.
+
+@defencism
+on-arrival: {!
+Q.war_line += 2;
+RO.fac(Q, 'defencist', 8, 0);
+RO.fac(Q, 'intl', -4, 8);
+RO.add(Q, {rel_kad: 4, rel_sr: 2});
+!}
+
+The Soviet adopted Tsereteli's formula. It is, for now, majority policy.
+
+@zimmerwald
+on-arrival: {!
+Q.war_line -= 2;
+RO.fac(Q, 'intl', 8, -4);
+RO.fac(Q, 'defencist', -5, 8);
+RO.fac(Q, 'rightdef', -2, 10);
+RO.add(Q, {war_weariness: -3, rel_kad: -5, rel_lsr: 3, rel_bol: 2});
+RO.boost(Q, {soldiers: 3});
+!}
+
+The party has taken the line of immediate peace. The Kadets are alarmed, and so is the Allied embassy.

@@ -1,0 +1,34 @@
+title: The Factory Representatives
+subtitle: The workers elect their own assemblies.
+new-page: true
+tags: event
+view-if: dix >= 28 and bol_regime = 1
+priority: 5
+max-visits: 1
+
+= The Factory Representatives
+
+On 13 March the first assembly of authorised factory representatives met in Petrograd: delegates elected by the workers of the big factories, independent of both the soviets and the unions. They passed resolutions on bread, on unemployment, on the Cheka. The Bolsheviks were a minority. The Mensheviks, the SRs and the anarchists were not.
+
+The movement spread to Moscow and a dozen other cities by the spring. In June it will be dispersed.
+
+- @endorse: Endorse the assemblies, as the party did on 7 April.
+- @ignore: Leave them to the workers.
+
+@endorse
+on-arrival: {!
+RO.boost(Q, {workers: 4});
+RO.add(Q, {soviet_democracy: 1, repression: 1});
+RO.fac(Q, 'unions', 1, -1);
+Q.endorsed_reps = 1;
+!}
+
+The party's Central Committee endorsed the assemblies on 7 April. A number of our members were elected as delegates, and several were arrested within the month.
+
+@ignore
+on-arrival: {!
+RO.boost(Q, {workers: -1});
+RO.fac(Q, 'unions', 0, 2);
+!}
+
+We said that it was for the workers to decide. Some of our members found the answer unsatisfying.

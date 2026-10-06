@@ -1,0 +1,20 @@
+title: Kolchak's Coup
+subtitle: The SR Directory is arrested.
+new-page: true
+tags: event
+view-if: dix >= 44 and bol_regime = 1
+priority: 15
+max-visits: 1
+on-arrival: {!
+RO.add(Q, {rel_sr: -3});
+RO.boost(Q, {middle: -2});
+RO.add(Q, {right_threat: 5});
+!}
+
+= Kolchak's Coup
+
+On 18 November, officers loyal to Admiral Alexander Kolchak arrested the SR members of the Directory in Omsk, the anti-Bolshevik government that had been formed in Ufa in September from the SR and Kadet delegates. Kolchak proclaimed himself Supreme Ruler. The SRs who had joined the anti-Bolshevik cause, among them Avksentiev and Zenzinov, were deported to the West.
+
+The other side of the civil war has now shown its hand. A White Russia would be a dictatorship of the officers, and the socialists, of every party, would be in prison.
+
+For the Mensheviks it is a sign that the policy of "neither side" is not so foolish after all, and that armed struggle against the Bolsheviks can only help the Whites.

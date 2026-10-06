@@ -1,70 +1,45 @@
-title: Questions of Ideology
+title: Defencism or Internationalism
+subtitle: Move the party's line on the war.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: ideology_timer = 0
-on-arrival: month_actions += 1; old_ideology = ideology; ideology_timer = 18
-card-image: img/arbeiterbew.jpg
-max-visits: 3
-#subtitle: Setting the party's ideological direction.
+view-if: ideology_timer <= 0
+on-arrival: month_actions += 1; ideology_timer = 4
 
-= Questions of Ideology
+The party has no single line. The Revolutionary Defencists want to defend the revolution against the Kaiser and keep the alliance with the liberals. The Internationalists want an immediate general peace and a government of the socialists alone. [? if at_war = 0 : The war with Germany is over; the question is now how to treat the Bolshevik state. ?]
 
-The SPD is torn between many different ideological currents. What should be our primary ideological guidance for now?
-
-[? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
-
-- @class_struggle: Class struggle and preparing the proletariat for the revolution are our primary goals.
-- @centrist: The Center Marxism of Karl Kautsky remains the best way to resolve our internal contradictions.
-- @labor: We should work with the trade unions to improve the lives of workers.
-- @reform: Following Eduard Bernstein, we should work for ethical socialism, strengthen democracy, and expand the party's electorate.
+- @defencist: Move toward the Defencists.
+- @intl: Move toward the Internationalists.
+- @balance: Hold the middle and calm both wings.
 - @easy_discard
 
-@class_struggle
+@defencist
 on-arrival: {!
-if (Q.ideology && Q.ideology != "left") {
-    Q.changed = 1;
-}
+RO.fac(Q, 'defencist', 5, 0);
+RO.fac(Q, 'rightdef', 2, -2);
+RO.fac(Q, 'intl', -3, 6);
+Q.war_line += 1;
+RO.add(Q, {rel_kad: 3, rel_sr: 1});
 !}
-go-to: changed if changed = 1
-on-departure: ideology = "left"; left_strength += 10; communist_coalition += 1; left_dissent -= 5; z_relation -= 3; dvp_relation -= 5; nationalization_support += 1; kpd_relation += 3
 
-The radical left of the party supports a course of class struggle, and potentially a reconcilliation with the Communists.
+The majority is pleased. The Internationalists issued a statement of regret, and some of their younger members are looking at Lenin's paper.
 
-@centrist
+@intl
 on-arrival: {!
-if (Q.ideology && Q.ideology != "centrist") {
-    Q.changed = 1;
-}
+RO.fac(Q, 'intl', 5, -6);
+RO.fac(Q, 'defencist', -3, 4);
+RO.fac(Q, 'rightdef', -2, 6);
+Q.war_line -= 1;
+RO.add(Q, {rel_kad: -3, rel_lsr: 2, rel_bol: 2});
 !}
-go-to: changed if changed = 1
-on-departure: ideology = "centrist"; center_strength += 10; center_dissent -= 10; left_dissent -= 5; reformist_dissent -= 5
 
-The Center Marxists, represented by Kautsky and Hilferding, support a middle course of preparing for revolution while building up the consciousness of the working class.
+Martov's wing is happy. Potresov's wing is not, and has begun to write letters to the newspapers.
 
-@labor
+@balance
 on-arrival: {!
-if (Q.ideology && Q.ideology != "labor") {
-    Q.changed = 1;
-}
+RO.fac(Q, 'defencist', 0, -3);
+RO.fac(Q, 'intl', 0, -4);
+RO.fac(Q, 'rightdef', 0, -2);
 !}
-go-to: changed if changed = 1
-on-departure: ideology = "labor"; labor_strength += 10; wtb_support += 1; labor_dissent -= 5; kpd_relation -= 3
 
-The labor wing of the party supports continued particpation in government in order to provide benefits to the workers, and the creation of public works programs for employment.
-
-@reform
-on-arrival: {!
-if (Q.ideology && Q.ideology != "reformist") {
-    Q.changed = 1;
-}
-!}
-go-to: changed if changed = 1
-on-departure: ideology = "reformist"; reformist_strength += 10; democratization += 1; reformist_dissent -= 5; z_relation += 5; dvp_relation += 5; kpd_relation -= 8; moderate_plan_support += 1
-
-The reformist wing of the party seeks to preserve the Republic and the democratic system of government, and is most supportive of coalitions with the other pro-democracy parties.
-
-@changed
-on-arrival: left_dissent += 5; center_dissent += 5; labor_dissent += 5; reformist_dissent += 5
-
-We have changed ideologies. Many in the party feel unmoored.
+A carefully worded resolution satisfied nobody and offended nobody. For now.

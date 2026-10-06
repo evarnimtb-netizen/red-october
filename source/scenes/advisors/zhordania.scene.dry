@@ -1,0 +1,29 @@
+title: Noe Zhordania
+is-pinned-card: true
+tags: advisor, defencist
+new-page: true
+view-if: zhordania_advisor = 1
+
+= Noe Zhordania
+
+Zhordania (1868-1953), the leader of the Georgian Mensheviks, heads the government of independent Georgia from 1918 to 1921.
+
+- @action
+- @root: Return to main
+
+@action
+title: Georgian Model
+subtitle: Zhordania offers Georgia as a model of democratic socialism, and as a refuge.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {land_pressure: -3, soviet_democracy: 1}); Q.resources += 1; RO.boost(Q, {nations: 3}); RO.fac(Q, 'defencist', 2, -2);
+!}
+
+A delegation to Tiflis has seen a democratic republic with land reform, free elections and a working railway system. It is our best argument.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

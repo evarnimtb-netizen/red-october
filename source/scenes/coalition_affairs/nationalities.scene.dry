@@ -1,0 +1,51 @@
+title: Nationalities
+subtitle: The Ukrainian Rada, Finland and Transcaucasia.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: nationalities_timer <= 0
+on-arrival: month_actions += 1; nationalities_timer = 4
+
+The empire's peoples want autonomy or independence: the Ukrainian Central Rada, the Finnish Diet, the Georgians, who vote Menshevik, the Baltic peoples, the Muslims of the Volga and Central Asia.
+
+- @rada: Recognise the Ukrainian Rada's autonomy.
+- @finland: Let the Finnish Diet govern its own affairs.
+- @caucasus: Support a federal Transcaucasia led by the Georgian Mensheviks.
+- @unity: Insist on the unity of the Russian state until the Assembly meets.
+- @easy_discard
+
+@rada
+on-arrival: {!
+RO.boost(Q, {nations: 4});
+RO.add(Q, {rel_kad: -4, right_threat: 2, rel_sr: 1});
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it.
+
+@finland
+on-arrival: {!
+RO.boost(Q, {nations: 2});
+RO.add(Q, {rel_kad: -2, right_threat: 1});
+!}
+
+The Finns are to govern their internal affairs. The question of independence is left for the Assembly.
+
+@caucasus
+on-arrival: {!
+RO.boost(Q, {nations: 5});
+RO.fac(Q, 'defencist', 1, 0);
+RO.add(Q, {rel_kad: -1});
+Q.georgia_support = (Q.georgia_support || 0) + 1;
+!}
+
+Tsereteli, Chkheidze and Zhordania are Georgian Mensheviks. A federal Transcaucasia under their party would be the party's one secure base.
+
+@unity
+on-arrival: {!
+RO.boost(Q, {nations: -4, middle: 1});
+RO.add(Q, {rel_kad: 3, right_threat: -1});
+RO.fac(Q, 'rightdef', 1, -2);
+!}
+
+The unity of the Russian state was affirmed, and the national parties took note.

@@ -1,0 +1,40 @@
+title: The Red Terror
+subtitle: The attempt on Lenin.
+new-page: true
+tags: event
+view-if: dix >= 40 and bol_regime = 1
+priority: 30
+max-visits: 1
+on-arrival: {!
+RO.add(Q, {repression: 12, soviet_democracy: -4});
+Q.potresov_advisor = 0;
+RO.fac(Q, 'rightdef', -12, -5);
+!}
+
+= The Red Terror
+
+On 30 August, Lenin was shot and wounded in Moscow by Fanny Kaplan, an SR. On the same day the head of the Petrograd Cheka, Uritsky, was murdered. On 5 September the Soviet government declared a Red Terror: hostages were to be shot, and enemies of the revolution "isolated in concentration camps". In the following weeks, thousands, at least, were killed. The figures that historians give for the Red Terror range from 12,733 to over a million, depending on what is counted.
+
+Alexander Potresov has left the party to join the anti-Bolshevik opposition; Plekhanov's followers have already done so.
+
+- @condemn: Condemn the Terror.
+- @bargain: Bargain for readmission.
+
+@condemn
+on-arrival: {!
+RO.add(Q, {rel_bol: -5, soviet_democracy: 1, repression: 2});
+RO.boost(Q, {workers: 2, middle: 3});
+RO.fac(Q, 'intl', 1, -3);
+!}
+
+We condemned the Terror in the strongest terms, which cost us another set of presses. It is nothing to be proud of that our words were safe.
+
+@bargain
+on-arrival: {!
+RO.add(Q, {rel_bol: 4, repression: -2});
+Q.readmission_hope = 1;
+RO.fac(Q, 'intl', 0, 6);
+RO.fac(Q, 'defencist', 0, 4);
+!}
+
+We told the government that we were not responsible for the attempt on Lenin, and that the party should be readmitted to the soviets. We were not answered, but some of our members were released.

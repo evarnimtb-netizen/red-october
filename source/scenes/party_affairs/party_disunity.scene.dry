@@ -1,101 +1,67 @@
-title: Party Disunity
+title: Party Unity
+subtitle: Manage the party's quarrels.
 new-page: true
 is-card: true
-view-if: party_disunity_timer = 0 and (dissent >= 0.3 or (reformist_dissent > 30 and not reformists_resign) or (center_dissent > 30 and not centrists_resign) or (left_dissent > 30 and not sapd_formed) or (labor_dissent > 30 and not unions_independent) or (neorevisionist_dissent > 30 and neorevisionism))
-on-arrival: month_actions += 1; party_disunity_timer = 4
-card-image: img/Reichstagsfraktion_der_SPD.jpg
-frequency: 200
 tags: party_affairs
+view-if: party_disunity_timer <= 0
+on-arrival: month_actions += 1; party_disunity_timer = 4
 
-# TODO: party dissent events for every faction, have a good image for this... 
+Menshevism has always been a party of tendencies, and the tendencies do not like one another. Whom will you spend the time to reassure? (Internal dissent: [+ d_dissent : dissent +].)
 
-= Party Disunity
+- @intl: The Internationalists.
+- @defencist: The Revolutionary Defencists.
+- @rightdef: The Right Defencists.
+- @unions: The trade unionists and cooperators.
+- @bund: The Bund.
+- @all: A party conference for everyone.
+- @easy_discard
 
-The party is being torn apart by internal dissent. Upset at the leadership and general direction, factions have started sabotaging their rivals, hampering our efforts to win votes and carry out our policies.
+@intl
+on-arrival: {!
+RO.fac(Q, 'intl', 0, -10);
+RO.fac(Q, 'defencist', 0, 2);
+!}
 
-[? if reformist_dissent > 30 : The reformists are upset at our direction.  ?]
-[? if center_dissent > 30 : The centrists are displeased with the direction of our party. ?]
-[? if labor_dissent > 30 : The trade unions disagree with our present course of action. ?]
-[? if left_dissent > 30: Leftists are making noises about another party split. ?]
-[? if neorevisionist_dissent > 30 and neorevisionism = 1 : Neorevisionists are in disagreement about our political direction. ?]
+Martov and Sukhanov were given a column in the paper and a place on the Soviet committee. They are, for a time, content.
 
-Something must be done to reinforce party unity.
+@defencist
+on-arrival: {!
+RO.fac(Q, 'defencist', 0, -8);
+RO.fac(Q, 'intl', 0, 2);
+!}
 
-- @enforce_unity
-- @concessions_reformists
-- @concessions_center
-- @concessions_left
-- @concessions_labor
-- @concessions_neorevisionists
-- @do_nothing
+Tsereteli's circle has been reassured that the party will not leave the coalition. The Internationalists are suspicious.
 
+@rightdef
+view-if: rightdef_strength > 0
+on-arrival: {!
+RO.fac(Q, 'rightdef', 0, -10);
+RO.fac(Q, 'intl', 0, 3);
+!}
 
-@enforce_unity
-title: Enforce party discipline.
-on-arrival: reformist_dissent -= 5; center_dissent -= 5; labor_dissent -= 5; left_dissent -= 5; neorevisionist_dissent -= 5; workers_spd -= 4; new_middle_spd -= 2; unemployed_spd -= 2
+Potresov was flattered with an invitation to write the editorial. He will not stay flattered long.
 
-Enforcing party discipline reduces dissent, but it could lead to an exit of dissenting members.
+@unions
+on-arrival: {!
+RO.fac(Q, 'unions', 0, -8);
+!}
 
-# enforcing party discipline applies to all parties.
+The union men want to be left alone to run their unions, and we have promised to leave them alone.
 
-# each party has a concessions action and an expulsions action.
+@bund
+on-arrival: {!
+RO.fac(Q, 'bund', 0, -8);
+RO.fac(Q, 'defencist', 0, 1);
+!}
 
-@concessions_reformists
-title: Give concessions to the reformists.
-view-if: reformist_dissent > 30
-on-arrival: reformist_dissent -= 7; left_dissent += 5
+The Bund is a party inside our party, with its own press, its own members and its own memory of the pogroms. We have promised to speak for it in the Soviet.
 
-We have promised to adopt a more reformist posture. This may alienate the left, however.
+@all
+choose-if: resources >= 1
+unavailable-subtitle: A conference costs a resource.
+on-arrival: {!
+RO.pay(Q, 1);
+for (var f of Q.factions) { RO.fac(Q, f, 0, -4); }
+!}
 
-@concessions_center
-title: Give concessions to the centrists.
-view-if: center_dissent > 30
-on-arrival: center_dissent -= 7; reformist_dissent += 2; left_dissent += 2; neorevisionist_dissent += 2
-
-We have promised to take more policy suggestions from the centrists. Both the left and reformist wings of the party might be displeased.
-
-@concessions_left
-title: Give concessions to the left.
-view-if: left_dissent > 30
-on-arrival: left_dissent -= 7; reformist_dissent += 5
-
-We have promised that we will listen to the left wing of the party. Of course, this leads to increased dissent from the centrists.
-
-@concessions_labor
-title: Give concessions to labor.
-view-if: labor_dissent > 30
-on-arrival: labor_dissent -= 7; center_dissent += 5
-
-The trade unions will be granted more influence in party decision making. This upsets the centrists, who would prefer to centralize political decision making within the party.
-
-@concessions_neorevisionists
-title: Give concessions to the neorevisionists.
-view-if: neorevisionist_dissent > 30 and neorevisionism = 1
-on-arrival: neorevisionist_dissent -= 7; center_dissent += 5;
-
-Giving the neorevisionists more influence will cause increased dissent from the centrists.
-
-
-@do_nothing
-title: Let the factions argue with themselves.
-on-arrival: labor_dissent += 1; left_dissent += 1; center_dissent += 1; reformist_dissent += 1
-
-Let the factions bicker; perhaps dissent is healthy for the party.
-
-# TODO: should we be allowed to preemptively expel factions?
-
-@expel_reformists
-title: Expel the dissident reformists.
-view-if: reformist_dissent > 30
-
-@expel_left
-title: Expel the dissident leftists.
-view-if: left_dissent > 30
-
-@expel_center
-title: Expel the centrists.
-view-if: center_dissent > 30
-
-@expel_labor
-title: Expel the labor supporters.
-view-if: labor_dissent > 30
+A conference allowed everyone to speak, and everyone did. It ran four days. Tempers are lower.

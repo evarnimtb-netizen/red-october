@@ -1,0 +1,48 @@
+title: The June Offensive
+subtitle: Kerensky's advance in Galicia.
+new-page: true
+tags: event
+view-if: dix >= 12
+priority: 12
+max-visits: 1
+on-arrival: {!
+Q.offensive_failed = (Q.army_discipline < 55 && !Q.separate_feelers) ? 1 : 0;
+if (Q.offensive_failed) {
+    RO.add(Q, {war_weariness: 8, army_discipline: -8, bolshevik: 4, right_threat: 4});
+    RO.boost(Q, {soldiers: -3});
+} else {
+    RO.add(Q, {war_weariness: 3, army_discipline: -3, bolshevik: 1});
+}
+!}
+
+= The June Offensive
+
+On 1 July, in the middle of the Soviet Congress, the army attacked in Galicia, on Kerensky's orders and the Allies' urging. The Petrograd Soviet had planned a demonstration for the same day; the Bolsheviks took over its slogans, and 400,000 marched under "All power to the soviets". Kerensky's offensive is the last attempt of the Russian army.
+
+[? if offensive_failed = 1 : After a brief advance the troops stopped, then refused to go on. By mid-July the Germans counter-attacked and the army lost up to 120 kilometres. Entire divisions are dissolving. ?][? if offensive_failed = 0 : The offensive made modest gains before stalling. Desertion continues. ?]
+
+What position does the party take on the offensive?
+
+- @support: Support it ambiguously, as defence of the revolution.
+- @withhold: Withhold support, and push for the Stockholm conference.
+
+@support
+on-arrival: {!
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'intl', 0, 5);
+RO.add(Q, {rel_kad: 3});
+RO.boost(Q, {middle: 2, soldiers: -2});
+!}
+
+We did not oppose the offensive, but we said that it must be limited. The Internationalists said we had done what the Allies wanted.
+
+@withhold
+on-arrival: {!
+RO.fac(Q, 'intl', 2, -3);
+RO.fac(Q, 'defencist', -1, 4);
+RO.add(Q, {rel_kad: -3, war_weariness: -2});
+RO.boost(Q, {soldiers: 2, workers: 1});
+Q.stockholm = (Q.stockholm || 0) + 1;
+!}
+
+We have not endorsed the offensive. The government blames the Soviet for its failure; the soldiers do not.

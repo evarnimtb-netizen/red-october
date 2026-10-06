@@ -1,0 +1,36 @@
+title: The British Labour Delegation
+subtitle: May 1920.
+new-page: true
+tags: event
+view-if: dix >= 80 and bol_regime = 1
+priority: 20
+max-visits: 1
+
+= The British Labour Delegation
+
+In May 1920 a delegation of the British Labour Party and the TUC visited Moscow. At the Printers' Union meeting in Moscow, the Mensheviks Dan, Martov and Abramovich were permitted to speak. Martov, Dan and the Menshevik printers addressed the delegation, accused the Soviet government of repression and demanded free elections. The foreign delegates heard them out in silence.
+
+Within a few months of the delegation's departure, the leaders of the opposition will be removed. Martov goes abroad, ill. Abramovich leaves for Germany. It is easier to remove a leader from his country than to arrest him in front of foreign socialists.
+
+- @openly: Speak openly.
+- @private: Keep it private.
+
+@openly
+on-arrival: {!
+Q.foreign_pressure = (Q.foreign_pressure || 0) + 2;
+RO.add(Q, {soviet_democracy: 2, repression: 8, rel_bol: -4});
+RO.boost(Q, {workers: 5, railway: 3, middle: 2});
+RO.fac(Q, 'intl', 2, -3);
+Q.printers_meeting = 1;
+!}
+
+The printers' meeting was a triumph. The foreign guests had seen what our speakers had told them. It was a victory, and it will be paid for.
+
+@private
+on-arrival: {!
+RO.add(Q, {repression: -1});
+RO.boost(Q, {workers: 1});
+RO.fac(Q, 'intl', 0, 3);
+!}
+
+We spoke to the delegation privately, and told them what we could. The meeting with the printers was held, and nobody mentioned it.
