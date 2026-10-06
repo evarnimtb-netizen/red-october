@@ -16,7 +16,7 @@
     // Add your custom code here.
   };
 
-  var TITLE = "Red October: An Alternate History" + '_' + "Eva";
+  var TITLE = "Red October: Fall of Empire" + '_' + "Eva";
 
   // the url is a link to game.json
   // test url: https://aucchen.github.io/social_democracy_mods/v0.1.json

@@ -1,6 +1,8 @@
-# Red October: An Alternate History
+# Red October: Fall of Empire
 
 A fork of [*Social Democracy: An Alternate History*](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen (MIT licence), set in the Russian Revolution, 1917-1921. You lead one of three socialist parties (the Mensheviks, the SRs or the Left SRs) from the February Revolution to December 1921: share power or refuse it, keep the party together, and try to save something of what was won in February from a military dictatorship of the Right, a Bolshevik one-party state, or exile. "Red October" is a working title.
+
+**Play it in your browser: https://evarnimtb-netizen.github.io/red-october/** (rebuilt automatically from `main`).
 
 The design is in [`docs/design-plan.md`](docs/design-plan.md).
 
@@ -21,13 +23,13 @@ Not yet done from the design plan: public-domain period images and music (the ol
 1. `npm install`
 2. `npx dendrynexus make-html` in this folder, then open `out/html/index.html` (or serve the folder with any static web server).
 
-`out/html/index.html` and `out/html/game.js` are hand-maintained and are not rewritten by the build. `out/html/model.js` is a copy of `tools/model.js`; run `tools/sync_model.sh` after editing the model.
+`out/html/index.html`, `game.js`, `ui.js` (the sidebar bars, the "What changed" box and the party-select screen) and `game.css` are hand-maintained and are not rewritten by the build. `out/html/model.js` is a copy of `tools/model.js`; run `tools/sync_model.sh` after editing the model.
 
 ## Tools
 
 - `tools/model.js`: the numbers behind the game: the support model for each voter group and arena, the monthly drift of the stats, factions and dissent, the Civil War front, and helpers for cards and events. It is plain JavaScript, loaded by the game and by the tests.
 - `tools/playtest.js`: a headless playtester. `node tools/playtest.js 100 cautious` plays 100 complete games with a random policy; `bot:democrat`, `bot:vikzhelist`, `bot:opposition`, `bot:whiteaid` (Mensheviks), `bot:sr_land`, `bot:sr_komuch`, `bot:sr_peasant` (SRs) and `bot:lsr_coalition`, `bot:lsr_rising` (Left SRs) play scripted strategies (see `tools/bots.js`). `PARTY="Left SRs"` picks the party (`Mensheviks`, `Socialist Revolutionaries`, `Left SRs`), `DIFF=Hard` picks the difficulty, `TEXT=file` dumps all text shown, `POW=1` and `WF=1` print balance data. Run `make-html` first.
-- `tools/evedit.py` has helpers for editing events by party; `tools/gen_advisors.py` regenerates the advisor scenes; `tools/gen_cards.py` regenerates the card art (SVG) and wires it into the scenes.
+- `tools/evedit.py` has helpers for editing events by party; `tools/gen_advisors.py` regenerates the advisor scenes; `tools/gen_cards.py` regenerates the card art (SVG) and wires it into the scenes; `tools/gen_art.py` regenerates the title banner and the party emblems.
 
 ## Included Libraries
 

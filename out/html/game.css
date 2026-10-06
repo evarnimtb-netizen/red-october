@@ -596,3 +596,64 @@ table {
     text-decoration: underline;
     text-decoration-style: dotted;
 }
+
+/* ---- Red October: Fall of Empire ---- */
+body {
+  --good-color: #3d7a35;
+  --bad-color: #a52a2a;
+  --bar-bg: rgba(0, 0, 0, 0.10);
+}
+body.dark-mode {
+  --good-color: #7fcf74;
+  --bad-color: #ff8a80;
+  --bar-bg: rgba(255, 255, 255, 0.12);
+}
+
+/* title page */
+.title-banner { margin: -0.2em -0.6em 0.8em -0.6em; line-height: 0; }
+.title-banner img { width: 100%; height: auto; display: block; border: 2px solid var(--border-color); box-sizing: border-box; }
+.title-tagline { font-style: italic; text-align: center; margin: 0.2em 0 1em 0; }
+
+/* party select */
+ul.choices li.party-choice { display: flex; align-items: center; gap: 0.8em; padding: 0.7em 0.6em; }
+ul.choices li.party-choice .party-emblem { width: 76px; height: 76px; flex: 0 0 76px; border: 1px solid #876; }
+
+/* effects of a choice */
+.effects {
+  margin: 0.8em 0 0.4em 0;
+  padding: 0.35em 0.6em;
+  border-left: 4px solid #876;
+  background: var(--bar-bg);
+  font-size: 0.82em;
+  line-height: 1.9em;
+}
+.effects-title { font-variant: small-caps; letter-spacing: 0.06em; margin-right: 0.5em; opacity: 0.75; }
+.eff { display: inline-block; padding: 0 0.5em; margin: 0 0.25em 0 0; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; }
+.eff.good { color: var(--good-color); }
+.eff.bad { color: var(--bad-color); }
+.eff.neutral { color: var(--text-color); opacity: 0.8; }
+
+/* sidebar */
+.sb { font-size: 0.92em; }
+.sb-date { text-align: center; font-size: 1.15em; letter-spacing: 0.04em; margin-top: 0.3em; }
+.sb-phase { text-align: center; font-style: italic; opacity: 0.8; margin-bottom: 0.5em; }
+.sb-kv { width: 100%; border-collapse: collapse; margin-bottom: 0.5em; }
+.sb-kv td { padding: 0.08em 0; }
+.sb-kv td + td { text-align: right; }
+.sb-section { text-align: center; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9em; margin: 0.9em 0 0.4em 0; border-bottom: 1px solid #876; }
+.sb-row { margin-bottom: 0.5em; }
+.sb-row.mine .sb-label { font-weight: bold; }
+.sb-label { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5em; line-height: 1.2em; }
+.sb-word { font-size: 0.85em; opacity: 0.8; text-align: right; }
+.sb-bar { position: relative; height: 0.55em; background: var(--bar-bg); border-radius: 2px; margin-top: 0.15em; overflow: hidden; }
+.sb-fill { height: 100%; border-radius: 2px; }
+.sb-tick { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--text-color); opacity: 0.45; }
+.sb-arrow { font-size: 0.7em; }
+.sb-arrow.good, .sb-diss.good { color: var(--good-color); }
+.sb-arrow.bad, .sb-diss.bad { color: var(--bad-color); }
+.sb-diss.mid { opacity: 0.85; }
+.sb-note { font-size: 0.8em; font-style: italic; opacity: 0.7; margin: 0.2em 0 0.4em 0; }
+.sb-badge { font-size: 0.8em; border: 1px solid #876; border-radius: 3px; padding: 0 0.3em; }
+.sb-badge.lvl1 { background: rgba(120, 90, 40, 0.15); }
+.sb-badge.lvl2 { background: rgba(120, 90, 40, 0.30); }
+.sb-badge.lvl3 { background: rgba(120, 90, 40, 0.50); font-weight: bold; }

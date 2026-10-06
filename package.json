@@ -1,7 +1,7 @@
 {
   "name": "red-october",
   "version": "0.0.1",
-  "description": "Red October: An Alternate History. A fork of Social Democracy: An Alternate History, set in the Russian Revolution, 1917-1921.",
+  "description": "Red October: Fall of Empire. A fork of Social Democracy: An Alternate History, set in the Russian Revolution, 1917-1921.",
   "main": "out/html/index.html",
   "scripts": {
     "dendrynexus": "dendrynexus"
