@@ -1,0 +1,31 @@
+title: The Last Arrests
+subtitle: Spring 1921.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 100 and bol_regime = 1
+priority: 35
+max-visits: 1
+on-arrival: {!
+Q.lsr_still = Q.lsr_in_gov ? 1 : 0;
+if (!Q.lsr_still) {
+    Q.legality = 0;
+    Q.members -= Math.round(Q.members * 0.5);
+}
+!}
+go-to: l21_yes if lsr_still = 1; l21_no if lsr_still = 0
+
+@l21_yes
+
+= The Coalition Survives
+
+In March 1921 sailors at Kronstadt called for free soviets, and the Cheka made arrests in every opposition party. The Left SR members of the Council of People's Commissars, who sit in the government, were not touched. They are, in 1921, the only party but one that is.
+
+It is a coalition of a kind: a government of two parties, one of which holds all the guns. It is the only coalition that the Russian Revolution produced.
+
+@l21_no
+
+= The Last Arrests
+
+In March 1921 sailors at Kronstadt called for free soviets, and the Cheka made arrests in every opposition party. The Left SRs, who had supported the sailors' programme, were arrested in their hundreds. Their last congress was held in a prison. By May 1921 the party's activity had ceased.
+
+The party that had the peasants and the sailors, and a seat in the government for eight months, has, in 1921, a few hundred members in prison and a few more abroad.

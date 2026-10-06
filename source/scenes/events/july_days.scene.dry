@@ -15,8 +15,11 @@ The Soviet leaders, with the crowd in front of them and the government behind th
 - @troops: Call on loyal troops, and refuse power.
 - @power: Take power from the crowd.
 - @shield: Shield the Bolsheviks from arrest.
+- @lsr_sailors: Support the sailors' demand for Soviet power, and ask them to go home.
+- @lsr_mediate: Mediate between the crowd and the Soviet executive.
 
 @troops
+view-if: player_party != 'lsr'
 on-arrival: {!
 RO.add(Q, {bolshevik: -8, rel_bol: -10, right_threat: 6, soviet_democracy: -2, rel_kad: 3});
 RO.boost(Q, {soldiers: -2, workers: -1, middle: 2});
@@ -28,6 +31,7 @@ Q.july_repressed = 1;
 Loyal units dispersed the crowd, and the Bolshevik leaders went into hiding or to prison. It was a victory, and a bitter one: socialists arrested socialists. The Bolsheviks will not forget it.
 
 @power
+view-if: player_party != 'lsr'
 choose-if: rel_ally >= 60 and (militia >= 1 or army_discipline >= 45)
 unavailable-subtitle: We lack the armed force and the SR's support for this.
 on-arrival: {!
@@ -57,3 +61,26 @@ RO.fac(Q, 'rightdef', 0, 6);
 !}
 
 We refused to turn the Soviet against the Bolsheviks and the Soviet declined to sanction the arrest of the leaders. [+ Dlbl +] say that we protect the people who tried to overthrow the revolution.
+
+@lsr_sailors
+view-if: player_party = 'lsr'
+on-arrival: {!
+Q.lsr_backs_bol = 1;
+RO.add(Q, {rel_bol: 8, rel_ally: -8, bolshevik: 3, right_threat: 4});
+RO.boost(Q, {soldiers: 3, workers: 2});
+RO.fac(Q, 'intl', 3, -2);
+RO.fac(Q, 'rightdef', 0, 10);
+!}
+
+The Left SRs said that the sailors and the Putilov workers were right, and that the Soviet should take power. They also said that the time had not come, and asked the Kronstadters to go home. The Right SRs call that incitement. The Bolsheviks, in hiding, say that the Left SRs are the only socialists with any courage.
+
+@lsr_mediate
+view-if: player_party = 'lsr'
+on-arrival: {!
+RO.add(Q, {rel_ally: 2, rel_bol: 3, soviet_democracy: 2, right_threat: 1});
+RO.boost(Q, {soldiers: 1, workers: 1});
+RO.fac(Q, 'defencist', 2, 0);
+RO.fac(Q, 'intl', 0, 5);
+!}
+
+Spiridonova went out to the crowd on the steps of the Tauride Palace, and spoke to it for an hour. The crowd went home, because she had asked it to. It was the best hour that the Left SRs had had in the revolution.

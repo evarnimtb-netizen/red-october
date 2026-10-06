@@ -1,0 +1,34 @@
+title: The Coalition Is Squeezed
+subtitle: The Bolsheviks and their partners.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 48 and bol_regime = 1 and lsr_in_gov = 1
+priority: 25
+max-visits: 1
+on-arrival: {!
+Q.sq_rb = Q.rel_bol;
+Q.squeeze_p = RO.clamp((Q.rel_bol - 50) / 50 + (Q.soviet_democracy - 50) / 200, 0.1, 0.85);
+Q.squeeze_ok = (Q.dissent < 0.45 && RO.chance(Q.squeeze_p)) ? 1 : 0;
+if (!Q.squeeze_ok) {
+    Q.lsr_in_gov = 0;
+    Q.lsr_seats = 0;
+    Q.lsr_squeezed = 1;
+    RO.add(Q, {rel_bol: -6, repression: 5, soviet_democracy: -3});
+    RO.boost(Q, {peasants: -2});
+}
+!}
+go-to: squeeze_yes if squeeze_ok = 1; squeeze_no if squeeze_ok = 0
+
+@squeeze_yes
+
+= The Coalition Holds
+
+In 1919 the civil war made the Bolsheviks stronger and every other party weaker. The Left SRs, who had survived the crisis of 1918, found that they were needed after all: for the peasants, for the hungry provinces and for the foreign socialists who still came to Moscow to see a coalition government.
+
+Lenin has said that the coalition is useful. He has not said how long it will be useful for.
+
+@squeeze_no
+
+= The Coalition Is Squeezed Out
+
+In 1919 the civil war made the Bolsheviks stronger and every other party weaker. In the course of the year, the Left SR commissariats were merged, one by one, into Bolshevik ones. By autumn the last Left SR commissar had resigned, and the Council of People's Commissars was a party body in all but name.

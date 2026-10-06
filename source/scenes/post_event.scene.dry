@@ -44,7 +44,7 @@ if (Q.month_actions >= 1) {
     // membership follows the party's popularity and its legal status
     RO.clampStats(Q);
     RO.updatePolls(Q);
-    Q.members += Q.turn_length * Q.mem_scale * (0.7 * (Q.player_poll - 9) - (3 - Q.legality) * 1.5 - Q.repression / 25);
+    Q.members += Q.turn_length * Q.mem_scale * (0.7 * (Q.player_poll - (Q.poll_neutral || 9)) - (3 - Q.legality) * 1.5 - Q.repression / 25);
     if (Q.members < 3) { Q.members = 3; }
     Q.dues_income = Math.max(1, Math.round(Q.members / Q.mem_div));
 }

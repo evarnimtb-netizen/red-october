@@ -1,0 +1,42 @@
+title: The Cheka's Board
+card-image: img/cards/cheka_board.svg
+subtitle: Use the Left SR seats to slow repression.
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: player_party = 'lsr' and lsr_in_gov = 1 and cheka_seats = 1 and bol_regime = 1 and cheka_board_timer <= 0 and dix >= 24
+on-arrival: month_actions += 1; cheka_board_timer = 3
+
+Since January 1918 four Left SRs have held seats on the Cheka's board, and Pyotr Aleksandrovich is Dzerzhinsky's deputy. They have the right to see the files, to vote on the sentences and to resign. (Repression: [+ repression : level +].)
+
+- @slow: Use the seats to slow the arrests.
+- @cooperate: Cooperate, and keep the confidence of the Bolsheviks.
+- @investigate: Investigate abuses, with Steinberg.
+- @easy_discard
+
+@slow
+on-arrival: {!
+RO.add(Q, {repression: -3, rel_bol: -3});
+Q.cheka_shield = 1;
+RO.fac(Q, 'rightdef', 1, -2);
+!}
+
+The Left SR members of the board have blocked a dozen death sentences, and a number of arrests. They have also made it known whom they cannot protect.
+
+@cooperate
+on-arrival: {!
+RO.add(Q, {repression: 3, rel_bol: 4, soviet_democracy: -2});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 6);
+!}
+
+The Left SR members of the board have gone along with the arrests of the "enemies of the revolution". It has kept the confidence of the Bolsheviks. It has cost us the confidence of everyone else.
+
+@investigate
+on-arrival: {!
+RO.add(Q, {soviet_democracy: 2, repression: -2, rel_bol: -2});
+RO.boost(Q, {middle: 2});
+RO.fac(Q, 'rightdef', 2, -2);
+!}
+
+Steinberg's commission has published the first report on abuses in the provincial Chekas. It has been called libel by the Bolsheviks and a document of the highest value by the foreign press.

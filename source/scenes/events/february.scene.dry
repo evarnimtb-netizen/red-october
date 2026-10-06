@@ -2,7 +2,7 @@ title: The February Revolution
 subtitle: The Soviet and the Provisional Government.
 new-page: true
 tags: event
-view-if: dix >= 4
+view-if: player_party != 'lsr' and (dix >= 4)
 priority: 20
 max-visits: 1
 on-arrival: dual_power = 1;

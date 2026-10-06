@@ -1,0 +1,36 @@
+title: Seats on the Cheka's Board
+subtitle: The Left SRs and the new commission.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 24 and bol_regime = 1 and lsr_in_gov = 1
+priority: 15
+max-visits: 1
+
+= Seats on the Cheka's Board
+
+The Cheka, created in December to fight counter-revolution, has been given a board, and in January the Left SRs were offered four seats on it, and the post of deputy chairman for Pyotr Aleksandrovich. The Bolsheviks say that it is the Left SR's right as a coalition partner. The Left SR commissar of Justice, Steinberg, says that it is a trap.
+
+- @seats: Take the four seats on the board.
+- @refuse: Refuse to sit with the Cheka.
+
+@seats
+on-arrival: {!
+Q.cheka_seats = 1;
+Q.aleksandrovich_advisor = 1;
+RO.add(Q, {rel_bol: 3, repression: 2});
+RO.fac(Q, 'rightdef', 0, 4);
+RO.fac(Q, 'intl', 1, 0);
+!}
+
+The party has four seats on the board and a deputy chairman. Its members can see the files, vote on the sentences and resign. They have also joined, in the eyes of everybody who is not a Bolshevik, the people who sign the lists.
+
+@refuse
+on-arrival: {!
+Q.cheka_seats = 0;
+RO.add(Q, {rel_bol: -3, soviet_democracy: 1});
+RO.boost(Q, {middle: 2});
+RO.fac(Q, 'rightdef', 2, -2);
+RO.fac(Q, 'intl', 0, 4);
+!}
+
+The party said that it would not be part of a commission that had the power to execute without trial. The Bolsheviks said that this was a kind of delicacy that the revolution could not afford.

@@ -1,19 +1,19 @@
 # Red October: An Alternate History
 
-A fork of [*Social Democracy: An Alternate History*](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen (MIT licence), set in the Russian Revolution, 1917-1921. You lead the Mensheviks from the February Revolution to December 1921: share power or refuse it, keep the party together, and try to save something of what was won in February from a military dictatorship of the Right, a Bolshevik one-party state, or exile. "Red October" is a working title.
+A fork of [*Social Democracy: An Alternate History*](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen (MIT licence), set in the Russian Revolution, 1917-1921. You lead one of three socialist parties (the Mensheviks, the SRs or the Left SRs) from the February Revolution to December 1921: share power or refuse it, keep the party together, and try to save something of what was won in February from a military dictatorship of the Right, a Bolshevik one-party state, or exile. "Red October" is a working title.
 
 The design is in [`docs/design-plan.md`](docs/design-plan.md).
 
 ## Status
 
-The **Menshevik campaign is playable from start to finish**:
+All three campaigns are **playable from start to finish**: the Mensheviks (hard), the SRs (normal) and the Left SRs (hard).
 
 - 69 turns: two-week turns until the calendar reform of February 1918, then monthly turns to December 1921.
-- 27 cards in three decks (13 Party Affairs, 8 Coalition Affairs, 6 Soviet Affairs) and 16 advisors.
-- About 50 events from the February Revolution to the arrests of 1921, with a real fork at the October Revolution (a Bolshevik takeover, an all-socialist government via the Vikzhel talks, or a Constituent Assembly that governs).
-- 8 endings (Kornilov's Russia, the generals' republic, White Russia, exile, the one-party state, the all-socialist government, the Constituent Republic, Soviet democracy) and 10 achievements.
+- Cards in three decks (Party Affairs, Coalition Affairs, Soviet Affairs), with party-only cards for each campaign, and 29 advisors.
+- About 70 events from the February Revolution to the arrests of 1921, most shared between the parties with options and wording that change by party, plus events of each campaign's own. A real fork at the October Revolution: a Bolshevik takeover, an all-socialist government via the Vikzhel talks, or a Constituent Assembly that governs.
+- 11 endings (Kornilov's Russia, the generals' republic, White Russia, exile, the one-party state, the SR and Left SR historical endings, the all-socialist government, the Constituent Republic, Soviet democracy, the Soviet coalition) and 14 achievements.
 
-Not yet done from the design plan: the SR and Left SR campaigns and the alliance system between the playable parties (the alliance levels exist for the Menshevik campaign), public-domain period images and music (the old German assets were removed; card art is generated), and a balance pass by a human player. The numbers in the design plan marked as uncertain have not been checked against the books.
+Not yet done from the design plan: public-domain period images and music (the old German assets were removed; card art is generated), and a balance pass by a human player. The alliance system exists for each party's main partner, but not the full web of alliances between all three. The numbers in the design plan marked as uncertain have not been checked against the books.
 
 ## Building the game
 
@@ -25,8 +25,8 @@ Not yet done from the design plan: the SR and Left SR campaigns and the alliance
 ## Tools
 
 - `tools/model.js`: the numbers behind the game: the support model for each voter group and arena, the monthly drift of the stats, factions and dissent, the Civil War front, and helpers for cards and events. It is plain JavaScript, loaded by the game and by the tests.
-- `tools/playtest.js`: a headless playtester. `node tools/playtest.js 100 cautious` plays 100 complete games with a random policy; `bot:democrat`, `bot:vikzhelist`, `bot:opposition` and `bot:whiteaid` play scripted strategies (see `tools/bots.js`). `DIFF=Hard` picks the difficulty, `TEXT=file` dumps all text shown, `POW=1` and `WF=1` print balance data. Run `make-html` first.
-- `tools/gen_advisors.py` regenerates the advisor scenes; `tools/gen_cards.py` regenerates the card art (SVG) and wires it into the scenes.
+- `tools/playtest.js`: a headless playtester. `node tools/playtest.js 100 cautious` plays 100 complete games with a random policy; `bot:democrat`, `bot:vikzhelist`, `bot:opposition`, `bot:whiteaid` (Mensheviks), `bot:sr_land`, `bot:sr_komuch`, `bot:sr_peasant` (SRs) and `bot:lsr_coalition`, `bot:lsr_rising` (Left SRs) play scripted strategies (see `tools/bots.js`). `PARTY="Left SRs"` picks the party (`Mensheviks`, `Socialist Revolutionaries`, `Left SRs`), `DIFF=Hard` picks the difficulty, `TEXT=file` dumps all text shown, `POW=1` and `WF=1` print balance data. Run `make-html` first.
+- `tools/evedit.py` has helpers for editing events by party; `tools/gen_advisors.py` regenerates the advisor scenes; `tools/gen_cards.py` regenerates the card art (SVG) and wires it into the scenes.
 
 ## Included Libraries
 

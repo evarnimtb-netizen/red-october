@@ -1,0 +1,58 @@
+title: The Coalition
+subtitle: The party enters the government without the left.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 9
+priority: 15
+max-visits: 1
+on-arrival: {!
+Q.in_coalition = 1;
+Q.gov_kadets = 1;
+Q.chernov_gov = 1;
+RO.add(Q, {bolshevik: 2, rel_kad: 3});
+!}
+
+= The Coalition
+
+On 18 May the first coalition cabinet was formed. The SR leader Viktor Chernov is Minister of Agriculture, Kerensky is Minister of War, the Mensheviks Tsereteli and Skobelev take Posts and Labour; six socialists sit with ten non-socialists. The Party Council of the SRs has voted for it by a large majority. The left wing was in the minority, and did not like it.
+
+The party has taken its share of responsibility, and with it, the blame for the war, the bread and the delay on the land. The left, which opposed all three, has to decide where it stands.
+
+- @oppose: Oppose the coalition inside the party.
+- @vote: Vote with the majority, for the sake of party unity.
+- @leave: Leave the party now, and found our own.
+
+@oppose
+on-arrival: {!
+RO.boost(Q, {peasants: 3, soldiers: 3});
+RO.add(Q, {rel_ally: -5, rel_bol: 3});
+RO.fac(Q, 'rightdef', 0, 6);
+RO.fac(Q, 'defencist', 1, 0);
+!}
+
+The Left SRs voted against the coalition, in the Party Council and in the Soviet. They lost, and were reproached with it: a faction that loses votes and keeps its tongue.
+
+@vote
+on-arrival: {!
+RO.add(Q, {rel_ally: 4});
+RO.boost(Q, {peasants: -2, soldiers: -2});
+RO.fac(Q, 'intl', 0, 10);
+RO.fac(Q, 'defencist', 0, 3);
+!}
+
+The left voted for the coalition, on the principle that a divided party is no use to the peasants. The pro-Bolshevik wing of our faction is furious.
+
+@leave
+choose-if: lsr_split = 0
+unavailable-subtitle: We are already a separate party.
+on-arrival: {!
+Q.lsr_split = 1;
+Q.early_split = 1;
+RO.add(Q, {rel_ally: -15, rel_bol: 3});
+RO.boost(Q, {peasants: 3, soldiers: 3});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 8);
+Q.members -= 4 * Q.mem_scale;
+!}
+
+The Left SRs walked out of the Party Council and declared themselves a party. The SR leaders are alarmed; the other socialist parties are surprised; the Bolsheviks have sent congratulations.

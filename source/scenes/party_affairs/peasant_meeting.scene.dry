@@ -4,7 +4,7 @@ subtitle: Speak to the village assembly and the regiment.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: player_party = 'sr' and peasant_meeting_timer <= 0
+view-if: (player_party = 'sr' or player_party = 'lsr') and peasant_meeting_timer <= 0
 on-arrival: month_actions += 1; peasant_meeting_timer = 3
 
 The party's voice carries furthest in the villages and the barracks, where almost everyone who can vote has already decided that they are an SR. What is the theme?
@@ -34,7 +34,7 @@ RO.fac(Q, 'rightdef', 1, -2);
 RO.fac(Q, 'intl', 0, 4);
 !}
 
-We told the peasants that the Assembly will settle the land question fairly, and that nobody should take the law into their own hands. A few village elders agreed. Several younger men did not.
+[? if player_party = 'sr' : We told the peasants that the Assembly will settle the land question fairly, and that nobody should take the law into their own hands. A few village elders agreed. Several younger men did not. ?][? if player_party = 'lsr' : We told the peasants that the Assembly must pass the land law in its first week, and that they should not wait for the Kadets to be persuaded. The village elders nodded. The younger men did not wait to be told. ?]
 
 @defence
 view-if: at_war = 1

@@ -8,7 +8,7 @@ max-visits: 1
 on-arrival: {!
 Q.at_war = 0;
 RO.add(Q, {war_weariness: -20, army_discipline: 0, land_pressure: -5});
-Q.lsr_left_gov = 1;
+Q.lsr_left_gov = (Q.player_party == 'lsr') ? 0 : 1;
 !}
 
 = Brest-Litovsk
@@ -22,6 +22,9 @@ Martov and Kamkov, the Left SR leader, both spoke against ratification. The Left
 - @accept: Accept the treaty as a necessity.
 - @sr_against: Vote against ratification with the Left SRs.
 - @sr_abstain: Abstain, and say that the peasants have not been asked.
+- @lsr_leave: Leave the government over the treaty.
+- @lsr_stay: Stay in the government and fight the treaty from inside.
+- @lsr_vote: Vote for ratification.
 
 @against
 view-if: player_party = 'menshevik'
@@ -49,6 +52,7 @@ Q.anti_brest_front = 1;
 An anti-Brest front of Mensheviks and Left SRs has been formed, on paper. It has a common programme for a revolutionary defence: a people's militia, not a standing army, and a refusal to ratify.
 
 @accept
+view-if: player_party != 'lsr'
 on-arrival: {!
 RO.add(Q, {rel_bol: 3, rel_lsr: -3});
 RO.fac(Q, 'intl', 0, 8);
@@ -78,3 +82,60 @@ RO.boost(Q, {peasants: 1});
 !}
 
 We abstained, and said that a peace which the peasants and soldiers have not been asked about is the Assembly's business. The Left SRs called it cowardice.
+
+@lsr_leave
+view-if: player_party = 'lsr'
+on-arrival: {!
+Q.lsr_in_gov = 0;
+Q.lsr_seats = 0;
+RO.add(Q, {rel_bol: -10, soviet_democracy: -1});
+RO.boost(Q, {soldiers: 3, peasants: 3, middle: 1});
+RO.fac(Q, 'defencist', 2, -3);
+RO.fac(Q, 'intl', 0, 12);
+RO.fac(Q, 'rightdef', 2, -2);
+Q.anti_brest = (Q.anti_brest || 0) + 1;
+!}
+
+On 19 March the Left SR People's Commissars resigned from the government, over the Treaty and over what they say is the abandonment of the revolutionary war. The seven commissariats were given to Bolsheviks within a week. The party is a party of opposition again, with a seat on the Cheka's board and a reputation for courage.
+
+@lsr_stay
+view-if: player_party = 'lsr' and lsr_in_gov = 1
+on-arrival: {!
+Q.brest_rb = Q.rel_bol; Q.brest_sd = Q.soviet_democracy;
+Q.stay_p = RO.clamp((Q.rel_bol - 60) / 50 + (Q.soviet_democracy - 50) / 200, 0.05, 0.85);
+Q.stay_ok = (Q.dissent < 0.45 && RO.chance(Q.stay_p)) ? 1 : 0;
+if (Q.stay_ok) {
+    Q.seven_commissars = 1;
+    RO.add(Q, {rel_bol: 3, soviet_democracy: 1});
+    RO.boost(Q, {soldiers: 2, peasants: 2});
+    RO.fac(Q, 'rightdef', 0, 4);
+} else {
+    Q.lsr_in_gov = 0;
+    Q.lsr_seats = 0;
+    RO.add(Q, {rel_bol: -6, soviet_democracy: -2});
+    RO.boost(Q, {soldiers: 1, peasants: 1});
+    RO.fac(Q, 'intl', 0, 8);
+}
+!}
+go-to: lsr_stay_yes if stay_ok = 1; lsr_stay_no if stay_ok = 0
+
+@lsr_stay_yes
+
+The Left SR commissars voted against the treaty in the Council of People's Commissars and in the Congress of Soviets, and stayed at their posts. Lenin, who needs the peasants' party more than he cares to say, allowed it. The first coalition in Russian history has survived a vote on a matter of principle.
+
+@lsr_stay_no
+
+The Left SR commissars voted against the treaty and said that they were staying. Lenin told them that a government that voted in two ways was not a government, and that they would be treated as an opposition. The Left SR commissariats were reorganised in the course of the week.
+
+@lsr_vote
+view-if: player_party = 'lsr'
+on-arrival: {!
+RO.add(Q, {rel_bol: 6});
+RO.boost(Q, {peasants: -3, soldiers: -3});
+RO.fac(Q, 'intl', 3, -2);
+RO.fac(Q, 'defencist', -3, 8);
+RO.fac(Q, 'rightdef', 0, 8);
+if (Q.lsr_in_gov) { Q.seven_commissars = 1; }
+!}
+
+The party voted for ratification, with a heavy heart, and stayed in the government. The village delegations say that the Left SRs have become the Bolsheviks' junior partner. In the Baltic Fleet, they say worse.

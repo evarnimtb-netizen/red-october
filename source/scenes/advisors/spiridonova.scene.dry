@@ -1,0 +1,30 @@
+title: Maria Spiridonova
+is-pinned-card: true
+card-image: img/cards/spiridonova.svg
+tags: advisor, defencist
+new-page: true
+view-if: spiridonova_advisor = 1 and player_party = 'lsr'
+
+= Maria Spiridonova
+
+Spiridonova (1884-1941), who shot a governor in 1906 and was tortured for it, is the leader of the Left SRs and the heroine of the villages. She drew the peasant congresses to the left.
+
+- @action
+- @root: Return to main
+
+@action
+title: Peasant Congress
+subtitle: Spiridonova turns the peasants' deputies to the left.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.boost(Q, {peasants: 8, soldiers: 2}); Q.peasant_organised = (Q.peasant_organised || 0) + 1; RO.add(Q, {rel_ally: -3}); RO.fac(Q, 'defencist', 1, -1);
+!}
+
+Spiridonova spoke at the provincial peasant congresses, and the delegates followed her. The SR leaders say that she hypnotises them.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

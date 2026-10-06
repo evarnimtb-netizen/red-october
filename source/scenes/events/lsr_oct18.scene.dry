@@ -1,0 +1,48 @@
+title: The Last Party Congress
+subtitle: October 1918.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 42 and bol_regime = 1
+priority: 25
+max-visits: 1
+
+= The Last Party Congress
+
+In the first week of October the Left SRs met in an underground congress in Moscow, [? if lsr_rising = 1 : with their leaders in prison or in hiding, and the party's press closed. ?][? if lsr_rising = 0 : with their members in the government, and in the factories, and the Cheka's agents among the delegates. ?] Three currents were represented: the Kamkov-Spiridonova leadership; those who think that the party should return to the Soviet government and the Bolsheviks; and those who want to join the Bolsheviks and be done with it. The pro-Bolshevik wing will, within a month, form the Party of Narodnik Communists; another group will form the Party of Revolutionary Communism.
+
+- @hold: Try to hold the party together.
+- @split: Let the currents go their own ways.
+
+@hold
+on-arrival: {!
+Q.hold_ok = Q.dissent < 0.3 ? 1 : 0;
+if (Q.hold_ok) {
+    RO.add(Q, {rel_bol: 2});
+    for (var f of Q.factions) { RO.fac(Q, f, 0, -8); }
+} else {
+    Q.members -= Math.round(Q.members * 0.2);
+    Q.bund_strength = 15;
+    RO.fac(Q, 'intl', -8, 6);
+    RO.add(Q, {rel_bol: 6});
+}
+!}
+go-to: oct18_hold if hold_ok = 1; oct18_fail if hold_ok = 0
+
+@oct18_hold
+
+The Congress agreed on a resolution: that the party would continue, within the limits of the law that the Bolsheviks have left it, and that it would not join them. The Narodnik Communists, who wanted to, were persuaded to wait.
+
+@oct18_fail
+
+The Congress broke up in disorder. The pro-Bolshevik wing left, to form the Party of Narodnik Communists, which joined the Bolsheviks in November. The party that remains is smaller, and, on the whole, better disciplined.
+
+@split
+on-arrival: {!
+Q.members -= Math.round(Q.members * 0.25);
+Q.bund_strength = 15;
+RO.fac(Q, 'intl', -10, 5);
+RO.add(Q, {rel_bol: 6});
+RO.boost(Q, {peasants: -1});
+!}
+
+The currents parted by agreement. The Narodnik Communists, who think that the Bolsheviks are right about everything but the name, went into the Bolshevik party in November. The Revolutionary Communists, who want to stay a coalition partner, did not. What is left is a party of a few thousand, and a reputation.

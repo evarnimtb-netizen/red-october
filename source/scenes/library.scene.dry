@@ -23,11 +23,11 @@ go-to: menu
 
 = How the game works
 
-You lead the Mensheviks from March 1917 to December 1921. Each turn you play one card: a Party Affairs card (meetings, the press, dues, party unity, relations with other parties), a Coalition Affairs card while you hold ministries and the Bolsheviks are not in power, a Soviet Affairs card once they are, or an advisor's action. Between turns, history happens: the events follow the real course of the revolution, but their outcomes depend on what you have done.
+You lead [+ pname_the +] from March 1917 to December 1921. (Choose the Mensheviks, the SRs or the Left SRs at the start.) Each turn you play one card: a Party Affairs card (meetings, the press, dues, party unity, relations with other parties), a Coalition Affairs card while you hold ministries and the Bolsheviks are not in power, a Soviet Affairs card once they are, or an advisor's action. Between turns, history happens: the events follow the real course of the revolution, but their outcomes depend on what you have done.
 
 Turns last two weeks until the New Calendar of February 1918, then a month. Cooldowns are measured in months.
 
-**What kills you.** A military dictatorship of the Right (Kornilov in September 1917, a generals' coup later, or the Whites reaching Moscow). Or exile: the loss of your legal status and your members. **What wins.** A democratic republic that survives to the end of 1921, an all-socialist government that holds, or a Soviet system that has come to accept an opposition.
+**What kills you.** A military dictatorship of the Right (Kornilov in September 1917, a generals' coup later, or the Whites reaching Moscow). Or the end of your party: exile, prison, a failed rising. **What wins.** A democratic republic that survives to the end of 1921, an all-socialist government that holds, a Soviet system that has come to accept an opposition, or, for the Left SRs, a coalition with the Bolsheviks that lasts.
 
 **Dissent.** Internal dissent is the weighted average of the dissent in the party's five currents. It blunts every gain in support that you make, and, if it gets too high, a current walks out.
 
@@ -53,9 +53,9 @@ go-to: menu
 
 = The parties
 
-**Mensheviks (you).** Russian social democrats, in the same International as the German SPD. Workers' party in 1917, with a base in the railways, the unions and Georgia.
+**Mensheviks.** Russian social democrats, in the same International as the German SPD. Workers' party in 1917, with a base in the railways, the unions and Georgia. Playable: hard.
 
-**SRs.** The largest party in Russia, the peasants' party. The Mensheviks' partner in the Soviet majority. **Left SRs.** The SR left wing: radical on the land, against the war. **Bolsheviks.** Lenin's party; small in March 1917, in power in November.
+**SRs (Socialist Revolutionaries).** The largest party in Russia, the peasants' party, and the Mensheviks' partner in the Soviet majority. Playable: normal. **Left SRs.** The SR left wing: radical on the land, against the war, strong among the Baltic sailors. They found their own party in December 1917. Playable: hard. **Bolsheviks.** Lenin's party; small in March 1917, in power in November.
 
 **Kadets.** The liberals, the main party of the middle classes. **Popular Socialists and Trudoviks.** Moderate socialists and peasant radicals. **National parties.** Ukrainian SRs, Dashnaks, Musavat and others. **Anarchists and others.**
 
@@ -64,9 +64,13 @@ go-to: menu
 
 = The party's currents
 
-**Revolutionary Defencists** (Tsereteli, Dan, Chkheidze, Skobelev): defence of the revolution, coalition with the liberals. **Internationalists** (Martov, Sukhanov, Broido): no war, no coalition, an all-socialist government. **Right Defencists** (Potresov): war to victory, and no truck with the Bolsheviks. **Trade unionists and cooperators** (Gvozdev, Batursky, Khinchuk): the unions first. **The Bund** (Liber, Abramovich): the Jewish workers' party in alliance.
+**Mensheviks:** the Revolutionary Defencists (Tsereteli, Dan, Chkheidze), the Internationalists (Martov, Sukhanov), the Right Defencists (Potresov), the trade unionists and cooperators, and the Bund.
 
-In 1918, Activists who want armed struggle may appear. The Georgian party separates in May 1918.
+**SRs:** the Centre (Chernov), the Right SRs (Avksentiev, Breshko-Breshkovskaya), the Right Centre (Gots, Zenzinov), the Left SRs, and, from 1919, the Ufa delegation (Volsky).
+
+**Left SRs:** the Kamkov-Spiridonova leadership, the pro-coalition Left SRs (Natanson, Kolegaev), the pro-Bolshevik Left SRs and, from 1918, the Narodnik Communists.
+
+In every party, the current names change but the roles are the same: a main line, a left wing, a right wing, an organisation wing and a late or special current.
 
 @stats
 go-to: menu

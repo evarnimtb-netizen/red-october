@@ -46,6 +46,7 @@ if (Q.vik_ok) {
     RO.fac(Q, 'intl', 2, -4);
     RO.fac(Q, 'defencist', -3, 6);
     RO.fac(Q, 'rightdef', 0, 12);
+    if (Q.player_party == 'lsr') { Q.lsr_in_gov = 1; Q.lsr_seats = 4; Q.steinberg_advisor = 1; Q.kolegaev_advisor = 1; Q.proshian_advisor = 1; }
     this.achieve('vikzhel');
 } else {
     RO.add(Q, {rel_bol: -4, soviet_democracy: -2});

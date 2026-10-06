@@ -18,7 +18,7 @@ Soviets are re-elected often. A campaign costs money for printing, halls and tra
 - @easy_discard
 
 @villages
-view-if: player_party = 'sr'
+view-if: player_party = 'sr' or player_party = 'lsr'
 choose-if: resources >= 1
 unavailable-subtitle: We have no resources.
 on-arrival: {!

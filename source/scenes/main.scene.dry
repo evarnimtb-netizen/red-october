@@ -49,7 +49,7 @@ is-deck: true
 title: Coalition Affairs
 card-image: img/cards/deck_coalition.svg
 subtitle: The ministries our party holds or supervises.
-view-if: in_coalition = 1 and bol_regime = 0
+view-if: in_coalition = 1 and bol_regime = 0 and player_party != 'lsr'
 is-deck: true
 
 - #coalition_affairs

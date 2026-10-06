@@ -2,7 +2,7 @@ title: The First Coalition
 subtitle: Tsereteli and Skobelev become ministers.
 new-page: true
 tags: event
-view-if: dix >= 9 and in_coalition = 0
+view-if: player_party != 'lsr' and (dix >= 9 and in_coalition = 0)
 priority: 15
 max-visits: 1
 

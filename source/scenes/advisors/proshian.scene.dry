@@ -1,0 +1,30 @@
+title: Prosh Proshian
+is-pinned-card: true
+card-image: img/cards/proshian.svg
+tags: advisor, unions
+new-page: true
+view-if: proshian_advisor = 1 and player_party = 'lsr'
+
+= Prosh Proshian
+
+Proshian (1883-1918), a Left SR, is People's Commissar of Posts and Telegraphs. He has the telegraph in his hands, and a network of operators who are loyal to the party.
+
+- @action
+- @root: Return to main
+
+@action
+title: Telegraph Lines
+subtitle: Proshian's telegraph network carries news and the party's organisation.
+choose-if: advisor_action_timer <= 0 and lsr_in_gov = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (lsr_in_gov = 1) : We are not in the government. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+Q.insight = (Q.insight || 0) + 1; Q.members += 10 * Q.mem_scale; RO.boost(Q, {workers: 1, railway: 2}); RO.fac(Q, 'unions', 1, -2);
+!}
+
+The telegraphists of a dozen provincial towns now take their instructions from the party, and the party hears everything that goes over the wire.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

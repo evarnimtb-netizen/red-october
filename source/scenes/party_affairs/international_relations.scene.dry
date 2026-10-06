@@ -4,7 +4,7 @@ subtitle: Foreign socialist pressure.
 new-page: true
 is-card: true
 tags: party_affairs
-view-if: international_relations_timer <= 0
+view-if: player_party != 'lsr' and (international_relations_timer <= 0)
 on-arrival: month_actions += 1; international_relations_timer = 6
 
 Russia's socialist parties belong to the same International as the German SPD, the British Labour Party and the French SFIO. Their opinion matters, to somebody.

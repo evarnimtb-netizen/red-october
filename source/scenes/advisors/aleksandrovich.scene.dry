@@ -1,0 +1,30 @@
+title: Pyotr Aleksandrovich
+is-pinned-card: true
+card-image: img/cards/aleksandrovich.svg
+tags: advisor, rightdef
+new-page: true
+view-if: aleksandrovich_advisor = 1 and player_party = 'lsr'
+
+= Pyotr Aleksandrovich
+
+Aleksandrovich (1887-1918) is the Left SR member of the Cheka's board and, until July 1918, Dzerzhinsky's deputy. He knows who is on the lists.
+
+- @action
+- @root: Return to main
+
+@action
+title: Inside the Cheka
+subtitle: Aleksandrovich blocks a wave of arrests before it begins.
+choose-if: advisor_action_timer <= 0 and lsr_in_gov = 1 and dix >= 24
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (lsr_in_gov = 1 and dix >= 24) : We have no seat on the Cheka board yet. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+Q.cheka_shield = 1; RO.add(Q, {repression: -2, rel_bol: -1}); RO.fac(Q, 'rightdef', 1, -2);
+!}
+
+Aleksandrovich saw the lists before they were signed. A number of names were crossed out, and a few of those named were warned.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

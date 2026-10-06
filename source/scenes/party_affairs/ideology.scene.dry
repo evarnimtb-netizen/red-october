@@ -9,9 +9,9 @@ on-arrival: month_actions += 1; ideology_timer = 4
 
 [? if player_party = 'menshevik' : The party has no single line. The Revolutionary Defencists want to defend the revolution against the Kaiser and keep the alliance with the liberals. The Internationalists want an immediate general peace and a government of the socialists alone. ?][? if player_party = 'sr' : The party has no single line. The Right SRs want the war carried on and the coalition kept. Chernov's Centre wants a defensive war and a quick road to a general peace, and the land now. The Left SRs want an immediate peace, and no more compromise with the liberals. ?][? if at_war = 0 : The war with Germany is over; the question is now how to treat the Bolshevik state. ?]
 
-- @right: Move toward [+ flabel_rightdef +].
-- @defencist: Move toward [+ flabel_defencist +].
-- @intl: Move toward [+ flabel_intl +].
+- @right: Move toward [+ rlbl +].
+- @defencist: Move toward [+ dlbl +].
+- @intl: Move toward [+ ilbl +].
 - @balance: Hold the middle and calm all wings.
 - @easy_discard
 

@@ -49,7 +49,7 @@ Our relations with:
 
 [+ partner_name +]: [+ rel_ally : relationships +]
 
-[? if player_party = 'menshevik' : [? if lsr_split = 1 : Left SRs: [+ rel_lsr : relationships +] ?][? if lsr_split = 0 : Left SRs (inside the SR party): [+ rel_lsr : relationships +] ?] ?][? if player_party = 'sr' : [? if lsr_split = 0 : The Left SR faction: [+ rel_lsr : relationships +] ?][? if lsr_split = 1 : Left SRs (now a separate party): [+ rel_lsr : relationships +] ?] ?]
+[? if player_party = 'lsr' : Mensheviks: [+ rel_lsr : relationships +] ?][? if player_party = 'menshevik' : [? if lsr_split = 1 : Left SRs: [+ rel_lsr : relationships +] ?][? if lsr_split = 0 : Left SRs (inside the SR party): [+ rel_lsr : relationships +] ?] ?][? if player_party = 'sr' : [? if lsr_split = 0 : The Left SR faction: [+ rel_lsr : relationships +] ?][? if lsr_split = 1 : Left SRs (now a separate party): [+ rel_lsr : relationships +] ?] ?]
 
 Bolsheviks: [+ rel_bol : relationships +]
 
@@ -85,7 +85,7 @@ Strength and dissent of each current:
 
 Bolsheviks: [+ poll_bol +]%
 
-[? if lsr_split = 1 : Left SRs: [+ poll_lsr +]% ?]
+[? if lsr_split = 1 : Left SRs: [+ poll_lsr +]% ?][? if lsr_split = 0 and player_party = 'lsr' : Left SRs (inside the SR lists): [+ poll_lsr_in +]% ?]
 
 SRs: [+ poll_sr +]%
 

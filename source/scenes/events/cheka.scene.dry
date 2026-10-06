@@ -2,7 +2,7 @@ title: The Cheka
 subtitle: A commission to fight counter-revolution.
 new-page: true
 tags: event
-view-if: dix >= 23 and bol_regime = 1
+view-if: player_party != 'lsr' and (dix >= 23 and bol_regime = 1)
 priority: 10
 max-visits: 1
 on-arrival: {!

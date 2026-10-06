@@ -10,7 +10,7 @@ on-arrival: month_actions += 1; inter_party_relationships_timer = 3
 The bloc of the Mensheviks and the SRs is the Soviet majority, and every party is calculating how long it will last.
 
 - @partner: Talks with the [+ partner_name +]. (Relations: [+ rel_ally : relationships +])
-- @lsr: Talks with the Left SRs. (Relations: [+ rel_lsr : relationships +])
+- @lsr: Talks with the [+ third_name +]. (Relations: [+ rel_lsr : relationships +])
 - @bol: Talks with the moderate Bolsheviks. (Relations: [+ rel_bol : relationships +])
 - @kad: Talks with the Kadets. (Relations: [+ rel_kad : relationships +])
 - @formalize: Formalize an alliance with a partner.
@@ -29,9 +29,10 @@ on-arrival: {!
 RO.add(Q, {rel_lsr: 8, rel_kad: -1});
 RO.fac(Q, 'rightdef', 0, 1);
 if (Q.player_party == 'sr') { RO.fac(Q, 'intl', 0, -2); }
+if (Q.player_party == 'lsr') { RO.fac(Q, 'rightdef', 2, -2); }
 !}
 
-[? if player_party = 'menshevik' : Spiridonova and Kamkov are not our natural allies, but they speak for the villages and the Baltic Fleet, and they are not afraid to speak to us. ?][? if player_party = 'sr' : Spiridonova and Kamkov are inside our party, and they say that the party has forgotten the peasants. We have listened, and promised to listen again. ?]
+[? if player_party = 'menshevik' : Spiridonova and Kamkov are not our natural allies, but they speak for the villages and the Baltic Fleet, and they are not afraid to speak to us. ?][? if player_party = 'sr' : Spiridonova and Kamkov are inside our party, and they say that the party has forgotten the peasants. We have listened, and promised to listen again. ?][? if player_party = 'lsr' : Dan and Martov are not our natural allies, but the Menshevik Internationalists oppose the war and the coalition, as we do. They listened. ?]
 
 @bol
 on-arrival: {!
@@ -56,7 +57,7 @@ The Kadets are the coalition's only serious bourgeois party. Milyukov listened p
 Formal alliances need relations of 40 for cooperation, 60 for a bloc and 75 for a coalition. Whom do you propose it to?
 
 - @form_partner: The [+ partner_name +].
-- @form_lsr: The Left SRs.
+- @form_lsr: The [+ third_name +].
 - @form_bol: The Bolsheviks.
 - @back: Never mind.
 
@@ -72,7 +73,7 @@ Q.alliance_level = lvl;
 go-to: formalized if alliance_msg = 1; not_formalized if alliance_msg = 0
 
 @form_lsr
-view-if: player_party = 'menshevik'
+view-if: player_party = 'menshevik' or player_party = 'lsr'
 on-arrival: {!
 var lvl = 0;
 if (Q.rel_lsr >= 75 && (Q.in_coalition || Q.assembly_survives || Q.vikzhel_deal)) { lvl = 3; }

@@ -15,10 +15,15 @@ if (Q.ending == 'final') {
     }
 }
 if (Q.player_party == 'sr' && (Q.ending == 'exile' || Q.ending == 'one_party')) { Q.ending = 'sr_historical'; }
+if (Q.player_party == 'lsr' && (Q.ending == 'exile' || Q.ending == 'one_party' || Q.ending == 'soviet_democracy')) {
+    Q.ending = (Q.bol_regime && Q.lsr_in_gov && !Q.lsr_rising) ? 'soviet_coalition' : 'lsr_historical';
+}
 this.achieve('game_completed');
-if (Q.ending == 'exile' || Q.ending == 'one_party' || Q.ending == 'sr_historical') { this.achieve('dustbin_of_history'); }
+if (Q.ending == 'exile' || Q.ending == 'one_party' || Q.ending == 'sr_historical' || Q.ending == 'lsr_historical') { this.achieve('dustbin_of_history'); }
+if (Q.ending == 'soviet_coalition') { this.achieve('soviet_coalition_win'); }
 if (Q.player_party == 'sr' && Q.komuch_alive && Q.white_front < 72 && Q.bol_regime) { this.achieve('komuch_without_kolchak'); }
 if (Q.player_party == 'sr' && Q.lsr_kept && !Q.lsr_split) { this.achieve('one_party_sr'); }
+if (Q.player_party == 'lsr' && Q.seven_commissars && Q.bol_regime) { this.achieve('seven_commissars'); }
 if (Q.ending == 'soviet_democracy') { this.achieve('soviet_democracy_win'); }
 if (Q.ending == 'constituent_republic') { this.achieve('constituent_republic_win'); }
 if (Q.ending == 'all_socialist') { this.achieve('all_socialist_win'); }
@@ -27,7 +32,7 @@ if (Q.program_adopted && Q.program_dix < 72) { this.achieve('chto_delat'); }
 if (Q.georgia_survives && Q.bol_regime) { this.achieve('free_georgia'); }
 Q.ending_exile = (Q.ending == 'exile') ? 1 : 0;
 !}
-go-to: eg_kornilov if ending = 'kornilov'; eg_right_coup if ending = 'right_coup'; eg_white if ending = 'white'; eg_exile if ending = 'exile'; eg_sr_historical if ending = 'sr_historical'; eg_one_party if ending = 'one_party'; eg_all_socialist if ending = 'all_socialist'; eg_constituent_republic if ending = 'constituent_republic'; eg_soviet_democracy if ending = 'soviet_democracy'
+go-to: eg_kornilov if ending = 'kornilov'; eg_right_coup if ending = 'right_coup'; eg_white if ending = 'white'; eg_exile if ending = 'exile'; eg_sr_historical if ending = 'sr_historical'; eg_lsr_historical if ending = 'lsr_historical'; eg_soviet_coalition if ending = 'soviet_coalition'; eg_one_party if ending = 'one_party'; eg_all_socialist if ending = 'all_socialist'; eg_constituent_republic if ending = 'constituent_republic'; eg_soviet_democracy if ending = 'soviet_democracy'
 
 @eg_kornilov
 
@@ -95,6 +100,32 @@ The party that had received more votes than any other in the free elections of N
 
 - @eg_menu: Continue.
 
+@eg_lsr_historical
+
+= July 1918
+
+*The historical ending.*
+
+[? if lsr_rising = 1 : The party's Central Committee ordered the assassination of the German ambassador on 6 July 1918, and the rising that followed lasted an afternoon. ?][? if lsr_rising = 0 and lsr_squeezed = 1 : The party avoided the rising of July 1918, and was squeezed out of the government a year later, one commissariat at a time. ?][? if lsr_rising = 0 and lsr_squeezed = 0 : The party never made its way into the government for long, and was never able to leave it with its dignity. ?] By the end of the year, the Narodnik Communists had joined the Bolsheviks, and the Revolutionary Communists were an addition to the government that nobody noticed.
+
+Spiridonova was arrested in 1919 and sent to a sanatorium, from which she escaped to give speeches. Kamkov, Steinberg and the others went into exile or into prison; Natanson died in Switzerland in 1919. By May 1921 the party's activity had ceased. In the 1930s most of its former members were shot.
+
+It was the party of the peasants' land and of the Baltic sailors, and it had the best slogan of the revolution, and the best martyrs.
+
+- @eg_menu: Continue.
+
+@eg_soviet_coalition
+
+= The Soviet Coalition
+
+*A win.*
+
+In this world, the Left SR commissars, who in our world resigned in March and rose in July, stayed. They voted against the treaty and stayed at their posts. They told Lenin that the party would not break the peace, and Lenin was grateful. In 1919 and 1920 the coalition of the Bolsheviks and the Left SRs governed Russia together, with the Soviet Congress above them, and, in the provinces, the peasant soviets elected by the villages.
+
+It is not a democracy. It is a government of two parties, one of which holds all the guns, and the other of which holds the villages. But it is a government that has to ask someone else, and that is worth a good deal.
+
+- @eg_menu: Continue.
+
 @eg_one_party
 
 = The One-Party State
@@ -127,7 +158,7 @@ The Bolsheviks sat in the Council of Ministers. Lenin was there, and Martov, and
 
 The Constituent Assembly, which in our world sat for thirteen hours, sat in this one for a long time. It passed the land law, ended the war, drafted a constitution and elected a President. The Bolsheviks sat on the left, sometimes in the government and sometimes not, and in the end they accepted that they had lost.
 
-Russia in December 1921 is a poor, damaged, hungry republic. It is also a republic. [? if player_party = 'menshevik' : The Mensheviks, who said in March 1917 that Russia was not ready for socialism, are now the party that tells the peasants and workers what is possible. ?][? if player_party = 'sr' : The SRs, who have had the votes of the peasants since February, have the government, too. [? if land_socialised = 1 : The land has been socialised, as Chernov's law proposed, and is allocated by the village communities. ?] ?]
+Russia in December 1921 is a poor, damaged, hungry republic. It is also a republic. [? if player_party = 'menshevik' : The Mensheviks, who said in March 1917 that Russia was not ready for socialism, are now the party that tells the peasants and workers what is possible. ?][? if player_party = 'lsr' : The Left SRs, who said in 1917 that the republic had to give the peasants the land and the soldiers the peace, sit in the Assembly as a party of the left, and have lived to see it. ?][? if player_party = 'sr' : The SRs, who have had the votes of the peasants since February, have the government, too. [? if land_socialised = 1 : The land has been socialised, as Chernov's law proposed, and is allocated by the village communities. ?] ?]
 
 - @eg_menu: Continue.
 
@@ -185,6 +216,8 @@ go-to: eg_menu
 [? if game_achievement_komuch_without_kolchak : **Komuch Without Kolchak** - an SR government on the Volga that the Whites never capture. ?]
 
 [? if game_achievement_one_party_sr : **One Party** - the SRs never split. ?]
+
+[? if game_achievement_seven_commissars : **Seven Commissars** - the Left SR coalition outlives Brest-Litovsk. ?]
 
 @restart
 on-arrival: started = 0;

@@ -21,6 +21,7 @@ The Right is stronger than it has been since February, and the democracy is weak
 - @committee: Form a Committee for the Struggle against Counter-Revolution, with the Bolsheviks.
 - @gov: Use the crisis to form a government without the Kadets.
 - @kerensky: Defend the government and leave the Soviet's role to Kerensky.
+- @lsr_sailors: Send the Kronstadt sailors and the peasant delegates against the General.
 
 @committee
 on-arrival: {!
@@ -93,3 +94,17 @@ Everyone has lost something. The army has lost its last illusions about its offi
 The Soviet's committees were too few, and the General's troops too many. On 14 September cavalry units entered the capital. The Soviet was dissolved, and the party's leaders were arrested or fled. Kornilov has declared himself the head of a National Defence Council.
 
 Russia is now a military dictatorship.
+
+@lsr_sailors
+view-if: player_party = 'lsr'
+on-arrival: {!
+Q.k_bonus = 22;
+RO.add(Q, {rel_bol: 6, bolshevik: 6, rel_ally: -3});
+Q.bol_armed = 1;
+RO.boost(Q, {soldiers: 3, peasants: 2});
+RO.fac(Q, 'intl', 2, -2);
+!}
+
+The Left SRs have called out the Kronstadt sailors, and the peasant soviets of Petrograd province. Within two days thousands of armed men were at Pulkovo. The Bolsheviks, released from prison, are with them.
+
+- @kornilov_result: Continue...

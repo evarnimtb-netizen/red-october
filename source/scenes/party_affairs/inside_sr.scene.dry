@@ -1,0 +1,47 @@
+title: Inside the SR Party
+card-image: img/cards/inside_sr.svg
+subtitle: Grow the left faction's strength inside the party.
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: player_party = 'lsr' and lsr_split = 0 and inside_sr_timer <= 0
+on-arrival: month_actions += 1; inside_sr_timer = 3
+
+The left wing is a fifth of the delegates to any SR congress, and a larger share of the villages. It has its own newspaper in some provinces and its own caucus in the Petrograd Soviet. What it lacks is the party's machinery: the money, the committees, the printing presses. (Our share of the SR vote: [+ poll_lsr_in +]% of the electorate.)
+
+- @caucus: Organise a left caucus in the provincial committees. (1 resource)
+- @committees: Win over local SR committees, one by one.
+- @tour: Send Spiridonova on a speaking tour.
+- @easy_discard
+
+@caucus
+choose-if: resources >= 1
+unavailable-subtitle: We have no resources.
+on-arrival: {!
+RO.pay(Q, 1);
+RO.boost(Q, {peasants: 4, soldiers: 3});
+RO.add(Q, {rel_ally: -2});
+RO.fac(Q, 'defencist', 1, 0);
+RO.fac(Q, 'rightdef', 0, 3);
+!}
+
+A caucus of the Left SR delegates now meets before every provincial conference, with its own resolutions. The Party Council has noticed.
+
+@committees
+on-arrival: {!
+RO.boost(Q, {peasants: 5});
+RO.add(Q, {rel_ally: 1});
+RO.fac(Q, 'unions', 2, -1);
+!}
+
+A district committee at a time, our people have argued, drunk tea and counted votes. It is slow. The party's own members elected the committees, and the left has more friends among them than the leaders think.
+
+@tour
+on-arrival: {!
+RO.boost(Q, {peasants: 6, soldiers: 2});
+RO.add(Q, {rel_ally: -4});
+Q.peasant_organised = (Q.peasant_organised || 0) + 0.5;
+RO.fac(Q, 'defencist', 2, -1);
+!}
+
+Maria Spiridonova, who shot a governor in 1906 and was tortured for it, spoke in villages and garrison towns across three provinces. The peasants wept, and voted. The SR leaders say that she is a hysteric.

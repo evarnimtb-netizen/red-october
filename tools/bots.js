@@ -171,4 +171,45 @@ var sr_peasant = {
   cards: ['peasant_congress', 'land_committees', 'inter_party_relationships', 'domestic_enemies', 'judiciary', 'campaigning', 'peasant_meeting', 'media',
           'social_welfare', 'economic_democracy', 'fundraising', 'party_disunity', 'international_relations', 'gots', 'zenzinov']
 };
-module.exports = {sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};
+var lsrCommon = {
+  april_theses: [/Welcome the land and peace/],
+  june_offensive: [/Oppose the offensive/, /committees against/],
+  july_days: [/mediate/i, /Shield/, /sailors/],
+  kornilov: [/Send the Kronstadt sailors/, /Committee/],
+  democratic_conference: [/Walk out/],
+  october: [/Join the Bolsheviks/, /Stay in the hall/],
+  constituent_assembly_election: [/separate Left SR lists/, /own lists/],
+  assembly_dispersed: [/Defend the dispersal/, /Protest/],
+  brest: [/Stay in the government/, /Vote for ratification/, /Leave the government/],
+  lsr_july: [/Call it off/, /Protest the treaty/],
+  lsr_oct18: [/hold the party together/i],
+  lsr_government: [/Enter the government/],
+  lsr_cheka: [/Take the four seats/],
+  lsr_start: [/caucus/],
+  lsr_coalition: [/Oppose the coalition/, /Vote with the majority/],
+  lsr_congress: [/all socialist parties/, /Vote with the Bolsheviks/],
+  lsr_split_nov: [/founding congress/],
+  inside_sr: [/caucus/, /Win over/, /speaking tour/],
+  the_split: [/November/, /Stay, and fight/],
+  sovnarkom_seats: [/Defend the party's seats/, /land redistribution/, /legality/],
+  cheka_board: [/Use the seats to slow/, /Investigate/],
+  inter_party_relationships: [/moderate Bolsheviks/],
+  peasant_congress: [/Call a congress/, /village committees/],
+  peasant_meeting: [/Land and freedom/, /Whatever/],
+  media: [/Land and Freedom/, /Constituent Assembly/],
+  campaigning: [/villages/, /railwaymen/],
+  expelled: [/Protest/],
+  red_terror: [/Bargain/, /Condemn/],
+  denikin: [/Mobilise/],
+  kronstadt: [/Condemn/, /Stay silent/],
+  nep: [/Demand political/, /Claim/]
+};
+var lsr_coalition_bot = {
+  choices: merge(democrat.choices, lsrCommon),
+  cards: ['inter_party_relationships', 'sovnarkom_seats', 'cheka_board', 'inside_sr', 'the_split', 'peasant_congress', 'spiridonova', 'natanson', 'steinberg', 'kolegaev', 'campaigning', 'peasant_meeting', 'media', 'party_disunity', 'fundraising', 'domestic_enemies', 'judiciary']
+};
+var lsr_rising_bot = {
+  choices: merge(democrat.choices, merge(lsrCommon, { lsr_july: [/Carry out/], brest: [/Leave the government/], lsr_government: [/Stay outside/] })),
+  cards: ['inside_sr', 'the_split', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'kamkov', 'spiridonova']
+};
+module.exports = {lsr_coalition: lsr_coalition_bot, lsr_rising: lsr_rising_bot, sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};

@@ -25,8 +25,11 @@ What position does the party take on the offensive?
 
 - @support: Support it ambiguously, as defence of the revolution.
 - @withhold: Withhold support, and push for the Stockholm conference.
+- @lsr_oppose: Oppose the offensive from the platform of the Congress.
+- @lsr_committees: Organise the soldiers' committees against it.
 
 @support
+view-if: player_party != 'lsr'
 on-arrival: {!
 RO.fac(Q, 'defencist', 2, 0);
 RO.fac(Q, 'intl', 0, 5);
@@ -46,3 +49,25 @@ Q.stockholm = (Q.stockholm || 0) + 1;
 !}
 
 We have not endorsed the offensive. The government blames the Soviet for its failure; the soldiers do not.
+
+@lsr_oppose
+view-if: player_party = 'lsr'
+on-arrival: {!
+RO.boost(Q, {soldiers: 4, peasants: 2, workers: 1});
+RO.add(Q, {rel_ally: -4, rel_bol: 3, war_weariness: -1});
+RO.fac(Q, 'defencist', 2, -1);
+RO.fac(Q, 'rightdef', 0, 4);
+!}
+
+Kamkov said from the platform that the offensive was a crime against the soldiers and against the German workers. The SR leaders, who voted for it, were shouted down in the barracks.
+
+@lsr_committees
+view-if: player_party = 'lsr'
+on-arrival: {!
+RO.boost(Q, {soldiers: 5});
+RO.add(Q, {army_discipline: -2, rel_ally: -3, right_threat: 2});
+Q.militia = (Q.militia || 0) + 0.5;
+RO.fac(Q, 'intl', 2, -2);
+!}
+
+Left SR agitators went to the regimental committees with a resolution: no offensive, no attack. A good many committees passed it, and some regiments refused to move. The officers are furious.

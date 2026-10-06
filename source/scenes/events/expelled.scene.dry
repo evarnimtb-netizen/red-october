@@ -2,7 +2,7 @@ title: Expelled from the Soviet Executive
 subtitle: 14 June 1918.
 new-page: true
 tags: event
-view-if: dix >= 34 and bol_regime = 1
+view-if: player_party != 'lsr' and (dix >= 34 and bol_regime = 1)
 priority: 40
 max-visits: 1
 on-arrival: {!

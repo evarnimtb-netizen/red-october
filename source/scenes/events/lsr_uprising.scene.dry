@@ -2,7 +2,7 @@ title: The Left SR Uprising
 subtitle: The German ambassador is murdered.
 new-page: true
 tags: event
-view-if: dix >= 36 and bol_regime = 1
+view-if: player_party != 'lsr' and (dix >= 36 and bol_regime = 1)
 priority: 40
 max-visits: 1
 on-arrival: {!

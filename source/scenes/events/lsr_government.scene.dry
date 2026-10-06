@@ -1,0 +1,44 @@
+title: Seven Commissars
+subtitle: Lenin offers the Left SRs places in the government.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 22 and bol_regime = 1 and lsr_split = 1
+priority: 30
+max-visits: 1
+
+= Seven Commissars
+
+The Bolsheviks govern alone, in the name of the Soviets, and they have no peasants. Lenin has offered the Left SRs, who have the peasants and nothing else, a coalition: seven People's Commissariats, among them Justice, Agriculture and Posts and Telegraphs, and seats on the Council of People's Commissars and on the Cheka's board.
+
+The other socialist parties say that the party is a prop for a dictatorship. The Left SRs say that it is the only way of making the dictatorship share power, and of defending the peasants' land.
+
+- @enter: Enter the government.
+- @outside: Stay outside, as a bridge to the other socialists.
+
+@enter
+choose-if: rel_bol >= 30
+unavailable-subtitle: The Bolsheviks have not offered us places.
+on-arrival: {!
+Q.lsr_in_gov = 1;
+Q.lsr_seats = 7;
+Q.steinberg_advisor = 1;
+Q.kolegaev_advisor = 1;
+Q.proshian_advisor = 1;
+RO.add(Q, {rel_bol: 8, rel_ally: -4, soviet_democracy: 1, land_pressure: -4});
+RO.boost(Q, {peasants: 3, soldiers: 1});
+RO.fac(Q, 'intl', 3, -3);
+RO.fac(Q, 'rightdef', 0, 10);
+!}
+
+Seven Left SRs took their places in the Council of People's Commissars: Steinberg at Justice, Kolegaev at Agriculture, Proshian at Posts and Telegraphs, and four others. It is the only coalition in Russia, and it has the peasants and the workers in it.
+
+@outside
+on-arrival: {!
+Q.lsr_in_gov = 0;
+RO.add(Q, {rel_ally: 6, rel_lsr: 6, rel_bol: -3});
+RO.boost(Q, {middle: 1, peasants: 1});
+RO.fac(Q, 'rightdef', 2, -3);
+RO.fac(Q, 'intl', 0, 8);
+!}
+
+The Left SRs have turned the offer down, and said that the party would rather work for an all-socialist government than for a Bolshevik one. Lenin says that they have chosen to be a party of the opposition, which is the party of the people who change their minds.

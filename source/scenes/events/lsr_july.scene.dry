@@ -1,0 +1,61 @@
+title: The German Ambassador
+subtitle: The Left SR Central Committee orders an assassination.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 36 and bol_regime = 1
+priority: 45
+max-visits: 1
+
+= The German Ambassador
+
+The Treaty of Brest-Litovsk is in force, the Bolsheviks are requisitioning grain in the villages, and the Committees of the Poor are dividing the peasants against each other. The Left SR Central Committee, at its meeting in June, has decided that the treaty must be broken, and that the best way to break it is to kill the German ambassador, Count Mirbach, and call the Soviet Congress to continue the war.
+
+The plan has been agreed by Spiridonova and Kamkov. Natanson and some of the party's leaders say that it is madness. The party's members in the government are warned, and the Bolsheviks have heard rumours.
+
+- @rising: Carry out the Central Committee's order.
+- @calloff: Call it off.
+- @congress: Protest the treaty in the Congress of Soviets instead.
+
+@rising
+on-arrival: {!
+Q.lsr_rising = 1;
+Q.lsr_in_gov = 0;
+Q.lsr_seats = 0;
+Q.legality = 1;
+Q.members -= Math.round(Q.members * 0.35);
+RO.add(Q, {rel_bol: -20, repression: 10, soviet_democracy: -5});
+RO.boost(Q, {peasants: -4, soldiers: -4});
+RO.fac(Q, 'defencist', -6, 8);
+RO.fac(Q, 'intl', 3, 10);
+Q.steinberg_advisor = 0; Q.kolegaev_advisor = 0; Q.proshian_advisor = 0; Q.aleksandrovich_advisor = 0;
+!}
+
+On 6 July two Left SR members of the Cheka walked into the German embassy with a forged warrant and shot the ambassador. The party's detachments seized the telegraph office, and Proshian sent out a proclamation that the Soviet government had been overthrown. Within a day, the rising had been put down by Latvian riflemen: it was the work of one afternoon. Hundreds of Left SRs were arrested, and the party's deputies in the Congress of Soviets were taken from the hall. Aleksandrovich was shot.
+
+The Left SRs were the last of the parties that shared the Soviet government with the Bolsheviks. By the end of the summer, they will be a party without a seat.
+
+@calloff
+choose-if: dissent < 0.35
+unavailable-subtitle: The party is too divided to be talked out of it.
+on-arrival: {!
+Q.lsr_survives = 1;
+RO.add(Q, {rel_bol: 4, repression: -2, soviet_democracy: 1});
+RO.fac(Q, 'intl', 0, 10);
+RO.fac(Q, 'defencist', -2, 6);
+RO.boost(Q, {peasants: -1});
+!}
+
+Spiridonova and Natanson went to the Central Committee with the warning that the Bolsheviks had been told, and carried a narrow majority. The ambassador lived. The treaty was not broken, the party was not crushed, and the pro-Bolshevik wing, which was against the plan anyway, is quietly pleased. The anti-treaty wing is less so.
+
+@congress
+choose-if: rel_bol >= 40 and soviet_democracy >= 50
+unavailable-subtitle: The Bolsheviks do not trust us, or the Congress is no longer free.
+on-arrival: {!
+Q.lsr_survives = 1;
+RO.add(Q, {rel_bol: 2, soviet_democracy: 2, repression: -1});
+RO.boost(Q, {peasants: 2, soldiers: 2});
+RO.fac(Q, 'defencist', 1, 3);
+RO.fac(Q, 'intl', 0, 6);
+!}
+
+The Left SR delegates went to the Fifth Congress of Soviets and spoke against the treaty and the Committees of the Poor, for three hours, in front of the whole country. They were heard in silence. They went home as a party that had said its piece, and not the party that had broken the peace.

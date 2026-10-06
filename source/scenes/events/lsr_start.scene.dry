@@ -1,0 +1,47 @@
+title: The Left Within
+subtitle: A faction of the largest party in Russia.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 4
+priority: 20
+max-visits: 1
+on-arrival: {!
+Q.dual_power = 1;
+!}
+
+= The Left Within
+
+The Tsar is gone. The SR party, whose members spent the war in prison, in exile and at the front, has become, in a fortnight, the largest party in Russia, and not one of its leaders is certain what it is for. The Right SRs, around Avksentiev and Breshko-Breshkovskaya, want to carry the war through to a victory and share power with the liberals. Chernov's Centre wants the land question settled by the Constituent Assembly. And the left wing, a few thousand men and women around Spiridonova, Kamkov and Natanson, says that the revolution has not yet begun.
+
+The Soviet has the power, and the Provisional Government has the ministries. Kerensky is the only socialist in the cabinet. You lead the left wing of the party, and you have one year to decide what to do with it.
+
+- @caucus: Organise a left caucus inside the party.
+- @soviet: Work through the Soviet's section of soldiers' deputies.
+- @wait: Wait: the party must not be split before the Assembly.
+
+@caucus
+on-arrival: {!
+RO.boost(Q, {peasants: 2, soldiers: 1});
+RO.fac(Q, 'defencist', 2, 0);
+RO.add(Q, {rel_ally: -2});
+!}
+
+The left wing has begun to meet separately before every party gathering, with its own resolutions and its own speakers. It is not yet a faction in the formal sense, which the party's rules do not allow, and it is not yet anything else.
+
+@soviet
+on-arrival: {!
+RO.boost(Q, {soldiers: 3});
+RO.add(Q, {rel_bol: 2});
+RO.fac(Q, 'unions', 1, 0);
+!}
+
+The Soviet's soldiers' section is a place where speeches are made in barracks language and delegates have been elected from the regimental committees, not from the party lists. The left wing has friends there, and so have the Bolsheviks.
+
+@wait
+on-arrival: {!
+RO.add(Q, {rel_ally: 3});
+RO.fac(Q, 'rightdef', 2, -2);
+RO.fac(Q, 'defencist', 0, 3);
+!}
+
+The left wing has agreed to keep its disputes inside the party until the Assembly meets. The Centre of the party has noticed, and said so, in public.

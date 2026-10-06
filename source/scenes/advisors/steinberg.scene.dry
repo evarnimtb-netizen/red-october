@@ -1,0 +1,30 @@
+title: Isaac Steinberg
+is-pinned-card: true
+card-image: img/cards/steinberg.svg
+tags: advisor, rightdef
+new-page: true
+view-if: steinberg_advisor = 1 and player_party = 'lsr'
+
+= Isaac Steinberg
+
+Steinberg (1888-1957), a Left SR lawyer, is People's Commissar of Justice. He clashes with the Cheka over the right of the accused.
+
+- @action
+- @root: Return to main
+
+@action
+title: Revolutionary Legality
+subtitle: Steinberg fights the Cheka's powers from inside the government.
+choose-if: advisor_action_timer <= 0 and lsr_in_gov = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?][? if not (lsr_in_gov = 1) : We are not in the government. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+RO.add(Q, {repression: -5, soviet_democracy: 2, rel_bol: -1}); RO.fac(Q, 'rightdef', 1, -2);
+!}
+
+Steinberg's commission released a number of prisoners and drafted a law on the courts. Dzerzhinsky says that Steinberg wants to turn the revolution into a law school.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.

@@ -15,8 +15,10 @@ Between 27 September and 5 October, 1,500 delegates from the soviets, the unions
 - @coalition: Back coalition with the liberals, as before.
 - @socialist: Force a homogeneous socialist government.
 - @pre: Take seats in the Pre-Parliament, as a loyal opposition.
+- @lsr_boycott: Walk out with the Bolsheviks, and boycott the Pre-Parliament.
 
 @coalition
+view-if: player_party != 'lsr'
 on-arrival: {!
 Q.in_coalition = 1;
 RO.fac(Q, 'defencist', 3, 0);
@@ -42,6 +44,7 @@ RO.fac(Q, 'rightdef', 0, 10);
 The Menshevik Defencists and Internationalists have, for once, agreed. A government of the Soviet parties, without the liberals, will be formed.
 
 @pre
+view-if: player_party != 'lsr'
 on-arrival: {!
 RO.add(Q, {rel_kad: 2, soviet_democracy: -1});
 RO.boost(Q, {middle: 1, workers: -1});
@@ -50,3 +53,15 @@ RO.fac(Q, 'intl', 0, 4);
 !}
 
 We entered the Pre-Parliament, which is a body of advice without a mandate, to be elected by nobody. The Bolsheviks walked out, loudly.
+
+@lsr_boycott
+view-if: player_party = 'lsr'
+on-arrival: {!
+Q.lsr_backs_bol = 1;
+RO.add(Q, {rel_bol: 6, rel_ally: -6, soviet_democracy: -1});
+RO.boost(Q, {soldiers: 2, workers: 1, peasants: 1});
+RO.fac(Q, 'intl', 3, -2);
+RO.fac(Q, 'rightdef', 0, 8);
+!}
+
+The Left SR delegates left the hall with the Bolsheviks, and said that the Pre-Parliament was a body without a mandate. The SR leaders say that the Left has chosen its allies.

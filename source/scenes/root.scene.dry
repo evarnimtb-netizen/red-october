@@ -50,6 +50,10 @@ Q.resources = 3;
 Q.dues = 2;
 // membership in thousands
 Q.members = 60;
+Q.mem_scale = 1;
+Q.mem_div = 60;
+Q.mem_cap = 400;
+Q.poll_neutral = 9;
 
 // ---- the state of the country (0-100) ----
 Q.bread = 30;
@@ -127,7 +131,7 @@ Q.timers = ['advisor_action', 'rally', 'fundraising', 'media', 'campaigning', 'i
             'labor_affairs', 'economic_policy', 'foreign_policy', 'agricultural_policy', 'military_policy',
             'constitutional_reform', 'nationalities', 'police',
             'economic_democracy', 'labor_rights', 'social_welfare', 'domestic_enemies', 'judiciary', 'fiscal_policy',
-            'crisis', 'alt_coup', 'right_plot', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army'];
+            'crisis', 'alt_coup', 'right_plot', 'inside_sr', 'the_split', 'sovnarkom_seats', 'cheka_board', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -160,7 +164,9 @@ var flags = ['may_crisis_seen', 'larin_seen', 'crisis_count', 'vik_check_1', 'al
              'activists_strength', 'georgia_survives', 'renounced_armed', 'spring_won', 'no_terror',
              'martov_line', 'war_aims_note', 'bol_unity', 'soviet_power_motion', 'reconvene_assembly',
              'ca_extra', 'prisoners_freed', 'steinberg_line', 'constitution', 'dissent_dummy',
-             'land_law_draft', 'peasant_organised', 'army_raised', 'komuch_alive', 'chernov_gov', 'lsr_kept', 'ufa_line'];
+             'land_law_draft', 'peasant_organised', 'army_raised', 'komuch_alive', 'chernov_gov', 'lsr_kept', 'ufa_line',
+             'lsr_in_gov', 'lsr_seats', 'lsr_backs_bol', 'lsr_survives', 'split_planned', 'cheka_shield', 'seven_commissars', 'lsr_squeezed',
+             'kolchak_seen', 'land_socialised', 'prog_rb', 'prog_po', 'cheka_seats', 'lsr_rising', 'anti_brest', 'early_split'];
 for (var fl of flags) { Q[fl] = 0; }
 Q.dues_income = 1;
 
@@ -179,6 +185,7 @@ The February Revolution has overthrown the Tsar. Three socialist parties stand o
 
 - @pick_men: The Mensheviks. Russia's social democrats, with their strength among the workers and railwaymen. *Hard.*
 - @pick_sr: The Socialist Revolutionaries. The largest party in Russia, the party of the peasants and the soldiers. *Normal.*
+- @pick_lsr: The Left SRs. The left wing of the SR party, which does not yet exist as a party: the peasants' radicals, the Baltic sailors. *Hard.*
 
 @pick_men
 on-arrival: {!
@@ -190,6 +197,13 @@ go-to: difficulty
 @pick_sr
 on-arrival: {!
 RO.initParty(Q, 'sr');
+RO.updateFactions(Q); RO.updatePolls(Q); RO.display(Q);
+!}
+go-to: difficulty
+
+@pick_lsr
+on-arrival: {!
+RO.initParty(Q, 'lsr');
 RO.updateFactions(Q); RO.updatePolls(Q); RO.display(Q);
 !}
 go-to: difficulty
@@ -226,7 +240,7 @@ go-to: intro
 
 @intro
 new-page: true
-go-to: intro_men if player_party = 'menshevik'; intro_sr if player_party = 'sr'
+go-to: intro_men if player_party = 'menshevik'; intro_sr if player_party = 'sr'; intro_lsr if player_party = 'lsr'
 
 @intro_men
 new-page: true
@@ -255,6 +269,20 @@ go-to: intro_common
 The February Revolution has overthrown the monarchy. A Provisional Government of liberals sits in the Tauride Palace, and in the same building a Soviet of Workers' and Soldiers' Deputies, led by Socialist Revolutionaries and Mensheviks, holds the real power: the garrison, the railways and the telegraph obey the Soviet, not the ministers. One of your own, the lawyer Kerensky, sits in the cabinet.
 
 Your party is the largest in Russia. In a few months it will have close to a million members, and the votes of most of the peasants and soldiers. It wants the land for those who work it, socialised and not divided; it wants a democratic republic, and a Constituent Assembly to found it. It is also as divided as it is large: the Right SRs (Avksentiev, Breshko-Breshkovskaya), the Centre (Chernov), the Right Centre (Gots, Zenzinov) and the Left SRs (Spiridonova, Kamkov), who think the party has already betrayed the peasants.
+
+@intro_lsr
+new-page: true
+go-to: intro_common
+
+= March 1917
+
+> *"The land belongs to those who work it."*
+>
+> The Left SR slogan
+
+The February Revolution has overthrown the monarchy. A Provisional Government of liberals sits in the Tauride Palace, and in the same building a Soviet of Workers' and Soldiers' Deputies, led by Socialist Revolutionaries and Mensheviks, holds the real power. One of the SRs, Kerensky, is in the cabinet.
+
+You lead the left wing of the SR party: the peasants' radicals, who say that the party has forgotten the land; the opponents of the war, who say that the party has forgotten the peace; the sailors of Kronstadt and the Baltic Fleet, who say that the Soviet should take all power. You are Spiridonova, Kamkov, Natanson: the old terrorists and the old populists. You are not yet a party. You are a faction of the largest party in Russia, a faction that shares its name, its newspaper and its voters. Whether to break with it, and when, is the most important decision that you will make.
 
 @intro_common
 

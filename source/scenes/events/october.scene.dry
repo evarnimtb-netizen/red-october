@@ -36,8 +36,10 @@ The Bolsheviks govern in the name of the Soviets. Trotsky told the Mensheviks as
 
 - @walkout: Walk out with the other moderate socialists.
 - @stay: Stay in the hall and fight for a coalition.
+- @lsr_join: Join the Bolsheviks at the Congress, and vote for Soviet power.
 
 @walkout
+view-if: player_party != 'lsr'
 on-arrival: {!
 RO.fac(Q, 'defencist', 2, 0);
 RO.fac(Q, 'intl', 0, 10);
@@ -95,3 +97,16 @@ Q.no_terror = 0;
 !}
 
 The party was banned and its leaders imprisoned. [+ Ilbl +] said that it was the first act of a regime of terror, and the Right said that it was only a start.
+
+@lsr_join
+view-if: player_party = 'lsr'
+on-arrival: {!
+Q.lsr_backs_bol = 1;
+Q.stayed_in_congress = 1;
+RO.add(Q, {rel_bol: 10, rel_ally: -6, soviet_democracy: 1});
+RO.boost(Q, {soldiers: 3, workers: 2, peasants: 2});
+RO.fac(Q, 'intl', 4, -4);
+RO.fac(Q, 'rightdef', 0, 10);
+!}
+
+The Left SR delegates stayed in the Smolny. When Lenin read the Decree on Land, which is the SR programme almost word for word, they cheered with the Bolsheviks. Lenin has offered the party places in the government. The Left SRs have said that they will think about it, and that they would like to see a government of all the socialist parties.

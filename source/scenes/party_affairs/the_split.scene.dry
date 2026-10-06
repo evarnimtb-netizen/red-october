@@ -1,0 +1,48 @@
+title: The Split
+card-image: img/cards/the_split.svg
+subtitle: Choose the moment to found the party, or never.
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: player_party = 'lsr' and lsr_split = 0 and the_split_timer <= 0 and dix >= 8
+on-arrival: month_actions += 1; the_split_timer = 4
+
+Every month inside the SR party means the party's money, its votes and its legitimacy. Every month inside also means supporting a coalition, an offensive and a policy of waiting, which the left wing does not believe in. The Central Committee has begun to talk about expelling the left. When should it be the one to leave?
+
+- @now: Found the party now.
+- @november: Plan to split in November, after the party's congress.
+- @never: Stay, and fight to take over the party.
+- @easy_discard
+
+@now
+on-arrival: {!
+Q.lsr_split = 1;
+RO.add(Q, {rel_ally: -15, soviet_democracy: 1});
+RO.boost(Q, {peasants: 3, soldiers: 3});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 8);
+Q.members -= 4 * Q.mem_scale;
+Q.early_split = 1;
+!}
+
+The Left SRs have declared themselves a party, with a programme: peace now, land now, all power to the soviets. The SR leaders call it a betrayal. It is also, for the first time, a banner of our own.
+
+@november
+on-arrival: {!
+Q.split_planned = 1;
+RO.boost(Q, {peasants: 2});
+RO.fac(Q, 'defencist', 2, -2);
+RO.add(Q, {rel_ally: -2});
+!}
+
+The leadership has decided that the break will come in November, after the party's congress, with the left wing's strength counted and its newspaper ready. In the meantime, it will go on speaking inside the party.
+
+@never
+on-arrival: {!
+Q.lsr_kept = 1;
+RO.add(Q, {rel_ally: 6});
+RO.fac(Q, 'intl', 0, 10);
+RO.fac(Q, 'rightdef', 2, -4);
+!}
+
+We have said that the left will fight for the party, not leave it. The Right SRs are surprised, and the pro-Bolshevik Left SRs are not at all pleased.

@@ -54,6 +54,19 @@ var RO = (function() {
       labels: {intl: 'the Internationalists', defencist: 'the Defencists', rightdef: 'the Right Defencists'},
       advisors: ['dan', 'chkheidze', 'liber', 'lidia', 'abramovich', 'potresov', 'sukhanov', 'khinchuk']
     },
+    lsr: {
+      slot: 'lsr', name: 'Left SRs', pname: 'the Left SRs', partner: 'SRs', partner_slot: 'sr',
+      members: 40, memDiv: 40, memScale: 0.8, memCap: 200, resources: 2, legality: 3, pollNeutral: 3,
+      // rel_ally is the relation with the SR party; rel_lsr stands for the Mensheviks in this campaign
+      rel: {ally: 55, lsr: 40, bol: 40, kad: 15, men: 40}, relBase: {ally: 45, lsr: 35, bol: 40, kad: 15},
+      factions: {
+        defencist: [45, 0, 'The Kamkov-Spiridonova leadership'], intl: [20, 15, 'The pro-Bolshevik Left SRs'],
+        rightdef: [20, 10, 'The pro-coalition Left SRs (Natanson, Kolegaev)'], unions: [15, 5, 'The village organisers'],
+        bund: [0, 0, 'The Narodnik Communists']
+      },
+      labels: {intl: 'the pro-Bolshevik Left SRs', defencist: 'the leadership', rightdef: 'the pro-coalition Left SRs'},
+      advisors: ['spiridonova', 'kamkov', 'natanson']
+    },
     sr: {
       slot: 'sr', name: 'SRs', pname: 'the SRs', partner: 'Mensheviks', partner_slot: 'men',
       members: 300, memDiv: 150, memScale: 2.5, memCap: 1200, resources: 3, legality: 3,
@@ -81,10 +94,12 @@ var RO = (function() {
     Q.pname_the = c.pname;
     Q.partner_name = c.partner;
     Q.partner_slot = c.partner_slot;
+    Q.third_name = party === 'lsr' ? 'Mensheviks' : 'Left SRs';
     Q.members = c.members;
     Q.mem_div = c.memDiv;
     Q.mem_scale = c.memScale;
     Q.mem_cap = c.memCap;
+    Q.poll_neutral = c.pollNeutral || 9;
     Q.resources = c.resources;
     Q.legality = c.legality;
     Q.rel_ally = c.rel.ally; Q.rel_lsr = c.rel.lsr; Q.rel_bol = c.rel.bol; Q.rel_kad = c.rel.kad; Q.rel_men = c.rel.men;
@@ -130,21 +145,29 @@ var RO = (function() {
   }
 
   // support[group][party]: fractions that sum to 1 within each group.
+  // Before the split the Left SRs are inside the SR party's lists: their appeal is added to the SR
+  // row, and also reported as row.lsr_in so that a Left SR player has a poll number of their own.
   function groupSupport(Q) {
     var m = multipliers(Q), out = {}, gi, pi;
+    var lsrMult = Q.player_slot === 'lsr' ? 3 : 1;
     for (gi = 0; gi < GROUPS.length; gi++) {
       var g = GROUPS[gi], tot = 0, row = {};
+      var lsrA = BASE[g].lsr * m.lsr * lsrMult;
+      if (Q.player_slot === 'lsr') { lsrA += (Q['boost_' + g] || 0); }
+      if (lsrA < 0.05) { lsrA = 0.05; }
       for (pi = 0; pi < PARTIES.length; pi++) {
         var p = PARTIES[pi];
         var a = BASE[g][p] * m[p];
-        if (p === Q.player_slot) { a += (Q['boost_' + g] || 0); }
+        if (p === 'lsr') { a = lsrA; }
+        else if (p === Q.player_slot) { a += (Q['boost_' + g] || 0); }
         if (p === 'lsr' && !Q.lsr_split) { a = 0; }
-        if (p === 'sr' && !Q.lsr_split) { a += BASE[g].lsr * m.lsr; }
-        // a socialist ally on a joint list pools its support
+        if (p === 'sr' && !Q.lsr_split) { a += lsrA; }
         if (a < 0.05) { a = 0.05; }
         row[p] = a; tot += a;
       }
+      row.lsr_in = Q.lsr_split ? 0 : lsrA;
       for (pi = 0; pi < PARTIES.length; pi++) { row[PARTIES[pi]] /= tot; }
+      row.lsr_in /= tot;
       out[g] = row;
     }
     return out;
@@ -154,6 +177,7 @@ var RO = (function() {
   function arenaResult(Q, arena, extra) {
     var gs = groupSupport(Q), w = ARENAS[arena], bias = ARENA_BIAS[arena] || {}, res = {}, tot = 0, gi, pi;
     for (pi = 0; pi < PARTIES.length; pi++) { res[PARTIES[pi]] = 0; }
+    res.lsr_in = 0;
     for (gi = 0; gi < GROUPS.length; gi++) {
       var g = GROUPS[gi];
       for (pi = 0; pi < PARTIES.length; pi++) {
@@ -161,8 +185,10 @@ var RO = (function() {
         if (extra && extra[p]) { v *= extra[p]; }
         res[p] += v; tot += v;
       }
+      res.lsr_in += gs[g].lsr_in * w[g] * (bias.sr || 1);
     }
     for (pi = 0; pi < PARTIES.length; pi++) { res[PARTIES[pi]] = 100 * res[PARTIES[pi]] / tot; }
+    res.lsr_in = 100 * res.lsr_in / tot;
     return res;
   }
 
@@ -179,8 +205,9 @@ var RO = (function() {
     for (var pi = 0; pi < PARTIES.length; pi++) {
       Q['poll_' + PARTIES[pi]] = Math.round(r[PARTIES[pi]]);
     }
+    Q.poll_lsr_in = Math.round(r.lsr_in);
     // the player's own party, as a plain number for event conditions
-    Q.player_poll = r[Q.player_slot];
+    Q.player_poll = (Q.player_slot === 'lsr' && !Q.lsr_split) ? r.lsr_in : r[Q.player_slot];
   }
 
   function whitePressure(d) {
@@ -333,6 +360,7 @@ var RO = (function() {
       Q['res_' + p] = Math.round(r[p] * 10) / 10;
       Q['seat_' + p] = Math.round(r[p] * Q.seats_total / 100);
     }
+    Q.res_lsr_in = Math.round(r.lsr_in * 10) / 10;
     return r;
   }
 
@@ -344,7 +372,8 @@ var RO = (function() {
       - 3 * Math.min(Q.land_committees || 0, 3) // the land question is being settled
       - ((Q.stockholm || 0) >= 3 ? 6 : 0)     // a general peace is in sight
       - (Q.bread >= 35 ? 4 : 0)
-      - (Q.land_decree ? 5 : 0);
+      - (Q.land_decree ? 5 : 0)
+      + (Q.lsr_backs_bol ? 8 : 0);            // the Left SRs and the sailors stand with the Bolsheviks
   }
 
   // Kornilov's march: force of the Right against the resistance of the democracy.
@@ -356,7 +385,10 @@ var RO = (function() {
            (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 60) / 8 + (Q.player_party === 'sr' ? 6 : 0);
   }
 
-  return {PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  // A weighted coin for the decisions that no stat can settle.
+  function chance(p) { return Math.random() < clamp(p, 0, 1); }
+
+  return {chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

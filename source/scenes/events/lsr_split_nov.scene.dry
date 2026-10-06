@@ -1,0 +1,40 @@
+title: The Left SRs Are Expelled
+subtitle: November 1917.
+new-page: true
+tags: event
+view-if: player_party = 'lsr' and dix >= 20 and lsr_split = 0 and lsr_kept = 0
+priority: 25
+max-visits: 1
+
+= The Left SRs Are Expelled
+
+In the second half of November the SR party's Central Committee, meeting after its congress, expelled the Left SRs for forming a separate organisation. The Left SRs have called a founding congress for early December: 116 delegates from 99 organisations. [? if bol_regime = 1 : They will take seven seats in Lenin's government before the month is out. ?]
+
+The left wing is a fifth of the party's members, and nearly all of its voters in the Baltic Fleet, in the Petrograd garrison and in many a village.
+
+- @found: Hold the founding congress in December.
+- @reconcile: Seek reconciliation, and stay in the party.
+
+@found
+on-arrival: {!
+Q.lsr_split = 1;
+RO.add(Q, {rel_ally: -8});
+RO.boost(Q, {peasants: 2, soldiers: 2});
+RO.fac(Q, 'defencist', 2, -2);
+RO.fac(Q, 'intl', 0, -3);
+!}
+
+The founding congress of the Party of Left Socialist Revolutionaries met in Petrograd on 2 December, with 116 delegates from 99 organisations. It elected Spiridonova, Kamkov and Natanson, and proclaimed that the party would defend the peasants' land and the soviets.
+
+@reconcile
+choose-if: rel_ally >= 55
+unavailable-subtitle: The SR leaders will not take the Left SRs back.
+on-arrival: {!
+Q.lsr_kept = 1;
+RO.add(Q, {rel_ally: 6});
+RO.fac(Q, 'intl', 0, 12);
+RO.fac(Q, 'rightdef', 3, -4);
+RO.boost(Q, {peasants: -2});
+!}
+
+The Left SRs have asked the Central Committee to withdraw the expulsion, and have been given a pledge on the Assembly and the land. The party is whole, and the left has the satisfaction of having been asked to stay.

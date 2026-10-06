@@ -19,8 +19,11 @@ The Assembly has been dissolved by decree. Demonstrations in its support were fi
 
 - @protest: Protest, and turn to the soviets.
 - @provinces: Try to reconvene the Assembly in the provinces. (1 resource)
+- @lsr_defend: Defend the dispersal as the will of the soviets.
+- @lsr_protest: Protest, and demand new elections to the Assembly.
 
 @protest
+view-if: player_party != 'lsr'
 on-arrival: {!
 RO.add(Q, {soviet_democracy: -3, rel_bol: -3});
 RO.boost(Q, {workers: 2});
@@ -31,6 +34,7 @@ RO.fac(Q, 'defencist', 0, 3);
 We protested in the Soviet and the press. The Assembly is gone. Our work, for now, is in the soviets and the unions, if they will let us.
 
 @provinces
+view-if: player_party != 'lsr'
 choose-if: resources >= 1
 unavailable-subtitle: We have no resources.
 on-arrival: {!
@@ -44,3 +48,25 @@ Q.white_aid += 0.5;
 !}
 
 A group of delegates left for the Volga to reconvene the Assembly there. It is unlikely that the Bolsheviks will allow it, and equally unlikely that we can stop the delegates from trying.
+
+@lsr_defend
+view-if: player_party = 'lsr'
+on-arrival: {!
+RO.add(Q, {rel_bol: 6, rel_ally: -8, soviet_democracy: -3});
+RO.boost(Q, {soldiers: 2, workers: 1, peasants: -2});
+RO.fac(Q, 'intl', 3, -3);
+RO.fac(Q, 'rightdef', 0, 10);
+!}
+
+The Left SR delegates left the hall with the Bolsheviks, and the party has defended the dispersal as the right of the Soviet Congress, a higher form of democracy, to override an Assembly elected from old lists. The SR party, which holds the Assembly's majority, calls it treason.
+
+@lsr_protest
+view-if: player_party = 'lsr'
+on-arrival: {!
+RO.add(Q, {rel_bol: -3, rel_ally: 4, soviet_democracy: -1});
+RO.boost(Q, {peasants: 1, middle: 1});
+RO.fac(Q, 'intl', 0, 6);
+RO.fac(Q, 'rightdef', 2, -2);
+!}
+
+We said that the Assembly should have been given a week to pass the land law, and that the Left SRs would have defended it. It is a position that nobody wanted to hear, on either side.

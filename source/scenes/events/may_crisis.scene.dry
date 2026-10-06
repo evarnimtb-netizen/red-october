@@ -2,7 +2,7 @@ title: The May Cabinet Crisis
 subtitle: The Kadets, the Soviet and the Allies.
 new-page: true
 tags: event
-view-if: dix >= 9 and in_coalition = 1 and gov_kadets = 1 and may_crisis_seen = 0
+view-if: player_party != 'lsr' and (dix >= 9 and in_coalition = 1 and gov_kadets = 1 and may_crisis_seen = 0)
 priority: 5
 max-visits: 1
 on-arrival: may_crisis_seen = 1;

@@ -1,0 +1,13 @@
+title: Wait and See
+card-image: img/cards/wait.svg
+subtitle: Let the fortnight pass without a new initiative.
+is-pinned-card: true
+tags: advisor
+new-page: true
+on-arrival: month_actions += 1
+
+= Wait and See
+
+Not every fortnight needs a decision. The committees meet, the newspapers are printed, the delegates travel to the provinces, and the party's affairs go on as before. Nothing was done this turn, and nothing was undone.
+
+- @root: Continue.

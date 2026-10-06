@@ -1,6 +1,6 @@
 title: The Party Press
 card-image: img/cards/media.svg
-subtitle: [? if player_party = 'menshevik' and dix < 34 : Rabochaya Gazeta ?][? if player_party = 'menshevik' and dix >= 34 : Vsegda Vpered ?][? if player_party = 'sr' : Delo Naroda ?]
+subtitle: [? if player_party = 'menshevik' and dix < 34 : Rabochaya Gazeta ?][? if player_party = 'menshevik' and dix >= 34 : Vsegda Vpered ?][? if player_party = 'sr' : Delo Naroda ?][? if player_party = 'lsr' : Znamya Truda ?]
 new-page: true
 is-card: true
 tags: party_affairs
@@ -38,6 +38,7 @@ RO.fac(Q, 'rightdef', -1, 3);
 The paper called for a general democratic peace, and for the socialists of Europe to meet at Stockholm.
 
 @bolsheviks
+view-if: player_party != 'lsr'
 on-arrival: {!
 RO.boost(Q, {workers: 2, middle: 2});
 RO.add(Q, {bolshevik: -3, rel_bol: -4, rel_lsr: -1});
@@ -55,7 +56,7 @@ RO.add(Q, {rel_ally: 2, land_pressure: -1});
 The Constituent Assembly will settle the land question, the form of the state and the war. The paper insisted that nothing should be settled before it.
 
 @land
-view-if: player_party = 'sr'
+view-if: player_party = 'sr' or player_party = 'lsr'
 on-arrival: {!
 RO.boost(Q, {peasants: 6, soldiers: 2});
 RO.add(Q, {land_pressure: -1, rel_kad: -1});

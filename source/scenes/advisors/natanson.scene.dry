@@ -1,0 +1,30 @@
+title: Mark Natanson
+is-pinned-card: true
+card-image: img/cards/natanson.svg
+tags: advisor, rightdef
+new-page: true
+view-if: natanson_advisor = 1 and player_party = 'lsr'
+
+= Mark Natanson
+
+Natanson (1850-1919), a veteran populist and a founder of the party, has the authority of forty years of prison and exile. He is the Left SRs' elder.
+
+- @action
+- @root: Return to main
+
+@action
+title: Elder's Authority
+subtitle: Natanson's authority calms the party's quarrels.
+choose-if: advisor_action_timer <= 0
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next advisor action. ?]
+on-arrival: {!
+Q.advisor_action_timer = 6;
+Q.last_advisor_action = 1;
+Q.month_actions += 1;
+for (var f of Q.factions) { RO.fac(Q, f, 0, -6); } RO.fac(Q, 'rightdef', 1, 0);
+!}
+
+The old man sat at the head of the table, and the quarrels stopped. There is no authority like that of a man who has spent his life in prison.
+
+- @cancel_advisor_action: Cancel action.
+- @root: Continue.
