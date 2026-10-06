@@ -1,10 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#8c1d18"/>
-<polygon points="0,0 240,0 240,111 0,181" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,181 240,111 240,340 0,340" fill="#1c1c1c"/>
-<circle cx="167" cy="73" r="36" fill="#8c1d18" opacity="0.9"/>
-<polygon points="120.0,67.0 130.1,96.1 160.9,96.7 136.4,115.3 145.3,144.8 120.0,127.2 94.7,144.8 103.6,115.3 79.1,96.7 109.9,96.1" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">THE PEOPLE&#x27;S</text>
-<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">ARMY</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="166" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">The People&#x27;s</text>
+<text x="120" y="194" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Army</text>
 </svg>

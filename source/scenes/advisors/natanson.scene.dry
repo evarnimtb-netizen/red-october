@@ -1,6 +1,6 @@
 title: Mark Natanson
 is-pinned-card: true
-card-image: img/cards/natanson.svg
+card-image: img/cards/natanson.svg?v=2
 tags: advisor, rightdef
 new-page: true
 view-if: natanson_advisor = 1 and (player_party = 'lsr' or lent_natanson = 1)

@@ -1,6 +1,6 @@
 title: Nikolai Avksentiev
 is-pinned-card: true
-card-image: img/cards/avksentiev.svg
+card-image: img/cards/avksentiev.svg?v=2
 tags: advisor, rightdef
 new-page: true
 view-if: avksentiev_advisor = 1 and (player_party = 'sr' or lent_avksentiev = 1)

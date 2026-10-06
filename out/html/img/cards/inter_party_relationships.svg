@@ -1,11 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#8c1d18"/>
-<polygon points="0,0 240,0 240,119 0,159" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,159 240,119 240,340 0,340" fill="#1c1c1c"/>
-<circle cx="63" cy="97" r="39" fill="#8c1d18" opacity="0.9"/>
-<polygon points="120.0,63.0 131.1,94.8 164.7,95.5 137.9,115.8 147.6,148.0 120.0,128.8 92.4,148.0 102.1,115.8 75.3,95.5 108.9,94.8" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="230" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">RELATIONS</text>
-<text x="120" y="259" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">WITH OTHER</text>
-<text x="120" y="288" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">PARTIES</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="166" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Relations with</text>
+<text x="120" y="194" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Other Parties</text>
 </svg>

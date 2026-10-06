@@ -1,11 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#1f3a5f"/>
-<polygon points="0,0 240,0 240,92 0,182" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,182 240,92 240,340 0,340" fill="#c9a227"/>
-<circle cx="74" cy="76" r="37" fill="#1f3a5f" opacity="0.9"/>
-<polygon points="120.0,70.0 129.4,97.1 158.0,97.6 135.2,114.9 143.5,142.4 120.0,126.0 96.5,142.4 104.8,114.9 82.0,97.6 110.6,97.1" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="230" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">CONVENE THE</text>
-<text x="120" y="259" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">CONSTITUENT</text>
-<text x="120" y="288" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">ASSEMBLY</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="156" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Convene the</text>
+<text x="120" y="184" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Constituent</text>
+<text x="120" y="212" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Assembly</text>
 </svg>

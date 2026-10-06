@@ -1,10 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#3d4a2a"/>
-<polygon points="0,0 240,0 240,103 0,193" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,193 240,103 240,340 0,340" fill="#b3261e"/>
-<circle cx="151" cy="109" r="48" fill="#3d4a2a" opacity="0.9"/>
-<polygon points="120.0,71.0 129.2,97.4 157.1,97.9 134.8,114.8 142.9,141.6 120.0,125.6 97.1,141.6 105.2,114.8 82.9,97.9 110.8,97.4" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">DEFEND THE</text>
-<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">REVOLUTION</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="166" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Defend the</text>
+<text x="120" y="194" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Revolution</text>
 </svg>

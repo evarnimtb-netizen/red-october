@@ -40,14 +40,14 @@ max-cards: 4
 
 @party
 title: Party Affairs
-card-image: img/cards/deck_party.svg
+card-image: img/cards/deck_party.svg?v=2
 is-deck: true
 
 - #party_affairs
 
 @coalition
 title: Coalition Affairs
-card-image: img/cards/deck_coalition.svg
+card-image: img/cards/deck_coalition.svg?v=2
 subtitle: The ministries our party holds or supervises.
 view-if: in_coalition = 1 and bol_regime = 0 and player_party != 'lsr'
 is-deck: true
@@ -56,7 +56,7 @@ is-deck: true
 
 @soviet
 title: Soviet Affairs
-card-image: img/cards/deck_soviet.svg
+card-image: img/cards/deck_soviet.svg?v=2
 subtitle: Working in the soviets, the unions and the cooperatives.
 view-if: bol_regime = 1
 is-deck: true

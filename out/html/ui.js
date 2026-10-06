@@ -256,7 +256,7 @@
         else if (txt.indexOf('Socialist Revolutionaries') >= 0) { img = 'sr'; }
         else if (txt.indexOf('Left SRs') >= 0) { img = 'lsr'; }
         if (img && !li.hasClass('party-choice')) {
-          li.addClass('party-choice').prepend('<img class="party-emblem" src="img/parties/' + img + '.svg" alt="">');
+          li.addClass('party-choice').prepend('<img class="party-emblem" src="img/parties/' + img + '.svg?v=2" alt="">');
         }
       });
     }, 30);

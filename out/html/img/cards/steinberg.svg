@@ -1,10 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#5a3d2b"/>
-<polygon points="0,0 240,0 240,93 0,163" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,163 240,93 240,340 0,340" fill="#c9a227"/>
-<circle cx="81" cy="79" r="43" fill="#5a3d2b" opacity="0.9"/>
-<text x="120" y="118" text-anchor="middle" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="#f2e6c9">IS</text>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#5a3d2b" stroke-width="0.6">ISAAC</text>
-<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#5a3d2b" stroke-width="0.6">STEINBERG</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<circle cx="120" cy="112" r="40" fill="#462f21"/>
+<path d="M44 220 Q44 160 120 160 Q196 160 196 220 Z" fill="#462f21"/>
+<text x="120" y="252" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Isaac</text>
+<text x="120" y="280" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Steinberg</text>
 </svg>

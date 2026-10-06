@@ -1,6 +1,6 @@
 title: Party Unity
 subtitle: Manage the party's quarrels.
-card-image: img/cards/party_disunity.svg
+card-image: img/cards/party_disunity.svg?v=2
 new-page: true
 is-card: true
 tags: party_affairs

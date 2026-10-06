@@ -30,26 +30,30 @@ def star(cx, cy, r, fill):
         pts.append('%.1f,%.1f' % (cx + rad * math.cos(ang), cy + rad * math.sin(ang)))
     return '<polygon points="%s" fill="%s"/>' % (' '.join(pts), fill)
 
+ART_VERSION = 2   # bump to make browsers fetch new card art
+
+def darker(hexcolor, f=0.8):
+    r, g, b = [int(hexcolor[i:i + 2], 16) for i in (1, 3, 5)]
+    return '#%02x%02x%02x' % (int(r * f), int(g * f), int(b * f))
+
 def card_svg(title, kind, seed, initials=None):
+    """Very simple art: a flat colour, a thin frame and the name. Advisors get a blank silhouette."""
     bg, fg, accent = PALETTES[kind]
-    h = sum(ord(c) for c in seed)
-    lines = textwrap.wrap(title, 13)[:4]
+    lines = textwrap.wrap(title, 14)[:4]
     parts = ['<svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">',
-             '<rect width="240" height="340" fill="%s"/>' % bg]
-    # constructivist shapes, varied by seed
-    ang = 18 + (h % 5) * 6
-    parts.append('<polygon points="0,0 240,0 240,%d 0,%d" fill="%s" opacity="0.92"/>' % (90 + h % 40, 150 + h % 50, fg))
-    parts.append('<polygon points="0,%d 240,%d 240,340 0,340" fill="%s"/>' % (150 + h % 50, 90 + h % 40, accent))
-    parts.append('<circle cx="%d" cy="%d" r="%d" fill="%s" opacity="0.9"/>' % (60 + (h * 7) % 120, 70 + (h * 3) % 60, 30 + h % 25, bg))
-    if initials:
-        parts.append('<text x="120" y="118" text-anchor="middle" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="%s">%s</text>' % (fg, html.escape(initials)))
+             '<rect width="240" height="340" fill="%s"/>' % bg,
+             '<rect x="14" y="14" width="212" height="312" fill="none" stroke="%s" stroke-width="2" opacity="0.7"/>' % fg]
+    if initials is not None:
+        sil = darker(bg, 0.78)
+        parts.append('<circle cx="120" cy="112" r="40" fill="%s"/>' % sil)
+        parts.append('<path d="M44 220 Q44 160 120 160 Q196 160 196 220 Z" fill="%s"/>' % sil)
+        y0 = 262
     else:
-        parts.append(star(120, 110, 38 + h % 12, fg))
-    parts.append('<rect x="14" y="14" width="212" height="312" fill="none" stroke="%s" stroke-width="3"/>' % fg)
-    y = 250 - 10 * (len(lines) - 1)
+        y0 = 176
+    y = y0 - 10 * (len(lines) - 1)
     for ln in lines:
-        parts.append('<text x="120" y="%d" text-anchor="middle" font-family="Impact, \'Arial Black\', sans-serif" font-size="25" fill="%s" stroke="%s" stroke-width="0.6">%s</text>' % (y, fg, bg, html.escape(ln.upper())))
-        y += 29
+        parts.append('<text x="120" y="%d" text-anchor="middle" font-family="Georgia, \'Times New Roman\', serif" font-size="24" fill="%s">%s</text>' % (y, fg, html.escape(ln)))
+        y += 28
     parts.append('</svg>')
     return '\n'.join(parts)
 
@@ -86,12 +90,12 @@ for f in sorted(glob.glob(os.path.join(SCENES, '**', '*.scene.dry'), recursive=T
             kind = k
     if 'advisor' in tags:
         kind = 'advisor'
-        ini = initials_of(title)
+        ini = ''
     if not kind:
         continue
     svg = card_svg(title, kind, sid, ini)
     open(os.path.join(OUT, sid + '.svg'), 'w', encoding='utf-8').write(svg)
-    add_image_line(f, 'img/cards/%s.svg' % sid)
+    add_image_line(f, 'img/cards/%s.svg?v=%d' % (sid, ART_VERSION))
     count += 1
 
 # decks live in main.scene.dry
@@ -102,6 +106,6 @@ s = open(main, encoding='utf-8').read()
 for did, (title, kind) in decks.items():
     open(os.path.join(OUT, 'deck_%s.svg' % did), 'w', encoding='utf-8').write(card_svg(title, kind, did))
     pat = re.compile(r'(^@%s\ntitle:.*\n)(card-image:.*\n)?' % did, re.M)
-    s = pat.sub(lambda m: m.group(1) + 'card-image: img/cards/deck_%s.svg\n' % did, s, count=1)
+    s = pat.sub(lambda m: m.group(1) + 'card-image: img/cards/deck_%s.svg?v=%d\n' % (did, ART_VERSION), s, count=1)
 open(main, 'w', encoding='utf-8').write(s)
 print('card images:', count + 3)

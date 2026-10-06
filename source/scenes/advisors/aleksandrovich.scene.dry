@@ -1,6 +1,6 @@
 title: Pyotr Aleksandrovich
 is-pinned-card: true
-card-image: img/cards/aleksandrovich.svg
+card-image: img/cards/aleksandrovich.svg?v=2
 tags: advisor, rightdef
 new-page: true
 view-if: aleksandrovich_advisor = 1 and (player_party = 'lsr' or lent_aleksandrovich = 1)

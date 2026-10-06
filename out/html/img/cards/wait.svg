@@ -1,9 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#5a3d2b"/>
-<polygon points="0,0 240,0 240,127 0,187" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,187 240,127 240,340 0,340" fill="#c9a227"/>
-<circle cx="119" cy="121" r="42" fill="#5a3d2b" opacity="0.9"/>
-<text x="120" y="118" text-anchor="middle" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="#f2e6c9">WS</text>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="250" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#5a3d2b" stroke-width="0.6">WAIT AND SEE</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<circle cx="120" cy="112" r="40" fill="#462f21"/>
+<path d="M44 220 Q44 160 120 160 Q196 160 196 220 Z" fill="#462f21"/>
+<text x="120" y="262" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Wait and See</text>
 </svg>

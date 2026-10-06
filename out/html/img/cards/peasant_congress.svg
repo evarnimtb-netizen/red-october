@@ -1,10 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#8c1d18"/>
-<polygon points="0,0 240,0 240,121 0,161" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,161 240,121 240,340 0,340" fill="#1c1c1c"/>
-<circle cx="157" cy="103" r="41" fill="#8c1d18" opacity="0.9"/>
-<polygon points="120.0,65.0 130.6,95.4 162.8,96.1 137.1,115.6 146.5,146.4 120.0,128.0 93.5,146.4 102.9,115.6 77.2,96.1 109.4,95.4" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">PEASANT</text>
-<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">CONGRESS</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="166" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Peasant</text>
+<text x="120" y="194" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Congress</text>
 </svg>

@@ -1,5 +1,5 @@
 title: The Party Press
-card-image: img/cards/media.svg
+card-image: img/cards/media.svg?v=2
 subtitle: [? if player_party = 'menshevik' and dix < 34 : Rabochaya Gazeta ?][? if player_party = 'menshevik' and dix >= 34 : Vsegda Vpered ?][? if player_party = 'sr' : Delo Naroda ?][? if player_party = 'lsr' : Znamya Truda ?]
 new-page: true
 is-card: true

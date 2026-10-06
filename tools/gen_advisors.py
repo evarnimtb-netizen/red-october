@@ -172,7 +172,7 @@ def main():
             un += '[? if not (' + cond + ') : ' + unavail + ' ?]'
         text = f"""title: {title}
 is-pinned-card: true
-card-image: img/cards/{aid}.svg
+card-image: img/cards/{aid}.svg?v=2
 tags: advisor, {tag}
 new-page: true
 view-if: {flag} = 1 and (player_party = 'menshevik' or lent_{aid} = 1)
@@ -233,7 +233,7 @@ Q.month_actions += 1;
 """
         text = f"""title: {title}
 is-pinned-card: true
-card-image: img/cards/{aid}.svg
+card-image: img/cards/{aid}.svg?v=2
 tags: advisor, {tag}
 new-page: true
 view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1)

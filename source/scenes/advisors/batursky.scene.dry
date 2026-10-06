@@ -1,6 +1,6 @@
 title: Boris Batursky
 is-pinned-card: true
-card-image: img/cards/batursky.svg
+card-image: img/cards/batursky.svg?v=2
 tags: advisor, unions
 new-page: true
 view-if: batursky_advisor = 1 and (player_party = 'menshevik' or lent_batursky = 1)

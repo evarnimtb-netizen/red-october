@@ -1,10 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#3d4a2a"/>
-<polygon points="0,0 240,0 240,90 0,180" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,180 240,90 240,340 0,340" fill="#b3261e"/>
-<circle cx="140" cy="70" r="35" fill="#3d4a2a" opacity="0.9"/>
-<polygon points="120.0,64.0 130.8,95.1 163.7,95.8 137.5,115.7 147.0,147.2 120.0,128.4 93.0,147.2 102.5,115.7 76.3,95.8 109.2,95.1" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">UNION</text>
-<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">INDEPENDENCE</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="166" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Union</text>
+<text x="120" y="194" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Independence</text>
 </svg>

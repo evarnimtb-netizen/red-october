@@ -1,10 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#1f3a5f"/>
-<polygon points="0,0 240,0 240,126 0,186" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,186 240,126 240,340 0,340" fill="#c9a227"/>
-<circle cx="72" cy="118" r="41" fill="#1f3a5f" opacity="0.9"/>
-<polygon points="120.0,72.0 128.9,97.7 156.1,98.3 134.5,114.7 142.3,140.7 120.0,125.2 97.7,140.7 105.5,114.7 83.9,98.3 111.1,97.7" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">MILITIA AND</text>
-<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">POLICE</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="166" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Militia and</text>
+<text x="120" y="194" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Police</text>
 </svg>

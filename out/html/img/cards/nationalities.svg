@@ -1,9 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
 <rect width="240" height="340" fill="#1f3a5f"/>
-<polygon points="0,0 240,0 240,126 0,196" fill="#f2e6c9" opacity="0.92"/>
-<polygon points="0,196 240,126 240,340 0,340" fill="#c9a227"/>
-<circle cx="112" cy="118" r="51" fill="#1f3a5f" opacity="0.9"/>
-<polygon points="120.0,68.0 129.9,96.4 159.9,97.0 136.0,115.2 144.7,144.0 120.0,126.8 95.3,144.0 104.0,115.2 80.1,97.0 110.1,96.4" fill="#f2e6c9"/>
-<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
-<text x="120" y="250" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">NATIONALITIES</text>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="2" opacity="0.7"/>
+<text x="120" y="176" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#f2e6c9">Nationalities</text>
 </svg>
