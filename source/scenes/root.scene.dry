@@ -6,7 +6,7 @@ go-to: post_event if started = 1; start_menu if started = 0
 new-page: true
 go-to: start_menu_2
 
-{!<div class="title-banner"><img src="img/title.svg" alt="Red October: Fall of Empire"></div>!}
+{!<div class="title-banner"><img src="img/title.svg?v=2" alt="Red October: Fall of Empire"></div>!}
 
 *Three socialist parties, one revolution, and the end of an empire.*
 

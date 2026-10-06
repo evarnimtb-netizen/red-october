@@ -16,17 +16,19 @@ def star(cx, cy, r, fill):
     return '<polygon points="%s" fill="%s"/>' % (' '.join(pts), fill)
 
 def title():
+    # The diagonal runs between the text (left, on black) and the star (right, on red).
+    # textLength fixes the width of each line so that it fits in any fallback font.
     s = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="900" height="260">',
          '<rect width="900" height="260" fill="%s"/>' % RED,
-         '<polygon points="0,0 560,0 330,260 0,260" fill="%s"/>' % BLACK,
-         '<polygon points="560,0 900,0 900,260 330,260" fill="%s" opacity="0.18"/>' % CREAM,
-         '<circle cx="745" cy="120" r="92" fill="%s"/>' % CREAM,
-         star(745, 120, 70, RED),
-         '<rect x="22" y="22" width="856" height="216" fill="none" stroke="%s" stroke-width="4"/>' % CREAM,
-         '<text x="52" y="132" font-family="Impact, \'Arial Black\', \'Helvetica Neue\', sans-serif" font-size="104" fill="%s" letter-spacing="3">RED OCTOBER</text>' % CREAM,
-         '<rect x="54" y="152" width="470" height="6" fill="%s"/>' % GOLD,
-         '<text x="54" y="204" font-family="Georgia, \'Times New Roman\', serif" font-size="40" fill="%s" letter-spacing="14">FALL OF EMPIRE</text>' % CREAM,
-         '<text x="56" y="236" font-family="Georgia, serif" font-size="17" fill="%s" letter-spacing="6">RUSSIA  1917 – 1921</text>' % GOLD,
+         '<polygon points="0,0 700,0 610,260 0,260" fill="%s"/>' % BLACK,
+         '<polygon points="700,0 900,0 900,260 610,260" fill="%s" opacity="0.14"/>' % CREAM,
+         '<circle cx="772" cy="130" r="84" fill="%s"/>' % CREAM,
+         star(772, 130, 64, RED),
+         '<rect x="20" y="20" width="860" height="220" fill="none" stroke="%s" stroke-width="4"/>' % CREAM,
+         '<text x="52" y="124" textLength="590" lengthAdjust="spacingAndGlyphs" font-family="Impact, \'Arial Black\', \'Helvetica Neue\', sans-serif" font-size="100" fill="%s">RED OCTOBER</text>' % CREAM,
+         '<rect x="54" y="142" width="440" height="6" fill="%s"/>' % GOLD,
+         '<text x="54" y="190" textLength="500" lengthAdjust="spacing" font-family="Georgia, \'Times New Roman\', serif" font-size="38" fill="%s">FALL OF EMPIRE</text>' % CREAM,
+         '<text x="56" y="219" textLength="260" lengthAdjust="spacing" font-family="Georgia, serif" font-size="16" fill="%s">RUSSIA 1917 \u2013 1921</text>' % GOLD,
          '</svg>']
     open(os.path.join(OUT, 'title.svg'), 'w', encoding='utf-8').write('\n'.join(s))
 

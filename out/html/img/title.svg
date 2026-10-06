@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="900" height="260">
 <rect width="900" height="260" fill="#8c1d18"/>
-<polygon points="0,0 560,0 330,260 0,260" fill="#1c1c1c"/>
-<polygon points="560,0 900,0 900,260 330,260" fill="#f2e6c9" opacity="0.18"/>
-<circle cx="745" cy="120" r="92" fill="#f2e6c9"/>
-<polygon points="745.0,50.0 761.5,97.3 811.6,98.4 771.6,128.7 786.1,176.6 745.0,148.0 703.9,176.6 718.4,128.7 678.4,98.4 728.5,97.3" fill="#8c1d18"/>
-<rect x="22" y="22" width="856" height="216" fill="none" stroke="#f2e6c9" stroke-width="4"/>
-<text x="52" y="132" font-family="Impact, 'Arial Black', 'Helvetica Neue', sans-serif" font-size="104" fill="#f2e6c9" letter-spacing="3">RED OCTOBER</text>
-<rect x="54" y="152" width="470" height="6" fill="#c9a227"/>
-<text x="54" y="204" font-family="Georgia, 'Times New Roman', serif" font-size="40" fill="#f2e6c9" letter-spacing="14">FALL OF EMPIRE</text>
-<text x="56" y="236" font-family="Georgia, serif" font-size="17" fill="#c9a227" letter-spacing="6">RUSSIA  1917 – 1921</text>
+<polygon points="0,0 700,0 610,260 0,260" fill="#1c1c1c"/>
+<polygon points="700,0 900,0 900,260 610,260" fill="#f2e6c9" opacity="0.14"/>
+<circle cx="772" cy="130" r="84" fill="#f2e6c9"/>
+<polygon points="772.0,66.0 787.0,109.3 832.9,110.2 796.3,137.9 809.6,181.8 772.0,155.6 734.4,181.8 747.7,137.9 711.1,110.2 757.0,109.3" fill="#8c1d18"/>
+<rect x="20" y="20" width="860" height="220" fill="none" stroke="#f2e6c9" stroke-width="4"/>
+<text x="52" y="124" textLength="590" lengthAdjust="spacingAndGlyphs" font-family="Impact, 'Arial Black', 'Helvetica Neue', sans-serif" font-size="100" fill="#f2e6c9">RED OCTOBER</text>
+<rect x="54" y="142" width="440" height="6" fill="#c9a227"/>
+<text x="54" y="190" textLength="500" lengthAdjust="spacing" font-family="Georgia, 'Times New Roman', serif" font-size="38" fill="#f2e6c9">FALL OF EMPIRE</text>
+<text x="56" y="219" textLength="260" lengthAdjust="spacing" font-family="Georgia, serif" font-size="16" fill="#c9a227">RUSSIA 1917 – 1921</text>
 </svg>
