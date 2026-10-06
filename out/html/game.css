@@ -729,3 +729,19 @@ body.dark-mode .card-tooltip { color: #eee; background-color: rgba(30, 30, 30, 0
 
 /* the side panels stay hidden until the game has started (ui.js shows them), whatever else rewrites their style */
 #stats_sidebar, #support_sidebar { display: none; }
+
+/* the centre column: a fixed, narrower width with a gap on each side, so it never runs into the side panels */
+header, #content, footer { box-sizing: border-box; max-width: 34rem; }
+#mid_panel { margin-left: 17.5rem; margin-right: 17.5rem; }
+@media screen and (max-width: 1200px) {
+  #mid_panel { margin-left: 17.5rem; margin-right: 0.8em; }
+}
+/* too narrow for a column beside the sidebar: put the sidebar above the content */
+@media screen and (max-width: 900px) {
+  #page { position: static; }
+  #tools_wrapper { position: static; }
+  .tools { width: auto; margin: 0.4em; }
+  .tools.left, .tools.right { float: none; left: 0; right: 0; }
+  #mid_panel { margin: 0 0.4em; }
+  header, #content, footer { max-width: none; }
+}
