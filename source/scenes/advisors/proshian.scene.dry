@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/proshian.svg
 tags: advisor, unions
 new-page: true
-view-if: proshian_advisor = 1 and player_party = 'lsr'
+view-if: proshian_advisor = 1 and (player_party = 'lsr' or lent_proshian = 1)
 
 = Prosh Proshian
 

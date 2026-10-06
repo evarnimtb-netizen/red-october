@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/potresov.svg
 tags: advisor, rightdef
 new-page: true
-view-if: potresov_advisor = 1 and player_party = 'menshevik'
+view-if: potresov_advisor = 1 and (player_party = 'menshevik' or lent_potresov = 1)
 
 = Alexander Potresov
 

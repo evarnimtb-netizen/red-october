@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/batursky.svg
 tags: advisor, unions
 new-page: true
-view-if: batursky_advisor = 1 and player_party = 'menshevik'
+view-if: batursky_advisor = 1 and (player_party = 'menshevik' or lent_batursky = 1)
 
 = Boris Batursky
 

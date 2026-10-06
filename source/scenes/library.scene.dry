@@ -12,6 +12,7 @@ Herein is information about the politics of the Russian Revolution, 1917 to 1921
 - @overview: How the game works
 - @timeline: Timeline
 - @parties: The parties
+- @alliances: Alliances
 - @factions: The party's currents
 - @stats: The state of the country
 - @arenas: The elections and congresses
@@ -58,6 +59,21 @@ go-to: menu
 **SRs (Socialist Revolutionaries).** The largest party in Russia, the peasants' party, and the Mensheviks' partner in the Soviet majority. Playable: normal. **Left SRs.** The SR left wing: radical on the land, against the war, strong among the Baltic sailors. They found their own party in December 1917. Playable: hard. **Bolsheviks.** Lenin's party; small in March 1917, in power in November.
 
 **Kadets.** The liberals, the main party of the middle classes. **Popular Socialists and Trudoviks.** Moderate socialists and peasant radicals. **National parties.** Ukrainian SRs, Dashnaks, Musavat and others. **Anarchists and others.**
+
+@alliances
+go-to: menu
+
+= Alliances
+
+Each campaign has relations (0 to 100) with the other two playable parties and the Bolsheviks. Alliances come in three levels, and are proposed from the Relations with Other Parties card:
+
+**Cooperation** (relations of 40): your parties vote together in the soviets, and a share of the ally's vote is added to yours. Joint statements become possible.
+
+**Bloc** (relations of 60, and compatible lines on the war and the soviets: no armed struggle against the Soviet government for the Bolsheviks or the Left SRs, and no extreme position on the war): joint lists in the Constituent Assembly election, a shared soviet presidium that keeps the soviets freer, and a better chance in the decisions that depend on others: the Vikzhel talks, Brest-Litovsk, the spring soviet elections.
+
+**Coalition** (relations of 75, and a government or soviet majority to share): one of the ally's advisors joins your deck, and the ally's own quarrels feed your dissent.
+
+The Mensheviks and the SRs begin as a bloc, and the Left SRs begin inside the SR party. Alliances weaken when relations fall, and break at the historical fault lines unless relations are high: Brest-Litovsk, Komuch, the Left SR rising of July 1918, and Kolchak's coup. A bloc can also change what the other party does: a Menshevik bloc can talk the SRs out of Komuch, and a Left SR in alliance can warn the party off the rising.
 
 @factions
 go-to: menu

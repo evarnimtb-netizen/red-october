@@ -27,6 +27,7 @@ if (Q.month_actions >= 1) {
     }
     // stats drift every turn, in proportion to its length
     RO.drift(Q, Q.turn_length);
+    RO.alliancesTurn(Q, Q.turn_length);
     if (Q.month_complete) {
         Q.time += 1;
         Q.month += 1;
@@ -36,6 +37,7 @@ if (Q.month_actions >= 1) {
         }
     }
     Q.dix = RO.dix(Q.year, Q.month, Q.half_month);
+    RO.worldTurmoil(Q);
     // the phase follows the calendar
     Q.phase = Q.dix < 20 ? 1 : (Q.dix < 25 ? 2 : (Q.dix < 34 ? 3 : (Q.dix < 92 ? 4 : 5)));
     if (Q.month_complete) {

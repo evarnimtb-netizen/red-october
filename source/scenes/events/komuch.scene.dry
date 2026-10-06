@@ -18,6 +18,7 @@ It is the first anti-Bolshevik socialist government, and it is protected by fore
 - @neither: "Neither side." Expel Maisky.
 - @join: Join Komuch.
 - @delegation: Send a delegation with a labour programme.
+- @persuade: Persuade the SR leaders not to join Komuch.
 
 @neither
 on-arrival: {!
@@ -26,9 +27,10 @@ RO.fac(Q, 'rightdef', 0, 8);
 RO.add(Q, {rel_ally: -4, rel_bol: 2});
 RO.fac(Q, 'intl', 1, -3);
 Q.maisky_expelled = 1;
+Q.fault_text = RO.fault(Q, 'komuch');
 !}
 
-Maisky was expelled from the party. We have said that we are for neither side. It is a position that nobody on the Volga can understand.
+Maisky was expelled from the party. We have said that we are for neither side. It is a position that nobody on the Volga can understand. [? if fault_flag = 1 : [+ fault_text +] ?]
 
 @join
 on-arrival: {!
@@ -42,9 +44,10 @@ RO.fac(Q, 'intl', -4, 20);
 RO.fac(Q, 'defencist', 0, 10);
 Q.members -= 12 * Q.mem_scale;
 if (Q.legality > 1) { Q.legality -= 1; }
+Q.fault_text = RO.fault(Q, 'komuch');
 !}
 
-A Menshevik delegation joined Komuch in Samara. The Bolsheviks have taken it as a declaration of war, and will treat our members in Moscow as hostages.
+A Menshevik delegation joined Komuch in Samara. The Bolsheviks have taken it as a declaration of war, and will treat our members in Moscow as hostages. [? if fault_flag = 1 : [+ fault_text +] ?]
 
 @delegation
 on-arrival: {!
@@ -54,6 +57,21 @@ RO.add(Q, {rel_ally: 3, rel_bol: -6, repression: 3});
 RO.boost(Q, {peasants: 2, workers: 1});
 RO.fac(Q, 'rightdef', 2, -3);
 RO.fac(Q, 'intl', 0, 8);
+Q.fault_text = RO.fault(Q, 'komuch');
 !}
 
-A Menshevik delegation, led by Maisky's friends, has gone to Samara with a programme of workers' demands: restoration of the eight-hour day, trade union freedoms and no restoration of private estates. It is a middle position, and is attacked on both sides.
+A Menshevik delegation, led by Maisky's friends, has gone to Samara with a programme of workers' demands: restoration of the eight-hour day, trade union freedoms and no restoration of private estates. It is a middle position, and is attacked on both sides. [? if fault_flag = 1 : [+ fault_text +] ?]
+
+@persuade
+choose-if: ally_lvl >= 2 and rel_ally >= 65
+unavailable-subtitle: We have no bloc with the SRs strong enough to say this to them.
+on-arrival: {!
+Q.komuch_averted = 1;
+Q.white_aid = Math.max(-2, Q.white_aid - 1);
+RO.add(Q, {rel_ally: 6, rel_bol: 2});
+RO.fac(Q, 'rightdef', 0, 6);
+RO.fac(Q, 'intl', 1, -3);
+Q.fault_text = '';
+!}
+
+Dan and Abramovich went to the SR Central Committee with the party's whole record in the Soviet bloc, and with one argument: that Komuch would end as the Whites' instrument, as every government protected by foreign bayonets does. The SR leaders hesitated, and then declined to recognise Komuch as the party's government. It will remain a local affair of a few Volga delegates.

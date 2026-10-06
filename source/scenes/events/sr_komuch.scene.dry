@@ -31,9 +31,10 @@ RO.fac(Q, 'intl', 0, 20);
 RO.fac(Q, 'bund', 0, 6);
 Q.members -= 12 * Q.mem_scale;
 if (Q.legality > 1) { Q.legality -= 1; }
+Q.fault_text = RO.fault(Q, 'komuch');
 !}
 
-The party's Central Committee has endorsed Komuch and called on its members to join the People's Army. The Bolsheviks have declared the party an enemy of the Soviet power, and will treat its members in Moscow as hostages.
+The party's Central Committee has endorsed Komuch and called on its members to join the People's Army. The Bolsheviks have declared the party an enemy of the Soviet power, and will treat its members in Moscow as hostages. [? if fault_flag = 1 : [+ fault_text +] ?]
 
 @guarantees
 choose-if: rel_ally >= 55 and ally_lvl >= 1
@@ -47,9 +48,11 @@ RO.boost(Q, {peasants: 3, workers: 1, middle: 2});
 RO.fac(Q, 'rightdef', 2, -4);
 RO.fac(Q, 'intl', 0, 12);
 Q.members -= 6 * Q.mem_scale;
+Q.komuch_guaranteed = 1;
+Q.fault_text = RO.fault(Q, 'komuch');
 !}
 
-Komuch has been persuaded to publish a labour programme, drafted by the Mensheviks: the eight-hour day, union freedoms, no return of the landowners' estates. The Mensheviks have sent a delegation to Samara, and have said that they will not fight beside the generals. The Bolsheviks have not noticed the difference.
+Komuch has been persuaded to publish a labour programme, drafted by the Mensheviks: the eight-hour day, union freedoms, no return of the landowners' estates. The Mensheviks have sent a delegation to Samara, and have said that they will not fight beside the generals. The Bolsheviks have not noticed the difference. [? if fault_flag = 1 : [+ fault_text +] ?]
 
 @refuse
 on-arrival: {!
@@ -59,6 +62,7 @@ RO.add(Q, {rel_bol: 2});
 RO.fac(Q, 'rightdef', 0, 10);
 RO.fac(Q, 'intl', 0, -3);
 RO.boost(Q, {middle: -2});
+Q.fault_text = RO.fault(Q, 'komuch');
 !}
 
-The Central Committee has said that the party will not take up arms against a Soviet government that millions of peasants and workers voted for, and will not shelter under the Czech bayonets. Volsky has gone to Samara anyway. The Right SRs are furious.
+The Central Committee has said that the party will not take up arms against a Soviet government that millions of peasants and workers voted for, and will not shelter under the Czech bayonets. Volsky has gone to Samara anyway. The Right SRs are furious. [? if fault_flag = 1 : [+ fault_text +] ?]

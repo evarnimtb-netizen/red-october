@@ -38,7 +38,7 @@ The results were annulled in town after town. Menshevik delegates were turned ou
 @renounce
 on-arrival: {!
 Q.renounced_armed = 1;
-Q.honour_ok = (Q.soviet_democracy >= 50 && Q.rel_bol >= 30 && Q.capitals_won >= 10) ? 1 : 0;
+Q.honour_ok = (Q.soviet_democracy >= 50 - 4 * Q.bloc_lean && Q.rel_bol >= 30 && Q.capitals_won >= 10) ? 1 : 0;
 if (Q.honour_ok) {
     Q.spring_honoured = 1;
     RO.add(Q, {soviet_democracy: 5, repression: -3, rel_bol: 4});

@@ -9,6 +9,7 @@ on-arrival: {!
 Q.at_war = 0;
 RO.add(Q, {war_weariness: -20, army_discipline: 0, land_pressure: -5});
 Q.lsr_left_gov = (Q.player_party == 'lsr') ? 0 : 1;
+Q.fault_text = RO.fault(Q, 'brest');
 !}
 
 = Brest-Litovsk
@@ -16,6 +17,8 @@ Q.lsr_left_gov = (Q.player_party == 'lsr') ? 0 : 1;
 On 3 March the Soviet government signed the Treaty of Brest-Litovsk with Germany and her allies: Russia lost Poland, the Baltic provinces, Ukraine and a quarter of her population, and a third of her industry. Lenin had to threaten to resign to get it ratified: Trotsky's formula, "neither war nor peace", had failed and the Germans had advanced on Petrograd.
 
 Martov and Kamkov, the Left SR leader, both spoke against ratification. The Left SRs left the government on 19 March, over the treaty; the Soviet Congress ratified the treaty by 784 votes to 261. The war with Germany is over, for now.
+
+[? if fault_flag = 1 : [+ fault_text +] ?]
 
 - @against: Martov speaks against ratification.
 - @joint: Propose a joint defence programme with the Left SRs.
@@ -25,6 +28,7 @@ Martov and Kamkov, the Left SR leader, both spoke against ratification. The Left
 - @lsr_leave: Leave the government over the treaty.
 - @lsr_stay: Stay in the government and fight the treaty from inside.
 - @lsr_vote: Vote for ratification.
+- @lsr_front: Form an anti-Brest front with the Mensheviks.
 
 @against
 view-if: player_party = 'menshevik'
@@ -102,7 +106,7 @@ On 19 March the Left SR People's Commissars resigned from the government, over t
 view-if: player_party = 'lsr' and lsr_in_gov = 1
 on-arrival: {!
 Q.brest_rb = Q.rel_bol; Q.brest_sd = Q.soviet_democracy;
-Q.stay_p = RO.clamp((Q.rel_bol - 60) / 50 + (Q.soviet_democracy - 50) / 200, 0.05, 0.85);
+Q.stay_p = RO.clamp((Q.rel_bol - 60) / 50 + (Q.soviet_democracy - 50) / 200 + 0.05 * Q.bloc_lean + 0.08 * Q.anti_brest_front, 0.05, 0.9);
 Q.stay_ok = (Q.dissent < 0.45 && RO.chance(Q.stay_p)) ? 1 : 0;
 if (Q.stay_ok) {
     Q.seven_commissars = 1;
@@ -139,3 +143,18 @@ if (Q.lsr_in_gov) { Q.seven_commissars = 1; }
 !}
 
 The party voted for ratification, with a heavy heart, and stayed in the government. The village delegations say that the Left SRs have become the Bolsheviks' junior partner. In the Baltic Fleet, they say worse.
+
+@lsr_front
+view-if: player_party = 'lsr'
+choose-if: rel_lsr >= 40
+unavailable-subtitle: The Mensheviks will not stand beside us.
+on-arrival: {!
+if (Q.ally_lsr < 1) { Q.ally_lsr = 1; }
+Q.anti_brest_front = 1;
+RO.add(Q, {rel_lsr: 10, rel_bol: -3});
+RO.boost(Q, {soldiers: 2, peasants: 1, middle: 1});
+RO.fac(Q, 'rightdef', 1, 2);
+Q.anti_brest = (Q.anti_brest || 0) + 1;
+!}
+
+Martov and Kamkov spoke against ratification from the same platform. The Menshevik Internationalists and the Left SRs have published a joint declaration: no ratification without a vote of the Constituent Assembly, no peace over the heads of the German workers. It is the only front in the Congress that includes both parties.

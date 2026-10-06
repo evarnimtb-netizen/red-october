@@ -7,7 +7,7 @@ priority: 25
 max-visits: 1
 on-arrival: {!
 Q.sq_rb = Q.rel_bol;
-Q.squeeze_p = RO.clamp((Q.rel_bol - 50) / 50 + (Q.soviet_democracy - 50) / 200, 0.1, 0.85);
+Q.squeeze_p = RO.clamp((Q.rel_bol - 50) / 50 + (Q.soviet_democracy - 50) / 200 + 0.05 * Q.bloc_lean, 0.1, 0.9);
 Q.squeeze_ok = (Q.dissent < 0.45 && RO.chance(Q.squeeze_p)) ? 1 : 0;
 if (!Q.squeeze_ok) {
     Q.lsr_in_gov = 0;

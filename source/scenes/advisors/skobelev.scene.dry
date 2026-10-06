@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/skobelev.svg
 tags: advisor, defencist
 new-page: true
-view-if: skobelev_advisor = 1 and player_party = 'menshevik'
+view-if: skobelev_advisor = 1 and (player_party = 'menshevik' or lent_skobelev = 1)
 
 = Matvei Skobelev
 

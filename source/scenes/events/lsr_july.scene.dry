@@ -28,11 +28,12 @@ RO.boost(Q, {peasants: -4, soldiers: -4});
 RO.fac(Q, 'defencist', -6, 8);
 RO.fac(Q, 'intl', 3, 10);
 Q.steinberg_advisor = 0; Q.kolegaev_advisor = 0; Q.proshian_advisor = 0; Q.aleksandrovich_advisor = 0;
+Q.fault_text = RO.fault(Q, 'july');
 !}
 
 On 6 July two Left SR members of the Cheka walked into the German embassy with a forged warrant and shot the ambassador. The party's detachments seized the telegraph office, and Proshian sent out a proclamation that the Soviet government had been overthrown. Within a day, the rising had been put down by Latvian riflemen: it was the work of one afternoon. Hundreds of Left SRs were arrested, and the party's deputies in the Congress of Soviets were taken from the hall. Aleksandrovich was shot.
 
-The Left SRs were the last of the parties that shared the Soviet government with the Bolsheviks. By the end of the summer, they will be a party without a seat.
+The Left SRs were the last of the parties that shared the Soviet government with the Bolsheviks. By the end of the summer, they will be a party without a seat. [? if fault_flag = 1 : [+ fault_text +] ?]
 
 @calloff
 choose-if: dissent < 0.35

@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/steinberg.svg
 tags: advisor, rightdef
 new-page: true
-view-if: steinberg_advisor = 1 and player_party = 'lsr'
+view-if: steinberg_advisor = 1 and (player_party = 'lsr' or lent_steinberg = 1)
 
 = Isaac Steinberg
 

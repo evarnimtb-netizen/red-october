@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/tsereteli.svg
 tags: advisor, defencist
 new-page: true
-view-if: tsereteli_advisor = 1 and player_party = 'menshevik'
+view-if: tsereteli_advisor = 1 and (player_party = 'menshevik' or lent_tsereteli = 1)
 
 = Irakli Tsereteli
 

@@ -6,7 +6,7 @@ view-if: dix >= 21 and bol_regime = 1
 priority: 40
 max-visits: 1
 on-arrival: {!
-Q.vik_score = Q.rel_bol * 0.4 + Q.rel_lsr * 0.2 + Q.rel_ally * 0.15 + (Q.stayed_in_congress ? 10 : 0) + (Q.ally_bol >= 1 ? 5 : 0) + Q.soviet_democracy * 0.08 + (Q.insight ? 3 : 0);
+Q.vik_score = Q.rel_bol * 0.4 + Q.rel_lsr * 0.2 + Q.rel_ally * 0.15 + (Q.stayed_in_congress ? 10 : 0) + (Q.ally_bol >= 1 ? 5 : 0) + Q.soviet_democracy * 0.08 + (Q.insight ? 3 : 0) + 4 * Q.bloc_lean;
 Q.vik_score_d = Math.round(Q.vik_score);
 !}
 
@@ -32,7 +32,7 @@ Our delegation left the talks. The railway union lost its nerve. The Bolsheviks,
 
 @sign
 on-arrival: {!
-Q.vik_ok = Q.vik_score >= 62 ? 1 : 0;
+Q.vik_ok = Q.vik_score >= 70 ? 1 : 0;
 if (Q.vik_ok) {
     Q.vikzhel_deal = 1;
     Q.bol_regime = 0;
@@ -68,4 +68,4 @@ The Bolsheviks received the Menshevik delegation, heard it out, and in the follo
 
 The signature on the draft was worth nothing. Our delegation was too far from the other socialists, and the Bolsheviks too close to the victory.
 
-*(Vikzhel deal score: [+ vik_score_d +]; at least 62 was needed.)*
+*(Vikzhel deal score: [+ vik_score_d +]; at least 70 was needed.)*

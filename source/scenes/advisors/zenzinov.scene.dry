@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/zenzinov.svg
 tags: advisor, unions
 new-page: true
-view-if: zenzinov_advisor = 1 and player_party = 'sr'
+view-if: zenzinov_advisor = 1 and (player_party = 'sr' or lent_zenzinov = 1)
 
 = Vladimir Zenzinov
 

@@ -95,6 +95,8 @@ var RO = (function() {
     Q.partner_name = c.partner;
     Q.partner_slot = c.partner_slot;
     Q.third_name = party === 'lsr' ? 'Mensheviks' : 'Left SRs';
+    // history: the Mensheviks and the SRs begin as a bloc; the Left SRs begin inside the SR party
+    Q.ally_lvl = party === 'lsr' ? 3 : 2; Q.ally_lsr = 0; Q.ally_bol = 0;
     Q.members = c.members;
     Q.mem_div = c.memDiv;
     Q.mem_scale = c.memScale;
@@ -189,6 +191,20 @@ var RO = (function() {
     }
     for (pi = 0; pi < PARTIES.length; pi++) { res[PARTIES[pi]] = 100 * res[PARTIES[pi]] / tot; }
     res.lsr_in = 100 * res.lsr_in / tot;
+    // allies vote together in the soviets: a share of each ally's vote goes to the player
+    if (arena === 'soviets' || arena === 'provincial') {
+      var you = Q.player_slot;
+      if (!(you === 'lsr' && !Q.lsr_split)) {
+        for (var wi = 0; wi < WHO.length; wi++) {
+          var lv = Q[LVL[WHO[wi]]] || 0;
+          var slot = allySlot(Q, WHO[wi]);
+          if (lv >= 1 && slot !== you && res[slot] > 0 && !(slot === 'lsr' && !Q.lsr_split)) {
+            var t = res[slot] * 0.04 * lv;
+            res[you] += t; res[slot] -= t;
+          }
+        }
+      }
+    }
     return res;
   }
 
@@ -239,7 +255,7 @@ var RO = (function() {
       Q[f + '_strength'] = 100 * Q[f + '_strength'] / total;
       d += Q[f + '_strength'] * Q[f + '_dissent'];
     }
-    Q.dissent = clamp(d / 10000, 0, 0.95);
+    Q.dissent = clamp(d / 10000 + (Q.dissent_extra || 0), 0, 0.95);
     Q.dissent_percent = Q.dissent * 100;
   }
 
@@ -385,10 +401,141 @@ var RO = (function() {
            (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 60) / 8 + (Q.player_party === 'sr' ? 6 : 0);
   }
 
+
+  // ---- the alliance web ----
+  // Every campaign has relations with the other two playable parties and the Bolsheviks:
+  //   'ally'  = the main partner (SRs for the Mensheviks and the Left SRs, Mensheviks for the SRs),
+  //   'third' = the other playable party (Left SRs for the Mensheviks and the SRs, Mensheviks for the Left SRs),
+  //   'bol'   = the Bolsheviks.
+  // Levels: 1 cooperation (relations 40), 2 bloc (60, compatible lines), 3 coalition (75, shared power).
+  var WHO = ['ally', 'third', 'bol'];
+  var REL = {ally: 'rel_ally', third: 'rel_lsr', bol: 'rel_bol'};
+  var LVL = {ally: 'ally_lvl', third: 'ally_lsr', bol: 'ally_bol'};
+  var LEVEL_NAMES = ['no alliance', 'cooperation', 'bloc', 'coalition'];
+  var SLOTS = {menshevik: {ally: 'sr', third: 'lsr'}, sr: {ally: 'men', third: 'lsr'}, lsr: {ally: 'sr', third: 'men'}};
+  // an advisor of the ally joins the player's deck at the coalition level
+  var LEND = {menshevik: {ally: 'chernov', third: 'spiridonova'}, sr: {ally: 'dan', third: 'spiridonova'},
+              lsr: {ally: 'chernov', third: 'martov'}};
+
+  function allySlot(Q, who) { return who === 'bol' ? 'bol' : SLOTS[Q.player_party][who]; }
+
+  // can the player be on the same line as this party? (the war and the soviets)
+  function compatible(Q, who) {
+    if (who === 'bol') { return !Q.armed_struggle && Q.war_line <= 1; }
+    var slot = allySlot(Q, who);
+    if (slot === 'lsr') { return !Q.armed_struggle && Q.war_line <= 2; }
+    return Math.abs(Q.war_line) <= 3;
+  }
+  // is there a government or a soviet majority to share?
+  function sharedPower(Q, who) {
+    if (who === 'bol') { return !!(Q.vikzhel_deal || Q.assembly_survives || Q.lsr_in_gov); }
+    return !!(Q.in_coalition || Q.assembly_survives || Q.vikzhel_deal || Q.lsr_in_gov);
+  }
+  // the level that the current relations would allow
+  function allianceTarget(Q, who) {
+    var rel = Q[REL[who]], lvl = 0;
+    if (rel >= 40) { lvl = 1; }
+    if (rel >= 60 && compatible(Q, who)) { lvl = 2; }
+    if (rel >= 75 && compatible(Q, who) && sharedPower(Q, who)) { lvl = 3; }
+    return lvl;
+  }
+  // Try to raise an alliance. Returns the new level, or 0 if nothing changed.
+  function formalize(Q, who) {
+    var t = allianceTarget(Q, who);
+    Q.alliance_level = t;
+    if (t > (Q[LVL[who]] || 0)) { Q[LVL[who]] = t; Q.alliance_msg = 1; return t; }
+    Q.alliance_msg = 0;
+    return 0;
+  }
+  function levelName(l) { return LEVEL_NAMES[clamp(Math.round(l), 0, 3)]; }
+
+  // Alliances erode when relations fall well below what holds them.
+  var HOLD = [0, 30, 50, 65];
+  function alliancesTurn(Q, tl) {
+    var i, who, blocs = 0, feed = 0;
+    // Left SRs start inside the SR party; the split ends that
+    if (Q.player_party === 'lsr' && Q.lsr_split && !Q.split_alliance_done) {
+      Q.split_alliance_done = 1; Q.ally_lvl = 0; Q.chernov_advisor = 0; Q.lent_chernov = 0;
+    }
+    for (i = 0; i < WHO.length; i++) {
+      who = WHO[i];
+      var lvl = Q[LVL[who]] || 0;
+      while (lvl > 0 && Q[REL[who]] < HOLD[lvl]) { lvl--; }
+      Q[LVL[who]] = lvl;
+      if (lvl >= 2) { blocs++; }
+      if (lvl >= 3) {
+        feed += Q['turmoil_' + allySlot(Q, who)] || 0;
+        var adv = LEND[Q.player_party] && LEND[Q.player_party][who];
+        if (adv && !Q['lent_' + adv] && !Q[adv + '_advisor']) { Q[adv + '_advisor'] = 1; Q['lent_' + adv] = 1; }
+      }
+    }
+    Q.blocs = blocs;
+    Q.bloc_lean = blocs;
+    // a shared soviet presidium: blocs keep the soviets freer
+    Q.soviet_democracy += 0.12 * tl * blocs;
+    // the allies' own quarrels feed the player's dissent at the coalition level
+    Q.dissent_extra = clamp(0.002 * feed, 0, 0.12);
+    // the other parties' turmoil fades
+    var slots = ['men', 'sr', 'lsr', 'bol'];
+    for (i = 0; i < slots.length; i++) {
+      var k = 'turmoil_' + slots[i];
+      Q[k] = (Q[k] || 0) * (1 - 0.05 * tl);
+    }
+  }
+
+  // Historical upheavals in the parties that the player does not lead: [dix, slot, amount]
+  var TURMOIL = [[20, 'sr', 50], [22, 'men', 45], [22, 'lsr', 20], [28, 'lsr', 40], [28, 'bol', 30], [34, 'men', 30],
+                 [34, 'sr', 40], [36, 'lsr', 90], [44, 'sr', 40], [66, 'sr', 30], [100, 'sr', 20], [100, 'men', 20], [100, 'lsr', 20]];
+  function worldTurmoil(Q) {
+    for (var i = 0; i < TURMOIL.length; i++) {
+      var t = TURMOIL[i], key = 'tm_' + i;
+      if (Q.dix >= t[0] && !Q[key]) { Q[key] = 1; Q['turmoil_' + t[1]] = Math.min(100, (Q['turmoil_' + t[1]] || 0) + t[2]); }
+    }
+  }
+
+  // An alliance breaks at a historical fault line unless relations are high. Returns text for the event.
+  function breakIf(Q, who, threshold, text) {
+    if ((Q[LVL[who]] || 0) > 0 && Q[REL[who]] < threshold) {
+      Q[LVL[who]] = 0; Q[REL[who]] = Math.max(0, Q[REL[who]] - 10);
+      return text;
+    }
+    return '';
+  }
+  function fault(Q, line) {
+    var m = [], p = Q.player_party;
+    if (line === 'brest') {
+      m.push(breakIf(Q, 'bol', 70, 'The alliance with the Bolsheviks has not survived the treaty.'));
+    } else if (line === 'komuch') {
+      var srJoins = p === 'sr' ? (!!Q.armed_struggle && !Q.komuch_guaranteed) : (!Q.komuch_averted && !(p === 'menshevik' && Q.armed_struggle));
+      if (srJoins) {
+        if (p === 'menshevik') { m.push(breakIf(Q, 'ally', 70, 'The Menshevik Central Committee has forbidden its members to join Komuch, and the bloc with the SRs has broken.')); }
+        if (p === 'sr') { m.push(breakIf(Q, 'ally', 75, 'The Mensheviks have denounced Komuch, and the bloc with them has broken.')); }
+        if (p === 'lsr') { m.push(breakIf(Q, 'ally', 75, 'Komuch has ended whatever understanding there was with the SR party.')); }
+      }
+    } else if (line === 'july') {
+      var rising = p === 'lsr' ? !!Q.lsr_rising : !Q.lsr_uprising_averted;
+      if (rising) {
+        if (p === 'lsr') {
+          m.push(breakIf(Q, 'bol', 101, 'The Bolsheviks have ended the coalition with the Left SRs.'));
+          m.push(breakIf(Q, 'third', 75, 'The Mensheviks have kept their distance from the rising.'));
+        } else {
+          m.push(breakIf(Q, 'third', 75, 'The alliance with the Left SRs did not survive the rising.'));
+        }
+      }
+    } else if (line === 'kolchak') {
+      if (p === 'menshevik') { m.push(breakIf(Q, 'ally', 70, 'The SRs sat in the Directory that Kolchak overthrew, and the bloc with them has been called into question.')); }
+      if (p === 'lsr') { m.push(breakIf(Q, 'ally', 75, 'The SRs who sat in the Directory have been arrested by officers; nobody in the party will speak of an understanding with them now.')); }
+    }
+    var out = '';
+    for (var i = 0; i < m.length; i++) { if (m[i]) { out += (out ? ' ' : '') + m[i]; } }
+    Q.fault_flag = out ? 1 : 0;
+    return out;
+  }
+
   // A weighted coin for the decisions that no stat can settle.
   function chance(p) { return Math.random() < clamp(p, 0, 1); }
 
-  return {chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

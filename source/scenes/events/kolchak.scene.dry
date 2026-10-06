@@ -10,11 +10,14 @@ RO.add(Q, {right_threat: 5});
 RO.boost(Q, {middle: -2});
 if (Q.player_party == 'menshevik') { RO.add(Q, {rel_ally: -3}); }
 Q.kolchak_seen = 1;
+Q.fault_text = RO.fault(Q, 'kolchak');
 !}
 
 = Kolchak's Coup
 
 On 18 November, officers loyal to Admiral Alexander Kolchak arrested the SR members of the Directory in Omsk, the anti-Bolshevik government that had been formed in Ufa in September from the SR and Kadet delegates. Kolchak proclaimed himself Supreme Ruler. The SRs who had joined the anti-Bolshevik cause, among them Avksentiev and Zenzinov, were deported to the West.
+
+[? if fault_flag = 1 : [+ fault_text +] ?]
 
 The other side of the civil war has now shown its hand. A White Russia would be a dictatorship of the officers, and the socialists, of every party, would be in prison.
 

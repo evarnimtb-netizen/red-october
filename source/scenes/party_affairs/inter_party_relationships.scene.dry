@@ -14,6 +14,7 @@ The bloc of the Mensheviks and the SRs is the Soviet majority, and every party i
 - @bol: Talks with the moderate Bolsheviks. (Relations: [+ rel_bol : relationships +])
 - @kad: Talks with the Kadets. (Relations: [+ rel_kad : relationships +])
 - @formalize: Formalize an alliance with a partner.
+- @statement: Issue a joint statement with our allies.
 - @easy_discard
 
 @partner
@@ -54,7 +55,7 @@ The Kadets are the coalition's only serious bourgeois party. Milyukov listened p
 
 @formalize
 
-Formal alliances need relations of 40 for cooperation, 60 for a bloc and 75 for a coalition. Whom do you propose it to?
+Alliances grow with relations: cooperation at 40, a bloc at 60 (if our lines on the war and the soviets are compatible) and a coalition at 75 (if there is a government or a soviet majority to share). They also erode when relations fall. (Now: [+ partner_name +], [+ ally_lvl : alliance +]; [+ third_name +], [+ ally_lsr : alliance +]; Bolsheviks, [+ ally_bol : alliance +].) Whom do you propose it to?
 
 - @form_partner: The [+ partner_name +].
 - @form_lsr: The [+ third_name +].
@@ -63,45 +64,43 @@ Formal alliances need relations of 40 for cooperation, 60 for a bloc and 75 for 
 
 @form_partner
 on-arrival: {!
-var lvl = 0;
-if (Q.rel_ally >= 75 && (Q.in_coalition || Q.assembly_survives || Q.vikzhel_deal)) { lvl = 3; }
-else if (Q.rel_ally >= 60) { lvl = 2; }
-else if (Q.rel_ally >= 40) { lvl = 1; }
-if (lvl > Q.ally_lvl) { Q.ally_lvl = lvl; Q.alliance_msg = 1; } else { Q.alliance_msg = 0; }
-Q.alliance_level = lvl;
+RO.formalize(Q, 'ally');
 !}
 go-to: formalized if alliance_msg = 1; not_formalized if alliance_msg = 0
 
 @form_lsr
-view-if: player_party = 'menshevik' or player_party = 'lsr'
+view-if: player_party = 'menshevik' or player_party = 'lsr' or (player_party = 'sr' and lsr_split = 1)
 on-arrival: {!
-var lvl = 0;
-if (Q.rel_lsr >= 75 && (Q.in_coalition || Q.assembly_survives || Q.vikzhel_deal)) { lvl = 3; }
-else if (Q.rel_lsr >= 60) { lvl = 2; }
-else if (Q.rel_lsr >= 40) { lvl = 1; }
-if (lvl > Q.ally_lsr) { Q.ally_lsr = lvl; Q.alliance_msg = 1; } else { Q.alliance_msg = 0; }
-Q.alliance_level = lvl;
+RO.formalize(Q, 'third');
 !}
 go-to: formalized if alliance_msg = 1; not_formalized if alliance_msg = 0
 
 @form_bol
 on-arrival: {!
-var lvl = 0;
-if (Q.rel_bol >= 75 && (Q.vikzhel_deal || Q.assembly_survives)) { lvl = 3; }
-else if (Q.rel_bol >= 60) { lvl = 2; }
-else if (Q.rel_bol >= 40) { lvl = 1; }
-if (lvl > Q.ally_bol) { Q.ally_bol = lvl; Q.alliance_msg = 1; } else { Q.alliance_msg = 0; }
-Q.alliance_level = lvl;
+RO.formalize(Q, 'bol');
 !}
 go-to: formalized if alliance_msg = 1; not_formalized if alliance_msg = 0
 
 @formalized
 
-The talks produced an agreement: cooperation at level [+ alliance_level +] (1 = cooperation, 2 = bloc, 3 = coalition).
+The talks produced an agreement: [+ alliance_level : alliance +].
 
 @not_formalized
 
-Relations are not warm enough, or the conditions are not right, to formalize anything more than we already have.
+Relations are not warm enough, our lines are not compatible, or there is nothing yet to share, so we cannot go beyond what we already have.
+
+@statement
+view-if: ally_lvl >= 1 or ally_lsr >= 1 or ally_bol >= 1
+on-arrival: {!
+var n = 0;
+if (Q.ally_lvl >= 1) { RO.add(Q, {rel_ally: 2}); n++; }
+if (Q.ally_lsr >= 1) { RO.add(Q, {rel_lsr: 2}); n++; }
+if (Q.ally_bol >= 1) { RO.add(Q, {rel_bol: 2}); n++; }
+RO.boost(Q, {workers: 1 + n, soldiers: 1 + n});
+RO.add(Q, {soviet_democracy: 1});
+!}
+
+A joint statement was published over the signatures of the allied parties, on the war, the Assembly and the soviets. It was read in the factories and the barracks as a sign that the socialists could still act together.
 
 @back
 go-to: easy_discard

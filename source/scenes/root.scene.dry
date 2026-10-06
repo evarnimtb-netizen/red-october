@@ -97,7 +97,7 @@ Q.rel_ally = 65;
 Q.rel_lsr = 30;
 Q.rel_bol = 25;
 Q.rel_kad = 30;
-Q.ally_lvl = 0;
+Q.ally_lvl = 2;
 Q.ally_lsr = 0;
 Q.ally_bol = 0;
 
@@ -166,7 +166,11 @@ var flags = ['may_crisis_seen', 'larin_seen', 'crisis_count', 'vik_check_1', 'al
              'ca_extra', 'prisoners_freed', 'steinberg_line', 'constitution', 'dissent_dummy',
              'land_law_draft', 'peasant_organised', 'army_raised', 'komuch_alive', 'chernov_gov', 'lsr_kept', 'ufa_line',
              'lsr_in_gov', 'lsr_seats', 'lsr_backs_bol', 'lsr_survives', 'split_planned', 'cheka_shield', 'seven_commissars', 'lsr_squeezed',
-             'kolchak_seen', 'land_socialised', 'prog_rb', 'prog_po', 'cheka_seats', 'lsr_rising', 'anti_brest', 'early_split'];
+             'kolchak_seen', 'land_socialised', 'prog_rb', 'prog_po', 'cheka_seats', 'lsr_rising', 'anti_brest', 'early_split', 'blocs', 'bloc_lean', 'dissent_extra',
+             'turmoil_men', 'turmoil_sr', 'turmoil_lsr', 'turmoil_bol', 'komuch_averted', 'lsr_uprising_averted',
+             'split_alliance_done', 'anti_brest_front', 'lent_chernov', 'lent_dan', 'lent_spiridonova', 'lent_martov'];
+Q.fault_text = '';
+Q.fault_flag = 0;
 for (var fl of flags) { Q[fl] = 0; }
 Q.dues_income = 1;
 

@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/kamkov.svg
 tags: advisor, defencist
 new-page: true
-view-if: kamkov_advisor = 1 and player_party = 'lsr'
+view-if: kamkov_advisor = 1 and (player_party = 'lsr' or lent_kamkov = 1)
 
 = Boris Kamkov
 

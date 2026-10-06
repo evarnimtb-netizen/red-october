@@ -9,11 +9,12 @@ The design is in [`docs/design-plan.md`](docs/design-plan.md).
 All three campaigns are **playable from start to finish**: the Mensheviks (hard), the SRs (normal) and the Left SRs (hard).
 
 - 69 turns: two-week turns until the calendar reform of February 1918, then monthly turns to December 1921.
+- An alliance web between the three playable parties and the Bolsheviks, with three levels (cooperation, bloc, coalition), each with its own effects, and fault lines (Brest-Litovsk, Komuch, the July 1918 rising, Kolchak's coup) at which alliances break.
 - Cards in three decks (Party Affairs, Coalition Affairs, Soviet Affairs), with party-only cards for each campaign, and 29 advisors.
 - About 70 events from the February Revolution to the arrests of 1921, most shared between the parties with options and wording that change by party, plus events of each campaign's own. A real fork at the October Revolution: a Bolshevik takeover, an all-socialist government via the Vikzhel talks, or a Constituent Assembly that governs.
 - 11 endings (Kornilov's Russia, the generals' republic, White Russia, exile, the one-party state, the SR and Left SR historical endings, the all-socialist government, the Constituent Republic, Soviet democracy, the Soviet coalition) and 14 achievements.
 
-Not yet done from the design plan: public-domain period images and music (the old German assets were removed; card art is generated), and a balance pass by a human player. The alliance system exists for each party's main partner, but not the full web of alliances between all three. The numbers in the design plan marked as uncertain have not been checked against the books.
+Not yet done from the design plan: public-domain period images and music (the old German assets were removed; card art is generated), and a balance pass by a human player. The numbers in the design plan marked as uncertain have not been checked against the books.
 
 ## Building the game
 

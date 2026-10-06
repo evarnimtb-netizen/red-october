@@ -175,7 +175,7 @@ is-pinned-card: true
 card-image: img/cards/{aid}.svg
 tags: advisor, {tag}
 new-page: true
-view-if: {flag} = 1 and player_party = 'menshevik'
+view-if: {flag} = 1 and (player_party = 'menshevik' or lent_{aid} = 1)
 
 = {title}
 
@@ -236,7 +236,7 @@ is-pinned-card: true
 card-image: img/cards/{aid}.svg
 tags: advisor, {tag}
 new-page: true
-view-if: {flag} = 1 and player_party = '{party}'
+view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1)
 
 = {title}
 

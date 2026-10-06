@@ -212,4 +212,8 @@ var lsr_rising_bot = {
   choices: merge(democrat.choices, merge(lsrCommon, { lsr_july: [/Carry out/], brest: [/Leave the government/], lsr_government: [/Stay outside/] })),
   cards: ['inside_sr', 'the_split', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'kamkov', 'spiridonova']
 };
-module.exports = {lsr_coalition: lsr_coalition_bot, lsr_rising: lsr_rising_bot, sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};
+var persuader = {
+  choices: merge(opposition.choices, { komuch: [/Persuade/, /Neither/], inter_party_relationships: [/Formalize/, /Talks with the SRs/] }),
+  cards: ['inter_party_relationships', 'neorevisionism', 'peoples_party', 'international_relations', 'domestic_enemies', 'judiciary', 'campaigning', 'rally', 'media', 'party_disunity', 'fundraising']
+};
+module.exports = {persuader: persuader, lsr_coalition: lsr_coalition_bot, lsr_rising: lsr_rising_bot, sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};

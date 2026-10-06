@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/broido.svg
 tags: advisor, intl
 new-page: true
-view-if: broido_advisor = 1 and player_party = 'menshevik'
+view-if: broido_advisor = 1 and (player_party = 'menshevik' or lent_broido = 1)
 
 = Eva Broido
 

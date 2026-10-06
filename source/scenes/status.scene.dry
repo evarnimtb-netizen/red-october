@@ -45,7 +45,7 @@ Soviet democracy: [+ soviet_democracy : level +]
 
 = Other parties
 
-Our relations with:
+Our relations with (and alliances):
 
 [+ partner_name +]: [+ rel_ally : relationships +]
 
@@ -55,11 +55,11 @@ Bolsheviks: [+ rel_bol : relationships +]
 
 Kadets: [+ rel_kad : relationships +]
 
-[? if ally_lvl >= 1 : Alliance with the [+ partner_name +]: level [+ ally_lvl +] ?]
+[? if ally_lvl >= 1 : [+ partner_name +]: [+ ally_lvl : alliance +] ?]
 
-[? if ally_lsr >= 1 : Alliance with the Left SRs: level [+ ally_lsr +] ?]
+[? if ally_lsr >= 1 : [+ third_name +]: [+ ally_lsr : alliance +] ?]
 
-[? if ally_bol >= 1 : Alliance with the Bolsheviks: level [+ ally_bol +] ?]
+[? if ally_bol >= 1 : Bolsheviks: [+ ally_bol : alliance +] ?]
 
 @paramilitaries
 
