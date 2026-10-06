@@ -23,19 +23,111 @@ RO.boost(Q, {workers: 1, middle: 2});
 A militia chosen and supervised by the city dumas has taken shape. It is poorly armed and slow, but it answers to the elected authorities.
 
 @old
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @old_slow: Phase it in, with compensation and negotiation.
+- @old_decree: Pass it by decree, as written.
+- @old_force: Pass it by decree, and break any opposition by force.
+
+@old_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.add(Q, {right_threat: 3, rel_kad: 3, soviet_democracy: -1, repression: 1});
 RO.boost(Q, {workers: -3, middle: 2});
 RO.fac(Q, 'intl', 0, 3);
+});
+!}
+
+Many old officers were recalled. They are more experienced. They are also less trusted by the workers. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@old_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.add(Q, {right_threat: 3, rel_kad: 3, soviet_democracy: -1, repression: 1});
+RO.boost(Q, {workers: -3, middle: 2});
+RO.fac(Q, 'intl', 0, 3);
+});
 !}
 
 Many old officers were recalled. They are more experienced. They are also less trusted by the workers.
 
-@workers
+
+
+@old_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.add(Q, {right_threat: 3, rel_kad: 3, soviet_democracy: -1, repression: 1});
+RO.boost(Q, {workers: -3, middle: 2});
+RO.fac(Q, 'intl', 0, 3);
+});
+!}
+
+Many old officers were recalled. They are more experienced. They are also less trusted by the workers. [+ law_text +]
+
+@workers
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @workers_slow: Phase it in, with compensation and negotiation.
+- @workers_decree: Pass it by decree, as written.
+- @workers_force: Pass it by decree, and break any opposition by force.
+
+@workers_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
+on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.add(Q, {right_threat: -2, bolshevik: 2, rel_kad: -3});
 RO.boost(Q, {workers: 3});
 Q.militia = (Q.militia || 0) + 1;
+});
+!}
+
+The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@workers_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.add(Q, {right_threat: -2, bolshevik: 2, rel_kad: -3});
+RO.boost(Q, {workers: 3});
+Q.militia = (Q.militia || 0) + 1;
+});
 !}
 
 The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them.
+
+
+
+@workers_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.add(Q, {right_threat: -2, bolshevik: 2, rel_kad: -3});
+RO.boost(Q, {workers: 3});
+Q.militia = (Q.militia || 0) + 1;
+});
+!}
+
+The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them. [+ law_text +]

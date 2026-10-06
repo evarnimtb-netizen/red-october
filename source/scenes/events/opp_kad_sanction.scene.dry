@@ -21,6 +21,7 @@ Miliukov has said that the party "will use every means at its disposal". The Kad
 - @firm: Hold firm.
 - @soviet: Appeal to the Soviet and the factories over their heads.
 - @bargain: Negotiate through the banks and the Allied ambassadors.
+- @break: Break the opposition: close Rech and arrest the financiers.
 
 @concede
 on-arrival: {!
@@ -60,3 +61,12 @@ RO.add(Q, {ant_kad: -12, rel_kad: 4, ruble: 2});
 !}
 
 Through the ambassadors and a Petrograd banker who is not a Kadet, we have made it known that the party will respect property in everything but name. It was not a lie, exactly. The sanctions have eased, and the leaders of the Kadets remain suspicious.
+
+@break
+choose-if: strength >= 18
+unavailable-subtitle: We lack the force and the allies for this.
+on-arrival: {!
+RO.squashAll(Q, ['kad']);
+!}
+
+[+ sq_text +] Whatever the result, the liberals will remember that we are ready to use the militia against them.

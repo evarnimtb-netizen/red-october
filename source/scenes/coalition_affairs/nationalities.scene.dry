@@ -16,21 +16,111 @@ The empire's peoples want autonomy or independence: the Ukrainian Central Rada, 
 - @easy_discard
 
 @rada
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @rada_slow: Phase it in, with compensation and negotiation.
+- @rada_decree: Pass it by decree, as written.
+- @rada_force: Pass it by decree, and break any opposition by force.
+
+@rada_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.boost(Q, {nations: 4});
 RO.add(Q, {rel_kad: -4, right_threat: 2, rel_ally: 1});
 RO.fac(Q, 'rightdef', 0, 3);
+});
+!}
+
+The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@rada_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.boost(Q, {nations: 4});
+RO.add(Q, {rel_kad: -4, right_threat: 2, rel_ally: 1});
+RO.fac(Q, 'rightdef', 0, 3);
+});
 !}
 
 The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it.
 
-@finland
+
+
+@rada_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.boost(Q, {nations: 4});
+RO.add(Q, {rel_kad: -4, right_threat: 2, rel_ally: 1});
+RO.fac(Q, 'rightdef', 0, 3);
+});
+!}
+
+The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it. [+ law_text +]
+
+@finland
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @finland_slow: Phase it in, with compensation and negotiation.
+- @finland_decree: Pass it by decree, as written.
+- @finland_force: Pass it by decree, and break any opposition by force.
+
+@finland_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
+on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.boost(Q, {nations: 2});
 RO.add(Q, {rel_kad: -2, right_threat: 1});
+});
+!}
+
+The Finns are to govern their internal affairs. The question of independence is left for the Assembly. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@finland_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.boost(Q, {nations: 2});
+RO.add(Q, {rel_kad: -2, right_threat: 1});
+});
 !}
 
 The Finns are to govern their internal affairs. The question of independence is left for the Assembly.
+
+
+
+@finland_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.boost(Q, {nations: 2});
+RO.add(Q, {rel_kad: -2, right_threat: 1});
+});
+!}
+
+The Finns are to govern their internal affairs. The question of independence is left for the Assembly. [+ law_text +]
 
 @caucasus
 on-arrival: {!

@@ -25,14 +25,62 @@ RO.fac(Q, 'intl', 0, 1);
 Conciliation boards settled the worst strikes in Petrograd and the Urals. The employers are grateful. The factory committees are less so.
 
 @committees
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @committees_slow: Phase it in, with compensation and negotiation.
+- @committees_decree: Pass it by decree, as written.
+- @committees_force: Pass it by decree, and break any opposition by force.
+
+@committees_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.boost(Q, {workers: 5, railway: 2});
 RO.add(Q, {ruble: -3, rel_kad: -4, bolshevik: -1});
 RO.fac(Q, 'unions', 2, -2);
 RO.fac(Q, 'rightdef', 0, 3);
+});
+!}
+
+The committees are recognised in law and the eight-hour day is guaranteed. The factory owners say they will close the plants. A few have. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@committees_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.boost(Q, {workers: 5, railway: 2});
+RO.add(Q, {ruble: -3, rel_kad: -4, bolshevik: -1});
+RO.fac(Q, 'unions', 2, -2);
+RO.fac(Q, 'rightdef', 0, 3);
+});
 !}
 
 The committees are recognised in law and the eight-hour day is guaranteed. The factory owners say they will close the plants. A few have.
+
+
+
+@committees_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.boost(Q, {workers: 5, railway: 2});
+RO.add(Q, {ruble: -3, rel_kad: -4, bolshevik: -1});
+RO.fac(Q, 'unions', 2, -2);
+RO.fac(Q, 'rightdef', 0, 3);
+});
+!}
+
+The committees are recognised in law and the eight-hour day is guaranteed. The factory owners say they will close the plants. A few have. [+ law_text +]
 
 @circular
 on-arrival: {!

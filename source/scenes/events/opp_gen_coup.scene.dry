@@ -59,7 +59,7 @@ The government telegraphed to the garrisons that it was still the government. Mo
 @coup_result
 on-arrival: {!
 Q.opp_force = RO.kornilovForce(Q) + (Q.ant_gen - 70) / 4;
-Q.opp_resist = RO.kornilovResistance(Q, Q.opp_bonus);
+Q.opp_resist = RO.kornilovResistance(Q, Q.opp_bonus + RO.allyPower(Q, 'gen') / 4);
 Q.opp_win = Q.opp_force > Q.opp_resist ? 0 : 1;
 if (Q.opp_win) {
     RO.add(Q, {ant_gen: -40, right_threat: -18, army_discipline: -4, soviet_democracy: 3});

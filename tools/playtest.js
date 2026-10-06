@@ -65,7 +65,7 @@ function playOne(idx) {
     var watch = {'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1, 'sr_programme_1919': 1};
     if (watch[sid] && !snaps[sid]) {
       var qq = eng.state.qualities;
-      snaps[sid] = {G: Math.round(RO.grievance(qq)), bol: Math.round(qq.bolshevik), rt: Math.round(qq.right_threat), army: Math.round(qq.army_discipline), power: Math.round(RO.bolPower(qq)), war: Math.round(qq.war_weariness), bread: Math.round(qq.bread), land: Math.round(qq.land_pressure), ruble: Math.round(qq.ruble), sd: Math.round(qq.soviet_democracy), men: Math.round(qq.player_poll), mil: qq.militia, rr: Math.round(RO.kornilovResistance(qq, 10)), kf: Math.round(RO.kornilovForce(qq)), relsr: Math.round(qq.rel_ally), relbol: Math.round(qq.rel_bol), rep: Math.round(qq.repression), wf: Math.round(qq.white_front), red: Math.round(qq.red_army), bpow: Math.round(qq.bol_power || 0), po: qq.peasant_organised || 0, homog: qq.homogeneous_gov, ca: qq.ca_elected, lc: qq.land_committees, ak: Math.round(qq.ant_kad), ag: Math.round(qq.ant_gen), ab: Math.round(qq.ant_bol)};
+      snaps[sid] = {G: Math.round(RO.grievance(qq)), bol: Math.round(qq.bolshevik), rt: Math.round(qq.right_threat), army: Math.round(qq.army_discipline), power: Math.round(RO.bolPower(qq)), war: Math.round(qq.war_weariness), bread: Math.round(qq.bread), land: Math.round(qq.land_pressure), ruble: Math.round(qq.ruble), sd: Math.round(qq.soviet_democracy), men: Math.round(qq.player_poll), mil: qq.militia, rr: Math.round(RO.kornilovResistance(qq, 10)), kf: Math.round(RO.kornilovForce(qq)), relsr: Math.round(qq.rel_ally), relbol: Math.round(qq.rel_bol), rep: Math.round(qq.repression), wf: Math.round(qq.white_front), red: Math.round(qq.red_army), bpow: Math.round(qq.bol_power || 0), po: qq.peasant_organised || 0, homog: qq.homogeneous_gov, ca: qq.ca_elected, lc: qq.land_committees, ak: Math.round(qq.ant_kad), ag: Math.round(qq.ant_gen), ab: Math.round(qq.ant_bol), st: Math.round(RO.strength(qq)), od: Math.round(100 * RO.squashOdds(qq, 'kad')), odg: Math.round(100 * RO.squashOdds(qq, 'gen'))};
     }
     if (sid.indexOf('root.start_menu') === 0 && Q().started !== 1) {
       if (!pickByTitle(/Start game/)) { break; }
@@ -137,6 +137,12 @@ function playOne(idx) {
         for (var ci = 0; ci < avail.length; ci++) {
           if (prefs[pi].test(cs[avail[ci]].title)) { pick = avail[ci]; break; }
         }
+      }
+      if (pick === undefined) {
+        // laws with a choice of implementation: the bot's preferred style, by default the law as written
+        var lawRe = bot2.law || /as written/;
+        for (var li = 0; li < avail.length && pick === undefined; li++) { if (lawRe.test(cs[avail[li]].title)) { pick = avail[li]; } }
+        if (pick === undefined) { for (var lj = 0; lj < avail.length && pick === undefined; lj++) { if (/as written/.test(cs[avail[lj]].title)) { pick = avail[lj]; } } }
       }
       if (pick === undefined) {
         var nonret2 = avail.filter(function(i) { return !/Return card|Cancel action|Return to main/.test(cs[i].title); });

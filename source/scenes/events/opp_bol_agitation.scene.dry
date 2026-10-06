@@ -20,6 +20,7 @@ They are not wrong that it is a weakness. The question is what to do about it.
 - @concede: Adopt their demand.
 - @debate: Debate them in the Soviet.
 - @ignore: Ignore them.
+- @break: Shut down Pravda and arrest the agitators.
 
 @concede
 on-arrival: {!
@@ -47,3 +48,12 @@ RO.boost(Q, {workers: -3, soldiers: -2});
 !}
 
 We said nothing, and the Bolsheviks said everything. The garrisons and the factories are listening to them, and they are not listening to us.
+
+@break
+choose-if: strength >= 18
+unavailable-subtitle: We lack the force and the allies for this.
+on-arrival: {!
+RO.squashAll(Q, ['bol']);
+!}
+
+[+ sq_text +] The workers' districts will not forget it, whichever way it went.

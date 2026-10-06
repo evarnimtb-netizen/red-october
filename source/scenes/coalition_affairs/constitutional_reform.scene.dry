@@ -16,15 +16,65 @@ The Provisional Government set the Constituent Assembly elections for 12 Novembe
 @bring_forward
 choose-if: resources >= 1
 unavailable-subtitle: We have no resources.
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @bring_forward_slow: Phase it in, with compensation and negotiation.
+- @bring_forward_decree: Pass it by decree, as written.
+- @bring_forward_force: Pass it by decree, and break any opposition by force.
+
+@bring_forward_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.pay(Q, 1);
 Q.assembly_early = 1;
 RO.add(Q, {rel_kad: -5, rel_ally: 4, soviet_democracy: 2, bolshevik: -2});
 RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
 RO.fac(Q, 'intl', 0, -2);
+});
+!}
+
+The Provisional Government, under pressure from the Soviet, has moved the elections to the first half of October. The Kadets protested, and voted for it. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@bring_forward_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.pay(Q, 1);
+Q.assembly_early = 1;
+RO.add(Q, {rel_kad: -5, rel_ally: 4, soviet_democracy: 2, bolshevik: -2});
+RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
+RO.fac(Q, 'intl', 0, -2);
+});
 !}
 
 The Provisional Government, under pressure from the Soviet, has moved the elections to the first half of October. The Kadets protested, and voted for it.
+
+
+
+@bring_forward_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.pay(Q, 1);
+Q.assembly_early = 1;
+RO.add(Q, {rel_kad: -5, rel_ally: 4, soviet_democracy: 2, bolshevik: -2});
+RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
+RO.fac(Q, 'intl', 0, -2);
+});
+!}
+
+The Provisional Government, under pressure from the Soviet, has moved the elections to the first half of October. The Kadets protested, and voted for it. [+ law_text +]
 
 @keep
 on-arrival: {!

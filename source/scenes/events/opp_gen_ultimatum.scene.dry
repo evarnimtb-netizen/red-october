@@ -20,6 +20,7 @@ The memorandum is signed by men who command armies. It does not say what will ha
 - @concede: Restore the officers' authority.
 - @firm: Refuse the memorandum.
 - @purge: Dismiss the most hostile generals.
+- @break: Break the Officers' Union with the loyal garrisons and the committees.
 
 @concede
 on-arrival: {!
@@ -48,3 +49,12 @@ RO.boost(Q, {soldiers: 2});
 !}
 
 The commander of the northern front and two army commanders were dismissed in one afternoon, and replaced with men from the commissars' lists. It has frightened the others, for now. It has also made sure that the men who were dismissed have the leisure to talk to each other.
+
+@break
+choose-if: strength >= 18
+unavailable-subtitle: We lack the force and the allies for this.
+on-arrival: {!
+RO.squashAll(Q, ['gen']);
+!}
+
+[+ sq_text +] Whatever the result, the officers have been shown that the committees are armed.

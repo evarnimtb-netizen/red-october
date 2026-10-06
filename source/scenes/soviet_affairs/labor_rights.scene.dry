@@ -24,14 +24,62 @@ RO.add(Q, {soviet_democracy: 1, repression: 1});
 The Soviet debated the petition for a whole afternoon. It was rejected, but the union men noticed who supported it.
 
 @strike
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @strike_slow: Phase it in, with compensation and negotiation.
+- @strike_decree: Pass it by decree, as written.
+- @strike_force: Pass it by decree, and break any opposition by force.
+
+@strike_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.boost(Q, {workers: 6, railway: 6});
 RO.add(Q, {bread: -3, repression: 5, soviet_democracy: 2, rel_bol: -4});
 RO.fac(Q, 'unions', 3, -4);
 if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
+});
+!}
+
+The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@strike_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.boost(Q, {workers: 6, railway: 6});
+RO.add(Q, {bread: -3, repression: 5, soviet_democracy: 2, rel_bol: -4});
+RO.fac(Q, 'unions', 3, -4);
+if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
+});
 !}
 
 The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own.
+
+
+
+@strike_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.boost(Q, {workers: 6, railway: 6});
+RO.add(Q, {bread: -3, repression: 5, soviet_democracy: 2, rel_bol: -4});
+RO.fac(Q, 'unions', 3, -4);
+if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
+});
+!}
+
+The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own. [+ law_text +]
 
 @compromise
 on-arrival: {!

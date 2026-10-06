@@ -10,7 +10,7 @@ view-if: (in_coalition = 1 and bol_regime = 0) or lsr_in_gov = 1
 
 [? if in_coalition = 1 and bol_regime = 0 : The party shares the government, and with it the power to set the country's course. ?][? if lsr_in_gov = 1 and bol_regime = 1 : The party holds a few commissariats in a government that is not its own: the land and the courts are in its hands, and not much else. ?] A change of course takes a turn, and the cabinet cannot change course again for two months. Policies have a lasting effect, month by month.
 
-[? if ant_kad >= 40 : The liberals are in an angry mood. ?][? if ant_gen >= 40 : The generals are muttering about the government. ?][? if ant_bol >= 40 and bol_regime = 0 : Pravda has begun to campaign against the cabinet. ?]Each camp that opposes a policy will first try sanctions, and then, if it is angry enough, take up arms: see the Opposition tab on the right.
+[? if ant_kad >= 40 : The liberals are in an angry mood. ?][? if ant_gen >= 40 : The generals are muttering about the government. ?][? if ant_bol >= 40 and bol_regime = 0 : Pravda has begun to campaign against the cabinet. ?]Each camp that opposes a policy will first try sanctions, and then, if it is angry enough, take up arms: see the Opposition tab on the right. An unpopular law can be phased in gently, passed by decree, or, if the party is strong enough (its strength is shown there), passed and enforced against its opponents: the odds are shown for each camp, and a failure makes the camp angrier.
 
 Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Food: [+ pol_food : pol_food +]. Labour: [+ pol_labour : pol_labour +]. ?][? if at_war = 1 and in_coalition = 1 and bol_regime = 0 : The war: [+ pol_war : pol_war +]. ?]Order: [+ pol_order : pol_order +].
 
@@ -41,6 +41,7 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_land = 0;
+Q.soft_land = 0;
 RO.add(Q, {land_pressure: 2, rel_kad: 2});
 !}
 
@@ -52,14 +53,63 @@ The land question is left to the Constituent Assembly, as the liberals ask. The 
 view-if: (in_coalition = 1 or lsr_in_gov = 1) and pol_land != 1
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @land_1_slow: Phase it in, with compensation and negotiation.
+- @land_1_decree: Pass it by decree, as written.
+- @land_1_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@land_1_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_land = 1;
+Q.soft_land = 1;
+RO.law(Q, 'slow', () => {
 RO.add(Q, {land_pressure: -4, rel_kad: -3, right_threat: 1, ant_kad: 4, ant_gen: 2}); RO.boost(Q, {peasants: 2}); Q.land_committees = (Q.land_committees || 0) + 1;
+});
+!}
+
+The land committees now have the government's authority to regulate the transfers until the Assembly meets. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@land_1_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_land = 1;
+Q.soft_land = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {land_pressure: -4, rel_kad: -3, right_threat: 1, ant_kad: 4, ant_gen: 2}); RO.boost(Q, {peasants: 2}); Q.land_committees = (Q.land_committees || 0) + 1;
+});
 !}
 
 The land committees now have the government's authority to regulate the transfers until the Assembly meets.
+
+- @root: Continue.
+
+@land_1_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_land = 1;
+Q.soft_land = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {land_pressure: -4, rel_kad: -3, right_threat: 1, ant_kad: 4, ant_gen: 2}); RO.boost(Q, {peasants: 2}); Q.land_committees = (Q.land_committees || 0) + 1;
+});
+!}
+
+The land committees now have the government's authority to regulate the transfers until the Assembly meets. [+ law_text +]
 
 - @root: Continue.
 
@@ -67,14 +117,63 @@ The land committees now have the government's authority to regulate the transfer
 view-if: (in_coalition = 1 or lsr_in_gov = 1) and pol_land != 2
 choose-if: cabinet_timer <= 0 and (rel_ally >= 50 or player_party = 'sr' or player_party = 'lsr')
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?][? if not (rel_ally >= 50 or player_party = 'sr' or player_party = 'lsr') : The party that holds the peasants does not agree. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @land_2_slow: Phase it in, with compensation and negotiation.
+- @land_2_decree: Pass it by decree, as written.
+- @land_2_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@land_2_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_land = 2;
+Q.soft_land = 1;
+RO.law(Q, 'slow', () => {
 RO.add(Q, {land_pressure: -8, rel_kad: -8, right_threat: 3, ant_kad: 14, ant_gen: 8, ant_bol: -3}); RO.boost(Q, {peasants: 4}); RO.fac(Q, 'rightdef', 0, 6); Q.land_committees = (Q.land_committees || 0) + 1;
+});
+!}
+
+A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@land_2_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_land = 2;
+Q.soft_land = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {land_pressure: -8, rel_kad: -8, right_threat: 3, ant_kad: 14, ant_gen: 8, ant_bol: -3}); RO.boost(Q, {peasants: 4}); RO.fac(Q, 'rightdef', 0, 6); Q.land_committees = (Q.land_committees || 0) + 1;
+});
 !}
 
 A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar.
+
+- @root: Continue.
+
+@land_2_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_land = 2;
+Q.soft_land = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {land_pressure: -8, rel_kad: -8, right_threat: 3, ant_kad: 14, ant_gen: 8, ant_bol: -3}); RO.boost(Q, {peasants: 4}); RO.fac(Q, 'rightdef', 0, 6); Q.land_committees = (Q.land_committees || 0) + 1;
+});
+!}
+
+A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar. [+ law_text +]
 
 - @root: Continue.
 
@@ -86,6 +185,7 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_food = 0;
+Q.soft_food = 0;
 RO.add(Q, {bread: -2, ruble: 1}); RO.boost(Q, {peasants: 1, workers: -1});
 !}
 
@@ -101,6 +201,7 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_food = 1;
+Q.soft_food = 0;
 RO.add(Q, {bread: 3}); RO.boost(Q, {peasants: -2});
 !}
 
@@ -116,6 +217,7 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_food = 2;
+Q.soft_food = 0;
 RO.add(Q, {bread: 5, repression: 1, soviet_democracy: -1}); RO.boost(Q, {peasants: -6});
 !}
 
@@ -131,6 +233,7 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_war = 0;
+Q.soft_war = 0;
 RO.add(Q, {rel_kad: 1});
 !}
 
@@ -142,14 +245,63 @@ The government will defend the front but not attack. It is the middle line that 
 view-if: (in_coalition = 1 and bol_regime = 0 and at_war = 1) and pol_war != 1
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @war_1_slow: Phase it in, with compensation and negotiation.
+- @war_1_decree: Pass it by decree, as written.
+- @war_1_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@war_1_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_war = 1;
+Q.soft_war = 1;
+RO.law(Q, 'slow', () => {
 RO.add(Q, {war_weariness: -3, rel_kad: -3, ant_kad: 5, ant_gen: 7, ant_bol: -3}); Q.stockholm = (Q.stockholm || 0) + 1;
+});
+!}
+
+The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@war_1_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_war = 1;
+Q.soft_war = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {war_weariness: -3, rel_kad: -3, ant_kad: 5, ant_gen: 7, ant_bol: -3}); Q.stockholm = (Q.stockholm || 0) + 1;
+});
 !}
 
 The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations.
+
+- @root: Continue.
+
+@war_1_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_war = 1;
+Q.soft_war = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {war_weariness: -3, rel_kad: -3, ant_kad: 5, ant_gen: 7, ant_bol: -3}); Q.stockholm = (Q.stockholm || 0) + 1;
+});
+!}
+
+The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations. [+ law_text +]
 
 - @root: Continue.
 
@@ -157,14 +309,63 @@ The government's diplomacy now aims at a general peace without annexations. The 
 view-if: (in_coalition = 1 and bol_regime = 0 and at_war = 1) and pol_war != 2
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @war_2_slow: Phase it in, with compensation and negotiation.
+- @war_2_decree: Pass it by decree, as written.
+- @war_2_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@war_2_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_war = 2;
+Q.soft_war = 1;
+RO.law(Q, 'slow', () => {
 RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 3, ant_bol: 8, ant_gen: -4}); Q.offensive_prepared = 1;
+});
+!}
+
+The army is told to prepare to attack. The Allies are pleased; the soldiers are not. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@war_2_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_war = 2;
+Q.soft_war = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 3, ant_bol: 8, ant_gen: -4}); Q.offensive_prepared = 1;
+});
 !}
 
 The army is told to prepare to attack. The Allies are pleased; the soldiers are not.
+
+- @root: Continue.
+
+@war_2_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_war = 2;
+Q.soft_war = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 3, ant_bol: 8, ant_gen: -4}); Q.offensive_prepared = 1;
+});
+!}
+
+The army is told to prepare to attack. The Allies are pleased; the soldiers are not. [+ law_text +]
 
 - @root: Continue.
 
@@ -176,6 +377,7 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_order = 0;
+Q.soft_order = 0;
 RO.add(Q, {rel_kad: 0});
 !}
 
@@ -187,14 +389,63 @@ The government will govern by the ordinary law and the courts, with the libertie
 view-if: (in_coalition = 1 or lsr_in_gov = 1) and pol_order != 1
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @order_1_slow: Phase it in, with compensation and negotiation.
+- @order_1_decree: Pass it by decree, as written.
+- @order_1_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@order_1_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_order = 1;
+Q.soft_order = 1;
+RO.law(Q, 'slow', () => {
 RO.add(Q, {right_threat: -3, repression: 2, soviet_democracy: -2, rel_kad: 2, ant_gen: -6, ant_bol: 8});
+});
+!}
+
+Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@order_1_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_order = 1;
+Q.soft_order = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {right_threat: -3, repression: 2, soviet_democracy: -2, rel_kad: 2, ant_gen: -6, ant_bol: 8});
+});
 !}
 
 Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not.
+
+- @root: Continue.
+
+@order_1_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_order = 1;
+Q.soft_order = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {right_threat: -3, repression: 2, soviet_democracy: -2, rel_kad: 2, ant_gen: -6, ant_bol: 8});
+});
+!}
+
+Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not. [+ law_text +]
 
 - @root: Continue.
 
@@ -202,14 +453,63 @@ Emergency measures give the government the right to arrest agitators and close n
 view-if: (in_coalition = 1 or lsr_in_gov = 1) and pol_order != 2
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @order_2_slow: Phase it in, with compensation and negotiation.
+- @order_2_decree: Pass it by decree, as written.
+- @order_2_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@order_2_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_order = 2;
+Q.soft_order = 1;
+RO.law(Q, 'slow', () => {
 RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad: 2, ant_bol: -4});
+});
+!}
+
+An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@order_2_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_order = 2;
+Q.soft_order = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad: 2, ant_bol: -4});
+});
 !}
 
 An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful.
+
+- @root: Continue.
+
+@order_2_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_order = 2;
+Q.soft_order = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad: 2, ant_bol: -4});
+});
+!}
+
+An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful. [+ law_text +]
 
 - @root: Continue.
 
@@ -221,6 +521,7 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_labour = 0;
+Q.soft_labour = 0;
 RO.add(Q, {ruble: 1}); RO.boost(Q, {workers: -2});
 !}
 
@@ -232,14 +533,63 @@ The factories are left to their owners and managers. Production recovers a littl
 view-if: (in_coalition = 1 and bol_regime = 0) and pol_labour != 1
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @labour_1_slow: Phase it in, with compensation and negotiation.
+- @labour_1_decree: Pass it by decree, as written.
+- @labour_1_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@labour_1_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_labour = 1;
+Q.soft_labour = 1;
+RO.law(Q, 'slow', () => {
 RO.boost(Q, {workers: 4}); RO.add(Q, {rel_kad: -3, ruble: -2, ant_kad: 6, ant_gen: 2});
+});
+!}
+
+The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@labour_1_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_labour = 1;
+Q.soft_labour = 0;
+RO.law(Q, 'decree', () => {
+RO.boost(Q, {workers: 4}); RO.add(Q, {rel_kad: -3, ruble: -2, ant_kad: 6, ant_gen: 2});
+});
 !}
 
 The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants.
+
+- @root: Continue.
+
+@labour_1_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_labour = 1;
+Q.soft_labour = 0;
+RO.law(Q, 'force', () => {
+RO.boost(Q, {workers: 4}); RO.add(Q, {rel_kad: -3, ruble: -2, ant_kad: 6, ant_gen: 2});
+});
+!}
+
+The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants. [+ law_text +]
 
 - @root: Continue.
 
@@ -247,14 +597,63 @@ The eight-hour day and the factory committees are written into law. The workers 
 view-if: (in_coalition = 1 and bol_regime = 0) and pol_labour != 2
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @labour_2_slow: Phase it in, with compensation and negotiation.
+- @labour_2_decree: Pass it by decree, as written.
+- @labour_2_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@labour_2_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_labour = 2;
+Q.soft_labour = 1;
+RO.law(Q, 'slow', () => {
 RO.boost(Q, {workers: 2}); RO.add(Q, {ruble: 1, rel_kad: -4, ant_kad: 8, ant_gen: 3});
+});
+!}
+
+A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@labour_2_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_labour = 2;
+Q.soft_labour = 0;
+RO.law(Q, 'decree', () => {
+RO.boost(Q, {workers: 2}); RO.add(Q, {ruble: 1, rel_kad: -4, ant_kad: 8, ant_gen: 3});
+});
 !}
 
 A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like.
+
+- @root: Continue.
+
+@labour_2_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_labour = 2;
+Q.soft_labour = 0;
+RO.law(Q, 'force', () => {
+RO.boost(Q, {workers: 2}); RO.add(Q, {ruble: 1, rel_kad: -4, ant_kad: 8, ant_gen: 3});
+});
+!}
+
+A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like. [+ law_text +]
 
 - @root: Continue.
 
@@ -276,12 +675,56 @@ The Kadets are back in the cabinet, with the ministries that they had before. Th
 view-if: in_coalition = 1 and bol_regime = 0 and gov_kadets = 1 and rel_ally >= 55
 choose-if: cabinet_timer <= 0
 unavailable-subtitle: The cabinet has changed course too recently.
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @kadets_out_slow: Phase it in, with compensation and negotiation.
+- @kadets_out_decree: Pass it by decree, as written.
+- @kadets_out_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@kadets_out_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
-Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);
+RO.law(Q, 'slow', () => {
+Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2, ant_kad: 6, ant_gen: 3}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);
+});
+!}
+
+The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@kadets_out_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+RO.law(Q, 'decree', () => {
+Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2, ant_kad: 6, ant_gen: 3}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);
+});
 !}
 
 The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame.
+
+- @root: Continue.
+
+@kadets_out_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+RO.law(Q, 'force', () => {
+Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2, ant_kad: 6, ant_gen: 3}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);
+});
+!}
+
+The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame. [+ law_text +]
 
 - @root: Continue.

@@ -25,7 +25,7 @@ It is not yet a march on the capital, but it is a civil war in the countryside, 
 @crush
 on-arrival: {!
 Q.opp_force = RO.kornilovForce(Q) - 4 + (Q.ant_kad - 70) / 3;
-Q.opp_resist = RO.kornilovResistance(Q, 8);
+Q.opp_resist = RO.kornilovResistance(Q, 8 + RO.allyPower(Q, 'kad') / 3);
 Q.opp_win = Q.opp_force > Q.opp_resist ? 0 : 1;
 if (Q.opp_win) {
     RO.add(Q, {ant_kad: -35, right_threat: -8, army_discipline: -2, soviet_democracy: 1, rel_kad: -5});

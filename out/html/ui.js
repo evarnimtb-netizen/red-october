@@ -259,12 +259,17 @@
     var camps = window.RO.opposition(Q);
     var h = '<div class="sb-section">Opposition</div><div class="sb-note">The camps that answer your policies. At ' + window.RO.SANCTION_AT + ' they try to sanction you; at ' + window.RO.REVOLT_AT + ' they take up arms.</div>';
     if (!camps.length) { return h + '<div class="sb-note">No camp is organised against you now.</div>'; }
+    var st = Math.round(window.RO.strength(Q));
+    h += '<div class="opp-camp"><div class="sb-label"><span>Your strength</span><span class="sb-word">' + st + (st >= 18 ? ' · enough to strike' : ' · too weak to strike') + '</span></div>' +
+         '<div class="sb-bar opp-bar"><div class="sb-fill" style="width:' + clamp(st * 2, 0, 100) + '%;background:#4a6a8a"></div><i class="opp-tick" style="left:36%"></i></div>' +
+         '<div class="rs-meta">From your allies, the militia, the army, your resources and the soviets behind you. At 18 you can pass an unpopular law and break its opponents by force.</div></div>';
     camps.forEach(function(c) {
       var a = Math.round(c.ant), objects = c.why.filter(function(w) { return w.s > 0; }).slice(0, 3);
       var likes = c.why.filter(function(w) { return w.s < 0; }).slice(0, 1);
       h += '<div class="opp-camp"><div class="sb-label"><span>' + esc(c.name) + '</span><span class="sb-word">' + antWord(a) + ' · ' + a + '</span></div>' +
            '<div class="sb-bar opp-bar"><div class="sb-fill" style="width:' + clamp(a, 0, 100) + '%;background:#9a3b2e"></div>' +
            '<i class="opp-tick" style="left:' + window.RO.SANCTION_AT + '%"></i><i class="opp-tick" style="left:' + window.RO.REVOLT_AT + '%"></i></div>';
+      if (st >= 18) { h += '<div class="rs-meta">Chance to break it by force: ' + Math.round(c.odds * 100) + '%.</div>'; }
       if (c.pending) { h += '<div class="rs-meta opp-alert">' + (c.pending === 2 ? 'An uprising is under way.' : 'Sanctions are coming.') + '</div>'; }
       else if (c.cooling) { h += '<div class="rs-meta">It has just acted, and is regrouping.</div>'; }
       if (objects.length) { h += '<div class="rs-meta">Objects to: ' + objects.map(function(w) { return esc(w.t); }).join('; ') + '.</div>'; }

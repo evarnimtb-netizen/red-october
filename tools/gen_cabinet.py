@@ -6,6 +6,10 @@ setting's ongoing monthly effect lives in tools/model.js (policyDrift) and must 
 numbers described here.
 """
 import os
+import re
+import sys
+sys.path.insert(0, os.path.dirname(__file__))
+from lawvariants import variants
 
 ROOT = os.path.join(os.path.dirname(__file__), '..', 'source')
 OUT = os.path.join(ROOT, 'scenes', 'advisors')
@@ -76,9 +80,16 @@ POLITICS = [
   "Q.gov_kadets = 1; Q.homogeneous_gov = 0; RO.add(Q, {rel_kad: 10, right_threat: -4}); RO.boost(Q, {middle: 3}); RO.fac(Q, 'intl', 0, 8);",
   "The Kadets are back in the cabinet, with the ministries that they had before. The generals and the factory owners are reassured, and the left is not."),
  ('kadets_out', "Dismiss the Kadet ministers and govern with the Soviet parties alone.", "in_coalition = 1 and bol_regime = 0 and gov_kadets = 1 and rel_ally >= 55", 'The other socialists will not agree.',
-  "Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);",
+  "Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2, ant_kad: 6, ant_gen: 3}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);",
   "The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame."),
 ]
+
+
+def camps_of(js):
+    """The camps whose hostility this change raises, from the ant_* numbers in its effect."""
+    return [c for c, n in re.findall(r"ant_(kad|gen|bol): (-?\d+)", js) if int(n) > 0]
+
+FORCE_NOTE = 'unavailable-subtitle: We lack the force and the allies to break the opposition.'
 
 def write_qdisplays():
     for key, title, when, settings in AREAS:
@@ -102,7 +113,7 @@ view-if: (in_coalition = 1 and bol_regime = 0) or lsr_in_gov = 1
 
 [? if in_coalition = 1 and bol_regime = 0 : The party shares the government, and with it the power to set the country's course. ?][? if lsr_in_gov = 1 and bol_regime = 1 : The party holds a few commissariats in a government that is not its own: the land and the courts are in its hands, and not much else. ?] A change of course takes a turn, and the cabinet cannot change course again for two months. Policies have a lasting effect, month by month.
 
-[? if ant_kad >= 40 : The liberals are in an angry mood. ?][? if ant_gen >= 40 : The generals are muttering about the government. ?][? if ant_bol >= 40 and bol_regime = 0 : Pravda has begun to campaign against the cabinet. ?]Each camp that opposes a policy will first try sanctions, and then, if it is angry enough, take up arms: see the Opposition tab on the right.
+[? if ant_kad >= 40 : The liberals are in an angry mood. ?][? if ant_gen >= 40 : The generals are muttering about the government. ?][? if ant_bol >= 40 and bol_regime = 0 : Pravda has begun to campaign against the cabinet. ?]Each camp that opposes a policy will first try sanctions, and then, if it is angry enough, take up arms: see the Opposition tab on the right. An unpopular law can be phased in gently, passed by decree, or, if the party is strong enough (its strength is shown there), passed and enforced against its opponents: the odds are shown for each camp, and a failure makes the camp angrier.
 
 Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Food: [+ pol_food : pol_food +]. Labour: [+ pol_labour : pol_labour +]. ?][? if at_war = 1 and in_coalition = 1 and bol_regime = 0 : The war: [+ pol_war : pol_war +]. ?]Order: [+ pol_order : pol_order +].
 ''')
@@ -118,6 +129,11 @@ Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Foo
             v = 'view-if: (%s) and pol_%s != %d' % (when, key, i)
             ch = 'cabinet_timer <= 0' + (' and (%s)' % cond if cond else '')
             sub = '[? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]' + ('[? if not (%s) : %s ?]' % (cond, un) if cond else '')
+            if camps_of(js):
+                # an unpopular law: three ways to carry it out
+                pre = lambda style, key=key, i=i: 'Q.month_actions += 1;\nQ.cabinet_timer = 2;\nQ.pol_%s = %d;\nQ.soft_%s = %d;' % (key, i, key, 1 if style == 'slow' else 0)
+                L.append(variants('%s_%d' % (key, i), [v, 'choose-if: ' + ch, 'unavailable-subtitle: ' + sub], js, res, '- @root: Continue.', pre, back=True))
+                continue
             L.append('''@%s_%d
 %s
 choose-if: %s
@@ -126,14 +142,20 @@ on-arrival: {!
 Q.month_actions += 1;
 Q.cabinet_timer = 2;
 Q.pol_%s = %d;
+Q.soft_%s = 0;
 %s
 !}
 
 %s
 
 - @root: Continue.
-''' % (key, i, v, ch, sub, key, i, js, res))
+''' % (key, i, v, ch, sub, key, i, key, js, res))
     for pid, label, cond, un, js, res in POLITICS:
+        if camps_of(js):
+            pre = lambda style: 'Q.month_actions += 1;\nQ.cabinet_timer = 2;'
+            L.append(variants(pid, ['view-if: ' + cond, 'choose-if: cabinet_timer <= 0', 'unavailable-subtitle: The cabinet has changed course too recently.'],
+                              js, res, '- @root: Continue.', pre, back=True))
+            continue
         L.append('''@%s
 view-if: %s
 choose-if: cabinet_timer <= 0

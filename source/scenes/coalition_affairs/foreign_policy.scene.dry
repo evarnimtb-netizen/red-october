@@ -16,24 +16,120 @@ The Allies want the offensive. The soldiers want peace. The Soviet's formula is 
 - @easy_discard
 
 @note
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @note_slow: Phase it in, with compensation and negotiation.
+- @note_decree: Pass it by decree, as written.
+- @note_force: Pass it by decree, and break any opposition by force.
+
+@note_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.add(Q, {war_weariness: -2, rel_kad: -2});
 RO.boost(Q, {soldiers: 2, workers: 1});
 Q.war_aims_note = 1;
+});
+!}
+
+A note on war aims went to London and Paris. They replied politely, and not at all. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@note_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.add(Q, {war_weariness: -2, rel_kad: -2});
+RO.boost(Q, {soldiers: 2, workers: 1});
+Q.war_aims_note = 1;
+});
 !}
 
 A note on war aims went to London and Paris. They replied politely, and not at all.
 
-@stockholm
+
+
+@note_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.add(Q, {war_weariness: -2, rel_kad: -2});
+RO.boost(Q, {soldiers: 2, workers: 1});
+Q.war_aims_note = 1;
+});
+!}
+
+A note on war aims went to London and Paris. They replied politely, and not at all. [+ law_text +]
+
+@stockholm
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @stockholm_slow: Phase it in, with compensation and negotiation.
+- @stockholm_decree: Pass it by decree, as written.
+- @stockholm_force: Pass it by decree, and break any opposition by force.
+
+@stockholm_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
+on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 Q.stockholm = (Q.stockholm || 0) + 1;
 RO.add(Q, {war_weariness: -4, rel_kad: -4, army_discipline: -1});
 RO.boost(Q, {soldiers: 3, workers: 2});
 RO.fac(Q, 'intl', 2, -2);
 RO.fac(Q, 'rightdef', 0, 4);
+});
+!}
+
+The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?] It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@stockholm_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+Q.stockholm = (Q.stockholm || 0) + 1;
+RO.add(Q, {war_weariness: -4, rel_kad: -4, army_discipline: -1});
+RO.boost(Q, {soldiers: 3, workers: 2});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 4);
+});
 !}
 
 The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?]
+
+
+
+@stockholm_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+Q.stockholm = (Q.stockholm || 0) + 1;
+RO.add(Q, {war_weariness: -4, rel_kad: -4, army_discipline: -1});
+RO.boost(Q, {soldiers: 3, workers: 2});
+RO.fac(Q, 'intl', 2, -2);
+RO.fac(Q, 'rightdef', 0, 4);
+});
+!}
+
+The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?] [+ law_text +]
 
 @offensive
 on-arrival: {!
@@ -49,12 +145,62 @@ Kerensky is visiting the front, and the Soviet has given its blessing. The army 
 @separate
 choose-if: stockholm >= 2
 unavailable-subtitle: We must first have shown our commitment to a general peace at Stockholm.
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @separate_slow: Phase it in, with compensation and negotiation.
+- @separate_decree: Pass it by decree, as written.
+- @separate_force: Pass it by decree, and break any opposition by force.
+
+@separate_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 Q.separate_feelers = 1;
 RO.add(Q, {war_weariness: -6, rel_kad: -6, right_threat: 3});
 RO.boost(Q, {soldiers: 3});
 RO.fac(Q, 'rightdef', -2, 6);
 RO.fac(Q, 'intl', 0, -1);
+});
+!}
+
+An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@separate_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+Q.separate_feelers = 1;
+RO.add(Q, {war_weariness: -6, rel_kad: -6, right_threat: 3});
+RO.boost(Q, {soldiers: 3});
+RO.fac(Q, 'rightdef', -2, 6);
+RO.fac(Q, 'intl', 0, -1);
+});
 !}
 
 An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious.
+
+
+
+@separate_force
+choose-if: strength >= 18
+subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+Q.separate_feelers = 1;
+RO.add(Q, {war_weariness: -6, rel_kad: -6, right_threat: 3});
+RO.boost(Q, {soldiers: 3});
+RO.fac(Q, 'rightdef', -2, 6);
+RO.fac(Q, 'intl', 0, -1);
+});
+!}
+
+An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious. [+ law_text +]
