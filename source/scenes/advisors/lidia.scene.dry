@@ -1,5 +1,6 @@
 title: Lidia Dan
 is-pinned-card: true
+card-image: img/cards/lidia.svg
 tags: advisor, intl
 new-page: true
 view-if: lidia_advisor = 1

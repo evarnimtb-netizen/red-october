@@ -1,5 +1,6 @@
 title: Kuzma Gvozdev
 is-pinned-card: true
+card-image: img/cards/gvozdev.svg
 tags: advisor, unions
 new-page: true
 view-if: gvozdev_advisor = 1

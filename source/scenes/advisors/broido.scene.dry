@@ -1,5 +1,6 @@
 title: Eva Broido
 is-pinned-card: true
+card-image: img/cards/broido.svg
 tags: advisor, intl
 new-page: true
 view-if: broido_advisor = 1

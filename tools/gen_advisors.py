@@ -100,6 +100,7 @@ def main():
             un += '[? if not (' + cond + ') : ' + unavail + ' ?]'
         text = f"""title: {title}
 is-pinned-card: true
+card-image: img/cards/{aid}.svg
 tags: advisor, {tag}
 new-page: true
 view-if: {flag} = 1

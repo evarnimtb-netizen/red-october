@@ -194,7 +194,6 @@ go-to: intro
 
 @intro
 new-page: true
-go-to: post_event
 
 = March 1917
 
@@ -211,3 +210,5 @@ Every two weeks you will play a card: a meeting, a campaign, a ministry, an advi
 *This is a game of alternate history. The dates are given in the New Style (Gregorian) calendar; before February 1918 Russia kept the Old Style, thirteen days behind.*
 
 *Red October is a work in progress.*
+
+- @post_event: Begin.

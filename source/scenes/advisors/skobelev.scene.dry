@@ -1,5 +1,6 @@
 title: Matvei Skobelev
 is-pinned-card: true
+card-image: img/cards/skobelev.svg
 tags: advisor, defencist
 new-page: true
 view-if: skobelev_advisor = 1

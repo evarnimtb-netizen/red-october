@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
+<rect width="240" height="340" fill="#3d4a2a"/>
+<polygon points="0,0 240,0 240,94 0,164" fill="#f2e6c9" opacity="0.92"/>
+<polygon points="0,164 240,94 240,340 0,340" fill="#b3261e"/>
+<circle cx="88" cy="82" r="44" fill="#3d4a2a" opacity="0.9"/>
+<polygon points="120.0,68.0 129.9,96.4 159.9,97.0 136.0,115.2 144.7,144.0 120.0,126.8 95.3,144.0 104.0,115.2 80.1,97.0 110.1,96.4" fill="#f2e6c9"/>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
+<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">PRISONERS AND</text>
+<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">THE CHEKA</text>
+</svg>

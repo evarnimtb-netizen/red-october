@@ -1,4 +1,5 @@
 title: The Party Press
+card-image: img/cards/media.svg
 subtitle: [? if dix < 34 : Rabochaya Gazeta ?][? if dix >= 34 : Vsegda Vpered ?]
 new-page: true
 is-card: true

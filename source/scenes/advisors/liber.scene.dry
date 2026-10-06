@@ -1,5 +1,6 @@
 title: Mark Liber
 is-pinned-card: true
+card-image: img/cards/liber.svg
 tags: advisor, bund
 new-page: true
 view-if: liber_advisor = 1

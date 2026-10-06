@@ -1,5 +1,6 @@
 title: Julius Martov
 is-pinned-card: true
+card-image: img/cards/martov.svg
 tags: advisor, intl
 new-page: true
 view-if: martov_advisor = 1

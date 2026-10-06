@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
+<rect width="240" height="340" fill="#3d4a2a"/>
+<polygon points="0,0 240,0 240,101 0,191" fill="#f2e6c9" opacity="0.92"/>
+<polygon points="0,191 240,101 240,340 0,340" fill="#b3261e"/>
+<circle cx="97" cy="103" r="46" fill="#3d4a2a" opacity="0.9"/>
+<polygon points="120.0,65.0 130.6,95.4 162.8,96.1 137.1,115.6 146.5,146.4 120.0,128.0 93.5,146.4 102.9,115.6 77.2,96.1 109.4,95.4" fill="#f2e6c9"/>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
+<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">FACTORY REPRE</text>
+<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#3d4a2a" stroke-width="0.6">SENTATIVES</text>
+</svg>

@@ -1,4 +1,5 @@
 title: Workers' Militia
+card-image: img/cards/reichsbanner.svg
 subtitle: Arm the workers to defend our meetings and the revolution.
 new-page: true
 is-card: true
@@ -11,7 +12,16 @@ on-arrival: month_actions += 1; reichsbanner_timer = 5
 - @organise: Organise militias in the factories. (1 resource)
 - @train: Drill the militia and place them under the Soviet.
 - @against_whites: Raise militias to defend the cities against the Whites.
+- @talk: Talk it over with the factory committees.
 - @easy_discard
+
+@talk
+on-arrival: {!
+RO.boost(Q, {workers: 1});
+RO.fac(Q, 'intl', 0, 1);
+!}
+
+The factory committees listened, argued and promised to think about it. Nothing was armed, but the idea has been planted.
 
 @organise
 choose-if: resources >= 1 and bol_regime = 0

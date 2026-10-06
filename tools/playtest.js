@@ -7,6 +7,8 @@ var path = require('path');
 var fs = require('fs');
 global.RO = require('./model.js');
 var engine = require('../node_modules/dendrynexus/lib/engine');
+var toText = require('../node_modules/dendrynexus/lib/ui/content/text');
+var allText = [];
 
 var bots = require('./bots.js');
 var runs = parseInt(process.argv[2] || '20', 10);
@@ -23,11 +25,19 @@ function Ui() {
   this.decks = []; this.hand = []; this.pinned = []; this.choices = null; this.text = [];
 }
 engine.UserInterface.makeParentOf(Ui);
-Ui.prototype.displayContent = function(p) { this.text.push(JSON.stringify(p)); };
+function flat(x) {
+  if (x === null || x === undefined) { return ''; }
+  if (typeof x === 'string' || typeof x === 'number') { return String(x); }
+  if (Array.isArray(x)) { return x.map(flat).join(''); }
+  if (x.type === 'paragraph') { return flat(x.content) + '\n'; }
+  if (x.content !== undefined) { return flat(x.content); }
+  return '';
+}
+Ui.prototype.displayContent = function(p) { allText.push(flat(p)); };
+Ui.prototype.displayChoices = function(c) { this.choices = c; c.forEach(function(x) { allText.push('CHOICE: ' + flat(x.title) + ' | ' + flat(x.subtitle)); }); };
 Ui.prototype.displayDecks = function(d) { this.decks = d; };
 Ui.prototype.displayHand = function(h, max) { this.hand = h; this.maxCards = max; };
 Ui.prototype.displayPinnedCards = function(c) { this.pinned = c; };
-Ui.prototype.displayChoices = function(c) { this.choices = c; };
 Ui.prototype.removeChoices = function() { this.choices = null; this.decks = []; this.pinned = []; };
 Ui.prototype.displayGameOver = function() { this.over = true; };
 
@@ -62,6 +72,10 @@ function playOne(idx) {
     }
     if (sid === 'root.start') {
       if (!pickByTitle(/Normal/)) { break; }
+      continue;
+    }
+    if (sid === 'root.intro') {
+      if (!pickByTitle(/Begin/)) { break; }
       continue;
     }
     var scene = eng.getCurrentScene();
@@ -163,6 +177,7 @@ Object.keys(agg).forEach(function(k) {
 });
 results.forEach(function(r) { var k = r.game_over ? r.ending : 'STUCK'; counts[k] = (counts[k] || 0) + 1; });
 if (process.env.POW) { results.forEach(function(r) { console.log(JSON.stringify({e: r.ending, p: r.bpow_final, h: r.homog, lc: r.lc, ca: r.ca, st: r.stock, tk: r.takeover, vs: r.vs})); }); }
+if (process.env.TEXT) { fs.writeFileSync(process.env.TEXT, allText.join('\n')); }
 console.log('policy=' + policy + ' runs=' + runs + ' errors=' + errors);
 console.log(JSON.stringify(counts));
 results.filter(function(r) { return !r.game_over; }).slice(0, 5).forEach(function(r) {

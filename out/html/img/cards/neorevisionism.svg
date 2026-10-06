@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
+<rect width="240" height="340" fill="#8c1d18"/>
+<polygon points="0,0 240,0 240,100 0,180" fill="#f2e6c9" opacity="0.92"/>
+<polygon points="0,180 240,100 240,340 0,340" fill="#1c1c1c"/>
+<circle cx="90" cy="100" r="35" fill="#8c1d18" opacity="0.9"/>
+<polygon points="120.0,66.0 130.3,95.8 161.8,96.4 136.7,115.4 145.9,145.6 120.0,127.6 94.1,145.6 103.3,115.4 78.2,96.4 109.7,95.8" fill="#f2e6c9"/>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
+<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">WHAT IS TO BE</text>
+<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">DONE?</text>
+</svg>

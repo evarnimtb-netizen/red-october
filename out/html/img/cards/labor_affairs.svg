@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
+<rect width="240" height="340" fill="#1f3a5f"/>
+<polygon points="0,0 240,0 240,125 0,155" fill="#f2e6c9" opacity="0.92"/>
+<polygon points="0,155 240,125 240,340 0,340" fill="#c9a227"/>
+<circle cx="65" cy="115" r="35" fill="#1f3a5f" opacity="0.9"/>
+<polygon points="120.0,61.0 131.5,94.1 166.6,94.9 138.6,116.1 148.8,149.6 120.0,129.6 91.2,149.6 101.4,116.1 73.4,94.9 108.5,94.1" fill="#f2e6c9"/>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
+<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">MINISTRY OF</text>
+<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#1f3a5f" stroke-width="0.6">LABOUR</text>
+</svg>

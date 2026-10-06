@@ -1,5 +1,6 @@
 title: Pavel Axelrod
 is-pinned-card: true
+card-image: img/cards/axelrod.svg
 tags: advisor, unions
 new-page: true
 view-if: axelrod_advisor = 1

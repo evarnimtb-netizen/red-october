@@ -1,5 +1,6 @@
 title: Nikolai Chkheidze
 is-pinned-card: true
+card-image: img/cards/chkheidze.svg
 tags: advisor, defencist
 new-page: true
 view-if: chkheidze_advisor = 1

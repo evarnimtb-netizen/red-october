@@ -1,5 +1,6 @@
 title: Irakli Tsereteli
 is-pinned-card: true
+card-image: img/cards/tsereteli.svg
 tags: advisor, defencist
 new-page: true
 view-if: tsereteli_advisor = 1

@@ -1,4 +1,5 @@
 title: Soviet Election Campaign
+card-image: img/cards/campaigning.svg
 subtitle: Contest the factory and city soviets.
 new-page: true
 is-card: true
@@ -12,7 +13,15 @@ Soviets are re-elected often. A campaign costs money for printing, halls and tra
 - @garrisons: Campaign in the garrisons and at the front. (1 resource)
 - @railways: Campaign among the railwaymen and postal workers. (1 resource)
 - @joint: A joint list with our bloc partner. (1 resource)
+- @speeches: Send speakers out with no printed material.
 - @easy_discard
+
+@speeches
+on-arrival: {!
+RO.boost(Q, {workers: 2, railway: 1});
+!}
+
+Without money for leaflets, the speakers went out on their own. It was not much of a campaign, but it was a campaign.
 
 @factories
 choose-if: resources >= 1

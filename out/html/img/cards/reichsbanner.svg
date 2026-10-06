@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="340" viewBox="0 0 240 340">
+<rect width="240" height="340" fill="#8c1d18"/>
+<polygon points="0,0 240,0 240,118 0,168" fill="#f2e6c9" opacity="0.92"/>
+<polygon points="0,168 240,118 240,340 0,340" fill="#1c1c1c"/>
+<circle cx="176" cy="94" r="48" fill="#8c1d18" opacity="0.9"/>
+<polygon points="120.0,64.0 130.8,95.1 163.7,95.8 137.5,115.7 147.0,147.2 120.0,128.4 93.0,147.2 102.5,115.7 76.3,95.8 109.2,95.1" fill="#f2e6c9"/>
+<rect x="14" y="14" width="212" height="312" fill="none" stroke="#f2e6c9" stroke-width="3"/>
+<text x="120" y="240" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">WORKERS&#x27;</text>
+<text x="120" y="269" text-anchor="middle" font-family="Impact, 'Arial Black', sans-serif" font-size="25" fill="#f2e6c9" stroke="#8c1d18" stroke-width="0.6">MILITIA</text>
+</svg>

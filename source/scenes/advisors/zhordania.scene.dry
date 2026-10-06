@@ -1,5 +1,6 @@
 title: Noe Zhordania
 is-pinned-card: true
+card-image: img/cards/zhordania.svg
 tags: advisor, defencist
 new-page: true
 view-if: zhordania_advisor = 1

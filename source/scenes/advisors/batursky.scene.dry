@@ -1,5 +1,6 @@
 title: Boris Batursky
 is-pinned-card: true
+card-image: img/cards/batursky.svg
 tags: advisor, unions
 new-page: true
 view-if: batursky_advisor = 1

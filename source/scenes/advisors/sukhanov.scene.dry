@@ -1,5 +1,6 @@
 title: Nikolai Sukhanov
 is-pinned-card: true
+card-image: img/cards/sukhanov.svg
 tags: advisor, intl
 new-page: true
 view-if: sukhanov_advisor = 1
