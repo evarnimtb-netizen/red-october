@@ -1,4 +1,10 @@
-# Social Democracy: An Alternate History
+# Red October: An Alternate History
+
+A fork of [*Social Democracy: An Alternate History*](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen (MIT licence), set in the Russian Revolution, 1917-1921. The player leads the Mensheviks, the SRs or the Left SRs. The design is in [`docs/design-plan.md`](docs/design-plan.md).
+
+**Status:** early development. The game content is still the original German (Weimar) game; the conversion follows the build roadmap in the design plan. "Red October" is a working title.
+
+The engine, systems and any content not yet replaced are the work of Autumn Chen. See `LICENSE`.
 
 ## Included Libraries
 

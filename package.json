@@ -1,22 +1,22 @@
 {
-  "name": " social_democracy_alternate_history",
-  "version": "0.11.1",
-  "description": "Building the game:",
+  "name": "red-october",
+  "version": "0.0.1",
+  "description": "Red October: An Alternate History. A fork of Social Democracy: An Alternate History, set in the Russian Revolution, 1917-1921.",
   "main": "out/html/index.html",
   "scripts": {
     "dendrynexus": "dendrynexus"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://aucchen@github.com/aucchen/social_democracy_alternate_history.git"
+    "url": "git+https://github.com/evarnimtb-netizen/red-october.git"
   },
   "keywords": [],
-  "author": "Autumn Chen",
+  "author": "Eva (original game by Autumn Chen)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aucchen/social_democracy_alternate_history/issues"
+    "url": "https://github.com/evarnimtb-netizen/red-october/issues"
   },
-  "homepage": "https://github.com/aucchen/social_democracy_alternate_history",
+  "homepage": "https://github.com/evarnimtb-netizen/red-october",
   "dependencies": {
     "dendrynexus": "github:aucchen/dendrynexus",
     "parliament-svg": "^3.0.0"
