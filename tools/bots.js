@@ -110,4 +110,19 @@ var opposition = {
           'rally', 'media', 'economic_democracy', 'social_welfare', 'labor_rights', 'party_disunity', 'fundraising', 'fiscal_policy', 'martov', 'dan']
 };
 
-module.exports = {democrat: democrat, vikzhelist: vikzhelist, opposition: opposition};
+var whiteaid = {
+  choices: merge(democrat.choices, {
+    february: [/Lead the Soviet/],
+    july_days: [/loyal troops/],
+    democratic_conference: [/coalition/],
+    october: [/Walk out/],
+    vikzhel: [/Refuse/],
+    assembly_dispersed: [/reconvene/],
+    komuch: [/Join Komuch/],
+    expelled: [/Go underground/, /Protest/],
+    denikin: [/Stay neutral/],
+    domestic_enemies: [/neither side/]
+  }),
+  cards: ['reichsbanner', 'campaigning', 'media', 'rally', 'inter_party_relationships', 'fundraising', 'party_disunity', 'economic_democracy', 'labor_rights', 'social_welfare']
+};
+module.exports = {democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};

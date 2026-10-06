@@ -55,7 +55,7 @@ RO.display(Q);
 
 // 2. immediate endings
 if (!Q.game_end) {
-    if (Q.bol_regime && Q.white_front >= 80) {
+    if (Q.bol_regime && Q.white_front >= 72) {
         Q.game_end = 1; Q.ending = 'white';
     } else if (Q.bol_regime && Q.legality <= 0 && Q.members <= 12) {
         Q.game_end = 1; Q.ending = 'exile';

@@ -206,8 +206,8 @@ var RO = (function() {
   // Monthly: the Civil War front moves toward its target.
   function updateFront(Q, d) {
     if (!Q.bol_regime || d < dix(1918, 6)) { return; }
-    var target = whitePressure(d) + 7 * Q.white_aid - 0.5 * Q.red_army;
-    Q.white_front += 0.25 * (target - Q.white_front);
+    var target = whitePressure(d) + 8 * Q.white_aid - 0.5 * Q.red_army;
+    Q.white_front += 0.3 * (target - Q.white_front);
   }
 
   // Rounded copies of the stats (Q.d_<name>) for the sidebar and event text.

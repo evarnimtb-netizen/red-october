@@ -48,7 +48,7 @@ function playOne(idx) {
   var eng = new engine.DendryEngine(ui, game);
   eng.beginGame();
   var Q = function() { return eng.state.qualities; };
-  var steps = 0, log = [], scenes = [], snaps = {}, banned = {}, lastCard = null;
+  var steps = 0, log = [], scenes = [], snaps = {}, banned = {}, lastCard = null, maxwf = 0;
   // start menu -> start -> difficulty
   function pickByTitle(re) {
     if (!ui.choices) { return false; }
@@ -60,6 +60,7 @@ function playOne(idx) {
   while (!Q().game_over && steps < 4000 && !ui.over) {
     steps++;
     var sid = eng.state.sceneId;
+    maxwf = Math.max(maxwf, eng.state.qualities.white_front || 0);
     scenes.push(sid);
     var watch = {'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1};
     if (watch[sid] && !snaps[sid]) {
@@ -71,7 +72,7 @@ function playOne(idx) {
       continue;
     }
     if (sid === 'root.start') {
-      if (!pickByTitle(/Normal/)) { break; }
+      if (!pickByTitle(new RegExp(process.env.DIFF || 'Normal'))) { break; }
       continue;
     }
     if (sid === 'root.intro') {
@@ -151,7 +152,7 @@ function playOne(idx) {
   return {idx: idx, steps: steps, ending: q.ending, year: q.year, month: q.month, dix: q.dix, game_over: q.game_over,
           bol_regime: q.bol_regime, vikzhel: q.vikzhel_deal, assembly: q.assembly_survives,
           legality: q.legality, sd: Math.round(q.soviet_democracy), members: Math.round(q.members),
-          wf: Math.round(q.white_front), rt: Math.round(q.right_threat), bol: Math.round(q.bolshevik),
+          wf: Math.round(maxwf), rt: Math.round(q.right_threat), bol: Math.round(q.bolshevik),
           dissent: Math.round(q.dissent * 100), bpow_final: Math.round(q.bol_power || 0), homog: q.homogeneous_gov, lc: q.land_committees, ca: q.ca_elected, stock: q.stockholm, bread: Math.round(q.bread), takeover: q.takeover, vs: Math.round(q.vik_score || 0), snaps: snaps, log: log, lastScenes: scenes.slice(-6)};
 }
 
@@ -168,6 +169,7 @@ for (var i = 0; i < runs; i++) {
   }
 }
 var counts = {};
+if (process.env.WF) { console.log('max wf per run: ' + results.map(function(r) { return r.wf; }).join(',')); }
 var agg = {};
 results.forEach(function(r) { for (var k in r.snaps) { agg[k] = agg[k] || []; agg[k].push(r.snaps[k]); } });
 Object.keys(agg).forEach(function(k) {
