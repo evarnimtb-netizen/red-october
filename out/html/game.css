@@ -726,3 +726,6 @@ body.dark-mode .card-tooltip { color: #eee; background-color: rgba(30, 30, 30, 0
 .opp-bar { position: relative; }
 .opp-tick { position: absolute; top: -2px; bottom: -2px; width: 1px; background: #876; }
 .opp-alert { color: #b3261e; font-weight: bold; opacity: 1; }
+
+/* the side panels stay hidden until the game has started (ui.js shows them), whatever else rewrites their style */
+#stats_sidebar, #support_sidebar { display: none; }
