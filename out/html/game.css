@@ -696,3 +696,13 @@ body.hide-support #support_sidebar { display: none !important; }
   background-color: rgba(250, 248, 240, 0.96);
 }
 body.dark-mode .card-tooltip { color: #eee; background-color: rgba(30, 30, 30, 0.96); }
+
+/* parliament chart */
+.parliament { margin: 0.6em 0 0.8em 0; }
+.parliament svg { width: 100%; height: auto; display: block; }
+.parl-title { text-align: center; font-variant: small-caps; letter-spacing: 0.06em; opacity: 0.85; }
+.parl-legend { display: flex; flex-wrap: wrap; gap: 0.2em 1em; justify-content: center; font-size: 0.85em; margin-top: 0.3em; }
+.parl-key { white-space: nowrap; }
+.parl-key.mine { font-weight: bold; }
+.parl-key i { display: inline-block; width: 0.75em; height: 0.75em; border-radius: 50%; margin-right: 0.3em; vertical-align: -0.05em; }
+.parl-key small { opacity: 0.7; }

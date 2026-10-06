@@ -7,6 +7,7 @@ priority: 15
 max-visits: 1
 on-arrival: {!
 RO.setResults(Q, 'soviets', null, 777);
+RO.recordParliament(Q, 'congress', 'The First Congress of Soviets');
 Q.seat_other = Q.seats_total - Q.seat_bol - Q.seat_lsr - Q.seat_sr - Q.seat_men - Q.seat_kad;
 Q.lsr_delegates = Math.round(Q.res_lsr_in * 7.77);
 !}
@@ -14,6 +15,10 @@ Q.lsr_delegates = Math.round(Q.res_lsr_in * 7.77);
 = The Left Stands Out
 
 On 16 June the First All-Russia Congress of Soviets opened in Petrograd. Over 1,000 delegates were present, 777 with a vote. The SRs and the Mensheviks hold a majority. When Tsereteli declared that "there is at present no political party in Russia that would say: give the power into our hands", Lenin shouted from the floor: "There is such a party!" The Left SRs were silent, and applauded.
+
+The delegates, by our reckoning:
+
+{!<div class="parliament" data-name="congress"></div>!}
 
 Within the SR delegation, which is the largest in the hall (about [+ seat_sr +] delegates), the Left SRs number perhaps [+ lsr_delegates +]. They are enough to be heard, and not enough to decide.
 

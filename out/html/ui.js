@@ -337,6 +337,70 @@
     }
   }
 
+
+  // ---------- the parliament chart ----------
+  // A placeholder <div class="parliament" data-name="assembly"> in an event's text is replaced by a hemicycle of
+  // seats in party colours, from the record that RO.recordParliament stored in Q.parl_<name>.
+  var PARTY_SHORT = {bol: 'Bolsheviks', lsr: 'Left SRs', sr: 'SRs', men: 'Mensheviks', kad: 'Kadets', pop: 'Popular Socialists and Trudoviks',
+                     nat: 'National parties', oth: 'Anarchists and others'};
+
+  function hemicycle(total) {
+    // rows of seats between an inner and an outer radius, in proportion to the length of each arc
+    var rows = Math.max(3, Math.round(Math.sqrt(total / 2.6)));
+    var r0 = 0.38, radii = [], sum = 0, i, j;
+    for (i = 0; i < rows; i++) { radii.push(r0 + (1 - r0) * (i + 0.5) / rows); sum += radii[i]; }
+    var counts = [], placed = 0;
+    for (i = 0; i < rows; i++) { counts.push(Math.round(total * radii[i] / sum)); placed += counts[i]; }
+    i = rows - 1;
+    while (placed !== total) { counts[i] += (placed < total ? 1 : -1); placed += (placed < total ? 1 : -1); i = (i - 1 + rows) % rows; }
+    var seats = [];
+    for (i = 0; i < rows; i++) {
+      for (j = 0; j < counts[i]; j++) {
+        var th = Math.PI * (1 - (j + 0.5) / counts[i]);
+        seats.push({a: th, r: radii[i], x: radii[i] * Math.cos(th), y: radii[i] * Math.sin(th)});
+      }
+    }
+    seats.sort(function(p, q) { return (q.a - p.a) || (p.r - q.r); });
+    var gap = (1 - r0) / rows, spacing = gap;
+    for (i = 0; i < rows; i++) { spacing = Math.min(spacing, Math.PI * radii[i] / counts[i]); }
+    return {seats: seats, dot: spacing * 0.43};
+  }
+
+  function drawParliament(el, rec, Q) {
+    var layout = hemicycle(rec.total), W = 480, H = 262, cx = W / 2, cy = H - 22, R = 215;
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(rec.title) + '">';
+    var idx = 0, i, k;
+    for (i = 0; i < rec.rows.length; i++) {
+      var p = rec.rows[i][0], n = rec.rows[i][2];
+      for (k = 0; k < n && idx < layout.seats.length; k++, idx++) {
+        var st = layout.seats[idx];
+        svg += '<circle cx="' + (cx + st.x * R).toFixed(1) + '" cy="' + (cy - st.y * R).toFixed(1) + '" r="' + (layout.dot * R).toFixed(1) + '" fill="' + PARTY_COLORS[p] + '"/>';
+      }
+    }
+    // the majority mark
+    svg += '<line x1="' + cx + '" y1="' + (cy - R * 0.30) + '" x2="' + cx + '" y2="' + (cy - R * 1.04) + '" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.45"/>';
+    svg += '<text x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle" font-size="30" fill="currentColor" font-family="Georgia, serif">' + rec.total + '</text>';
+    svg += '<text x="' + cx + '" y="' + (cy + 14) + '" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.7" font-family="Georgia, serif">' + (rec.total === 100 ? 'points of the vote' : 'seats') + ' · majority ' + (Math.floor(rec.total / 2) + 1) + '</text></svg>';
+    var leg = '<div class="parl-legend">';
+    var rows = rec.rows.slice().sort(function(a, b) { return b[2] - a[2]; });
+    for (i = 0; i < rows.length; i++) {
+      var q = rows[i][0], mine = (q === Q.player_slot);
+      var name = PARTY_SHORT[q] + (q === 'sr' && rec.lsrIn ? ' (with the Left SRs)' : '');
+      leg += '<span class="parl-key' + (mine ? ' mine' : '') + '"><i style="background:' + PARTY_COLORS[q] + '"></i>' + esc(name) + ' <b>' + rows[i][2] + '</b> <small>' + (Math.round(rows[i][1] * 10) / 10) + '%</small></span>';
+    }
+    leg += '</div>';
+    $(el).html('<div class="parl-title">' + esc(rec.title) + '</div>' + svg + leg).attr('data-done', '1');
+  }
+
+  function renderParliaments() {
+    var Q = qualities();
+    if (!Q) { return; }
+    $('#content .parliament:not([data-done])').each(function() {
+      var rec = Q['parl_' + $(this).data('name')];
+      if (rec) { drawParliament(this, rec, Q); }
+    });
+  }
+
   // ---------- party-select screen ----------
   function decorateParties() {
     var id = sceneId();
@@ -359,6 +423,7 @@
     window.updateSidebar();
     showEffects();
     decorateParties();
+    renderParliaments();
   };
 
   // the first page is displayed before this script runs: draw (or hide) the sidebar once the page is ready

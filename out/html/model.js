@@ -703,10 +703,29 @@ var RO = (function() {
     return out;
   }
 
+
+  // Remember an election result for the parliament chart: Q.parl_<name> = {title, total, rows: [[party, percent, seats]], lsrIn}.
+  // Seats are rounded by the largest remainder so that they add up to the total.
+  var PARL_ORDER = ['bol', 'lsr', 'oth', 'sr', 'men', 'pop', 'nat', 'kad'];
+  function recordParliament(Q, name, title) {
+    var total = Q.seats_total || 100, seats = {}, rem = [], sum = 0, i;
+    PARL_ORDER.forEach(function(p) {
+      var v = (Q['res_' + p] || 0) * total / 100;
+      seats[p] = Math.floor(v); sum += seats[p]; rem.push([v - seats[p], p]);
+    });
+    rem.sort(function(a, b) { return b[0] - a[0]; });
+    for (i = 0; sum < total; i++) { seats[rem[i % rem.length][1]]++; sum++; }
+    Q['parl_' + name] = {
+      title: title, total: total,
+      rows: PARL_ORDER.filter(function(p) { return seats[p] > 0; }).map(function(p) { return [p, Q['res_' + p] || 0, seats[p]]; }),
+      lsrIn: Q.lsr_split ? 0 : Math.round((Q.res_lsr_in || 0) * total / 100)
+    };
+  }
+
   // A weighted coin for the decisions that no stat can settle.
   function chance(p) { return Math.random() < clamp(p, 0, 1); }
 
-  return {classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {recordParliament: recordParliament, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

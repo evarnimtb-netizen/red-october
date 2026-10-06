@@ -7,6 +7,7 @@ priority: 15
 max-visits: 1
 on-arrival: {!
 RO.setResults(Q, 'soviets', null, 777);
+RO.recordParliament(Q, 'congress', 'The First Congress of Soviets');
 Q.seat_other = Q.seats_total - Q.seat_bol - Q.seat_lsr - Q.seat_sr - Q.seat_men - Q.seat_kad;
 Q.congress_moderate = (Q.res_men + Q.res_sr + Q.res_lsr) >= 55 ? 1 : 0;
 Q.brought_july = 0;
@@ -18,7 +19,7 @@ On 16 June the First All-Russia Congress of Soviets opened in Petrograd. Over 1,
 
 The delegates, by our reckoning:
 
-SRs: [+ seat_sr +]. Mensheviks: [+ seat_men +]. Bolsheviks: [+ seat_bol +]. Others and unaffiliated: [+ seat_other +].
+{!<div class="parliament" data-name="congress"></div>!}
 
 (A decision for or against the coalition is on the floor.)
 

@@ -8,6 +8,7 @@ max-visits: 1
 on-arrival: {!
 var extra = {men: 1.0 + 0.004 * Q.soviet_democracy, sr: 1.0 + 0.003 * Q.soviet_democracy, bol: 1.0 + Q.repression / 150};
 RO.setResults(Q, 'provincial', extra, 100);
+RO.recordParliament(Q, 'spring', 'The spring soviet elections: share of the vote');
 Q.opp_share = Q.res_men + Q.res_sr + Q.res_lsr + Q.res_oth * 0.5;
 Q.capitals_won = Math.round(30 * RO.clamp((Q.opp_share - 30) / 32, 0, 1));
 Q.spring_honoured = 0;
@@ -20,7 +21,7 @@ During the spring of 1918, soviets across Russia held new elections. The Bolshev
 
 By our count, the vote was:
 
-Bolsheviks: [+ res_bol +]%. Mensheviks: [+ res_men +]%. SRs and Left SRs: [+ res_sr +]%, [+ res_lsr +]%. Others: the rest.
+{!<div class="parliament" data-name="spring"></div>!}
 
 - @protest: Accept the annulment, and protest.
 - @renounce: Offer to renounce armed struggle in return for the results being honoured.

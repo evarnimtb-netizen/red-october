@@ -58,6 +58,7 @@ if (Q.player_party == 'menshevik') {
     if (Q.ca_extra == 1) { extra = {sr: 1.0}; }
 }
 RO.setResults(Q, 'assembly', extra, 703);
+RO.recordParliament(Q, 'assembly', 'The Constituent Assembly');
 Q.ca_elected = 1;
 Q.ca_moderate = (Q.res_men + Q.res_sr + Q.res_lsr + Q.res_pop + Q.res_nat >= 55) ? 1 : 0;
 Q.ca_men_pct = Q.res_men;
@@ -68,17 +69,7 @@ if (Q.assembly_early) { RO.add(Q, {bolshevik: -10, soviet_democracy: 2}); }
 
 The results, by our count:
 
-SRs (including the Left SRs, who ran on the SR lists): [+ res_sr +]%, [+ seat_sr +] seats.
-
-Bolsheviks: [+ res_bol +]%, [+ seat_bol +] seats.
-
-National parties (Ukrainian SRs, the Dashnaks, Musavat, Alash Orda and others): [+ res_nat +]%, [+ seat_nat +] seats.
-
-Kadets: [+ res_kad +]%, [+ seat_kad +] seats.
-
-Mensheviks: [+ res_men +]%, [+ seat_men +] seats.
-
-Others (Popular Socialists, Trudoviks and the rest): [+ res_pop +]%, [+ res_oth +]%.
+{!<div class="parliament" data-name="assembly"></div>!}
 
 [? if player_party = 'sr' : Your party has won more votes than any other party in the history of Russia. ?][? if player_party = 'lsr' and lsr_split = 0 : The Left SRs, who ran on the SR lists, count about [+ res_lsr_in +] percent of the vote, a quarter of the SR delegation. ?][? if player_party = 'lsr' and lsr_split = 1 : The Left SRs, who ran on lists of their own, have [+ res_lsr +] percent of the vote and [+ seat_lsr +] seats. ?][? if ca_moderate = 1 : The moderate socialists and the national parties have a clear majority. The Assembly is theirs, if it meets. ?][? if ca_moderate = 0 : The moderate socialists do not have a majority. The Assembly will be a quarrelsome place. ?]
 
