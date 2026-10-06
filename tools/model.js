@@ -2,7 +2,16 @@
 // Pure functions of the quality object Q, so they can be tested in node.
 // A copy is served as out/html/model.js (see tools/sync_model.sh) and loaded by index.html.
 var RO = (function() {
-  var GROUPS = ['workers', 'soldiers', 'peasants', 'middle', 'railway', 'nations'];
+  // Voter groups ("classes"). The old 'middle strata' are split into four, so that the support of each
+  // can be shown separately. Campaign boosts still use the six boost groups (boost_middle covers the four).
+  var GROUPS = ['workers', 'soldiers', 'peasants', 'smallbiz', 'bigbiz', 'bureaucrats', 'intelligentsia', 'railway', 'nations'];
+  var BOOST_GROUPS = ['workers', 'soldiers', 'peasants', 'middle', 'railway', 'nations'];
+  var CLASS_NAMES = {workers: 'Urban workers', soldiers: 'Soldiers and sailors', peasants: 'Peasants',
+    smallbiz: 'Small business owners and artisans', bigbiz: 'Large business owners and landowners',
+    bureaucrats: 'Bureaucrats and officials', intelligentsia: 'Professionals and the intelligentsia',
+    railway: 'Railway and postal workers', nations: 'National minorities'};
+  var MIDDLE_SPLIT = {smallbiz: 0.35, bigbiz: 0.10, bureaucrats: 0.25, intelligentsia: 0.30};
+  var MIDDLE_BOOST = {smallbiz: 1, bigbiz: 0.3, bureaucrats: 1, intelligentsia: 1};
   var PARTIES = ['bol', 'lsr', 'sr', 'men', 'kad', 'pop', 'nat', 'oth'];
   var PARTY_NAMES = {bol: 'Bolsheviks', lsr: 'Left SRs', sr: 'SRs', men: 'Mensheviks', kad: 'Kadets',
                      pop: 'Popular Socialists and Trudoviks', nat: 'National parties', oth: 'Anarchists and others'};
@@ -14,7 +23,10 @@ var RO = (function() {
     workers:  {bol: 12, lsr: 1, sr: 22, men: 40, kad: 6,  pop: 3,  nat: 2,  oth: 14},
     soldiers: {bol: 8,  lsr: 2, sr: 45, men: 22, kad: 5,  pop: 2,  nat: 5,  oth: 11},
     peasants: {bol: 2,  lsr: 3, sr: 70, men: 3,  kad: 4,  pop: 6,  nat: 8,  oth: 4},
-    middle:   {bol: 2,  lsr: 0, sr: 17, men: 15, kad: 38, pop: 14, nat: 7,  oth: 7},
+    smallbiz: {bol: 1,  lsr: 0, sr: 16, men: 8,  kad: 42, pop: 17, nat: 8,  oth: 8},
+    bigbiz:   {bol: 0,  lsr: 0, sr: 3,  men: 1,  kad: 82, pop: 4,  nat: 5,  oth: 5},
+    bureaucrats: {bol: 2, lsr: 0, sr: 14, men: 14, kad: 40, pop: 12, nat: 7, oth: 11},
+    intelligentsia: {bol: 3, lsr: 0, sr: 24, men: 25, kad: 26, pop: 15, nat: 5, oth: 2},
     railway:  {bol: 10, lsr: 1, sr: 25, men: 40, kad: 8,  pop: 3,  nat: 5,  oth: 8},
     nations:  {bol: 4,  lsr: 1, sr: 20, men: 12, kad: 4,  pop: 3,  nat: 45, oth: 11}
   };
@@ -25,6 +37,13 @@ var RO = (function() {
     assembly:   {workers: 12, soldiers: 18, peasants: 50, middle: 8,  railway: 2,  nations: 10},
     provincial: {workers: 50, soldiers: 5,  peasants: 10, middle: 15, railway: 15, nations: 5}
   };
+  (function() {
+    for (var a in ARENAS) {
+      var w = ARENAS[a];
+      for (var g in MIDDLE_SPLIT) { w[g] = w.middle * MIDDLE_SPLIT[g]; }
+      delete w.middle;
+    }
+  })();
   // Arena-specific biases: soviet delegates over-represent town parties, the capitals went Bolshevik, etc.
   var ARENA_BIAS = {
     soviets:    {men: 1.6, bol: 1.3, sr: 1.15},
@@ -113,6 +132,8 @@ var RO = (function() {
     }
     for (i = 0; i < ALL_ADVISORS.length; i++) { Q[ALL_ADVISORS[i] + '_advisor'] = 0; }
     for (i = 0; i < c.advisors.length; i++) { Q[c.advisors[i] + '_advisor'] = 1; }
+    Q.adv_active = [];
+    syncAdvisors(Q);
     Q.dues_income = Math.max(1, Math.round(Q.members / Q.mem_div));
     // short phrases for prose in shared events
     var L = c.labels;
@@ -146,6 +167,11 @@ var RO = (function() {
     return m;
   }
 
+  // The player's campaign boost among one group (boost_middle spreads over the four middle groups).
+  function boostFor(Q, g) {
+    return (Q['boost_' + g] || 0) + (MIDDLE_BOOST[g] ? (Q.boost_middle || 0) * MIDDLE_BOOST[g] : 0);
+  }
+
   // support[group][party]: fractions that sum to 1 within each group.
   // Before the split the Left SRs are inside the SR party's lists: their appeal is added to the SR
   // row, and also reported as row.lsr_in so that a Left SR player has a poll number of their own.
@@ -155,13 +181,13 @@ var RO = (function() {
     for (gi = 0; gi < GROUPS.length; gi++) {
       var g = GROUPS[gi], tot = 0, row = {};
       var lsrA = BASE[g].lsr * m.lsr * lsrMult;
-      if (Q.player_slot === 'lsr') { lsrA += (Q['boost_' + g] || 0); }
+      if (Q.player_slot === 'lsr') { lsrA += boostFor(Q, g); }
       if (lsrA < 0.05) { lsrA = 0.05; }
       for (pi = 0; pi < PARTIES.length; pi++) {
         var p = PARTIES[pi];
         var a = BASE[g][p] * m[p];
         if (p === 'lsr') { a = lsrA; }
-        else if (p === Q.player_slot) { a += (Q['boost_' + g] || 0); }
+        else if (p === Q.player_slot) { a += boostFor(Q, g); }
         if (p === 'lsr' && !Q.lsr_split) { a = 0; }
         if (p === 'sr' && !Q.lsr_split) { a += lsrA; }
         if (a < 0.05) { a = 0.05; }
@@ -270,8 +296,8 @@ var RO = (function() {
     }
     Q.legality = clamp(Math.round(Q.legality), 0, 3);
     if (Q.resources < 0) { Q.resources = 0; }
-    for (var g = 0; g < GROUPS.length; g++) {
-      var k = 'boost_' + GROUPS[g];
+    for (var g = 0; g < BOOST_GROUPS.length; g++) {
+      var k = 'boost_' + BOOST_GROUPS[g];
       Q[k] = clamp(Q[k] || 0, -20, 40);
     }
   }
@@ -312,8 +338,8 @@ var RO = (function() {
       Q[rk] += (relBase[rk] - Q[rk]) * 0.08 * tl;
     }
     // the player's campaign boosts fade slowly
-    for (var g = 0; g < GROUPS.length; g++) {
-      var k = 'boost_' + GROUPS[g];
+    for (var g = 0; g < BOOST_GROUPS.length; g++) {
+      var k = 'boost_' + BOOST_GROUPS[g];
       Q[k] = (Q[k] || 0) * (1 - 0.05 * tl);
     }
   }
@@ -532,10 +558,155 @@ var RO = (function() {
     return out;
   }
 
+
+  // ---- the advisors' council: four active at a time ----
+  // BEGIN ADVISORS (written by tools/gen_advisors.py)
+  var ADVISORS = {
+    martov: {name: "Julius Martov", party: 'menshevik'},
+    dan: {name: "Fyodor Dan", party: 'menshevik'},
+    tsereteli: {name: "Irakli Tsereteli", party: 'menshevik'},
+    chkheidze: {name: "Nikolai Chkheidze", party: 'menshevik'},
+    skobelev: {name: "Matvei Skobelev", party: 'menshevik'},
+    gvozdev: {name: "Kuzma Gvozdev", party: 'menshevik'},
+    potresov: {name: "Alexander Potresov", party: 'menshevik'},
+    axelrod: {name: "Pavel Axelrod", party: 'menshevik'},
+    abramovich: {name: "Raphael Abramovich", party: 'menshevik'},
+    liber: {name: "Mark Liber", party: 'menshevik'},
+    broido: {name: "Eva Broido", party: 'menshevik'},
+    lidia: {name: "Lidia Dan", party: 'menshevik'},
+    sukhanov: {name: "Nikolai Sukhanov", party: 'menshevik'},
+    batursky: {name: "Boris Batursky", party: 'menshevik'},
+    khinchuk: {name: "Lev Khinchuk", party: 'menshevik'},
+    zhordania: {name: "Noe Zhordania", party: 'menshevik'},
+    chernov: {name: "Viktor Chernov", party: 'sr'},
+    avksentiev: {name: "Nikolai Avksentiev", party: 'sr'},
+    breshkovskaya: {name: "Ekaterina Breshko-Breshkovskaya", party: 'sr'},
+    gots: {name: "Abram Gots", party: 'sr'},
+    zenzinov: {name: "Vladimir Zenzinov", party: 'sr'},
+    volsky: {name: "Vladimir Volsky", party: 'sr'},
+    spiridonova: {name: "Maria Spiridonova", party: 'lsr'},
+    kamkov: {name: "Boris Kamkov", party: 'lsr'},
+    natanson: {name: "Mark Natanson", party: 'lsr'},
+    steinberg: {name: "Isaac Steinberg", party: 'lsr'},
+    kolegaev: {name: "Andrei Kolegaev", party: 'lsr'},
+    proshian: {name: "Prosh Proshian", party: 'lsr'},
+    aleksandrovich: {name: "Pyotr Aleksandrovich", party: 'lsr'}
+  };
+  // END ADVISORS
+  var COUNCIL_SIZE = 4;
+
+  function advisorsAvailable(Q) {
+    var out = [];
+    for (var id in ADVISORS) {
+      if (Q[id + '_advisor'] && (ADVISORS[id].party === Q.player_party || Q['lent_' + id])) { out.push(id); }
+    }
+    return out;
+  }
+  function shuffled(a) {
+    var b = a.slice();
+    for (var i = b.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
+    return b;
+  }
+  function nameList(ids) {
+    var n = [];
+    for (var i = 0; i < ids.length; i++) { n.push(ADVISORS[ids[i]].name); }
+    return n.join(', ');
+  }
+  // Keep the council at four: drop those who have left, fill the gaps from the reserve at random,
+  // and set Q.on_<id> (in the council) and Q.avail_<id> (available) for the scenes.
+  function syncAdvisors(Q) {
+    var avail = advisorsAvailable(Q), active = [], i, id;
+    var prev = Q.adv_active || [];
+    for (i = 0; i < prev.length; i++) { if (avail.indexOf(prev[i]) >= 0) { active.push(prev[i]); } }
+    var pool = shuffled(avail.filter(function(x) { return active.indexOf(x) < 0; }));
+    while (active.length < COUNCIL_SIZE && pool.length) { active.push(pool.shift()); }
+    Q.adv_active = active;
+    for (id in ADVISORS) {
+      Q['on_' + id] = active.indexOf(id) >= 0 ? 1 : 0;
+      Q['avail_' + id] = avail.indexOf(id) >= 0 ? 1 : 0;
+    }
+    Q.adv_reserve = pool.length;
+    Q.council_list = nameList(active);
+    Q.reserve_list = nameList(pool);
+  }
+  // Replace the whole council by a random draw.
+  function reshuffleCouncil(Q) { Q.adv_active = []; syncAdvisors(Q); }
+  // Bring one advisor in (the longest-serving steps down), or replace one by a random reserve member.
+  function callAdvisor(Q, id) {
+    var a = (Q.adv_active || []).slice();
+    if (a.indexOf(id) >= 0) { return; }
+    if (a.length >= COUNCIL_SIZE) { a.shift(); }
+    a.push(id); Q.adv_active = a; syncAdvisors(Q);
+  }
+  function replaceAdvisor(Q, id) {
+    var a = (Q.adv_active || []).filter(function(x) { return x !== id; });
+    var avail = advisorsAvailable(Q);
+    var pool = shuffled(avail.filter(function(x) { return a.indexOf(x) < 0 && x !== id; }));
+    if (pool.length) { a.push(pool[0]); } else { a.push(id); }
+    Q.adv_active = a; syncAdvisors(Q);
+  }
+
+
+  // ---- the Cabinet's standing policies (set from the Cabinet advisor card) ----
+  // Settings are 0, 1, 2 in each area; the immediate effects of a change are in tools/gen_cabinet.py.
+  // The defaults (land 0, food 1, war 0, order 0, labour 0) have no ongoing effect.
+  function policyDrift(Q, tl) {
+    var full = Q.in_coalition && !Q.bol_regime, lsr = Q.lsr_in_gov && Q.bol_regime;
+    if (!full && !lsr) { return; }
+    var land = Q.pol_land || 0, order = Q.pol_order || 0;
+    if (land === 1) { Q.land_pressure -= 0.4 * tl; Q.right_threat += 0.1 * tl; }
+    if (land === 2) { Q.land_pressure -= 0.8 * tl; Q.right_threat += 0.25 * tl; }
+    if (order === 1) { Q.right_threat -= 0.4 * tl; Q.repression += 0.3 * tl; Q.soviet_democracy -= 0.25 * tl; Q.bolshevik -= 0.1 * tl; }
+    if (order === 2) { Q.soviet_democracy += 0.25 * tl; Q.right_threat += 0.15 * tl; }
+    if (!full) { return; }
+    var food = Q.pol_food === undefined ? 1 : Q.pol_food, war = Q.pol_war || 0, labour = Q.pol_labour || 0;
+    if (food === 0) { Q.bread -= 0.4 * tl; Q.ruble += 0.3 * tl; }
+    if (food === 2) { Q.bread += 0.7 * tl; Q.repression += 0.2 * tl; Q.soviet_democracy -= 0.2 * tl; Q.land_pressure += 0.2 * tl; }
+    if (Q.at_war) {
+      if (war === 1) { Q.war_weariness -= 0.2 * tl; Q.army_discipline -= 0.2 * tl; }
+      if (war === 2) { Q.war_weariness += 0.6 * tl; Q.army_discipline -= 0.3 * tl; }
+    }
+    if (labour === 0) { Q.ruble += 0.2 * tl; Q.bolshevik += 0.1 * tl; }
+    if (labour === 1) { Q.ruble -= 0.2 * tl; Q.bolshevik -= 0.15 * tl; }
+    if (labour === 2) { Q.ruble += 0.15 * tl; Q.bread += 0.1 * tl; Q.soviet_democracy -= 0.05 * tl; }
+  }
+
+
+  // Support of every party in each class, for the right-hand panel.
+  // Returns [{id, name, share (percent of this arena's electorate), rows: {party: percent}, you: percent}].
+  function classSupport(Q, arena) {
+    arena = arena || currentArena(Q);
+    var gs = groupSupport(Q), w = ARENAS[arena], bias = ARENA_BIAS[arena] || {}, out = [], total = 0, gi, pi;
+    for (gi = 0; gi < GROUPS.length; gi++) { total += w[GROUPS[gi]]; }
+    for (gi = 0; gi < GROUPS.length; gi++) {
+      var g = GROUPS[gi], rows = {}, t = 0;
+      for (pi = 0; pi < PARTIES.length; pi++) { rows[PARTIES[pi]] = gs[g][PARTIES[pi]] * (bias[PARTIES[pi]] || 1); t += rows[PARTIES[pi]]; }
+      for (pi = 0; pi < PARTIES.length; pi++) { rows[PARTIES[pi]] = 100 * rows[PARTIES[pi]] / t; }
+      var you = rows[Q.player_slot];
+      if (Q.player_slot === 'lsr' && !Q.lsr_split) { you = 100 * gs[g].lsr_in * (bias.sr || 1) / t; }
+      out.push({id: g, name: CLASS_NAMES[g], share: 100 * w[g] / total, rows: rows, you: you});
+    }
+    return out;
+  }
+  // The player's projected share in all four arenas, with the rank among the parties.
+  function popularity(Q) {
+    var out = [], names = {soviets: 'Congress of Soviets', dumas: 'City dumas', assembly: 'Constituent Assembly', provincial: 'City soviets'};
+    for (var a in names) {
+      var r = arenaResult(Q, a), you = (Q.player_slot === 'lsr' && !Q.lsr_split) ? r.lsr_in : r[Q.player_slot], rank = 1;
+      for (var pi = 0; pi < PARTIES.length; pi++) {
+        var p = PARTIES[pi];
+        if (p === Q.player_slot || (p === 'lsr' && !Q.lsr_split)) { continue; }
+        if (r[p] > you) { rank++; }
+      }
+      out.push({arena: a, name: names[a], you: you, rank: rank});
+    }
+    return out;
+  }
+
   // A weighted coin for the decisions that no stat can settle.
   function chance(p) { return Math.random() < clamp(p, 0, 1); }
 
-  return {allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

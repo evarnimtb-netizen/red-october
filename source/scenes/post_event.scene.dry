@@ -28,6 +28,7 @@ if (Q.month_actions >= 1) {
     // stats drift every turn, in proportion to its length
     RO.drift(Q, Q.turn_length);
     RO.alliancesTurn(Q, Q.turn_length);
+    RO.policyDrift(Q, Q.turn_length);
     if (Q.month_complete) {
         Q.time += 1;
         Q.month += 1;
@@ -54,6 +55,7 @@ RO.clampStats(Q);
 RO.updateFactions(Q);
 RO.updatePolls(Q);
 RO.display(Q);
+RO.syncAdvisors(Q);
 
 // 2. immediate endings
 if (!Q.game_end) {

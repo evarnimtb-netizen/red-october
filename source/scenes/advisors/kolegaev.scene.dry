@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/kolegaev.svg?v=2
 tags: advisor, rightdef
 new-page: true
-view-if: kolegaev_advisor = 1 and (player_party = 'lsr' or lent_kolegaev = 1)
+view-if: kolegaev_advisor = 1 and (player_party = 'lsr' or lent_kolegaev = 1) and on_kolegaev = 1
 
 = Andrei Kolegaev
 

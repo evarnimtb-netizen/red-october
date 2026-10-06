@@ -139,6 +139,97 @@
     return h;
   }
 
+
+  // ---------- the right-hand panel: support by class ----------
+  var rightTab = 'classes';
+  var openClass = {};
+  var PARTY_LABEL = {bol: 'Bolsheviks', lsr: 'Left SRs', sr: 'SRs', men: 'Mensheviks', kad: 'Kadets', pop: 'Popular Socialists, Trudoviks',
+                     nat: 'National parties', oth: 'Anarchists and others'};
+  function arenaName(Q) { return Q.phase <= 1 ? 'Congress of Soviets' : (Q.phase === 2 ? 'Constituent Assembly' : 'City soviets'); }
+  function youLabel(Q) { return Q.player_party === 'lsr' && !Q.lsr_split ? 'Left SRs (on SR lists)' : (Q.pname || ''); }
+
+  function renderClasses(Q) {
+    var cs = window.RO.classSupport(Q);
+    var color = PARTY_COLORS[Q.player_slot] || '#7a5a2b';
+    var h = '<div class="sb-section">Support by class</div><div class="sb-note">' + esc(youLabel(Q)) + ' – ' + arenaName(Q) + ', projected. Click a class for all parties.</div>';
+    var order = ['workers', 'railway', 'soldiers', 'peasants', 'smallbiz', 'bureaucrats', 'intelligentsia', 'bigbiz', 'nations'];
+    var byId = {};
+    cs.forEach(function(c) { byId[c.id] = c; });
+    order.forEach(function(id) {
+      var c = byId[id];
+      var lead = null, best = -1;
+      Object.keys(c.rows).forEach(function(p) { if (c.rows[p] > best && !(p === 'lsr' && !Q.lsr_split)) { best = c.rows[p]; lead = p; } });
+      var leadTxt = (lead === Q.player_slot || (Q.player_slot === 'lsr' && !Q.lsr_split && lead === 'sr' && false)) ? 'you lead' : 'leads: ' + PARTY_LABEL[lead] + ' ' + Math.round(best) + '%';
+      h += '<div class="rs-class" data-id="' + id + '"><div class="sb-label"><span>' + esc(c.name) + '</span><span class="sb-word">' + Math.round(c.you) + '%</span></div>' +
+           '<div class="sb-bar"><div class="sb-fill" style="width:' + clamp(c.you, 0, 100) + '%;background:' + color + '"></div></div>' +
+           '<div class="rs-meta">' + (c.share < 1 ? '<1' : Math.round(c.share)) + '% of the electorate · ' + esc(leadTxt) + '</div>';
+      if (openClass[id]) {
+        h += '<div class="rs-detail">';
+        var keys = Object.keys(c.rows).filter(function(p) { return !(p === 'lsr' && !Q.lsr_split); }).sort(function(a, b) { return c.rows[b] - c.rows[a]; });
+        keys.forEach(function(p) {
+          var mine = (p === Q.player_slot);
+          h += '<div class="sb-row' + (mine ? ' mine' : '') + '"><div class="sb-label"><span>' + esc(PARTY_LABEL[p]) + '</span><span class="sb-word">' + Math.round(c.rows[p]) + '%</span></div>' +
+               '<div class="sb-bar"><div class="sb-fill" style="width:' + clamp(c.rows[p] * 1.4, 0, 100) + '%;background:' + PARTY_COLORS[p] + '"></div></div></div>';
+        });
+        h += '</div>';
+      }
+      h += '</div>';
+    });
+    return h;
+  }
+
+  function renderPopularity(Q) {
+    var pops = window.RO.popularity(Q);
+    var color = PARTY_COLORS[Q.player_slot] || '#7a5a2b';
+    var cur = Q.phase <= 1 ? 'soviets' : (Q.phase === 2 ? 'assembly' : 'provincial');
+    var now = null;
+    pops.forEach(function(p) { if (p.arena === cur) { now = p; } });
+    var h = '<div class="sb-section">Popularity</div>';
+    if (now) {
+      var trend = '';
+      if (prevTurnSnap && prevTurnSnap.player_poll !== undefined) {
+        var d = Math.round(now.you) - Math.round(prevTurnSnap.player_poll);
+        if (d !== 0) { trend = ' <span class="sb-arrow ' + (d > 0 ? 'good' : 'bad') + '">' + (d > 0 ? '▲' : '▼') + Math.abs(d) + '</span>'; }
+      }
+      h += '<div class="rs-big">' + Math.round(now.you) + '%' + trend + '<small>' + esc(youLabel(Q)) + ' · ' + esc(now.name) + '</small></div>';
+      h += '<div class="sb-note" style="text-align:center">Ranked ' + now.rank + (now.rank === 1 ? 'st' : (now.rank === 2 ? 'nd' : (now.rank === 3 ? 'rd' : 'th'))) + ' of the parties</div>';
+    }
+    h += '<div class="sb-section">In every arena</div>';
+    pops.forEach(function(p) {
+      h += '<div class="sb-row"><div class="sb-label"><span>' + esc(p.name) + '</span><span class="sb-word">' + Math.round(p.you) + '% · rank ' + p.rank + '</span></div>' +
+           '<div class="sb-bar"><div class="sb-fill" style="width:' + clamp(p.you * 2, 0, 100) + '%;background:' + color + '"></div></div></div>';
+    });
+    h += '<div class="sb-note">The soviets favour the towns and the soldiers, the dumas the propertied classes, the Assembly the villages.</div>';
+    h += '<div class="sb-section">Members and resources</div><table class="sb-kv"><tr><td>Members</td><td>' + Math.round(num(Q.members)) + ',000</td></tr><tr><td>Resources</td><td>' + Math.round(num(Q.resources)) + '</td></tr></table>';
+    return h;
+  }
+
+  function renderRight() {
+    var Q = qualities();
+    var side = $('#support_sidebar');
+    if (!Q || Q.started !== 1 || !window.RO || sceneId().indexOf('root.') === 0) { side.hide(); return; }
+    side.show();
+    var html = rightTab === 'popularity' ? renderPopularity(Q) : renderClasses(Q);
+    $('#support_panel').empty().append('<div class="sb">' + html + '</div>');
+  }
+  window.changeRightTab = function(tab, btn) {
+    rightTab = tab;
+    $('#support_sidebar .tab_button').removeClass('active');
+    $('#' + btn).addClass('active');
+    renderRight();
+  };
+  window.toggleSupport = function() {
+    if (window.innerWidth <= 1200) { $('body').toggleClass('show-support'); }
+    else { $('body').toggleClass('hide-support'); }
+    renderRight();
+    return false;
+  };
+  $(document).on('click', '.rs-class', function() {
+    var id = $(this).data('id');
+    openClass[id] = !openClass[id];
+    renderRight();
+  });
+
   var previousUpdate = window.updateSidebar;
   window.updateSidebar = function() {
     var Q = qualities();
@@ -146,6 +237,7 @@
     var side = $('#stats_sidebar');
     if (!Q || Q.started !== 1 || !window.RO || sceneId().indexOf('root.') === 0) {
       side.hide();
+      $('#support_sidebar').hide();
       return;
     }
     side.show();
@@ -159,6 +251,7 @@
       default: html = renderMain(Q);
     }
     box.empty().append('<div class="sb">' + html + '</div>');
+    renderRight();
   };
 
   // ---------- what did that choice change? ----------
@@ -177,7 +270,7 @@
     var i;
     for (i = 0; i < TRACK.length; i++) { s[TRACK[i][0]] = num(Q[TRACK[i][0]]); }
     for (i = 0; i < BOOSTS.length; i++) { s['boost_' + BOOSTS[i][0]] = num(Q['boost_' + BOOSTS[i][0]]); }
-    ['rel_ally', 'rel_lsr', 'rel_bol', 'rel_kad', 'members', 'dissent', 'legality', 'ally_lvl', 'ally_lsr', 'ally_bol'].forEach(function(k) { s[k] = num(Q[k]); });
+    ['rel_ally', 'rel_lsr', 'rel_bol', 'rel_kad', 'members', 'dissent', 'legality', 'ally_lvl', 'ally_lsr', 'ally_bol', 'player_poll'].forEach(function(k) { s[k] = num(Q[k]); });
     (Q.factions || []).forEach(function(f) { s[f + '_strength'] = num(Q[f + '_strength']); });
     return s;
   }
@@ -270,6 +363,14 @@
 
   // the first page is displayed before this script runs: draw (or hide) the sidebar once the page is ready
   $(function() { setTimeout(function() { window.updateSidebar(); }, 150); });
+
+  // no native tooltips on the cards (the card shows its own subtitle inside itself)
+  $(function() {
+    var strip = function() { $('#content a.card[title]').removeAttr('title'); };
+    var target = document.getElementById('content');
+    if (target && window.MutationObserver) { new MutationObserver(strip).observe(target, {childList: true, subtree: true}); }
+    strip();
+  });
 
   // redraw the sidebar when the hand changes (cards played in the same scene)
   window.refreshSidebar = function() { window.updateSidebar(); };

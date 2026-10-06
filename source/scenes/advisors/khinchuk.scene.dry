@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/khinchuk.svg?v=2
 tags: advisor, unions
 new-page: true
-view-if: khinchuk_advisor = 1 and (player_party = 'menshevik' or lent_khinchuk = 1)
+view-if: khinchuk_advisor = 1 and (player_party = 'menshevik' or lent_khinchuk = 1) and on_khinchuk = 1
 
 = Lev Khinchuk
 

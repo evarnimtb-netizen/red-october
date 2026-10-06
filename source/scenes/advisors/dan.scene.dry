@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/dan.svg?v=2
 tags: advisor, defencist
 new-page: true
-view-if: dan_advisor = 1 and (player_party = 'menshevik' or lent_dan = 1)
+view-if: dan_advisor = 1 and (player_party = 'menshevik' or lent_dan = 1) and on_dan = 1
 
 = Fyodor Dan
 

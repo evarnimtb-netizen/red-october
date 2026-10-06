@@ -31,7 +31,7 @@ Delegates from unions, cooperatives and factory committees met for three days. T
 @prepare
 on-arrival: {!
 RO.fac(Q, 'unions', 2, -2);
-peoples_party_timer = 3;
+Q.peoples_party_timer = 3;
 !}
 
 The preparation brought the unions closer to us, and the congress will be easier to call next time.

@@ -90,7 +90,7 @@ for f in sorted(glob.glob(os.path.join(SCENES, '**', '*.scene.dry'), recursive=T
             kind = k
     if 'advisor' in tags:
         kind = 'advisor'
-        ini = ''
+        ini = None if sid in ('wait', 'council', 'cabinet') else ''
     if not kind:
         continue
     svg = card_svg(title, kind, sid, ini)

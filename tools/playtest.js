@@ -48,7 +48,7 @@ function playOne(idx) {
   var eng = new engine.DendryEngine(ui, game);
   eng.beginGame();
   var Q = function() { return eng.state.qualities; };
-  var steps = 0, log = [], scenes = [], snaps = {}, banned = {}, lastCard = null, maxwf = 0;
+  var steps = 0, log = [], scenes = [], snaps = {}, banned = {}, lastCard = null, maxwf = 0, maxPinned = 0;
   // start menu -> start -> difficulty
   function pickByTitle(re) {
     if (!ui.choices) { return false; }
@@ -87,6 +87,7 @@ function playOne(idx) {
     if (scene.isHand) {
       // fill the hand, then play something
       var canDraw = ui.decks.filter(function(d) { return d.canChoose; });
+      maxPinned = Math.max(maxPinned, ui.pinned.length);
       var hand = eng.state.currentHands[sid] || [];
       var tries = 0;
       while (hand.length < (scene.maxCards || 3) && canDraw.length && tries < 10) {
@@ -153,7 +154,7 @@ function playOne(idx) {
     eng.choose(pick);
   }
   var q = Q();
-  return {idx: idx, steps: steps, ending: q.ending, year: q.year, month: q.month, dix: q.dix, game_over: q.game_over,
+  return {idx: idx, maxPinned: maxPinned, steps: steps, ending: q.ending, year: q.year, month: q.month, dix: q.dix, game_over: q.game_over,
           bol_regime: q.bol_regime, vikzhel: q.vikzhel_deal, assembly: q.assembly_survives,
           legality: q.legality, sd: Math.round(q.soviet_democracy), members: Math.round(q.members),
           wf: Math.round(maxwf), rt: Math.round(q.right_threat), bol: Math.round(q.bolshevik),
@@ -185,6 +186,7 @@ results.forEach(function(r) { var k = r.game_over ? r.ending : 'STUCK'; counts[k
 if (process.env.DBG) { results.forEach(function(r) { console.log(r.ending + ' ' + JSON.stringify(r.dbg)); }); }
 if (process.env.POW) { results.forEach(function(r) { console.log(JSON.stringify({e: r.ending, p: r.bpow_final, h: r.homog, lc: r.lc, ca: r.ca, st: r.stock, tk: r.takeover, vs: r.vs})); }); }
 if (process.env.TEXT) { fs.writeFileSync(process.env.TEXT, allText.join('\n')); }
+if (results.length) { console.log('max pinned cards shown: ' + Math.max.apply(null, results.map(function(r) { return r.maxPinned; }))); }
 console.log('policy=' + policy + ' runs=' + runs + ' errors=' + errors);
 console.log(JSON.stringify(counts));
 results.filter(function(r) { return !r.game_over; }).slice(0, 5).forEach(function(r) {

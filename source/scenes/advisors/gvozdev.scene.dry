@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/gvozdev.svg?v=2
 tags: advisor, unions
 new-page: true
-view-if: gvozdev_advisor = 1 and (player_party = 'menshevik' or lent_gvozdev = 1)
+view-if: gvozdev_advisor = 1 and (player_party = 'menshevik' or lent_gvozdev = 1) and on_gvozdev = 1
 
 = Kuzma Gvozdev
 

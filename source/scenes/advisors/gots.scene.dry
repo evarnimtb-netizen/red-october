@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/gots.svg?v=2
 tags: advisor, unions
 new-page: true
-view-if: gots_advisor = 1 and (player_party = 'sr' or lent_gots = 1)
+view-if: gots_advisor = 1 and (player_party = 'sr' or lent_gots = 1) and on_gots = 1
 
 = Abram Gots
 

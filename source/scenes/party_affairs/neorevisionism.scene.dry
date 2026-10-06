@@ -31,7 +31,7 @@ The programme was published as an open letter to the Central Executive Committee
 
 @study
 on-arrival: {!
-neorevisionism_timer = 1;
+Q.neorevisionism_timer = 1;
 RO.fac(Q, 'unions', 1, 0);
 !}
 

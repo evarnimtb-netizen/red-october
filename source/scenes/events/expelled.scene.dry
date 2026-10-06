@@ -40,7 +40,7 @@ We protested in the press, and went on holding meetings in those factories where
 on-arrival: {!
 Q.underground = 1;
 Q.members -= 18 * Q.mem_scale;
-for (var g of RO.GROUPS) { Q['boost_' + g] = (Q['boost_' + g] || 0) * 0.5; }
+for (var g of RO.BOOST_GROUPS) { Q['boost_' + g] = (Q['boost_' + g] || 0) * 0.5; }
 RO.add(Q, {repression: -3});
 Q.resources += 1;
 RO.fac(Q, 'intl', 0, 4);

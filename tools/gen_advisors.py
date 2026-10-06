@@ -163,6 +163,76 @@ OTHERS = [
     "Aleksandrovich saw the lists before they were signed. A number of names were crossed out, and a few of those named were warned.")]),
 ]
 
+def write_model_table(table):
+    import json, re
+    path = os.path.join(os.path.dirname(__file__), 'model.js')
+    src = open(path, encoding='utf-8').read()
+    body = ',\n    '.join("%s: {name: %s, party: '%s'}" % (k, json.dumps(v[0]), v[1]) for k, v in table.items())
+    block = "  // BEGIN ADVISORS (written by tools/gen_advisors.py)\n  var ADVISORS = {\n    %s\n  };\n  // END ADVISORS" % body
+    src = re.sub(r"  // BEGIN ADVISORS.*?// END ADVISORS", lambda m: block, src, flags=re.S)
+    open(path, 'w', encoding='utf-8').write(src)
+
+def write_council(table):
+    lines = ['''title: The Council
+subtitle: Change the advisors you are listening to.
+is-pinned-card: true
+card-image: img/cards/council.svg?v=2
+tags: advisor
+new-page: true
+view-if: adv_reserve >= 1 and council_timer <= 0
+on-arrival: {!
+RO.syncAdvisors(Q);
+!}
+
+= The Council
+
+You listen to four advisors at a time; the others wait in the corridor. Changing the council takes a turn, and it cannot be done again for three months.
+
+*Advising now: [+ council_list +].* *In reserve: [+ reserve_list +].*
+
+- @shuffle: Draw a new council at random.''']
+    for k, v in table.items():
+        lines.append('- @bring_%s: Call on %s. (The longest-serving advisor steps down.)' % (k, v[0]))
+    for k, v in table.items():
+        lines.append('- @drop_%s: Replace %s with someone from the reserve.' % (k, v[0]))
+    lines.append('- @root: Return to main')
+    lines.append('')
+    lines.append('''@shuffle
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.reshuffleCouncil(Q);
+!}
+
+The advisors were thanked and sent home, and a new circle was called together.
+
+- @root: Continue.
+''')
+    for k, v in table.items():
+        lines.append('''@bring_%s
+view-if: avail_%s = 1 and on_%s = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, '%s');
+!}
+
+%s has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+''' % (k, k, k, k, v[0]))
+    for k, v in table.items():
+        lines.append('''@drop_%s
+view-if: on_%s = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, '%s');
+!}
+
+%s has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+''' % (k, k, k, v[0]))
+    open(os.path.join(OUT, 'council.scene.dry'), 'w', encoding='utf-8').write('\n'.join(lines))
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for (aid, title, tag, flag, bio, atitle, asub, cond, unavail, js, result) in ADVISORS:
@@ -175,7 +245,7 @@ is-pinned-card: true
 card-image: img/cards/{aid}.svg?v=2
 tags: advisor, {tag}
 new-page: true
-view-if: {flag} = 1 and (player_party = 'menshevik' or lent_{aid} = 1)
+view-if: {flag} = 1 and (player_party = 'menshevik' or lent_{aid} = 1) and on_{aid} = 1
 
 = {title}
 
@@ -236,7 +306,7 @@ is-pinned-card: true
 card-image: img/cards/{aid}.svg?v=2
 tags: advisor, {tag}
 new-page: true
-view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1)
+view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1) and on_{aid} = 1
 
 = {title}
 
@@ -247,6 +317,13 @@ view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1)
 {scenes}"""
         with open(os.path.join(OUT, aid + '.scene.dry'), 'w', encoding='utf-8') as f:
             f.write(text.rstrip() + '\n')
-    print('wrote', len(ADVISORS), '+', len(OTHERS), 'advisors')
+    table = {}
+    for (aid, title, tag, flag, bio, atitle, asub, cond, unavail, js, result) in ADVISORS:
+        table[aid] = (title, 'menshevik')
+    for (aid, title, tag, flag, bio, party, actions) in OTHERS:
+        table[aid] = (title, party)
+    write_model_table(table)
+    write_council(table)
+    print('wrote', len(ADVISORS), '+', len(OTHERS), 'advisors and the council')
 
 main()

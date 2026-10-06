@@ -1,0 +1,725 @@
+title: The Council
+subtitle: Change the advisors you are listening to.
+is-pinned-card: true
+card-image: img/cards/council.svg?v=2
+tags: advisor
+new-page: true
+view-if: adv_reserve >= 1 and council_timer <= 0
+on-arrival: {!
+RO.syncAdvisors(Q);
+!}
+
+= The Council
+
+You listen to four advisors at a time; the others wait in the corridor. Changing the council takes a turn, and it cannot be done again for three months.
+
+*Advising now: [+ council_list +].* *In reserve: [+ reserve_list +].*
+
+- @shuffle: Draw a new council at random.
+- @bring_martov: Call on Julius Martov. (The longest-serving advisor steps down.)
+- @bring_dan: Call on Fyodor Dan. (The longest-serving advisor steps down.)
+- @bring_tsereteli: Call on Irakli Tsereteli. (The longest-serving advisor steps down.)
+- @bring_chkheidze: Call on Nikolai Chkheidze. (The longest-serving advisor steps down.)
+- @bring_skobelev: Call on Matvei Skobelev. (The longest-serving advisor steps down.)
+- @bring_gvozdev: Call on Kuzma Gvozdev. (The longest-serving advisor steps down.)
+- @bring_potresov: Call on Alexander Potresov. (The longest-serving advisor steps down.)
+- @bring_axelrod: Call on Pavel Axelrod. (The longest-serving advisor steps down.)
+- @bring_abramovich: Call on Raphael Abramovich. (The longest-serving advisor steps down.)
+- @bring_liber: Call on Mark Liber. (The longest-serving advisor steps down.)
+- @bring_broido: Call on Eva Broido. (The longest-serving advisor steps down.)
+- @bring_lidia: Call on Lidia Dan. (The longest-serving advisor steps down.)
+- @bring_sukhanov: Call on Nikolai Sukhanov. (The longest-serving advisor steps down.)
+- @bring_batursky: Call on Boris Batursky. (The longest-serving advisor steps down.)
+- @bring_khinchuk: Call on Lev Khinchuk. (The longest-serving advisor steps down.)
+- @bring_zhordania: Call on Noe Zhordania. (The longest-serving advisor steps down.)
+- @bring_chernov: Call on Viktor Chernov. (The longest-serving advisor steps down.)
+- @bring_avksentiev: Call on Nikolai Avksentiev. (The longest-serving advisor steps down.)
+- @bring_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya. (The longest-serving advisor steps down.)
+- @bring_gots: Call on Abram Gots. (The longest-serving advisor steps down.)
+- @bring_zenzinov: Call on Vladimir Zenzinov. (The longest-serving advisor steps down.)
+- @bring_volsky: Call on Vladimir Volsky. (The longest-serving advisor steps down.)
+- @bring_spiridonova: Call on Maria Spiridonova. (The longest-serving advisor steps down.)
+- @bring_kamkov: Call on Boris Kamkov. (The longest-serving advisor steps down.)
+- @bring_natanson: Call on Mark Natanson. (The longest-serving advisor steps down.)
+- @bring_steinberg: Call on Isaac Steinberg. (The longest-serving advisor steps down.)
+- @bring_kolegaev: Call on Andrei Kolegaev. (The longest-serving advisor steps down.)
+- @bring_proshian: Call on Prosh Proshian. (The longest-serving advisor steps down.)
+- @bring_aleksandrovich: Call on Pyotr Aleksandrovich. (The longest-serving advisor steps down.)
+- @drop_martov: Replace Julius Martov with someone from the reserve.
+- @drop_dan: Replace Fyodor Dan with someone from the reserve.
+- @drop_tsereteli: Replace Irakli Tsereteli with someone from the reserve.
+- @drop_chkheidze: Replace Nikolai Chkheidze with someone from the reserve.
+- @drop_skobelev: Replace Matvei Skobelev with someone from the reserve.
+- @drop_gvozdev: Replace Kuzma Gvozdev with someone from the reserve.
+- @drop_potresov: Replace Alexander Potresov with someone from the reserve.
+- @drop_axelrod: Replace Pavel Axelrod with someone from the reserve.
+- @drop_abramovich: Replace Raphael Abramovich with someone from the reserve.
+- @drop_liber: Replace Mark Liber with someone from the reserve.
+- @drop_broido: Replace Eva Broido with someone from the reserve.
+- @drop_lidia: Replace Lidia Dan with someone from the reserve.
+- @drop_sukhanov: Replace Nikolai Sukhanov with someone from the reserve.
+- @drop_batursky: Replace Boris Batursky with someone from the reserve.
+- @drop_khinchuk: Replace Lev Khinchuk with someone from the reserve.
+- @drop_zhordania: Replace Noe Zhordania with someone from the reserve.
+- @drop_chernov: Replace Viktor Chernov with someone from the reserve.
+- @drop_avksentiev: Replace Nikolai Avksentiev with someone from the reserve.
+- @drop_breshkovskaya: Replace Ekaterina Breshko-Breshkovskaya with someone from the reserve.
+- @drop_gots: Replace Abram Gots with someone from the reserve.
+- @drop_zenzinov: Replace Vladimir Zenzinov with someone from the reserve.
+- @drop_volsky: Replace Vladimir Volsky with someone from the reserve.
+- @drop_spiridonova: Replace Maria Spiridonova with someone from the reserve.
+- @drop_kamkov: Replace Boris Kamkov with someone from the reserve.
+- @drop_natanson: Replace Mark Natanson with someone from the reserve.
+- @drop_steinberg: Replace Isaac Steinberg with someone from the reserve.
+- @drop_kolegaev: Replace Andrei Kolegaev with someone from the reserve.
+- @drop_proshian: Replace Prosh Proshian with someone from the reserve.
+- @drop_aleksandrovich: Replace Pyotr Aleksandrovich with someone from the reserve.
+- @root: Return to main
+
+@shuffle
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.reshuffleCouncil(Q);
+!}
+
+The advisors were thanked and sent home, and a new circle was called together.
+
+- @root: Continue.
+
+@bring_martov
+view-if: avail_martov = 1 and on_martov = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'martov');
+!}
+
+Julius Martov has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_dan
+view-if: avail_dan = 1 and on_dan = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'dan');
+!}
+
+Fyodor Dan has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_tsereteli
+view-if: avail_tsereteli = 1 and on_tsereteli = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'tsereteli');
+!}
+
+Irakli Tsereteli has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_chkheidze
+view-if: avail_chkheidze = 1 and on_chkheidze = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'chkheidze');
+!}
+
+Nikolai Chkheidze has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_skobelev
+view-if: avail_skobelev = 1 and on_skobelev = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'skobelev');
+!}
+
+Matvei Skobelev has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_gvozdev
+view-if: avail_gvozdev = 1 and on_gvozdev = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'gvozdev');
+!}
+
+Kuzma Gvozdev has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_potresov
+view-if: avail_potresov = 1 and on_potresov = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'potresov');
+!}
+
+Alexander Potresov has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_axelrod
+view-if: avail_axelrod = 1 and on_axelrod = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'axelrod');
+!}
+
+Pavel Axelrod has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_abramovich
+view-if: avail_abramovich = 1 and on_abramovich = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'abramovich');
+!}
+
+Raphael Abramovich has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_liber
+view-if: avail_liber = 1 and on_liber = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'liber');
+!}
+
+Mark Liber has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_broido
+view-if: avail_broido = 1 and on_broido = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'broido');
+!}
+
+Eva Broido has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_lidia
+view-if: avail_lidia = 1 and on_lidia = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'lidia');
+!}
+
+Lidia Dan has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_sukhanov
+view-if: avail_sukhanov = 1 and on_sukhanov = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'sukhanov');
+!}
+
+Nikolai Sukhanov has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_batursky
+view-if: avail_batursky = 1 and on_batursky = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'batursky');
+!}
+
+Boris Batursky has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_khinchuk
+view-if: avail_khinchuk = 1 and on_khinchuk = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'khinchuk');
+!}
+
+Lev Khinchuk has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_zhordania
+view-if: avail_zhordania = 1 and on_zhordania = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'zhordania');
+!}
+
+Noe Zhordania has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_chernov
+view-if: avail_chernov = 1 and on_chernov = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'chernov');
+!}
+
+Viktor Chernov has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_avksentiev
+view-if: avail_avksentiev = 1 and on_avksentiev = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'avksentiev');
+!}
+
+Nikolai Avksentiev has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_breshkovskaya
+view-if: avail_breshkovskaya = 1 and on_breshkovskaya = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'breshkovskaya');
+!}
+
+Ekaterina Breshko-Breshkovskaya has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_gots
+view-if: avail_gots = 1 and on_gots = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'gots');
+!}
+
+Abram Gots has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_zenzinov
+view-if: avail_zenzinov = 1 and on_zenzinov = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'zenzinov');
+!}
+
+Vladimir Zenzinov has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_volsky
+view-if: avail_volsky = 1 and on_volsky = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'volsky');
+!}
+
+Vladimir Volsky has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_spiridonova
+view-if: avail_spiridonova = 1 and on_spiridonova = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'spiridonova');
+!}
+
+Maria Spiridonova has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_kamkov
+view-if: avail_kamkov = 1 and on_kamkov = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'kamkov');
+!}
+
+Boris Kamkov has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_natanson
+view-if: avail_natanson = 1 and on_natanson = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'natanson');
+!}
+
+Mark Natanson has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_steinberg
+view-if: avail_steinberg = 1 and on_steinberg = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'steinberg');
+!}
+
+Isaac Steinberg has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_kolegaev
+view-if: avail_kolegaev = 1 and on_kolegaev = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'kolegaev');
+!}
+
+Andrei Kolegaev has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_proshian
+view-if: avail_proshian = 1 and on_proshian = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'proshian');
+!}
+
+Prosh Proshian has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@bring_aleksandrovich
+view-if: avail_aleksandrovich = 1 and on_aleksandrovich = 0
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.callAdvisor(Q, 'aleksandrovich');
+!}
+
+Pyotr Aleksandrovich has been called to the council. The one who had served longest has gone back to the party's work.
+
+- @root: Continue.
+
+@drop_martov
+view-if: on_martov = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'martov');
+!}
+
+Julius Martov has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_dan
+view-if: on_dan = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'dan');
+!}
+
+Fyodor Dan has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_tsereteli
+view-if: on_tsereteli = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'tsereteli');
+!}
+
+Irakli Tsereteli has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_chkheidze
+view-if: on_chkheidze = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'chkheidze');
+!}
+
+Nikolai Chkheidze has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_skobelev
+view-if: on_skobelev = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'skobelev');
+!}
+
+Matvei Skobelev has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_gvozdev
+view-if: on_gvozdev = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'gvozdev');
+!}
+
+Kuzma Gvozdev has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_potresov
+view-if: on_potresov = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'potresov');
+!}
+
+Alexander Potresov has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_axelrod
+view-if: on_axelrod = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'axelrod');
+!}
+
+Pavel Axelrod has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_abramovich
+view-if: on_abramovich = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'abramovich');
+!}
+
+Raphael Abramovich has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_liber
+view-if: on_liber = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'liber');
+!}
+
+Mark Liber has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_broido
+view-if: on_broido = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'broido');
+!}
+
+Eva Broido has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_lidia
+view-if: on_lidia = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'lidia');
+!}
+
+Lidia Dan has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_sukhanov
+view-if: on_sukhanov = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'sukhanov');
+!}
+
+Nikolai Sukhanov has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_batursky
+view-if: on_batursky = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'batursky');
+!}
+
+Boris Batursky has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_khinchuk
+view-if: on_khinchuk = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'khinchuk');
+!}
+
+Lev Khinchuk has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_zhordania
+view-if: on_zhordania = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'zhordania');
+!}
+
+Noe Zhordania has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_chernov
+view-if: on_chernov = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'chernov');
+!}
+
+Viktor Chernov has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_avksentiev
+view-if: on_avksentiev = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'avksentiev');
+!}
+
+Nikolai Avksentiev has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_breshkovskaya
+view-if: on_breshkovskaya = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'breshkovskaya');
+!}
+
+Ekaterina Breshko-Breshkovskaya has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_gots
+view-if: on_gots = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'gots');
+!}
+
+Abram Gots has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_zenzinov
+view-if: on_zenzinov = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'zenzinov');
+!}
+
+Vladimir Zenzinov has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_volsky
+view-if: on_volsky = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'volsky');
+!}
+
+Vladimir Volsky has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_spiridonova
+view-if: on_spiridonova = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'spiridonova');
+!}
+
+Maria Spiridonova has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_kamkov
+view-if: on_kamkov = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'kamkov');
+!}
+
+Boris Kamkov has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_natanson
+view-if: on_natanson = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'natanson');
+!}
+
+Mark Natanson has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_steinberg
+view-if: on_steinberg = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'steinberg');
+!}
+
+Isaac Steinberg has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_kolegaev
+view-if: on_kolegaev = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'kolegaev');
+!}
+
+Andrei Kolegaev has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_proshian
+view-if: on_proshian = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'proshian');
+!}
+
+Prosh Proshian has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+
+@drop_aleksandrovich
+view-if: on_aleksandrovich = 1 and adv_reserve >= 1
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, 'aleksandrovich');
+!}
+
+Pyotr Aleksandrovich has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.

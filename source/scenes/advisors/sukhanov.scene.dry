@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/sukhanov.svg?v=2
 tags: advisor, intl
 new-page: true
-view-if: sukhanov_advisor = 1 and (player_party = 'menshevik' or lent_sukhanov = 1)
+view-if: sukhanov_advisor = 1 and (player_party = 'menshevik' or lent_sukhanov = 1) and on_sukhanov = 1
 
 = Nikolai Sukhanov
 

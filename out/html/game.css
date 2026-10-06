@@ -657,3 +657,42 @@ ul.choices li.party-choice .party-emblem { width: 76px; height: 76px; flex: 0 0 
 .sb-badge.lvl1 { background: rgba(120, 90, 40, 0.15); }
 .sb-badge.lvl2 { background: rgba(120, 90, 40, 0.30); }
 .sb-badge.lvl3 { background: rgba(120, 90, 40, 0.50); font-weight: bold; }
+
+/* right-hand panel: support by class */
+#mid_panel { margin-right: 16rem; }
+#support-link { margin-left: 0.2em; }
+.rs-class { margin-bottom: 0.55em; cursor: pointer; }
+.rs-meta { font-size: 0.78em; opacity: 0.75; line-height: 1.2em; margin-top: 0.1em; }
+.rs-detail { margin: 0.3em 0 0.2em 0.4em; padding-left: 0.5em; border-left: 2px solid #876; }
+.rs-detail .sb-row { margin-bottom: 0.25em; }
+.rs-detail .sb-label { font-size: 0.85em; }
+.rs-big { text-align: center; font-size: 2em; line-height: 1.1em; margin-top: 0.2em; }
+.rs-big small { display: block; font-size: 0.4em; opacity: 0.75; letter-spacing: 0.06em; text-transform: uppercase; }
+.rs-arena { display: flex; justify-content: space-between; align-items: baseline; margin: 0.35em 0 0.1em 0; }
+.rs-rank { font-size: 0.8em; opacity: 0.8; }
+@media screen and (max-width: 1200px) {
+  #mid_panel { margin-right: 0.4em; }
+  #support_sidebar { display: none !important; }
+  body.show-support #support_sidebar { display: block !important; position: fixed; top: 2.4em; right: 0.5em; z-index: 60;
+    max-height: 88vh; overflow-y: auto; border: 2px solid #876; }
+}
+body.hide-support #support_sidebar { display: none !important; }
+
+/* the card subtitle appears inside the card, so that it never spills out of the page */
+.card-tooltip {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  width: auto;
+  max-width: none;
+  box-sizing: border-box;
+  font-size: 0.7em;
+  line-height: 1.25em;
+  padding: 0.35em 0.45em;
+  border: none;
+  border-top: 1px solid var(--card-border-color);
+  color: #2b2b2b;
+  background-color: rgba(250, 248, 240, 0.96);
+}
+body.dark-mode .card-tooltip { color: #eee; background-color: rgba(30, 30, 30, 0.96); }

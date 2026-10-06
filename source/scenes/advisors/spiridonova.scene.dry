@@ -3,7 +3,7 @@ is-pinned-card: true
 card-image: img/cards/spiridonova.svg?v=2
 tags: advisor, defencist
 new-page: true
-view-if: spiridonova_advisor = 1 and (player_party = 'lsr' or lent_spiridonova = 1)
+view-if: spiridonova_advisor = 1 and (player_party = 'lsr' or lent_spiridonova = 1) and on_spiridonova = 1
 
 = Maria Spiridonova
 
