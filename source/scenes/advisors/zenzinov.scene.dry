@@ -1,6 +1,6 @@
 title: Vladimir Zenzinov
 is-pinned-card: true
-card-image: img/cards/zenzinov.svg?v=2
+card-image: img/portraits/zenzinov.jpg
 tags: advisor, unions
 new-page: true
 view-if: zenzinov_advisor = 1 and (player_party = 'sr' or lent_zenzinov = 1) and on_zenzinov = 1

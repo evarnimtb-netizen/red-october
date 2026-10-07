@@ -1,6 +1,6 @@
 title: Isaac Steinberg
 is-pinned-card: true
-card-image: img/cards/steinberg.svg?v=2
+card-image: img/portraits/steinberg.jpg
 tags: advisor, rightdef
 new-page: true
 view-if: steinberg_advisor = 1 and (player_party = 'lsr' or lent_steinberg = 1) and on_steinberg = 1

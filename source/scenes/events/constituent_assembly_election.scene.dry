@@ -1,4 +1,5 @@
 title: The Constituent Assembly Election
+face-image: img/events/constituent_assembly_election.jpg
 subtitle: [? if assembly_early = 1 : The election, brought forward to October. ?][? if assembly_early = 0 : The election of 25 November. ?]
 new-page: true
 tags: event

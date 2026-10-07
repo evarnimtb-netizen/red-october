@@ -1,6 +1,6 @@
 title: Ekaterina Breshko-Breshkovskaya
 is-pinned-card: true
-card-image: img/cards/breshkovskaya.svg?v=2
+card-image: img/portraits/breshkovskaya.jpg
 tags: advisor, rightdef
 new-page: true
 view-if: breshkovskaya_advisor = 1 and (player_party = 'sr' or lent_breshkovskaya = 1) and on_breshkovskaya = 1

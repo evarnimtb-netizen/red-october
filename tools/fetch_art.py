@@ -9,7 +9,7 @@ page of each go into credits_images.txt / credits_music.txt. Run it again to fet
 
 usage: python3 tools/fetch_art.py [--dry-run]
 """
-import json, os, re, socket, sys, time, html, urllib.parse, urllib.request
+import json, os, re, shutil, socket, subprocess, sys, time, html, urllib.parse, urllib.request
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 OUT = os.path.join(ROOT, 'out', 'html')
@@ -35,15 +35,30 @@ def info(title, width=None):
     m = ii.get('extmetadata', {})
     return {'url': ii.get('thumburl') or ii['url'], 'mime': ii.get('mime', ''),
             'license': clean(m.get('LicenseShortName', {}).get('value')),
-            'artist': clean(m.get('Artist', {}).get('value')) or 'Unknown author',
+            'artist': re.sub(r'(Unknown author)(\s*Unknown author)+', r'\1', clean(m.get('Artist', {}).get('value'))) or 'Unknown author',
             'date': clean(m.get('DateTimeOriginal', {}).get('value'))[:40],
             'page': 'https://commons.wikimedia.org/wiki/' + urllib.parse.quote(title.replace(' ', '_'))}
 
 
+def normalise(dest, use):
+    """Commons rounds thumbnails up to its standard widths: bring each image down to its width as a JPEG (macOS sips)."""
+    if use == 'music' or not shutil.which('sips'):
+        return
+    w = int(re.search(r'pixelWidth: (\d+)', subprocess.run(['sips', '-g', 'pixelWidth', dest], capture_output=True, text=True).stdout).group(1))
+    args = ['sips', '-s', 'format', 'jpeg', '-s', 'formatOptions', '72' if use == 'event' else '78']
+    if w > WIDTH[use]:
+        args += ['--resampleWidth', str(WIDTH[use])]
+    tmp = dest + '.tmp.jpg'
+    subprocess.run(args + [dest, '--out', tmp], capture_output=True, check=True)
+    os.replace(tmp, dest)
+
+
 def ext_for(entry, meta):
+    # the extension of the file itself: Commons may add tracking parameters to the link
+    path = urllib.parse.urlparse(meta['url']).path.lower()
     if entry['use'] == 'music':
-        return os.path.splitext(meta['url'])[1].lower() or '.ogg'
-    return '.png' if meta['url'].lower().endswith('.png') else '.jpg'
+        return os.path.splitext(path)[1] or '.ogg'
+    return '.jpg'  # images are re-encoded as JPEG by normalise()
 
 
 def main():
@@ -60,8 +75,10 @@ def main():
         dest = os.path.join(OUT, rel)
         if not os.path.exists(dest) and not dry:
             os.makedirs(os.path.dirname(dest), exist_ok=True)
-            with urllib.request.urlopen(urllib.request.Request(meta['url'], headers=UA)) as r, open(dest, 'wb') as f:
+            url = meta['url'].split('?')[0]
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA)) as r, open(dest, 'wb') as f:
                 f.write(r.read())
+            normalise(dest, e['use'])
             time.sleep(0.5)
         placed['%s:%s' % (e['use'], e['id'])] = rel
         line = '%s: %s. %s%s. Wikimedia Commons, %s. %s' % (

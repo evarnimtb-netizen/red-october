@@ -1,6 +1,6 @@
 title: Raphael Abramovich
 is-pinned-card: true
-card-image: img/cards/abramovich.svg?v=2
+card-image: img/portraits/abramovich.jpg
 tags: advisor, bund
 new-page: true
 view-if: abramovich_advisor = 1 and (player_party = 'menshevik' or lent_abramovich = 1) and on_abramovich = 1

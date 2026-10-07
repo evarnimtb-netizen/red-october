@@ -1,6 +1,6 @@
 title: Pavel Axelrod
 is-pinned-card: true
-card-image: img/cards/axelrod.svg?v=2
+card-image: img/portraits/axelrod.jpg
 tags: advisor, unions
 new-page: true
 view-if: axelrod_advisor = 1 and (player_party = 'menshevik' or lent_axelrod = 1) and on_axelrod = 1

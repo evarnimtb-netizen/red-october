@@ -1,6 +1,6 @@
 title: Boris Kamkov
 is-pinned-card: true
-card-image: img/cards/kamkov.svg?v=2
+card-image: img/portraits/kamkov.jpg
 tags: advisor, defencist
 new-page: true
 view-if: kamkov_advisor = 1 and (player_party = 'lsr' or lent_kamkov = 1) and on_kamkov = 1

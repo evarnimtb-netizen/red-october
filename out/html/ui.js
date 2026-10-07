@@ -677,6 +677,39 @@
     });
   }
 
+
+  // ---------- music: period recordings, shuffled, from the start of a game ----------
+  // The engine's audio() plays the first file and then picks at random from the playlist when a track ends. It is started
+  // once, after the player's first click into a game (browsers only play sound after a click).
+  var TRACKS = [
+    ['music/marseillaise.ogg', "The Workers' Marseillaise (1917)"],
+    ['music/varshavianka.ogg', 'Varshavianka (the Volga choir, 1928)'],
+    ['music/rachmaninoff.ogg', 'Rachmaninoff plays his Prelude in C-sharp minor (1920)'],
+    ['music/internationale.ogg', 'The Internationale (orchestral)']
+  ];
+  var musicStarted = false;
+  function startMusic() {
+    var ui = window.dendryUI;
+    if (musicStarted || !ui || ui.disable_audio || !ui.audio) { return; }
+    musicStarted = true;
+    var order = TRACKS.map(function(t) { return t[0]; });
+    var first = Math.floor(Math.random() * order.length);
+    order.unshift(order.splice(first, 1)[0]);
+    try { ui.audio(order.join(' ') + ' shuffle'); } catch (e) { musicStarted = false; }
+  }
+  function trackName() {
+    var a = window.dendryUI && window.dendryUI.currentAudio, src = a ? decodeURIComponent(a.src || '') : '';
+    for (var i = 0; i < TRACKS.length; i++) { if (src.indexOf(TRACKS[i][0]) >= 0) { return TRACKS[i][1]; } }
+    return '';
+  }
+  $(function() {
+    // the Options page shows what is playing; turning music on starts it if it never started
+    var show = window.showOptions;
+    window.showOptions = function() { show(); $('#currently_playing').text(trackName() || (window.dendryUI.disable_audio ? 'music is off' : 'nothing yet')); };
+    var on = window.enableAudio;
+    window.enableAudio = function() { on(); var Q = qualities(); if (Q && Q.started === 1) { startMusic(); } };
+  });
+
   // ---------- party-select screen ----------
   function decorateParties() {
     var id = sceneId();
@@ -702,6 +735,8 @@
     renderParliaments();
     renderRecap();
     cardSubtitles();
+    var Q0 = qualities();
+    if (Q0 && Q0.started === 1) { startMusic(); }
     if (phone()) { window.closeDrawers(); }
   };
 

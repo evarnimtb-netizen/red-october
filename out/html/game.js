@@ -332,6 +332,12 @@
       if (localStorage[key + 'dark_mode'] !== undefined) { ui.dark_mode = localStorage[key + 'dark_mode'] === 'true'; }
       var fs = parseFloat(localStorage[key + 'font_size']);
       if (isFinite(fs)) { ui.font_size = fs; }
+      // the event pictures arrived with the period art: switch them on once for players whose saved setting predates them
+      if (localStorage[key + 'art_v1'] === undefined) {
+        ui.show_portraits = true;
+        localStorage[key + 'art_v1'] = '1';
+        ui.saveSettings();
+      }
     } catch (e) { /* storage blocked */ }
   }
 

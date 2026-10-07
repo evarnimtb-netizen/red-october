@@ -21,4 +21,18 @@ for key, rel in placed.items():
     open(p, 'w', encoding='utf-8').write(s)
     n += 1
 print('events with a picture:', n)
+
+# the in-game credits: one page for the images and one for the music, from the credit files that fetch_art.py wrote
+def credit_page(name, heading, intro, path):
+    lines = [l.strip() for l in open(os.path.join(ROOT, path), encoding='utf-8').read().split('\n\n') if l.strip().startswith(('img/', 'music/'))]
+    body = '\n\n'.join(l.replace('*', '').replace('[', '(').replace(']', ')') for l in lines)
+    return '@%s\nnew-page: true\n\n= %s\n\n%s\n\n%s\n\n- @credits: Back.\n' % (name, heading, intro, body)
+
+p = os.path.join(ROOT, 'source', 'scenes', 'credits.scene.dry')
+s = open(p, encoding='utf-8').read()
+s = s[:s.index('\n@images\n')].rstrip('\n') + '\n\n'  # the page, not the menu option that points to it
+s += credit_page('images', 'Image sources', 'Period photographs and posters from Wikimedia Commons, by file: author, title, date, source and licence.', 'credits_images.txt')
+s += '\n' + credit_page('music', 'Music sources', 'Period recordings from Wikimedia Commons: performer, title, date, source and licence.', 'credits_music.txt')
+open(p, 'w', encoding='utf-8').write(s)
+print('credits pages written')
 subprocess.check_call([sys.executable, os.path.join(ROOT, 'tools', 'gen_advisors.py')])

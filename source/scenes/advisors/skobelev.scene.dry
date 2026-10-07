@@ -1,6 +1,6 @@
 title: Matvei Skobelev
 is-pinned-card: true
-card-image: img/cards/skobelev.svg?v=2
+card-image: img/portraits/skobelev.jpg
 tags: advisor, defencist
 new-page: true
 view-if: skobelev_advisor = 1 and (player_party = 'menshevik' or lent_skobelev = 1) and on_skobelev = 1

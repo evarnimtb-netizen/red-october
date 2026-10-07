@@ -1,6 +1,6 @@
 title: Vladimir Volsky
 is-pinned-card: true
-card-image: img/cards/volsky.svg?v=2
+card-image: img/portraits/volsky.jpg
 tags: advisor, bund
 new-page: true
 view-if: volsky_advisor = 1 and (player_party = 'sr' or lent_volsky = 1) and on_volsky = 1

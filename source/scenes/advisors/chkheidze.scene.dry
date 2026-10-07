@@ -1,6 +1,6 @@
 title: Nikolai Chkheidze
 is-pinned-card: true
-card-image: img/cards/chkheidze.svg?v=2
+card-image: img/portraits/chkheidze.jpg
 tags: advisor, defencist
 new-page: true
 view-if: chkheidze_advisor = 1 and (player_party = 'menshevik' or lent_chkheidze = 1) and on_chkheidze = 1

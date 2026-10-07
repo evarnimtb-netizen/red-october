@@ -20,7 +20,9 @@ All three campaigns are **playable from start to finish**: the Mensheviks (hard)
 - An ending recap: a chart of your support, Bolshevik strength, the threat from the Right and soviet democracy across the whole run, your peak support and best election result, the contested measures you passed and how, and the camps you faced and broke.
 - 11 endings (Kornilov's Russia, the generals' republic, White Russia, exile, the one-party state, the SR and Left SR historical endings, the all-socialist government, the Constituent Republic, Soviet democracy, the Soviet coalition) and 14 achievements.
 
-Not yet done from the design plan: public-domain period images and music (the old German assets were removed; card art is generated), and a balance pass by a human player. The numbers in the design plan marked as uncertain have not been checked against the books.
+- Period art and music: photographs of 26 of the advisors and pictures for 24 events (1917-1921), and four period recordings (the Workers' Marseillaise of 1917, Varshavianka, Rachmaninoff playing his Prelude in C-sharp minor, the Internationale), all public domain, from Wikimedia Commons. Event pictures and music can be switched off in Options.
+
+Not yet done: a balance pass by a human player (the tools for it are below), and portraits for Gvozdev, Kolegaev and Aleksandrovich, for whom no free photograph was found. The numbers in the design plan marked as uncertain have not been checked against the books.
 
 ## Building the game
 
@@ -53,6 +55,6 @@ Difficulty: Easy gives more resources, a bigger hand and returnable cards, and i
 
 ## Credits
 
-The engine, the interface and the structure of the cards, advisors and elections are the work of Autumn Chen: see `LICENSE`, and `credits_images.txt` and `credits_music.txt` for the assets of the original game, which are not included in this fork. Dendry, the game engine, is by Ian Millington and Autumn Chen.
+The engine, the interface and the structure of the cards, advisors and elections are the work of Autumn Chen: see `LICENSE`. The original game's images and music are not included in this fork. The period photographs and recordings in this one come from Wikimedia Commons and are listed, with author, source and licence, in `credits_images.txt` and `credits_music.txt` (and in the game's Credits); `docs/art_manifest.json` lists them, `tools/fetch_art.py` fetches them and `tools/wire_art.py` puts them into the scenes. Dendry, the game engine, is by Ian Millington and Autumn Chen.
 
 To update dendrynexus in `package-lock.json`, run `npm install --upgrade https://github.com/aucchen/dendrynexus`

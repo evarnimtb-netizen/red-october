@@ -1,6 +1,6 @@
 title: Irakli Tsereteli
 is-pinned-card: true
-card-image: img/cards/tsereteli.svg?v=2
+card-image: img/portraits/tsereteli.jpg
 tags: advisor, defencist
 new-page: true
 view-if: tsereteli_advisor = 1 and (player_party = 'menshevik' or lent_tsereteli = 1) and on_tsereteli = 1

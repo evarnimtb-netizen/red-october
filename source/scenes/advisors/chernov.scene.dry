@@ -1,6 +1,6 @@
 title: Viktor Chernov
 is-pinned-card: true
-card-image: img/cards/chernov.svg?v=2
+card-image: img/portraits/chernov.jpg
 tags: advisor, defencist
 new-page: true
 view-if: chernov_advisor = 1 and (player_party = 'sr' or lent_chernov = 1) and on_chernov = 1

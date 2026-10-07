@@ -1,6 +1,6 @@
 title: Prosh Proshian
 is-pinned-card: true
-card-image: img/cards/proshian.svg?v=2
+card-image: img/portraits/proshian.jpg
 tags: advisor, unions
 new-page: true
 view-if: proshian_advisor = 1 and (player_party = 'lsr' or lent_proshian = 1) and on_proshian = 1

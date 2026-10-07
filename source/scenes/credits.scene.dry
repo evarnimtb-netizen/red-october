@@ -60,11 +60,129 @@ Deutscher, "The Mensheviks' Debacle" (marxists.org); the Martov archive (marxist
 - @credits: Back.
 
 @images
-go-to: credits
+new-page: true
 
-See the file credits_images.txt in the repository. The images of this game have not yet been replaced.
+= Image sources
+
+Period photographs and posters from Wikimedia Commons, by file: author, title, date, source and licence.
+
+img/portraits/martov.jpg: Yakov Vladimirovich Steinberg. YuliMartov1917PorSteinberg.jpeg, 1917. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AYuliMartov1917PorSteinberg.jpeg. Public domain
+
+img/portraits/dan.jpg: Unknown author. Fyodor Dan.jpg, Unknown, circa 1900s. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AFyodor_Dan.jpg. Public domain
+
+img/portraits/tsereteli.jpg: Unknown author. Irakli Tsereteli portrait (cropped).jpg, 2023-12-23 15:16:01. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AIrakli_Tsereteli_portrait_%28cropped%29.jpg. Public domain
+
+img/portraits/chkheidze.jpg: Karl Fischer. Nikolay Chkheidze.jpg, 1910. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ANikolay_Chkheidze.jpg. Public domain
+
+img/portraits/skobelev.jpg: Unknown author. Matvej Skobelev.jpg, circa 1925date QS:P,+1925-00-00T00:00:00. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AMatvej_Skobelev.jpg. Public domain
+
+img/portraits/potresov.jpg: Unknown author. Alexander Potresov.jpg, 1890sdate QS:P,+1890-00-00T00:00:00Z/8. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AAlexander_Potresov.jpg. Public domain
+
+img/portraits/axelrod.jpg: Unknown author. Pavel Axelrod.jpg, до 16 апреля 1928. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3APavel_Axelrod.jpg. Public domain
+
+img/portraits/abramovich.jpg: Unknown photographer. Абрамович Рафаил Абрамович, фотографический портрет.jpg, circa 1922date QS:P,+1922-00-00T00:00:00. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A%D0%90%D0%B1%D1%80%D0%B0%D0%BC%D0%BE%D0%B2%D0%B8%D1%87_%D0%A0%D0%B0%D1%84%D0%B0%D0%B8%D0%BB_%D0%90%D0%B1%D1%80%D0%B0%D0%BC%D0%BE%D0%B2%D0%B8%D1%87%2C_%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BF%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82.jpg. Public domain
+
+img/portraits/liber.jpg: Unknown author. Mikhail Liber.jpg, before 1937date QS:P,+1937-00-00T00:00:0. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AMikhail_Liber.jpg. Public domain
+
+img/portraits/broido.jpg: Anonymous photographer from Russian Empire (before 1917)
+Public domain image (according to PD-Russia-expired). Eva Broido.jpg, before 1917date QS:P,+1917-00-00T00:00:0. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AEva_Broido.jpg. Public domain
+
+img/portraits/lidia.jpg: AnonymousUnknown author. Dan-lidija-ossipowna-in-1931-07-20-arbeiter-zeitung-s03.jpg, circa 1931date QS:P,+1931-00-00T00:00:00. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ADan-lidija-ossipowna-in-1931-07-20-arbeiter-zeitung-s03.jpg. Public domain
+
+img/portraits/sukhanov.jpg: Unknown author. Nikolaj N. Suchanov Himmer.jpeg, circa 1925date QS:P,+1925-00-00T00:00:00. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ANikolaj_N._Suchanov_Himmer.jpeg. Public domain
+
+img/portraits/batursky.jpg: Unknown author. Baturskiy BS do 1913.jpg, before 1913date QS:P,+1913-00-00T00:00:0. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ABaturskiy_BS_do_1913.jpg. Public domain
+
+img/portraits/khinchuk.jpg: Unknown author. Khinchuk LM.jpg, 1906. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AKhinchuk_LM.jpg. Public domain
+
+img/portraits/zhordania.jpg: UnknownUnknown. Zhordaniya NN.jpg, Before 1917. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AZhordaniya_NN.jpg. Public domain
+
+img/portraits/chernov.jpg: Unknown author. Portrait of Minister VM Chernov Trim Edit.jpg, 1917. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3APortrait_of_Minister_VM_Chernov_Trim_Edit.jpg. Public domain
+
+img/portraits/avksentiev.jpg: Unknown author. Nikolay Avksentyev.jpg, Начало 20 века. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ANikolay_Avksentyev.jpg. Public domain
+
+img/portraits/breshkovskaya.jpg: Published by Little, Brown and Co, Boston, 1918; photographer unknown. Breshkovskaya.jpg, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ABreshkovskaya.jpg. Public domain
+
+img/portraits/gots.jpg: Unknown author. Abram Gots Portrait Edit.jpg, 1922. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AAbram_Gots_Portrait_Edit.jpg. Public domain
+
+img/portraits/zenzinov.jpg: Unknown author. Vladimir Mikhailovich Zenzinov SR.jpg, 1900-1910-ые гг.. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AVladimir_Mikhailovich_Zenzinov_SR.jpg. Public domain
+
+img/portraits/volsky.jpg: Komuch small.jpg:Unknown author
+derivative work: Supakit prem. Vladimir Volsky in 1918.jpg, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AVladimir_Volsky_in_1918.jpg. Public domain
+
+img/portraits/spiridonova.jpg: Unknown author. Maria Spiridonova Portrait.jpg, Unknown. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AMaria_Spiridonova_Portrait.jpg. Public domain
+
+img/portraits/kamkov.jpg: Unknown photographer. Kamkov kats.jpg, 1916. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AKamkov_kats.jpg. Public domain
+
+img/portraits/natanson.jpg: Unknown author. Mark Andreyevich Natanson.jpg, 1900sdate QS:P,+1900-00-00T00:00:00Z/8. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AMark_Andreyevich_Natanson.jpg. Public domain
+
+img/portraits/steinberg.jpg: Unknown author. Isaac Steinberg.jpg, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AIsaac_Steinberg.jpg. Public domain
+
+img/portraits/proshian.jpg: Ross, Edward Alsworth, 1866-1951. Proshian--russianbolshevik00rossuoft (cropped).png, 1921. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AProshian--russianbolshevik00rossuoft_%28cropped%29.png. Public domain
+
+img/events/february.jpg: Unknown author. Soldiers demonstration.February 1917.jpg, 1917-02. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ASoldiers_demonstration.February_1917.jpg. Public domain
+
+img/events/petrograd_soviet.jpg: User Kristallstadt on en.wikipedia. 1917petrogradsoviet assembly.jpg, 1917-06. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A1917petrogradsoviet_assembly.jpg. Public domain
+
+img/events/first_coalition.jpg: Jakov Vladimirovic Stejnberg (1880-1942). Governo provvisorio russo marzo 1917.jpg, 1917-03. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AGoverno_provvisorio_russo_marzo_1917.jpg. Public domain
+
+img/events/june_offensive.jpg: Grondijs, Lodewijk Hermen. Attack of the 47 Siberian rifle regiment 1917.jpg, 1917-07-01. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AAttack_of_the_47_Siberian_rifle_regiment_1917.jpg. Public domain
+
+img/events/congress_of_soviets.jpg: Bilinmiyor. First All-Russian Congress of Soviets.jpg, 1917. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AFirst_All-Russian_Congress_of_Soviets.jpg. Public domain
+
+img/events/july_days.jpg: Viktor Bulla. 19170704 Riot on Nevsky prosp Petrograd.jpg, 17 July 1917 (4 July 1917 in Julian cale. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A19170704_Riot_on_Nevsky_prosp_Petrograd.jpg. Public domain
+
+img/events/kornilov.jpg: Unknown author. Lavr Kornilov Moscow 1917.jpg, 1917-08-27. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ALavr_Kornilov_Moscow_1917.jpg. Public domain
+
+img/events/moscow_conference.jpg: Yury Artsybushev. AleksandrKérenskiEnLaConferenciaEstatalDeMoscú19170825-19170828.png, between 25 August 1917 and 28 August 191. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AAleksandrK%C3%A9renskiEnLaConferenciaEstatalDeMosc%C3%BA19170825-19170828.png. Public domain
+
+img/events/october.jpg: Pyotr Novitsky. After the capture of the Winter Palace 26 October 1917.jpg, 1917-11-07. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AAfter_the_capture_of_the_Winter_Palace_26_October_1917.jpg. Public domain
+
+img/events/constituent_assembly_election.jpg: Я.Штейнберг. Petrograd Russian Constituent Assembly election posters.jpg, 1917. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3APetrograd_Russian_Constituent_Assembly_election_posters.jpg. Public domain
+
+img/events/assembly_dispersed.jpg: Yakov Vladimirovich Steinberg. Demonstration on Nevsky Prospect on the opening day of the Constituent Assembly.jpg, 1918-01. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ADemonstration_on_Nevsky_Prospect_on_the_opening_day_of_the_Constituent_Assembly.jpg. Public domain
+
+img/events/brest.jpg: Unknown author. Brest-litovsk-feb-9-1918c.jpg, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ABrest-litovsk-feb-9-1918c.jpg. Public domain
+
+img/events/cheka.jpg: Unknown author. Феликс Дзержинский среди сотрудников ВЧК (1918).jpg, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A%D0%A4%D0%B5%D0%BB%D0%B8%D0%BA%D1%81_%D0%94%D0%B7%D0%B5%D1%80%D0%B6%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D1%80%D0%B5%D0%B4%D0%B8_%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2_%D0%92%D0%A7%D0%9A_%281918%29.jpg. Public domain
+
+img/events/komuch.jpg: Unknown author. Komuch small.jpg, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AKomuch_small.jpg. Public domain
+
+img/events/red_terror.jpg: Unknown author. 19180902-red terror-banner.jpg, 1918-09-02. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A19180902-red_terror-banner.jpg. Public domain
+
+img/events/denikin.jpg: Unknown author. Anton Denikin 1919, Taganrog.png, 1919. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AAnton_Denikin_1919%2C_Taganrog.png. Public domain
+
+img/events/wrangel.jpg: Unknown Photographer
+
+img/events/kronstadt.jpg: Unknown author. Kronstadt 03 1921.jpg, 1921-03. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AKronstadt_03_1921.jpg. Public domain
+
+img/events/nep.jpg: Leon Leonidov (Лев Яковлевич Леонидов) (1). Lenin Voroshilov Trotsky.jpg, 1921-03-21. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ALenin_Voroshilov_Trotsky.jpg. Public domain
+
+img/events/georgia.jpg: Unknown. Members of the government of the Democratic Republic of Georgia (1918).jpg, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AMembers_of_the_government_of_the_Democratic_Republic_of_Georgia_%281918%29.jpg. Public domain
+
+img/events/lsr_uprising.jpg: Max Karl Tilke. Suppression of the Moscow Conspiracy in early July 1918 (M. Tilke).png, 1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ASuppression_of_the_Moscow_Conspiracy_in_early_July_1918_%28M._Tilke%29.png. Public domain
+
+img/events/peace_appeal.jpg: Dorothea Georgievna. 28th East Siberian Rifle Regiment fraternizing.jpg, 1914–1918. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A28th_East_Siberian_Rifle_Regiment_fraternizing.jpg. Public domain
+
+img/events/spring_elections.jpg: The Kathryn and Shelby Cullom Davis Library. Putilov Plant, Petrograd, meeting of workers (July 1920) (14334150751).jpg, 2014-03-20 08:58. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3APutilov_Plant%2C_Petrograd%2C_meeting_of_workers_%28July_1920%29_%2814334150751%29.jpg. No restrictions
+
+img/events/sr_peasant_congress.jpg: Vakhtang Rurua. First Regional Congress of Soviets of Workers and Peasants Deputies Tiflis, 31 May 1917.jpg, Taken on 31 May 1917. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AFirst_Regional_Congress_of_Soviets_of_Workers_and_Peasants_Deputies_Tiflis%2C_31_May_1917.jpg. Public domain
+
+- @credits: Back.
 
 @music
-go-to: credits
+new-page: true
 
-See the file credits_music.txt in the repository. The music of this game has not yet been replaced.
+= Music sources
+
+Period recordings from Wikimedia Commons: performer, title, date, source and licence.
+
+music/marseillaise.ogg: Rouget de Lisle / Robert Schumann. Рабочая Марсельеза (1917).ogg, 1917. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B0%D1%8F_%D0%9C%D0%B0%D1%80%D1%81%D0%B5%D0%BB%D1%8C%D0%B5%D0%B7%D0%B0_%281917%29.ogg. Public domain
+
+music/varshavianka.ogg: Русский хор "Волга", акк. оркестр, Columbia (Viva-Tonal, Electrical Process, USA). Варшавянка, Русский хор "Волга", акк. оркестр, Columbia, 1928-08.ogg, 1928. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3A%D0%92%D0%B0%D1%80%D1%88%D0%B0%D0%B2%D1%8F%D0%BD%D0%BA%D0%B0%2C_%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D1%85%D0%BE%D1%80_%22%D0%92%D0%BE%D0%BB%D0%B3%D0%B0%22%2C_%D0%B0%D0%BA%D0%BA._%D0%BE%D1%80%D0%BA%D0%B5%D1%81%D1%82%D1%80%2C_Columbia%2C_1928-08.ogg. Public domain
+
+music/rachmaninoff.ogg: Sergei Rachmaninoff. Sergei Rachmaninoff performs Rachmaninoff's Prelude in C sharp minor, Op. 3.ogg, 1920-12. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3ASergei_Rachmaninoff_performs_Rachmaninoff%27s_Prelude_in_C_sharp_minor%2C_Op._3.ogg. Public domain
+
+music/internationale.ogg: Arrangement by Jerry Engelbach (US, 2003), based on the music by Pierre Degeyter (France, 1888). Internationale orchestral arrangement.ogg, 2003. Wikimedia Commons, https://commons.wikimedia.org/wiki/File%3AInternationale_orchestral_arrangement.ogg. Public domain
+
+- @credits: Back.
