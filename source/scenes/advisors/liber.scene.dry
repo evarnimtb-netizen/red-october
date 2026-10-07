@@ -1,11 +1,11 @@
-title: Mark Liber
+title: Mikhail Liber
 is-pinned-card: true
 card-image: img/cards/liber.svg?v=2
 tags: advisor, bund
 new-page: true
 view-if: liber_advisor = 1 and (player_party = 'menshevik' or lent_liber = 1) and on_liber = 1
 
-= Mark Liber
+= Mikhail Liber
 
 Liber (1880-1937) is a Bundist and a member of the Soviet executive. He will head the Menshevik list in Petrograd in November 1917.
 

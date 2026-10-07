@@ -193,7 +193,7 @@ Two currents appear later through events, like neorevisionism in the original: t
 | Alexander Potresov | 1869–1934 | Right Defencist | Edited the paper *Den*; left the party in 1918 | Den Editorial: strong press against the Bolsheviks; may quit the party | 1917 – Sept 1918 |
 | Pavel Axelrod | 1850–1928 | Elder | Went abroad in August 1917; lobbied Western socialists | Western Socialist Network: international pressure, foreign aid | Abroad only |
 | Raphael Abramovich | 1880–1963 | Bund, then Internationalist | Soviet executive; spared from execution in 1918 by foreign socialists' appeals | Bridge-Builder: lowers dissent between factions | Until 1920 |
-| Mark Liber | 1880–1937 | Bund, Defencist | Soviet executive; headed the Petrograd list in November 1917 | Jewish Workers' Link: support among Jewish workers | Whole game |
+| Mikhail Liber | 1880–1937 | Bund, Defencist | Soviet executive; headed the Petrograd list in November 1917 | Jewish Workers' Link: support among Jewish workers | Whole game |
 | Eva Broido | 1876–1941 | Internationalist | Party secretary from August 1917; organised women workers | Party Secretary: membership and women workers' support | Until 1920 |
 | Lidia Dan | 1878–1963 | Internationalist | Martov's sister and Dan's wife; party organiser | Family Bridge: lowers dissent between the Martov and Dan circles | Whole game |
 | Nikolai Sukhanov | 1882–1940 | Internationalist (Novaya Zhizn) | Founding member of the Soviet executive; chronicler | Insider Chronicler: reveals rival parties' next moves | 1917–1918 |

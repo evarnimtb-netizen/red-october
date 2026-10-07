@@ -314,8 +314,30 @@
         window.dendryUI.saveSettings();
   }
 
+  // The engine saves only its own settings; dark mode and the font size are this game's, so save and restore them too.
+  function keepOwnSettings() {
+    var ui = window.dendryUI, key = ui.game.title + '_';
+    if (!ui._ownSettings) {
+      var base = ui.saveSettings.bind(ui);
+      ui.saveSettings = function() {
+        base();
+        try {
+          localStorage[key + 'dark_mode'] = ui.dark_mode ? 'true' : 'false';
+          localStorage[key + 'font_size'] = String(ui.font_size);
+        } catch (e) { /* storage blocked: the settings last for this visit only */ }
+      };
+      ui._ownSettings = true;
+    }
+    try {
+      if (localStorage[key + 'dark_mode'] !== undefined) { ui.dark_mode = localStorage[key + 'dark_mode'] === 'true'; }
+      var fs = parseFloat(localStorage[key + 'font_size']);
+      if (isFinite(fs)) { ui.font_size = fs; }
+    } catch (e) { /* storage blocked */ }
+  }
+
   window.onload = function() {
-    window.dendryUI.loadSettings({show_portraits: false});
+    window.dendryUI.loadSettings({show_portraits: true});
+    keepOwnSettings();
     if (window.dendryUI.dark_mode) {
         document.body.classList.add('dark-mode');
     }

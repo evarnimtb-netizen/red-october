@@ -51,7 +51,7 @@ ADVISORS = [
   'Bridge-Builder', 'Abramovich eases tension between the party currents.', '', '',
   "for (var f of Q.factions) { RO.fac(Q, f, 0, -6); }",
   "Abramovich sat up with Internationalists and Defencists in turn. Nobody has changed their mind, but people are on speaking terms again."),
- ('liber', 'Mark Liber', 'bund', 'liber_advisor',
+ ('liber', 'Mikhail Liber', 'bund', 'liber_advisor',
   "Liber (1880-1937) is a Bundist and a member of the Soviet executive. He will head the Menshevik list in Petrograd in November 1917.",
   'Jewish Workers\' Link', "Liber rallies the Jewish workers' organisations.", '', '',
   "RO.boost(Q, {nations: 4, workers: 2}); RO.fac(Q, 'bund', 1, -5);",
@@ -233,6 +233,14 @@ RO.replaceAdvisor(Q, '%s');
 ''' % (k, k, k, v[0]))
     open(os.path.join(OUT, 'council.scene.dry'), 'w', encoding='utf-8').write('\n'.join(lines))
 
+def card_image(aid):
+    """The advisor's period photograph if tools/fetch_art.py has placed one, otherwise the plain placeholder."""
+    for ext in ('.jpg', '.png'):
+        if os.path.exists(os.path.join(os.path.dirname(__file__), '..', 'out', 'html', 'img', 'portraits', aid + ext)):
+            return 'img/portraits/%s%s' % (aid, ext)
+    return 'img/cards/%s.svg?v=2' % aid
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for (aid, title, tag, flag, bio, atitle, asub, cond, unavail, js, result) in ADVISORS:
@@ -242,7 +250,7 @@ def main():
             un += '[? if not (' + cond + ') : ' + unavail + ' ?]'
         text = f"""title: {title}
 is-pinned-card: true
-card-image: img/cards/{aid}.svg?v=2
+card-image: {card_image(aid)}
 tags: advisor, {tag}
 new-page: true
 view-if: {flag} = 1 and (player_party = 'menshevik' or lent_{aid} = 1) and on_{aid} = 1
@@ -303,7 +311,7 @@ Q.month_actions += 1;
 """
         text = f"""title: {title}
 is-pinned-card: true
-card-image: img/cards/{aid}.svg?v=2
+card-image: {card_image(aid)}
 tags: advisor, {tag}
 new-page: true
 view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1) and on_{aid} = 1

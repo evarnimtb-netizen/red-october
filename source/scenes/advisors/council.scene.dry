@@ -25,7 +25,7 @@ You listen to four advisors at a time; the others wait in the corridor. Changing
 - @bring_potresov: Call on Alexander Potresov. (The longest-serving advisor steps down.)
 - @bring_axelrod: Call on Pavel Axelrod. (The longest-serving advisor steps down.)
 - @bring_abramovich: Call on Raphael Abramovich. (The longest-serving advisor steps down.)
-- @bring_liber: Call on Mark Liber. (The longest-serving advisor steps down.)
+- @bring_liber: Call on Mikhail Liber. (The longest-serving advisor steps down.)
 - @bring_broido: Call on Eva Broido. (The longest-serving advisor steps down.)
 - @bring_lidia: Call on Lidia Dan. (The longest-serving advisor steps down.)
 - @bring_sukhanov: Call on Nikolai Sukhanov. (The longest-serving advisor steps down.)
@@ -54,7 +54,7 @@ You listen to four advisors at a time; the others wait in the corridor. Changing
 - @drop_potresov: Replace Alexander Potresov with someone from the reserve.
 - @drop_axelrod: Replace Pavel Axelrod with someone from the reserve.
 - @drop_abramovich: Replace Raphael Abramovich with someone from the reserve.
-- @drop_liber: Replace Mark Liber with someone from the reserve.
+- @drop_liber: Replace Mikhail Liber with someone from the reserve.
 - @drop_broido: Replace Eva Broido with someone from the reserve.
 - @drop_lidia: Replace Lidia Dan with someone from the reserve.
 - @drop_sukhanov: Replace Nikolai Sukhanov with someone from the reserve.
@@ -192,7 +192,7 @@ Q.month_actions += 1; Q.council_timer = 3;
 RO.callAdvisor(Q, 'liber');
 !}
 
-Mark Liber has been called to the council. The one who had served longest has gone back to the party's work.
+Mikhail Liber has been called to the council. The one who had served longest has gone back to the party's work.
 
 - @root: Continue.
 
@@ -511,7 +511,7 @@ Q.month_actions += 1; Q.council_timer = 3;
 RO.replaceAdvisor(Q, 'liber');
 !}
 
-Mark Liber has stepped down from the council, and somebody from the reserve has taken the seat.
+Mikhail Liber has stepped down from the council, and somebody from the reserve has taken the seat.
 
 - @root: Continue.
 
