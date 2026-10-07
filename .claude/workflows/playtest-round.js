@@ -1,7 +1,7 @@
 export const meta = {
   name: 'playtest-round',
   description: 'Ten Haiku testers play or read Red October, then findings are merged, checked against the code and written up',
-  whenToUse: 'A round of playtesting of Red October: Fall of Empire. Optional args: {round: 3} (used in save-file names and the report name).',
+  whenToUse: 'A round of playtesting of Red October: Fall of Empire. Optional args: {round: 3, only: ["sr-hard-force", ...]} (round names the save files and the report; only picks the testers).',
   phases: [
     { title: 'Build', detail: 'build the game once, so every tester plays the same version' },
     { title: 'Play', detail: 'eight testers play full games, two read the scenes', model: 'haiku' },
@@ -132,13 +132,17 @@ const READER_PROMPTS = READERS.map(r => ({
   prompt: HOWTO + `\n\nYou are not playing: you are a READER. ${r.brief}\n\nReturn ending "not a player", a three-line summary of what you read, and your findings with file and line in "where", most important first.`,
 }))
 
+// args.only: the ids of the testers to run (all ten if not given)
+const ONLY = (args && args.only) || null
+const TEAM = [...PLAYERS, ...READER_PROMPTS].filter(t => !ONLY || ONLY.indexOf(t.id) >= 0)
+
 phase('Build')
 await agent(`In ${ROOT}, run \`npx dendrynexus make-html\` and then \`node tools/test_model.js\`. Report only "built" and the test result line.`,
   { label: 'build', phase: 'Build', model: 'haiku', effort: 'low' })
 
 phase('Play')
-log(`Round ${ROUND}: ${PLAYERS.length} players and ${READER_PROMPTS.length} readers`)
-const reports = await parallel([...PLAYERS, ...READER_PROMPTS].map(t => () =>
+log(`Round ${ROUND}: ${TEAM.length} testers (${TEAM.map(t => t.id).join(', ')})`)
+const reports = await parallel(TEAM.map(t => () =>
   agent(t.prompt, { label: t.id, phase: 'Play', model: 'haiku', schema: FINDINGS })
     .then(r => r && { tester: t.id, ...r })))
 const got = reports.filter(Boolean)
