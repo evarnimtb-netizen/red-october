@@ -205,23 +205,29 @@
   }
 
   // ---------- the Parliament tab: the parliament as elected, or as it would be if it voted today ----------
-  var parlArena = null, parlMode = 'elected', panelRec = null;
-  var PARL_ARENAS = [['soviets', 'Soviets'], ['assembly', 'Assembly'], ['dumas', 'City dumas']];
-  var ELECTED = {soviets: 'parl_congress', assembly: 'parl_assembly'};
+  // parlMode: null shows the elected body while it still sits, and the projection otherwise
+  var parlArena = null, parlMode = null, panelRec = null;
+  var PARL_ARENAS = [['soviets', 'Soviets'], ['assembly', 'Assembly'], ['provincial', 'City soviets'], ['dumas', 'City dumas']];
+  // the last election recorded for each arena, and whether that body still sits (the First Congress gave way to the Second in November 1917)
+  var ELECTED = {
+    soviets: {key: 'parl_congress', sits: function(Q) { return num(Q.dix) < 20; }},
+    assembly: {key: 'parl_assembly', sits: function(Q) { return Q.assembly_survives !== 0; }},
+    provincial: {key: 'parl_spring', sits: function() { return true; }}
+  };
 
   function renderParliamentTab(Q) {
-    if (!parlArena) { var cur = window.RO.currentArena(Q); parlArena = (cur === 'provincial') ? 'soviets' : cur; }
+    if (!parlArena) { parlArena = window.RO.currentArena(Q); }
     var h = '<div class="sb-section">Parliament</div><div class="pp-pills">';
     PARL_ARENAS.forEach(function(a) {
       h += '<button class="pp-pill' + (a[0] === parlArena ? ' active' : '') + '" data-arena="' + a[0] + '">' + a[1] + '</button>';
     });
     h += '</div>';
-    var elected = Q[ELECTED[parlArena]] || null;
+    var el = ELECTED[parlArena], elected = el ? (Q[el.key] || null) : null, sits = !!(elected && el.sits(Q));
     var proj = window.RO.projectParliament(Q, parlArena);
-    var showElected = elected && parlMode === 'elected';
+    var showElected = !!elected && (parlMode === 'elected' || (parlMode === null && sits));
     panelRec = showElected ? elected : proj;
     if (elected) {
-      h += '<div class="pp-pills"><button class="pp-pill pp-mode' + (showElected ? ' active' : '') + '" data-mode="elected">As elected</button>' +
+      h += '<div class="pp-pills"><button class="pp-pill pp-mode' + (showElected ? ' active' : '') + '" data-mode="elected">' + (sits ? 'As elected' : 'Last elected') + '</button>' +
            '<button class="pp-pill pp-mode' + (!showElected ? ' active' : '') + '" data-mode="projected">If it voted today</button></div>';
     }
     h += '<div class="parliament pp-chart"></div>';
@@ -237,8 +243,8 @@
     } else if (sorted.length) {
       h += '<div class="sb-note">' + esc(PARTY_SHORT[sorted[0][0]]) + ' hold a majority.</div>';
     }
-    if (showElected && parlArena === 'assembly' && Q.assembly_survives === 0 && Q.ca_elected) {
-      h += '<div class="sb-note">This Assembly has been dispersed; the seats are shown as they were elected.</div>';
+    if (showElected) {
+      h += '<div class="sb-note">' + esc(rec.title) + (sits ? ', as elected.' : ', as elected. It no longer sits.') + '</div>';
     }
     if (!showElected) {
       h += '<div class="sb-note">A projection: what the ' + esc(rec.title) + ' would look like if the electorate voted today. It moves every turn.</div>';
@@ -255,8 +261,7 @@
 
   // ---------- the Opposition tab: the camps that answer your policies ----------
   function antWord(a) { return a < 20 ? 'Calm' : (a < 40 ? 'Uneasy' : (a < 70 ? 'Hostile' : 'On the brink')); }
-  function renderOpposition(Q) {
-    var camps = window.RO.opposition(Q);
+  function renderOpposition(Q, camps) {
     var h = '<div class="sb-section">Opposition</div><div class="sb-note">The camps that answer your policies. At ' + window.RO.SANCTION_AT + ' they try to sanction you; at ' + window.RO.REVOLT_AT + ' they take up arms.</div>';
     if (!camps.length) { return h + '<div class="sb-note">No camp is organised against you now.</div>'; }
     var st = Math.round(window.RO.strength(Q));
@@ -269,7 +274,7 @@
       h += '<div class="opp-camp"><div class="sb-label"><span>' + esc(c.name) + '</span><span class="sb-word">' + antWord(a) + ' · ' + a + '</span></div>' +
            '<div class="sb-bar opp-bar"><div class="sb-fill" style="width:' + clamp(a, 0, 100) + '%;background:#9a3b2e"></div>' +
            '<i class="opp-tick" style="left:' + window.RO.SANCTION_AT + '%"></i><i class="opp-tick" style="left:' + window.RO.REVOLT_AT + '%"></i></div>';
-      if (st >= 18) { h += '<div class="rs-meta">Chance to break it by force: ' + Math.round(c.odds * 100) + '%.</div>'; }
+      if (st >= 18) { h += '<div class="rs-meta">Chance to break it by force: ' + Math.round(c.odds * 100) + '%' + (c.odds < 0.45 ? ' (a law\'s force option leaves it alone below 45%)' : '') + '.</div>'; }
       if (c.pending) { h += '<div class="rs-meta opp-alert">' + (c.pending === 2 ? 'An uprising is under way.' : 'Sanctions are coming.') + '</div>'; }
       else if (c.cooling) { h += '<div class="rs-meta">It has just acted, and is regrouping.</div>'; }
       if (objects.length) { h += '<div class="rs-meta">Objects to: ' + objects.map(function(w) { return esc(w.t); }).join('; ') + '.</div>'; }
@@ -281,7 +286,11 @@
     return h;
   }
 
-  function renderRight() {
+  function oppositionOf(Q) { try { return window.RO.opposition(Q); } catch (e) { return []; } }
+  function hottest(opp) { var h = 0; opp.forEach(function(c) { h = Math.max(h, c.ant); }); return h; }
+
+  // opp: the camps from RO.opposition, when the caller has them already
+  function renderRight(opp) {
     var Q = qualities();
     var side = $('#support_sidebar');
     if (!Q || Q.started !== 1 || !window.RO || sceneId().indexOf('root.') === 0) { side.hide(); return; }
@@ -290,15 +299,13 @@
     panelRec = null;
     if (rightTab === 'popularity') { html = renderPopularity(Q); }
     else if (rightTab === 'parliament') { html = renderParliamentTab(Q); }
-    else if (rightTab === 'opposition') { html = renderOpposition(Q); }
+    else if (rightTab === 'opposition') { html = renderOpposition(Q, opp = opp || oppositionOf(Q)); }
     else { html = renderClasses(Q); }
     $('#support_panel').empty().append('<div class="sb">' + html + '</div>');
     if (rightTab === 'parliament') { drawPanelParliament(); }
-    var hot = 0;
-    try { window.RO.opposition(Q).forEach(function(c) { hot = Math.max(hot, c.ant); }); } catch (e) { /* no model yet */ }
-    $('#rt_opp').toggleClass('alert', hot >= window.RO.SANCTION_AT);
+    $('#rt_opp').toggleClass('alert', hottest(opp || oppositionOf(Q)) >= window.RO.SANCTION_AT);
   }
-  $(document).on('click', '.pp-pill:not(.pp-mode)', function() { parlArena = $(this).data('arena'); parlMode = 'elected'; renderRight(); });
+  $(document).on('click', '.pp-pill:not(.pp-mode)', function() { parlArena = $(this).data('arena'); parlMode = null; renderRight(); });
   $(document).on('click', '.pp-mode', function() { parlMode = $(this).data('mode'); renderRight(); });
   window.changeRightTab = function(tab, btn) {
     rightTab = tab;
@@ -328,13 +335,11 @@
   $(document).on('keydown', function(ev) { if (ev.key === 'Escape') { window.closeDrawers(); } });
 
   // the bar at the top of a phone screen: the date and the two numbers that matter, and a flag on Support when a camp is angry
-  function renderMobileBar(Q, started) {
+  function renderMobileBar(Q, started, opp) {
     $('body').toggleClass('in-game', !!started);
     if (!started) { return; }
     $('#mb_summary').html('<b>' + esc(dateText(Q)) + '</b><span>Res ' + Math.round(num(Q.resources)) + ' · ' + Math.round(num(Q.members)) + 'k members</span>');
-    var hot = 0;
-    try { window.RO.opposition(Q).forEach(function(c) { hot = Math.max(hot, c.ant); }); } catch (e) { /* no model yet */ }
-    $('#mb_support').toggleClass('alert', hot >= window.RO.SANCTION_AT);
+    $('#mb_support').toggleClass('alert', hottest(opp) >= window.RO.SANCTION_AT);
   }
 
   // on a touch screen there is no hover: show each card's subtitle under its name
@@ -363,9 +368,10 @@
       return;
     }
     side.show();
-    renderMobileBar(Q, true);
     // refresh the derived numbers (polls, rounded stats) before drawing
     try { window.RO.updateFactions(Q); window.RO.updatePolls(Q); window.RO.display(Q); } catch (e) { /* the engine will recompute at the next turn */ }
+    var opp = oppositionOf(Q);
+    renderMobileBar(Q, true, opp);
     var html;
     switch (window.statusTab) {
       case 'status.politics': html = renderParties(Q); break;
@@ -374,7 +380,7 @@
       default: html = renderMain(Q);
     }
     box.empty().append('<div class="sb">' + html + '</div>');
-    renderRight();
+    renderRight(opp);
   };
 
   // ---------- what did that choice change? ----------

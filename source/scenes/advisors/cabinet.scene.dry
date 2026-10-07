@@ -97,7 +97,7 @@ The land committees now have the government's authority to regulate the transfer
 
 @land_1_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -161,7 +161,7 @@ A decree abolished private ownership of land, and put it in the hands of the vil
 
 @land_2_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -289,7 +289,7 @@ The government's diplomacy now aims at a general peace without annexations. The 
 
 @war_1_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -353,7 +353,7 @@ The army is told to prepare to attack. The Allies are pleased; the soldiers are 
 
 @war_2_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -433,7 +433,7 @@ Emergency measures give the government the right to arrest agitators and close n
 
 @order_1_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -497,7 +497,7 @@ An amnesty empties the prisons of those held for political offences, and the pre
 
 @order_2_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -577,7 +577,7 @@ The eight-hour day and the factory committees are written into law. The workers 
 
 @labour_1_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -641,7 +641,7 @@ A committee of the state now regulates prices, wages and supplies in the war ind
 
 @labour_2_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -715,7 +715,7 @@ The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Sov
 
 @kadets_out_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;

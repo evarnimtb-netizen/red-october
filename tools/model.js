@@ -764,9 +764,10 @@ var RO = (function() {
 
   // What each camp objects to. Returns {camp: {score, why: [{s, t, area}]}}; a negative s is something the camp likes.
   function offence(Q) {
-    var land = Q.pol_land || 0, labour = Q.pol_labour || 0, war = Q.pol_war || 0, order = Q.pol_order || 0;
-    var food = Q.pol_food === undefined ? 1 : Q.pol_food, lc = Math.min(Q.land_committees || 0, 4);
+    // the Cabinet's standing settings only count while the party sits in the government that keeps them
     var gov = !!Q.in_coalition, atWar = !!Q.at_war, out = {};
+    var land = gov ? (Q.pol_land || 0) : 0, labour = gov ? (Q.pol_labour || 0) : 0, war = gov ? (Q.pol_war || 0) : 0, order = gov ? (Q.pol_order || 0) : 0;
+    var food = (!gov || Q.pol_food === undefined) ? 1 : Q.pol_food, lc = Math.min(Q.land_committees || 0, 4);
     function put(k, s, t, area) { if (s > 0 && Q['soft_' + area]) { s *= 0.6; } if (s !== 0) { out[k].why.push({s: s, t: t, area: area}); } }
     CAMPS.forEach(function(k) { out[k] = {score: 0, why: []}; });
     // the Kadets and the propertied
@@ -868,7 +869,9 @@ var RO = (function() {
           lose: 'The Bolshevik agitators were warned in time. Pravda reappeared under another name, and the arrests have made them heroes.'}
   };
   // One attempt to break a camp. Applies the effects, adds a sentence to Q.sq_text and returns true if it worked.
-  function squash(Q, k) {
+  // A failure angers the camp and brings its reaction at once, except when the attempt is the answer to that camp's own
+  // event (inEvent): then the event's cooldown stands, and the anger waits for it.
+  function squash(Q, k, inEvent) {
     if (!campActive(Q, k)) { return false; }
     var win = chance(squashOdds(Q, k)), sent = SQUASH[k][win ? 'win' : 'lose'];
     if (win) {
@@ -882,9 +885,12 @@ var RO = (function() {
       if ((Q.ally_lvl || 0) >= 2 && Q.partner_name && (Q.sq_text || '').indexOf(' stood with us.') < 0) { sent += ' ' + Q.partner_name + ' stood with us.'; }
     } else {
       Q['ant_' + k] = clamp((Q['ant_' + k] || 0) + 15, 0, 100);
-      add(Q, {right_threat: (k === 'gen' ? 6 : 4), army_discipline: -3, soviet_democracy: -2, resources: -1});
-      Q['opp_' + k + '_timer'] = 0;
-      Q['opp_' + k + '_ev'] = Q['ant_' + k] >= REVOLT_AT ? 2 : 1;
+      add(Q, {right_threat: (k === 'gen' ? 6 : 4), army_discipline: -3, soviet_democracy: -2});
+      Q.resources = Math.max(0, (Q.resources || 0) - 1);
+      if (!inEvent) {
+        Q['opp_' + k + '_timer'] = 0;
+        Q['opp_' + k + '_ev'] = Q['ant_' + k] >= REVOLT_AT ? 2 : 1;
+      }
     }
     Q.sq_text = ((Q.sq_text || '') + ' ' + sent).replace(/^ /, '');
     return win;
@@ -903,12 +909,24 @@ var RO = (function() {
     if (!Q.sq_text) { Q.sq_text = 'There was nobody to break.'; }
   }
 
+  // The Break option in a camp's own sanction event: the player chose to strike, so the attempt is always made.
+  function breakCamp(Q, k) {
+    Q.sq_text = '';
+    Q.sq_won = squash(Q, k, true) ? 1 : 0;
+  }
+
   // ---- laws with a choice of implementation ----
   // Run a law's effects (fn) in one of three styles: 'slow' (phased in, with compensation: 60% of the effects, a
   // fifth of the anger, costs a resource), 'decree' (as written) or 'force' (as written, and the camps it angers are
   // broken by force if the party is strong enough). Q.law_text holds the result of the force.
   var LAW_KEYS = ['bread', 'ruble', 'army_discipline', 'land_pressure', 'bolshevik', 'right_threat', 'soviet_democracy', 'repression',
                   'war_weariness', 'rel_ally', 'rel_lsr', 'rel_bol', 'rel_kad'].concat(['workers', 'soldiers', 'peasants', 'middle', 'railway', 'nations'].map(function(g) { return 'boost_' + g; }));
+  // How much a law's effects anger each camp, when the law does not say so itself (explicit ant_* changes).
+  // tools/lawvariants.py (law_camps) applies the same rule to decide which laws get the three implementations: keep them in step.
+  var LAW_HIT_MIN = 2;
+  function lawHits(d) {
+    return {kad: Math.max(0, -(d.rel_kad || 0)) * 1.2, gen: Math.max(0, d.right_threat || 0) * 2, bol: Math.max(0, -(d.rel_bol || 0))};
+  }
   function law(Q, style, fn) {
     var before = {}, antBefore = {}, d = {}, f = (style === 'slow') ? 0.6 : 1, m = (style === 'slow') ? 0.4 : 1, explicit = false, hit = {}, camps = [];
     LAW_KEYS.forEach(function(k) { before[k] = Q[k] || 0; });
@@ -920,10 +938,10 @@ var RO = (function() {
       if (dd !== 0) { explicit = true; hit[k] = dd; }
       Q['ant_' + k] = antBefore[k];
     });
-    if (!explicit) { hit = {kad: Math.max(0, -d.rel_kad) * 1.2, gen: Math.max(0, d.right_threat) * 2, bol: Math.max(0, -d.rel_bol)}; }
+    if (!explicit) { hit = lawHits(d); }
     CAMPS.forEach(function(k) {
       var h = hit[k] || 0;
-      if (h >= 2 && campActive(Q, k)) { camps.push(k); }
+      if (h >= LAW_HIT_MIN && campActive(Q, k)) { camps.push(k); }
       if (campActive(Q, k)) { Q['ant_' + k] = clamp(antBefore[k] + (h > 0 ? h * m : h), 0, 100); }
     });
     if (style === 'slow') { Q.resources = Math.max(0, (Q.resources || 0) - 1); }
@@ -940,7 +958,8 @@ var RO = (function() {
       if ((Q['cow_' + k + '_timer'] || 0) > 0) { target = Math.min(target, 30); }
       Q[key] = clamp(cur + (target - cur) * Math.min(1, 0.3 * tl), 0, 100);
       var a = Q[key];
-      if (!campActive(Q, k) || Q.game_end || Q['opp_' + k + '_ev'] || (Q['opp_' + k + '_timer'] || 0) > 0) { return; }
+      if (!campActive(Q, k)) { Q['opp_' + k + '_ev'] = 0; return; }
+      if (Q.game_end || Q['opp_' + k + '_ev'] || (Q['opp_' + k + '_timer'] || 0) > 0) { return; }
       var stage = 0, thr = SANCTION_AT;
       if (a >= REVOLT_AT && ((Q['opp_' + k + '_n'] || 0) >= 1 || a >= 85)) { stage = 2; thr = REVOLT_AT; }
       else if (a >= SANCTION_AT) { stage = 1; }
@@ -960,7 +979,7 @@ var RO = (function() {
   }
 
 
-  return {law: law, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

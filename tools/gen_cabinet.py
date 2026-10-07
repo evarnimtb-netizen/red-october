@@ -9,7 +9,7 @@ import os
 import re
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
-from lawvariants import variants
+from lawvariants import variants, law_camps
 
 ROOT = os.path.join(os.path.dirname(__file__), '..', 'source')
 OUT = os.path.join(ROOT, 'scenes', 'advisors')
@@ -85,12 +85,6 @@ POLITICS = [
 ]
 
 
-def camps_of(js):
-    """The camps whose hostility this change raises, from the ant_* numbers in its effect."""
-    return [c for c, n in re.findall(r"ant_(kad|gen|bol): (-?\d+)", js) if int(n) > 0]
-
-FORCE_NOTE = 'unavailable-subtitle: We lack the force and the allies to break the opposition.'
-
 def write_qdisplays():
     for key, title, when, settings in AREAS:
         lines = ['']
@@ -129,7 +123,7 @@ Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Foo
             v = 'view-if: (%s) and pol_%s != %d' % (when, key, i)
             ch = 'cabinet_timer <= 0' + (' and (%s)' % cond if cond else '')
             sub = '[? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]' + ('[? if not (%s) : %s ?]' % (cond, un) if cond else '')
-            if camps_of(js):
+            if law_camps(js):
                 # an unpopular law: three ways to carry it out
                 pre = lambda style, key=key, i=i: 'Q.month_actions += 1;\nQ.cabinet_timer = 2;\nQ.pol_%s = %d;\nQ.soft_%s = %d;' % (key, i, key, 1 if style == 'slow' else 0)
                 L.append(variants('%s_%d' % (key, i), [v, 'choose-if: ' + ch, 'unavailable-subtitle: ' + sub], js, res, '- @root: Continue.', pre, back=True))
@@ -151,7 +145,7 @@ Q.soft_%s = 0;
 - @root: Continue.
 ''' % (key, i, v, ch, sub, key, i, key, js, res))
     for pid, label, cond, un, js, res in POLITICS:
-        if camps_of(js):
+        if law_camps(js):
             pre = lambda style: 'Q.month_actions += 1;\nQ.cabinet_timer = 2;'
             L.append(variants(pid, ['view-if: ' + cond, 'choose-if: cabinet_timer <= 0', 'unavailable-subtitle: The cabinet has changed course too recently.'],
                               js, res, '- @root: Continue.', pre, back=True))

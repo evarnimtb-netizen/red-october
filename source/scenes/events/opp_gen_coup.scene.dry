@@ -2,7 +2,7 @@ title: The Generals Move
 subtitle: Troops march on the capital.
 new-page: true
 tags: event
-view-if: opp_gen_ev = 2 and dix >= 6
+view-if: opp_gen_ev = 2 and dix >= 6 and bol_regime = 0
 priority: 26
 on-arrival: {!
 Q.opp_gen_ev = 0;

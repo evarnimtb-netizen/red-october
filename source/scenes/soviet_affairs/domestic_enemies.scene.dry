@@ -28,14 +28,62 @@ if (Q.legality < 3 && Q.defended >= 2 && Q.dix >= 66) { Q.legality += 1; }
 Our members enlisted in the Red Army and our veterans took commissions. The Bolsheviks have noticed, and some of the arrests have stopped.
 
 @neither
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @neither_slow: Phase it in, with compensation and negotiation.
+- @neither_decree: Pass it by decree, as written.
+- @neither_force: Pass it by decree, and break any opposition by force.
+
+@neither_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
 on-arrival: {!
+
+RO.law(Q, 'slow', () => {
 RO.boost(Q, {middle: 2, peasants: 1});
 RO.add(Q, {repression: 1, rel_bol: -2});
 RO.fac(Q, 'rightdef', 0, 5);
 RO.fac(Q, 'intl', 0, -2);
+});
+!}
+
+"Neither Kolchak nor Lenin." The slogan is exact, and it gives satisfaction to nobody who is on a front. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@neither_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.boost(Q, {middle: 2, peasants: 1});
+RO.add(Q, {repression: 1, rel_bol: -2});
+RO.fac(Q, 'rightdef', 0, 5);
+RO.fac(Q, 'intl', 0, -2);
+});
 !}
 
 "Neither Kolchak nor Lenin." The slogan is exact, and it gives satisfaction to nobody who is on a front.
+
+
+
+@neither_force
+choose-if: strength >= 18
+subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.boost(Q, {middle: 2, peasants: 1});
+RO.add(Q, {repression: 1, rel_bol: -2});
+RO.fac(Q, 'rightdef', 0, 5);
+RO.fac(Q, 'intl', 0, -2);
+});
+!}
+
+"Neither Kolchak nor Lenin." The slogan is exact, and it gives satisfaction to nobody who is on a front. [+ law_text +]
 
 @conditions
 on-arrival: {!

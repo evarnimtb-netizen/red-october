@@ -57,7 +57,7 @@ A note on war aims went to London and Paris. They replied politely, and not at a
 
 @note_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -116,7 +116,7 @@ The government has officially endorsed a socialist conference at Stockholm. The 
 
 @stockholm_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -190,7 +190,7 @@ An unofficial approach, through a Swedish socialist, asked if Germany would cons
 
 @separate_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

@@ -2,7 +2,7 @@ title: The Factories Walk Out
 subtitle: The Bolsheviks bring out the workers and the garrison.
 new-page: true
 tags: event
-view-if: opp_bol_ev = 2
+view-if: opp_bol_ev = 2 and bol_regime = 0
 priority: 25
 on-arrival: {!
 Q.opp_bol_ev = 0;

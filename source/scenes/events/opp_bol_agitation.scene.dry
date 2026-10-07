@@ -2,7 +2,7 @@ title: Pravda Names Us
 subtitle: The Bolsheviks campaign against our policy.
 new-page: true
 tags: event
-view-if: opp_bol_ev = 1
+view-if: opp_bol_ev = 1 and bol_regime = 0
 priority: 22
 on-arrival: {!
 Q.opp_bol_ev = 0;
@@ -51,9 +51,10 @@ We said nothing, and the Bolsheviks said everything. The garrisons and the facto
 
 @break
 choose-if: strength >= 18
+subtitle: Chance of breaking them: [+ odds_bol +]%. A failure makes them angrier.
 unavailable-subtitle: We lack the force and the allies for this.
 on-arrival: {!
-RO.squashAll(Q, ['bol']);
+RO.breakCamp(Q, 'bol');
 !}
 
 [+ sq_text +] The workers' districts will not forget it, whichever way it went.

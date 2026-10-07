@@ -2,7 +2,7 @@ title: The Liberals Strike Back
 subtitle: The Kadets and the propertied classes answer our policy.
 new-page: true
 tags: event
-view-if: opp_kad_ev = 1
+view-if: opp_kad_ev = 1 and bol_regime = 0
 priority: 24
 on-arrival: {!
 Q.opp_kad_ev = 0;
@@ -64,9 +64,10 @@ Through the ambassadors and a Petrograd banker who is not a Kadet, we have made 
 
 @break
 choose-if: strength >= 18
+subtitle: Chance of breaking them: [+ odds_kad +]%. A failure makes them angrier.
 unavailable-subtitle: We lack the force and the allies for this.
 on-arrival: {!
-RO.squashAll(Q, ['kad']);
+RO.breakCamp(Q, 'kad');
 !}
 
 [+ sq_text +] Whatever the result, the liberals will remember that we are ready to use the militia against them.

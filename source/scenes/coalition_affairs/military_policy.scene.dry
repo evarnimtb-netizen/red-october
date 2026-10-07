@@ -58,7 +58,7 @@ Officers regained their authority over operational orders. The committees have b
 
 @authority_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -114,7 +114,7 @@ Government commissars now sit with the committees in every regiment. The soldier
 
 @trust_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -171,7 +171,7 @@ The death penalty at the front was restored for desertion and treason. The Bolsh
 
 @death_penalty_force
 choose-if: strength >= 18
-subtitle: Chance of breaking the opposition: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%, Bolsheviks [+ odds_bol +]%.
+subtitle: Chance of breaking its opponents: generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

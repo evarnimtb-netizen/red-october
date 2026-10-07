@@ -2,7 +2,7 @@ title: The Landowners Rise
 subtitle: The propertied classes take up arms against us.
 new-page: true
 tags: event
-view-if: opp_kad_ev = 2
+view-if: opp_kad_ev = 2 and bol_regime = 0
 priority: 26
 on-arrival: {!
 Q.opp_kad_ev = 0;

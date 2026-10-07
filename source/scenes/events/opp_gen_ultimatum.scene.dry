@@ -2,7 +2,7 @@ title: The Generals' Ultimatum
 subtitle: Stavka demands a change of course.
 new-page: true
 tags: event
-view-if: opp_gen_ev = 1
+view-if: opp_gen_ev = 1 and bol_regime = 0
 priority: 24
 on-arrival: {!
 Q.opp_gen_ev = 0;
@@ -52,9 +52,10 @@ The commander of the northern front and two army commanders were dismissed in on
 
 @break
 choose-if: strength >= 18
+subtitle: Chance of breaking them: [+ odds_gen +]%. A failure makes them angrier.
 unavailable-subtitle: We lack the force and the allies for this.
 on-arrival: {!
-RO.squashAll(Q, ['gen']);
+RO.breakCamp(Q, 'gen');
 !}
 
 [+ sq_text +] Whatever the result, the officers have been shown that the committees are armed.
