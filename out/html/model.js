@@ -745,6 +745,15 @@ var RO = (function() {
     return rec;
   }
 
+  // ---- the record of the run, for the ending recap ----
+  // One row a turn: [dix, the party's support in the current arena, Bolshevik strength, threat from the Right, soviet democracy, members].
+  function recordTurn(Q) {
+    if (!Q.hist) { Q.hist = []; }
+    var r1 = function(x) { return Math.round((x || 0) * 10) / 10; };
+    var row = [Q.dix || 0, r1(Q.player_poll), r1(Q.bolshevik), r1(Q.right_threat), r1(Q.soviet_democracy), Math.round(Q.members || 0)];
+    if (Q.hist.length && Q.hist[Q.hist.length - 1][0] === row[0]) { Q.hist[Q.hist.length - 1] = row; } else { Q.hist.push(row); }
+  }
+
   // A weighted coin for the decisions that no stat can settle.
   function chance(p) { return Math.random() < clamp(p, 0, 1); }
 
@@ -893,6 +902,8 @@ var RO = (function() {
       }
     }
     Q.sq_text = ((Q.sq_text || '') + ' ' + sent).replace(/^ /, '');
+    if (!Q.break_log) { Q.break_log = []; }
+    Q.break_log.push([Q.dix || 0, k, win ? 1 : 0]);
     return win;
   }
   // The law's own force option: tries each camp that the law angers, except the ones that are too strong to touch (odds under 45%).
@@ -927,7 +938,8 @@ var RO = (function() {
   function lawHits(d) {
     return {kad: Math.max(0, -(d.rel_kad || 0)) * 1.2, gen: Math.max(0, d.right_threat || 0) * 2, bol: Math.max(0, -(d.rel_bol || 0))};
   }
-  function law(Q, style, fn) {
+  // label: what the law is called, for the ending recap.
+  function law(Q, style, fn, label) {
     var before = {}, antBefore = {}, d = {}, f = (style === 'slow') ? 0.6 : 1, m = (style === 'slow') ? 0.4 : 1, explicit = false, hit = {}, camps = [];
     LAW_KEYS.forEach(function(k) { before[k] = Q[k] || 0; });
     CAMPS.forEach(function(k) { antBefore[k] = Q['ant_' + k] || 0; });
@@ -947,6 +959,8 @@ var RO = (function() {
     if (style === 'slow') { Q.resources = Math.max(0, (Q.resources || 0) - 1); }
     Q.law_text = '';
     if (style === 'force') { squashAll(Q, camps); Q.law_text = Q.sq_text; }
+    if (!Q.laws_log) { Q.laws_log = []; }
+    Q.laws_log.push([Q.dix || 0, label || 'A law', style, camps.join(' ')]);
     return camps;
   }
 
@@ -979,7 +993,7 @@ var RO = (function() {
   }
 
 
-  return {law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

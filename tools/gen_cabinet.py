@@ -126,7 +126,7 @@ Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Foo
             if law_camps(js):
                 # an unpopular law: three ways to carry it out
                 pre = lambda style, key=key, i=i: 'Q.month_actions += 1;\nQ.cabinet_timer = 2;\nQ.pol_%s = %d;\nQ.soft_%s = %d;' % (key, i, key, 1 if style == 'slow' else 0)
-                L.append(variants('%s_%d' % (key, i), [v, 'choose-if: ' + ch, 'unavailable-subtitle: ' + sub], js, res, '- @root: Continue.', pre, back=True))
+                L.append(variants('%s_%d' % (key, i), [v, 'choose-if: ' + ch, 'unavailable-subtitle: ' + sub], js, res, '- @root: Continue.', pre, back=True, label=label))
                 continue
             L.append('''@%s_%d
 %s
@@ -148,7 +148,7 @@ Q.soft_%s = 0;
         if law_camps(js):
             pre = lambda style: 'Q.month_actions += 1;\nQ.cabinet_timer = 2;'
             L.append(variants(pid, ['view-if: ' + cond, 'choose-if: cabinet_timer <= 0', 'unavailable-subtitle: The cabinet has changed course too recently.'],
-                              js, res, '- @root: Continue.', pre, back=True))
+                              js, res, '- @root: Continue.', pre, back=True, label=label))
             continue
         L.append('''@%s
 view-if: %s

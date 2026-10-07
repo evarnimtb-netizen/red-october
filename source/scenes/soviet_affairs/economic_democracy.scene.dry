@@ -42,7 +42,7 @@ RO.boost(Q, {workers: 7, railway: 3});
 RO.add(Q, {soviet_democracy: 3, repression: 5, rel_bol: -5});
 RO.fac(Q, 'intl', 0, 5);
 if (Q.legality > 1) { Q.legality -= 1; }
-});
+}, "Make them a rival to the Bolshevik-controlled soviets");
 !}
 
 We tried to turn the assemblies into a rival to the soviets. It was a bold move, and the Bolsheviks answered with arrests and banned delegates from the factory gates. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -58,7 +58,7 @@ RO.boost(Q, {workers: 7, railway: 3});
 RO.add(Q, {soviet_democracy: 3, repression: 5, rel_bol: -5});
 RO.fac(Q, 'intl', 0, 5);
 if (Q.legality > 1) { Q.legality -= 1; }
-});
+}, "Make them a rival to the Bolshevik-controlled soviets");
 !}
 
 We tried to turn the assemblies into a rival to the soviets. It was a bold move, and the Bolsheviks answered with arrests and banned delegates from the factory gates.
@@ -76,7 +76,7 @@ RO.boost(Q, {workers: 7, railway: 3});
 RO.add(Q, {soviet_democracy: 3, repression: 5, rel_bol: -5});
 RO.fac(Q, 'intl', 0, 5);
 if (Q.legality > 1) { Q.legality -= 1; }
-});
+}, "Make them a rival to the Bolshevik-controlled soviets");
 !}
 
 We tried to turn the assemblies into a rival to the soviets. It was a bold move, and the Bolsheviks answered with arrests and banned delegates from the factory gates. [+ law_text +]

@@ -1,8 +1,9 @@
-name: Publish the game
+name: Test and publish the game
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -11,29 +12,91 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  # Model unit tests and the generated-files check, then full games for every party and difficulty in parallel.
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies
-        run: npm install
-      - name: Build the game
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm install
+      - name: Build
         run: npx dendrynexus make-html
-      - name: Check that the game plays to the end
-        run: node tools/playtest.js 5 cautious
+      - name: Model unit tests
+        run: node tools/test_model.js
+      - name: Generated scenes are up to date
+        run: |
+          python3 tools/gen_advisors.py > /dev/null
+          python3 tools/gen_cabinet.py > /dev/null
+          python3 tools/gen_laws.py > /dev/null
+          git diff --exit-code --stat -- source/scenes/advisors source/scenes/coalition_affairs source/scenes/soviet_affairs tools/model.js
+
+  playtest:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        party: ["Mensheviks", "Socialist Revolutionaries", "Left SRs"]
+        difficulty: [Normal, Hard]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx dendrynexus make-html
+      - name: Full games (${{ matrix.party }}, ${{ matrix.difficulty }})
+        env:
+          PARTY: ${{ matrix.party }}
+          DIFF: ${{ matrix.difficulty }}
+          STRICT: 1
+        run: |
+          node tools/playtest.js 40 cautious | tail -4
+          node tools/playtest.js 20 random | tail -4
+
+  bots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx dendrynexus make-html
+      - name: Scripted strategies
+        env:
+          STRICT: 1
+        run: |
+          for BOT in democrat vikzhelist opposition whiteaid persuader; do PARTY="Mensheviks" node tools/playtest.js 10 "bot:$BOT" | tail -2; done
+          for BOT in sr_land sr_komuch sr_peasant socializer breaker; do PARTY="Socialist Revolutionaries" node tools/playtest.js 10 "bot:$BOT" | tail -2; done
+          for BOT in lsr_coalition lsr_rising; do PARTY="Left SRs" node tools/playtest.js 10 "bot:$BOT" | tail -2; done
+
+  build:
+    needs: [checks, playtest, bots]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx dendrynexus make-html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out/html
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

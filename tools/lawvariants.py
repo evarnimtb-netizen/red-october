@@ -4,6 +4,7 @@ slow   - phased in, with compensation and negotiation: 60% of the effects, littl
 decree - as written
 force  - as written, and the camps it angers are broken by force if the party is strong enough
 """
+import json
 import re
 
 NAMES = {'kad': 'Kadets', 'gen': 'generals', 'bol': 'Bolsheviks'}
@@ -24,11 +25,16 @@ def law_camps(js):
     return [k for k in ('kad', 'gen', 'bol') if hits[k] >= LAW_HIT_MIN]
 
 
+def law_name(label):
+    """The law's name for the recap: the option's label without its cost in brackets or its final full stop."""
+    return re.sub(r'\s*\([^)]*\)\s*$', '', label).strip().rstrip('.')
+
+
 INTRO = ("How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. "
          "By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.")
 
 
-def variants(name, head, js, text, tail, prefix, back=False, intro=INTRO):
+def variants(name, head, js, text, tail, prefix, back=False, intro=INTRO, label=''):
     """head: header lines of the router (view-if, choose-if...); prefix(style): JS run before the effects; tail: lines after the text."""
     camps = law_camps(js)
     odds = ', '.join('%s [+ odds_%s +]%%' % (NAMES[k], k) for k in camps)
@@ -47,13 +53,13 @@ on-arrival: {!
 %s
 RO.law(Q, '%s', () => {
 %s
-});
+}, %s);
 !}
 
 %s
 
 %s
-''' % (name, style, '\n'.join(head2), prefix(style), style, js, text2, tail)
+''' % (name, style, '\n'.join(head2), prefix(style), style, js, json.dumps(law_name(label)), text2, tail)
     out.append(block('slow', ['choose-if: resources >= 1', 'subtitle: Milder effects and little anger. Costs 1 resource.',
                               'unavailable-subtitle: We have nothing to pay the compensation with.'],
                      text + ' It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.'))

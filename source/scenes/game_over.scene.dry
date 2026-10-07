@@ -180,6 +180,8 @@ view-if: game_over = 1
 
 = The end
 
+{!<div class="recap"></div>!}
+
 [? if georgia_survives = 1 and bol_regime = 1 : Epilogue: Georgia survived the winter of 1921. A free Georgia, a Menshevik republic on the shore of the Black Sea, remains one of the unfinished possibilities of the revolution. ?]
 
 *Thank you for playing Red October: Fall of Empire. It is a work in progress, and this is a game of alternate history.*

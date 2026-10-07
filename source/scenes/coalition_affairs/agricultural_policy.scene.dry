@@ -32,7 +32,7 @@ RO.law(Q, 'slow', () => {
 RO.add(Q, {land_pressure: -10, rel_kad: -6, rel_ally: 3, right_threat: 3});
 RO.boost(Q, {peasants: 3, soldiers: 2});
 Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Back the land committees' temporary transfers now");
 !}
 
 The land committees regulate the transfers of land until the Assembly meets. Landowners are alarmed, and so are their friends in the officer corps. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -47,7 +47,7 @@ RO.law(Q, 'decree', () => {
 RO.add(Q, {land_pressure: -10, rel_kad: -6, rel_ally: 3, right_threat: 3});
 RO.boost(Q, {peasants: 3, soldiers: 2});
 Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Back the land committees' temporary transfers now");
 !}
 
 The land committees regulate the transfers of land until the Assembly meets. Landowners are alarmed, and so are their friends in the officer corps.
@@ -64,7 +64,7 @@ RO.law(Q, 'force', () => {
 RO.add(Q, {land_pressure: -10, rel_kad: -6, rel_ally: 3, right_threat: 3});
 RO.boost(Q, {peasants: 3, soldiers: 2});
 Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Back the land committees' temporary transfers now");
 !}
 
 The land committees regulate the transfers of land until the Assembly meets. Landowners are alarmed, and so are their friends in the officer corps. [+ law_text +]
@@ -95,7 +95,7 @@ RO.law(Q, 'slow', () => {
 RO.add(Q, {land_pressure: -4, rel_kad: -2, rel_ally: 1});
 RO.boost(Q, {peasants: 1});
 Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Move state and Church lands to the committees at once");
 !}
 
 State, appanage and Church lands were put at the committees' disposal. The private estates are still untouched. It is a gesture, and the peasants know it. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -110,7 +110,7 @@ RO.law(Q, 'decree', () => {
 RO.add(Q, {land_pressure: -4, rel_kad: -2, rel_ally: 1});
 RO.boost(Q, {peasants: 1});
 Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Move state and Church lands to the committees at once");
 !}
 
 State, appanage and Church lands were put at the committees' disposal. The private estates are still untouched. It is a gesture, and the peasants know it.
@@ -127,7 +127,7 @@ RO.law(Q, 'force', () => {
 RO.add(Q, {land_pressure: -4, rel_kad: -2, rel_ally: 1});
 RO.boost(Q, {peasants: 1});
 Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Move state and Church lands to the committees at once");
 !}
 
 State, appanage and Church lands were put at the committees' disposal. The private estates are still untouched. It is a gesture, and the peasants know it. [+ law_text +]

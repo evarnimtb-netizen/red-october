@@ -42,7 +42,7 @@ RO.boost(Q, {workers: 6, railway: 6});
 RO.add(Q, {bread: -3, repression: 5, soviet_democracy: 2, rel_bol: -4});
 RO.fac(Q, 'unions', 3, -4);
 if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
-});
+}, "Back a railway and printers' strike in defence of union rights");
 !}
 
 The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -58,7 +58,7 @@ RO.boost(Q, {workers: 6, railway: 6});
 RO.add(Q, {bread: -3, repression: 5, soviet_democracy: 2, rel_bol: -4});
 RO.fac(Q, 'unions', 3, -4);
 if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
-});
+}, "Back a railway and printers' strike in defence of union rights");
 !}
 
 The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own.
@@ -76,7 +76,7 @@ RO.boost(Q, {workers: 6, railway: 6});
 RO.add(Q, {bread: -3, repression: 5, soviet_democracy: 2, rel_bol: -4});
 RO.fac(Q, 'unions', 3, -4);
 if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
-});
+}, "Back a railway and printers' strike in defence of union rights");
 !}
 
 The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own. [+ law_text +]

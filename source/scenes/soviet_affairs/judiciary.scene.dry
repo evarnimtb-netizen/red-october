@@ -33,7 +33,7 @@ RO.add(Q, {repression: -3, rel_bol: -3, soviet_democracy: 2});
 RO.boost(Q, {workers: 3, middle: 2});
 RO.fac(Q, 'intl', 1, -2);
 if (Q.repression >= 30 && Q.legality > 1) { Q.legality -= 1; }
-});
+}, "Launch a public campaign for the prisoners");
 !}
 
 A public campaign for the prisoners filled our meetings with relatives. Some were released. Some of those who organised it were not. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -49,7 +49,7 @@ RO.add(Q, {repression: -3, rel_bol: -3, soviet_democracy: 2});
 RO.boost(Q, {workers: 3, middle: 2});
 RO.fac(Q, 'intl', 1, -2);
 if (Q.repression >= 30 && Q.legality > 1) { Q.legality -= 1; }
-});
+}, "Launch a public campaign for the prisoners");
 !}
 
 A public campaign for the prisoners filled our meetings with relatives. Some were released. Some of those who organised it were not.
@@ -67,7 +67,7 @@ RO.add(Q, {repression: -3, rel_bol: -3, soviet_democracy: 2});
 RO.boost(Q, {workers: 3, middle: 2});
 RO.fac(Q, 'intl', 1, -2);
 if (Q.repression >= 30 && Q.legality > 1) { Q.legality -= 1; }
-});
+}, "Launch a public campaign for the prisoners");
 !}
 
 A public campaign for the prisoners filled our meetings with relatives. Some were released. Some of those who organised it were not. [+ law_text +]

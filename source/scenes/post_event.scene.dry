@@ -57,6 +57,7 @@ RO.updateFactions(Q);
 RO.updatePolls(Q);
 RO.display(Q);
 RO.syncAdvisors(Q);
+RO.recordTurn(Q);
 
 // 2. immediate endings
 if (!Q.game_end) {

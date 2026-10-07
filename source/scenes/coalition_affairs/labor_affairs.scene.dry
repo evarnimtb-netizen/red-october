@@ -43,7 +43,7 @@ RO.boost(Q, {workers: 5, railway: 2});
 RO.add(Q, {ruble: -3, rel_kad: -4, bolshevik: -1});
 RO.fac(Q, 'unions', 2, -2);
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Legalise the factory committees and the eight-hour day");
 !}
 
 The committees are recognised in law and the eight-hour day is guaranteed. The factory owners say they will close the plants. A few have. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -59,7 +59,7 @@ RO.boost(Q, {workers: 5, railway: 2});
 RO.add(Q, {ruble: -3, rel_kad: -4, bolshevik: -1});
 RO.fac(Q, 'unions', 2, -2);
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Legalise the factory committees and the eight-hour day");
 !}
 
 The committees are recognised in law and the eight-hour day is guaranteed. The factory owners say they will close the plants. A few have.
@@ -77,7 +77,7 @@ RO.boost(Q, {workers: 5, railway: 2});
 RO.add(Q, {ruble: -3, rel_kad: -4, bolshevik: -1});
 RO.fac(Q, 'unions', 2, -2);
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Legalise the factory committees and the eight-hour day");
 !}
 
 The committees are recognised in law and the eight-hour day is guaranteed. The factory owners say they will close the plants. A few have. [+ law_text +]

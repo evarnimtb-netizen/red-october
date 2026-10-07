@@ -818,3 +818,21 @@ a, button, ul.choices li, .tab_button { touch-action: manipulation; -webkit-tap-
   .parl-legend { font-size: 0.8em; }
   .effects { font-size: 0.9em; }
 }
+
+/* the ending recap */
+.recap { margin: 0.5em 0 1em 0; }
+.recap-title { text-align: center; font-variant: small-caps; letter-spacing: 0.06em; font-size: 1.1em; margin-bottom: 0.3em; }
+.recap-svg { display: block; margin: 0 auto; max-width: 100%; height: auto; font-family: "Minion Pro", Georgia, serif; }
+.recap-svg text { fill: var(--text-color); font-size: 11px; }
+.recap-svg .domain, .recap-svg .tick line { stroke: #876; }
+.recap-key { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.2em 1em; font-size: 0.82em; margin: 0.2em 0 0.6em 0; }
+.recap-key i { display: inline-block; width: 1.2em; height: 3px; margin-right: 0.35em; vertical-align: middle; }
+.recap-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5em, 1fr)); gap: 0.5em; margin: 0.4em 0 0.8em 0; }
+.recap-tile { border: 1px solid #876; border-radius: 4px; padding: 0.4em 0.3em; text-align: center; background: rgba(120, 90, 40, 0.06); }
+.recap-tile b { display: block; font-size: 1.35em; font-weight: normal; }
+.recap-tile small { display: block; font-size: 0.75em; opacity: 0.8; line-height: 1.25em; }
+.recap-sec { margin-top: 0.6em; }
+.recap-note { text-indent: 0; margin: 0.3em 0; }
+.recap-list { margin: 0.2em 0 0 0; padding-left: 1.1em; font-size: 0.9em; }
+.recap-list li { margin-bottom: 0.15em; }
+.recap-list span { opacity: 0.7; margin-right: 0.3em; }

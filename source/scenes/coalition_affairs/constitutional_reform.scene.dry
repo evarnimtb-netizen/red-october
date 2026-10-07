@@ -35,7 +35,7 @@ Q.assembly_early = 1;
 RO.add(Q, {rel_kad: -5, rel_ally: 4, soviet_democracy: 2, bolshevik: -2});
 RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
 RO.fac(Q, 'intl', 0, -2);
-});
+}, "Demand an election in the first half of October");
 !}
 
 The Provisional Government, under pressure from the Soviet, has moved the elections to the first half of October. The Kadets protested, and voted for it. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -52,7 +52,7 @@ Q.assembly_early = 1;
 RO.add(Q, {rel_kad: -5, rel_ally: 4, soviet_democracy: 2, bolshevik: -2});
 RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
 RO.fac(Q, 'intl', 0, -2);
-});
+}, "Demand an election in the first half of October");
 !}
 
 The Provisional Government, under pressure from the Soviet, has moved the elections to the first half of October. The Kadets protested, and voted for it.
@@ -71,7 +71,7 @@ Q.assembly_early = 1;
 RO.add(Q, {rel_kad: -5, rel_ally: 4, soviet_democracy: 2, bolshevik: -2});
 RO.boost(Q, {peasants: 2, middle: 2, workers: 1});
 RO.fac(Q, 'intl', 0, -2);
-});
+}, "Demand an election in the first half of October");
 !}
 
 The Provisional Government, under pressure from the Soviet, has moved the elections to the first half of October. The Kadets protested, and voted for it. [+ law_text +]

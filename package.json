@@ -4,7 +4,9 @@
   "description": "Red October: Fall of Empire. A fork of Social Democracy: An Alternate History, set in the Russian Revolution, 1917-1921.",
   "main": "out/html/index.html",
   "scripts": {
-    "dendrynexus": "dendrynexus"
+    "dendrynexus": "dendrynexus",
+    "test": "sh tools/ci.sh",
+    "build": "npx dendrynexus make-html && sh tools/sync_model.sh"
   },
   "repository": {
     "type": "git",

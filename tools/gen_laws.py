@@ -20,7 +20,8 @@ def main():
             if m and not name.endswith(('_slow', '_decree', '_force')) and law_camps(m.group(2)) and '\n- @' not in p and 'go-to:' not in p and (name + '_slow') not in s:
                 head = [l for l in m.group(1).split('\n') if l.strip()]
                 text = m.group(3).strip()
-                out.append(variants(name, head, m.group(2), text, '', lambda style: '').rstrip('\n') + '\n')
+                lm = re.search(r'^- @%s: (.+)$' % re.escape(name), s, re.M)
+                out.append(variants(name, head, m.group(2), text, '', lambda style: '', label=lm.group(1) if lm else '').rstrip('\n') + '\n')
                 changed = True; n += 1
             else:
                 out.append(p)

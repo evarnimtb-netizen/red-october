@@ -9,6 +9,8 @@
   function sceneId() { var e = engine(); return e && e.state ? (e.state.sceneId || '') : ''; }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function num(x) { return typeof x === 'number' && isFinite(x) ? x : 0; }
+  // members are counted in thousands: 1158 -> "1,158,000"
+  function members(k) { return (Math.round(k) * 1000).toLocaleString('en-GB'); }
   function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
 
   // ---------- words (the same thresholds as the qdisplay files) ----------
@@ -64,7 +66,7 @@
   function renderMain(Q) {
     var h = '<div class="sb-date">' + esc(dateText(Q)) + '</div><div class="sb-phase">' + esc(PHASE[clamp(Q.phase || 1, 1, 5)]) + '</div>';
     h += '<table class="sb-kv"><tr><td>Resources</td><td>' + Math.round(num(Q.resources)) + '</td></tr>' +
-         '<tr><td>Members</td><td>' + Math.round(num(Q.members)) + ',000</td></tr>' +
+         '<tr><td>Members</td><td>' + members(num(Q.members)) + '</td></tr>' +
          '<tr><td>Legal status</td><td>' + LEGALITY[clamp(Math.round(num(Q.legality)), 0, 3)] + '</td></tr></table>';
     var d = num(Q.dissent) * 100;
     h += barRow('Party dissent', d, pick(d, WORDS.dissent), scoreColor(d * 1.6, false), '');
@@ -200,7 +202,7 @@
            '<div class="sb-bar"><div class="sb-fill" style="width:' + clamp(p.you * 2, 0, 100) + '%;background:' + color + '"></div></div></div>';
     });
     h += '<div class="sb-note">The soviets favour the towns and the soldiers, the dumas the propertied classes, the Assembly the villages.</div>';
-    h += '<div class="sb-section">Members and resources</div><table class="sb-kv"><tr><td>Members</td><td>' + Math.round(num(Q.members)) + ',000</td></tr><tr><td>Resources</td><td>' + Math.round(num(Q.resources)) + '</td></tr></table>';
+    h += '<div class="sb-section">Members and resources</div><table class="sb-kv"><tr><td>Members</td><td>' + members(num(Q.members)) + '</td></tr><tr><td>Resources</td><td>' + Math.round(num(Q.resources)) + '</td></tr></table>';
     return h;
   }
 
@@ -427,7 +429,7 @@
     d = Math.round(num(Q.dissent) * 100) - Math.round(before.dissent * 100);
     if (d !== 0) { out.push(chip('Party dissent ' + signed(d), d < 0)); }
     d = Math.round(num(Q.members)) - Math.round(before.members);
-    if (d !== 0) { out.push(chip('Members ' + signed(d) + ',000', d > 0)); }
+    if (d !== 0) { out.push(chip('Members ' + (d > 0 ? '+' : '−') + members(Math.abs(d)), d > 0)); }
     (Q.factions || []).forEach(function(f) {
       var ds = Math.round(num(Q[f + '_strength']) - before[f + '_strength']);
       if (Math.abs(ds) >= 3) { out.push(chip(esc(Q['flabel_' + f] || f) + (ds > 0 ? ' stronger' : ' weaker'), null)); }
@@ -546,6 +548,107 @@
     });
   }
 
+
+  // ---------- the ending recap: the run in review ----------
+  // Reads the record the model keeps (Q.hist, Q.laws_log, Q.break_log, Q.parl_*) and draws it on the last page.
+  var MONTH_SHORT = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function dixText(dix) {
+    var y = 1917 + Math.floor(dix / 24), m = Math.floor((dix % 24) / 2) + 1;
+    return MONTH_SHORT[m] + ' ' + y;
+  }
+  var STYLE_WORD = {slow: 'phased in', decree: 'by decree', force: 'by force'};
+  var CAMP_SHORT = {kad: 'the Kadets', gen: 'the generals', bol: 'the Bolsheviks'};
+
+  function recapChart(el, hist, Q) {
+    if (!window.d3 || hist.length < 2) { return; }
+    var d3 = window.d3, W = Math.max(260, Math.min(520, $('#content').width() - 20)), H = Math.round(W * 0.55);
+    var m = {t: 10, r: 10, b: 26, l: 30};
+    var x = d3.scaleLinear().domain([hist[0][0], hist[hist.length - 1][0]]).range([m.l, W - m.r]);
+    var y = d3.scaleLinear().domain([0, 100]).range([H - m.b, m.t]);
+    var series = [
+      {i: 1, name: 'Your support', color: PARTY_COLORS[Q.player_slot] || '#7a5a2b', width: 3},
+      {i: 2, name: 'Bolshevik strength', color: '#b3261e', width: 1.8},
+      {i: 3, name: 'Threat from the Right', color: '#6b5a45', width: 1.8},
+      {i: 4, name: 'Soviet democracy', color: '#5f8f4e', width: 1.8, dash: '4 3'}
+    ];
+    var svg = d3.select(el).append('svg').attr('class', 'recap-svg').attr('viewBox', '0 0 ' + W + ' ' + H).attr('width', W).attr('height', H);
+    var years = [];
+    for (var yr = 1917; yr <= 1922; yr++) { var dx = (yr - 1917) * 24; if (dx >= hist[0][0] && dx <= hist[hist.length - 1][0]) { years.push(dx); } }
+    svg.append('g').attr('transform', 'translate(0,' + (H - m.b) + ')').call(d3.axisBottom(x).tickValues(years).tickFormat(function(d) { return 1917 + d / 24; }));
+    svg.append('g').attr('transform', 'translate(' + m.l + ',0)').call(d3.axisLeft(y).ticks(4));
+    series.forEach(function(s) {
+      var line = d3.line().x(function(r) { return x(r[0]); }).y(function(r) { return y(Math.max(0, Math.min(100, r[s.i]))); });
+      svg.append('path').datum(hist).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', s.width)
+        .attr('stroke-dasharray', s.dash || null).attr('d', line);
+    });
+    var key = '<div class="recap-key">' + series.map(function(s) {
+      return '<span><i style="background:' + s.color + '"></i>' + esc(s.name) + '</span>';
+    }).join('') + '</div>';
+    $(el).append(key);
+  }
+
+  function bestElection(Q) {
+    var best = null;
+    Object.keys(Q).forEach(function(k) {
+      if (k.indexOf('parl_') !== 0 || !Q[k] || !Q[k].rows) { return; }
+      var rec = Q[k], seats = 0;
+      rec.rows.forEach(function(r) { if (r[0] === Q.player_slot) { seats = r[2]; } });
+      if (Q.player_slot === 'lsr' && !Q.lsr_split && rec.lsrIn) { seats = rec.lsrIn; }
+      var share = seats / rec.total;
+      if (!best || share > best.share) { best = {title: rec.title, seats: seats, total: rec.total, share: share}; }
+    });
+    return best;
+  }
+
+  function renderRecap() {
+    var Q = qualities();
+    if (!Q) { return; }
+    $('#content .recap:not([data-done])').each(function() {
+      var el = this, hist = Q.hist || [], laws = Q.laws_log || [], breaks = Q.break_log || [];
+      $(el).attr('data-done', '1');
+      var h = '<div class="recap-title">Your revolution in review</div><div class="recap-chart"></div><div class="recap-tiles">';
+      var tile = function(big, small) { h += '<div class="recap-tile"><b>' + big + '</b><small>' + small + '</small></div>'; };
+      if (hist.length) {
+        var peak = hist[0];
+        hist.forEach(function(r) { if (r[1] > peak[1]) { peak = r; } });
+        var last = hist[hist.length - 1], memPeak = 0;
+        hist.forEach(function(r) { memPeak = Math.max(memPeak, r[5]); });
+        tile(Math.round(peak[1]) + '%', 'peak support, ' + dixText(peak[0]));
+        tile(Math.round(last[1]) + '%', 'support at the end');
+        tile(members(memPeak), 'members at the peak');
+      }
+      var best = bestElection(Q);
+      if (best) { tile(best.seats + ' of ' + best.total, 'best result: ' + esc(best.title.replace(/:.*$/, ''))); }
+      tile(String(hist.length), 'turns played');
+      h += '</div>';
+      // laws
+      var by = {slow: 0, decree: 0, force: 0};
+      laws.forEach(function(l) { by[l[2]] = (by[l[2]] || 0) + 1; });
+      h += '<div class="recap-sec"><div class="sb-section">Contested measures</div>';
+      if (!laws.length) { h += '<p class="recap-note">The party took no measure that its opponents contested.</p>'; }
+      else {
+        h += '<p class="recap-note">' + laws.length + ' contested measure' + (laws.length === 1 ? '' : 's') + ': ' + by.slow + ' phased in, ' + by.decree + ' by decree, ' + by.force + ' by force.</p><ul class="recap-list">';
+        laws.slice(-8).forEach(function(l) { h += '<li><span>' + dixText(l[0]) + '</span> ' + esc(l[1]) + ' <em>(' + STYLE_WORD[l[2]] + ')</em></li>'; });
+        h += '</ul>';
+      }
+      h += '</div>';
+      // the opposition
+      var faced = (Q.opp_kad_n || 0) + (Q.opp_gen_n || 0) + (Q.opp_bol_n || 0);
+      var won = breaks.filter(function(b) { return b[2]; }).length;
+      h += '<div class="recap-sec"><div class="sb-section">The opposition</div><p class="recap-note">';
+      h += faced ? ('The party faced ' + faced + ' sanction' + (faced === 1 ? '' : 's') + ' or revolt' + (faced === 1 ? '' : 's') + ' (the Kadets ' + (Q.opp_kad_n || 0) + ', the generals ' + (Q.opp_gen_n || 0) + ', the Bolsheviks ' + (Q.opp_bol_n || 0) + ').') : 'No camp ever moved against the party.';
+      if (breaks.length) {
+        h += ' It tried to break its opponents ' + breaks.length + ' time' + (breaks.length === 1 ? '' : 's') + ', and succeeded ' + won + ' time' + (won === 1 ? '' : 's') + ':';
+        h += '</p><ul class="recap-list">';
+        breaks.slice(-6).forEach(function(b) { h += '<li><span>' + dixText(b[0]) + '</span> ' + CAMP_SHORT[b[1]] + ', ' + (b[2] ? 'broken' : 'not broken') + '</li>'; });
+        h += '</ul>';
+      } else { h += '</p>'; }
+      h += '</div>';
+      $(el).html(h);
+      recapChart($(el).find('.recap-chart')[0], hist, Q);
+    });
+  }
+
   // ---------- party-select screen ----------
   function decorateParties() {
     var id = sceneId();
@@ -569,6 +672,7 @@
     showEffects();
     decorateParties();
     renderParliaments();
+    renderRecap();
     cardSubtitles();
     if (phone()) { window.closeDrawers(); }
   };

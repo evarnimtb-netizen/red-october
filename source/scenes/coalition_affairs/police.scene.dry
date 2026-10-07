@@ -40,7 +40,7 @@ RO.law(Q, 'slow', () => {
 RO.add(Q, {right_threat: 3, rel_kad: 3, soviet_democracy: -1, repression: 1});
 RO.boost(Q, {workers: -3, middle: 2});
 RO.fac(Q, 'intl', 0, 3);
-});
+}, "Recall the experienced police officers");
 !}
 
 Many old officers were recalled. They are more experienced. They are also less trusted by the workers. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -55,7 +55,7 @@ RO.law(Q, 'decree', () => {
 RO.add(Q, {right_threat: 3, rel_kad: 3, soviet_democracy: -1, repression: 1});
 RO.boost(Q, {workers: -3, middle: 2});
 RO.fac(Q, 'intl', 0, 3);
-});
+}, "Recall the experienced police officers");
 !}
 
 Many old officers were recalled. They are more experienced. They are also less trusted by the workers.
@@ -72,7 +72,7 @@ RO.law(Q, 'force', () => {
 RO.add(Q, {right_threat: 3, rel_kad: 3, soviet_democracy: -1, repression: 1});
 RO.boost(Q, {workers: -3, middle: 2});
 RO.fac(Q, 'intl', 0, 3);
-});
+}, "Recall the experienced police officers");
 !}
 
 Many old officers were recalled. They are more experienced. They are also less trusted by the workers. [+ law_text +]
@@ -95,7 +95,7 @@ RO.law(Q, 'slow', () => {
 RO.add(Q, {right_threat: -2, bolshevik: 2, rel_kad: -3});
 RO.boost(Q, {workers: 3});
 Q.militia = (Q.militia || 0) + 1;
-});
+}, "Rely on the workers' guards");
 !}
 
 The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -110,7 +110,7 @@ RO.law(Q, 'decree', () => {
 RO.add(Q, {right_threat: -2, bolshevik: 2, rel_kad: -3});
 RO.boost(Q, {workers: 3});
 Q.militia = (Q.militia || 0) + 1;
-});
+}, "Rely on the workers' guards");
 !}
 
 The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them.
@@ -127,7 +127,7 @@ RO.law(Q, 'force', () => {
 RO.add(Q, {right_threat: -2, bolshevik: 2, rel_kad: -3});
 RO.boost(Q, {workers: 3});
 Q.militia = (Q.militia || 0) + 1;
-});
+}, "Rely on the workers' guards");
 !}
 
 The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them. [+ law_text +]

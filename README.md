@@ -17,6 +17,7 @@ All three campaigns are **playable from start to finish**: the Mensheviks (hard)
 - A right-hand panel with your support divided by nine classes, your popularity in each arena, the parliament of each arena (as elected, and as it would be if it voted today, drawn with d3-parliament) and the Opposition tab.
 - An opposition that answers your policies: the Kadets and the propertied classes, the generals and the Right, and the Bolsheviks each have a hostility that rises with what they object to (socialising the land, the eight-hour day, peace diplomacy, emergency measures, the Kadets in or out of the cabinet). At 40 they try to sanction you; at 70 they take up arms (a landowners' revolt, a generals' march, a Bolshevik strike). You can give way, hold firm or appeal over their heads, and a revolt that is not put down can end the game. Every unpopular law, from the Cabinet or from the decks, can be carried out three ways: phased in with compensation (milder, costs a resource), by decree (as written), or, for a strong party or one with strong allies, by decree with the opposition broken by force (the odds are shown). Sanctions can be answered in kind.
 - About 70 events from the February Revolution to the arrests of 1921, most shared between the parties with options and wording that change by party, plus events of each campaign's own. A real fork at the October Revolution: a Bolshevik takeover, an all-socialist government via the Vikzhel talks, or a Constituent Assembly that governs.
+- An ending recap: a chart of your support, Bolshevik strength, the threat from the Right and soviet democracy across the whole run, your peak support and best election result, the contested measures you passed and how, and the camps you faced and broke.
 - 11 endings (Kornilov's Russia, the generals' republic, White Russia, exile, the one-party state, the SR and Left SR historical endings, the all-socialist government, the Constituent Republic, Soviet democracy, the Soviet coalition) and 14 achievements.
 
 Not yet done from the design plan: public-domain period images and music (the old German assets were removed; card art is generated), and a balance pass by a human player. The numbers in the design plan marked as uncertain have not been checked against the books.
@@ -27,6 +28,10 @@ Not yet done from the design plan: public-domain period images and music (the ol
 2. `npx dendrynexus make-html` in this folder, then open `out/html/index.html` (or serve the folder with any static web server).
 
 `out/html/index.html`, `game.js`, `ui.js` (the sidebar bars, the "What changed" box and the party-select screen) and `game.css` are hand-maintained and are not rewritten by the build. `out/html/model.js` is a copy of `tools/model.js`; run `tools/sync_model.sh` after editing the model.
+
+## Tests
+
+`npm test` (or `sh tools/ci.sh`) builds the game, runs the model's unit tests (`tools/test_model.js`), checks that the generated scenes match their generators, and plays full games for every party and difficulty and every scripted strategy, failing on an error, a stuck game or broken text (`STRICT=1`). GitHub Actions runs the same checks on every push and pull request, and only publishes the game if they pass.
 
 ## Tools
 

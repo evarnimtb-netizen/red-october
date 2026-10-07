@@ -33,7 +33,7 @@ RO.law(Q, 'slow', () => {
 RO.boost(Q, {nations: 4});
 RO.add(Q, {rel_kad: -4, right_threat: 2, rel_ally: 1});
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Recognise the Ukrainian Rada's autonomy");
 !}
 
 The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -48,7 +48,7 @@ RO.law(Q, 'decree', () => {
 RO.boost(Q, {nations: 4});
 RO.add(Q, {rel_kad: -4, right_threat: 2, rel_ally: 1});
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Recognise the Ukrainian Rada's autonomy");
 !}
 
 The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it.
@@ -65,7 +65,7 @@ RO.law(Q, 'force', () => {
 RO.boost(Q, {nations: 4});
 RO.add(Q, {rel_kad: -4, right_threat: 2, rel_ally: 1});
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Recognise the Ukrainian Rada's autonomy");
 !}
 
 The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it. [+ law_text +]
@@ -87,7 +87,7 @@ on-arrival: {!
 RO.law(Q, 'slow', () => {
 RO.boost(Q, {nations: 2});
 RO.add(Q, {rel_kad: -2, right_threat: 1});
-});
+}, "Let the Finnish Diet govern its own affairs");
 !}
 
 The Finns are to govern their internal affairs. The question of independence is left for the Assembly. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -101,7 +101,7 @@ on-arrival: {!
 RO.law(Q, 'decree', () => {
 RO.boost(Q, {nations: 2});
 RO.add(Q, {rel_kad: -2, right_threat: 1});
-});
+}, "Let the Finnish Diet govern its own affairs");
 !}
 
 The Finns are to govern their internal affairs. The question of independence is left for the Assembly.
@@ -117,7 +117,7 @@ on-arrival: {!
 RO.law(Q, 'force', () => {
 RO.boost(Q, {nations: 2});
 RO.add(Q, {rel_kad: -2, right_threat: 1});
-});
+}, "Let the Finnish Diet govern its own affairs");
 !}
 
 The Finns are to govern their internal affairs. The question of independence is left for the Assembly. [+ law_text +]

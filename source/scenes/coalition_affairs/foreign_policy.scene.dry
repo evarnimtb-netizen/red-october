@@ -33,7 +33,7 @@ RO.law(Q, 'slow', () => {
 RO.add(Q, {war_weariness: -2, rel_kad: -2});
 RO.boost(Q, {soldiers: 2, workers: 1});
 Q.war_aims_note = 1;
-});
+}, "Send a new note to the Allies on war aims");
 !}
 
 A note on war aims went to London and Paris. They replied politely, and not at all. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -48,7 +48,7 @@ RO.law(Q, 'decree', () => {
 RO.add(Q, {war_weariness: -2, rel_kad: -2});
 RO.boost(Q, {soldiers: 2, workers: 1});
 Q.war_aims_note = 1;
-});
+}, "Send a new note to the Allies on war aims");
 !}
 
 A note on war aims went to London and Paris. They replied politely, and not at all.
@@ -65,7 +65,7 @@ RO.law(Q, 'force', () => {
 RO.add(Q, {war_weariness: -2, rel_kad: -2});
 RO.boost(Q, {soldiers: 2, workers: 1});
 Q.war_aims_note = 1;
-});
+}, "Send a new note to the Allies on war aims");
 !}
 
 A note on war aims went to London and Paris. They replied politely, and not at all. [+ law_text +]
@@ -90,7 +90,7 @@ RO.add(Q, {war_weariness: -4, rel_kad: -4, army_discipline: -1});
 RO.boost(Q, {soldiers: 3, workers: 2});
 RO.fac(Q, 'intl', 2, -2);
 RO.fac(Q, 'rightdef', 0, 4);
-});
+}, "Back the Stockholm conference of the International");
 !}
 
 The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?] It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -107,7 +107,7 @@ RO.add(Q, {war_weariness: -4, rel_kad: -4, army_discipline: -1});
 RO.boost(Q, {soldiers: 3, workers: 2});
 RO.fac(Q, 'intl', 2, -2);
 RO.fac(Q, 'rightdef', 0, 4);
-});
+}, "Back the Stockholm conference of the International");
 !}
 
 The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?]
@@ -126,7 +126,7 @@ RO.add(Q, {war_weariness: -4, rel_kad: -4, army_discipline: -1});
 RO.boost(Q, {soldiers: 3, workers: 2});
 RO.fac(Q, 'intl', 2, -2);
 RO.fac(Q, 'rightdef', 0, 4);
-});
+}, "Back the Stockholm conference of the International");
 !}
 
 The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?] [+ law_text +]
@@ -164,7 +164,7 @@ RO.add(Q, {war_weariness: -6, rel_kad: -6, right_threat: 3});
 RO.boost(Q, {soldiers: 3});
 RO.fac(Q, 'rightdef', -2, 6);
 RO.fac(Q, 'intl', 0, -1);
-});
+}, "Sound out Germany through neutral intermediaries");
 !}
 
 An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -181,7 +181,7 @@ RO.add(Q, {war_weariness: -6, rel_kad: -6, right_threat: 3});
 RO.boost(Q, {soldiers: 3});
 RO.fac(Q, 'rightdef', -2, 6);
 RO.fac(Q, 'intl', 0, -1);
-});
+}, "Sound out Germany through neutral intermediaries");
 !}
 
 An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious.
@@ -200,7 +200,7 @@ RO.add(Q, {war_weariness: -6, rel_kad: -6, right_threat: 3});
 RO.boost(Q, {soldiers: 3});
 RO.fac(Q, 'rightdef', -2, 6);
 RO.fac(Q, 'intl', 0, -1);
-});
+}, "Sound out Germany through neutral intermediaries");
 !}
 
 An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious. [+ law_text +]

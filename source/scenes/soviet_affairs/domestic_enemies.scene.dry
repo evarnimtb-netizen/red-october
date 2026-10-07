@@ -46,7 +46,7 @@ RO.boost(Q, {middle: 2, peasants: 1});
 RO.add(Q, {repression: 1, rel_bol: -2});
 RO.fac(Q, 'rightdef', 0, 5);
 RO.fac(Q, 'intl', 0, -2);
-});
+}, "Say that we are for neither side");
 !}
 
 "Neither Kolchak nor Lenin." The slogan is exact, and it gives satisfaction to nobody who is on a front. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -62,7 +62,7 @@ RO.boost(Q, {middle: 2, peasants: 1});
 RO.add(Q, {repression: 1, rel_bol: -2});
 RO.fac(Q, 'rightdef', 0, 5);
 RO.fac(Q, 'intl', 0, -2);
-});
+}, "Say that we are for neither side");
 !}
 
 "Neither Kolchak nor Lenin." The slogan is exact, and it gives satisfaction to nobody who is on a front.
@@ -80,7 +80,7 @@ RO.boost(Q, {middle: 2, peasants: 1});
 RO.add(Q, {repression: 1, rel_bol: -2});
 RO.fac(Q, 'rightdef', 0, 5);
 RO.fac(Q, 'intl', 0, -2);
-});
+}, "Say that we are for neither side");
 !}
 
 "Neither Kolchak nor Lenin." The slogan is exact, and it gives satisfaction to nobody who is on a front. [+ law_text +]

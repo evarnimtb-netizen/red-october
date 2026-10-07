@@ -72,7 +72,7 @@ Q.pol_land = 1;
 Q.soft_land = 1;
 RO.law(Q, 'slow', () => {
 RO.add(Q, {land_pressure: -4, rel_kad: -3, right_threat: 1, ant_kad: 4, ant_gen: 2}); RO.boost(Q, {peasants: 2}); Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Let the land committees regulate the transfers of land");
 !}
 
 The land committees now have the government's authority to regulate the transfers until the Assembly meets. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -88,7 +88,7 @@ Q.pol_land = 1;
 Q.soft_land = 0;
 RO.law(Q, 'decree', () => {
 RO.add(Q, {land_pressure: -4, rel_kad: -3, right_threat: 1, ant_kad: 4, ant_gen: 2}); RO.boost(Q, {peasants: 2}); Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Let the land committees regulate the transfers of land");
 !}
 
 The land committees now have the government's authority to regulate the transfers until the Assembly meets.
@@ -106,7 +106,7 @@ Q.pol_land = 1;
 Q.soft_land = 0;
 RO.law(Q, 'force', () => {
 RO.add(Q, {land_pressure: -4, rel_kad: -3, right_threat: 1, ant_kad: 4, ant_gen: 2}); RO.boost(Q, {peasants: 2}); Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Let the land committees regulate the transfers of land");
 !}
 
 The land committees now have the government's authority to regulate the transfers until the Assembly meets. [+ law_text +]
@@ -136,7 +136,7 @@ Q.pol_land = 2;
 Q.soft_land = 1;
 RO.law(Q, 'slow', () => {
 RO.add(Q, {land_pressure: -8, rel_kad: -8, right_threat: 3, ant_kad: 14, ant_gen: 8, ant_bol: -3}); RO.boost(Q, {peasants: 4}); RO.fac(Q, 'rightdef', 0, 6); Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Socialise the land now, by decree");
 !}
 
 A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -152,7 +152,7 @@ Q.pol_land = 2;
 Q.soft_land = 0;
 RO.law(Q, 'decree', () => {
 RO.add(Q, {land_pressure: -8, rel_kad: -8, right_threat: 3, ant_kad: 14, ant_gen: 8, ant_bol: -3}); RO.boost(Q, {peasants: 4}); RO.fac(Q, 'rightdef', 0, 6); Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Socialise the land now, by decree");
 !}
 
 A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar.
@@ -170,7 +170,7 @@ Q.pol_land = 2;
 Q.soft_land = 0;
 RO.law(Q, 'force', () => {
 RO.add(Q, {land_pressure: -8, rel_kad: -8, right_threat: 3, ant_kad: 14, ant_gen: 8, ant_bol: -3}); RO.boost(Q, {peasants: 4}); RO.fac(Q, 'rightdef', 0, 6); Q.land_committees = (Q.land_committees || 0) + 1;
-});
+}, "Socialise the land now, by decree");
 !}
 
 A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar. [+ law_text +]
@@ -264,7 +264,7 @@ Q.pol_war = 1;
 Q.soft_war = 1;
 RO.law(Q, 'slow', () => {
 RO.add(Q, {war_weariness: -3, rel_kad: -3, ant_kad: 5, ant_gen: 7, ant_bol: -3}); Q.stockholm = (Q.stockholm || 0) + 1;
-});
+}, "Press for a general peace: Stockholm and the neutrals");
 !}
 
 The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -280,7 +280,7 @@ Q.pol_war = 1;
 Q.soft_war = 0;
 RO.law(Q, 'decree', () => {
 RO.add(Q, {war_weariness: -3, rel_kad: -3, ant_kad: 5, ant_gen: 7, ant_bol: -3}); Q.stockholm = (Q.stockholm || 0) + 1;
-});
+}, "Press for a general peace: Stockholm and the neutrals");
 !}
 
 The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations.
@@ -298,7 +298,7 @@ Q.pol_war = 1;
 Q.soft_war = 0;
 RO.law(Q, 'force', () => {
 RO.add(Q, {war_weariness: -3, rel_kad: -3, ant_kad: 5, ant_gen: 7, ant_bol: -3}); Q.stockholm = (Q.stockholm || 0) + 1;
-});
+}, "Press for a general peace: Stockholm and the neutrals");
 !}
 
 The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations. [+ law_text +]
@@ -328,7 +328,7 @@ Q.pol_war = 2;
 Q.soft_war = 1;
 RO.law(Q, 'slow', () => {
 RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 3, ant_bol: 8, ant_gen: -4}); Q.offensive_prepared = 1;
-});
+}, "Prepare an offensive with the Allies");
 !}
 
 The army is told to prepare to attack. The Allies are pleased; the soldiers are not. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -344,7 +344,7 @@ Q.pol_war = 2;
 Q.soft_war = 0;
 RO.law(Q, 'decree', () => {
 RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 3, ant_bol: 8, ant_gen: -4}); Q.offensive_prepared = 1;
-});
+}, "Prepare an offensive with the Allies");
 !}
 
 The army is told to prepare to attack. The Allies are pleased; the soldiers are not.
@@ -362,7 +362,7 @@ Q.pol_war = 2;
 Q.soft_war = 0;
 RO.law(Q, 'force', () => {
 RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 3, ant_bol: 8, ant_gen: -4}); Q.offensive_prepared = 1;
-});
+}, "Prepare an offensive with the Allies");
 !}
 
 The army is told to prepare to attack. The Allies are pleased; the soldiers are not. [+ law_text +]
@@ -408,7 +408,7 @@ Q.pol_order = 1;
 Q.soft_order = 1;
 RO.law(Q, 'slow', () => {
 RO.add(Q, {right_threat: -3, repression: 2, soviet_democracy: -2, rel_kad: 2, ant_gen: -6, ant_bol: 8});
-});
+}, "Introduce emergency measures against disorder");
 !}
 
 Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -424,7 +424,7 @@ Q.pol_order = 1;
 Q.soft_order = 0;
 RO.law(Q, 'decree', () => {
 RO.add(Q, {right_threat: -3, repression: 2, soviet_democracy: -2, rel_kad: 2, ant_gen: -6, ant_bol: 8});
-});
+}, "Introduce emergency measures against disorder");
 !}
 
 Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not.
@@ -442,7 +442,7 @@ Q.pol_order = 1;
 Q.soft_order = 0;
 RO.law(Q, 'force', () => {
 RO.add(Q, {right_threat: -3, repression: 2, soviet_democracy: -2, rel_kad: 2, ant_gen: -6, ant_bol: 8});
-});
+}, "Introduce emergency measures against disorder");
 !}
 
 Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not. [+ law_text +]
@@ -472,7 +472,7 @@ Q.pol_order = 2;
 Q.soft_order = 1;
 RO.law(Q, 'slow', () => {
 RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad: 2, ant_bol: -4});
-});
+}, "Proclaim broad liberties and an amnesty");
 !}
 
 An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -488,7 +488,7 @@ Q.pol_order = 2;
 Q.soft_order = 0;
 RO.law(Q, 'decree', () => {
 RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad: 2, ant_bol: -4});
-});
+}, "Proclaim broad liberties and an amnesty");
 !}
 
 An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful.
@@ -506,7 +506,7 @@ Q.pol_order = 2;
 Q.soft_order = 0;
 RO.law(Q, 'force', () => {
 RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad: 2, ant_bol: -4});
-});
+}, "Proclaim broad liberties and an amnesty");
 !}
 
 An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful. [+ law_text +]
@@ -552,7 +552,7 @@ Q.pol_labour = 1;
 Q.soft_labour = 1;
 RO.law(Q, 'slow', () => {
 RO.boost(Q, {workers: 4}); RO.add(Q, {rel_kad: -3, ruble: -2, ant_kad: 6, ant_gen: 2});
-});
+}, "Guarantee the eight-hour day and the factory committees");
 !}
 
 The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -568,7 +568,7 @@ Q.pol_labour = 1;
 Q.soft_labour = 0;
 RO.law(Q, 'decree', () => {
 RO.boost(Q, {workers: 4}); RO.add(Q, {rel_kad: -3, ruble: -2, ant_kad: 6, ant_gen: 2});
-});
+}, "Guarantee the eight-hour day and the factory committees");
 !}
 
 The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants.
@@ -586,7 +586,7 @@ Q.pol_labour = 1;
 Q.soft_labour = 0;
 RO.law(Q, 'force', () => {
 RO.boost(Q, {workers: 4}); RO.add(Q, {rel_kad: -3, ruble: -2, ant_kad: 6, ant_gen: 2});
-});
+}, "Guarantee the eight-hour day and the factory committees");
 !}
 
 The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants. [+ law_text +]
@@ -616,7 +616,7 @@ Q.pol_labour = 2;
 Q.soft_labour = 1;
 RO.law(Q, 'slow', () => {
 RO.boost(Q, {workers: 2}); RO.add(Q, {ruble: 1, rel_kad: -4, ant_kad: 8, ant_gen: 3});
-});
+}, "Regulate industry through the state");
 !}
 
 A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -632,7 +632,7 @@ Q.pol_labour = 2;
 Q.soft_labour = 0;
 RO.law(Q, 'decree', () => {
 RO.boost(Q, {workers: 2}); RO.add(Q, {ruble: 1, rel_kad: -4, ant_kad: 8, ant_gen: 3});
-});
+}, "Regulate industry through the state");
 !}
 
 A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like.
@@ -650,7 +650,7 @@ Q.pol_labour = 2;
 Q.soft_labour = 0;
 RO.law(Q, 'force', () => {
 RO.boost(Q, {workers: 2}); RO.add(Q, {ruble: 1, rel_kad: -4, ant_kad: 8, ant_gen: 3});
-});
+}, "Regulate industry through the state");
 !}
 
 A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like. [+ law_text +]
@@ -692,7 +692,7 @@ Q.month_actions += 1;
 Q.cabinet_timer = 2;
 RO.law(Q, 'slow', () => {
 Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2, ant_kad: 6, ant_gen: 3}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);
-});
+}, "Dismiss the Kadet ministers and govern with the Soviet parties alone");
 !}
 
 The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -706,7 +706,7 @@ Q.month_actions += 1;
 Q.cabinet_timer = 2;
 RO.law(Q, 'decree', () => {
 Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2, ant_kad: 6, ant_gen: 3}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);
-});
+}, "Dismiss the Kadet ministers and govern with the Soviet parties alone");
 !}
 
 The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame.
@@ -722,7 +722,7 @@ Q.month_actions += 1;
 Q.cabinet_timer = 2;
 RO.law(Q, 'force', () => {
 Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 5, soviet_democracy: 2, ant_kad: 6, ant_gen: 3}); RO.boost(Q, {workers: 2, middle: -3}); RO.fac(Q, 'rightdef', 0, 8);
-});
+}, "Dismiss the Kadet ministers and govern with the Soviet parties alone");
 !}
 
 The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame. [+ law_text +]

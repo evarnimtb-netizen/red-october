@@ -33,7 +33,7 @@ RO.add(Q, {army_discipline: 6, bolshevik: 2, right_threat: 2, rel_kad: 3});
 RO.boost(Q, {soldiers: -3});
 RO.fac(Q, 'defencist', 1, 0);
 RO.fac(Q, 'intl', 0, 2);
-});
+}, "Restore officers' authority; keep the committees only for supply");
 !}
 
 Officers regained their authority over operational orders. The committees have been told to concern themselves with food and boots. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -49,7 +49,7 @@ RO.add(Q, {army_discipline: 6, bolshevik: 2, right_threat: 2, rel_kad: 3});
 RO.boost(Q, {soldiers: -3});
 RO.fac(Q, 'defencist', 1, 0);
 RO.fac(Q, 'intl', 0, 2);
-});
+}, "Restore officers' authority; keep the committees only for supply");
 !}
 
 Officers regained their authority over operational orders. The committees have been told to concern themselves with food and boots.
@@ -67,7 +67,7 @@ RO.add(Q, {army_discipline: 6, bolshevik: 2, right_threat: 2, rel_kad: 3});
 RO.boost(Q, {soldiers: -3});
 RO.fac(Q, 'defencist', 1, 0);
 RO.fac(Q, 'intl', 0, 2);
-});
+}, "Restore officers' authority; keep the committees only for supply");
 !}
 
 Officers regained their authority over operational orders. The committees have been told to concern themselves with food and boots. [+ law_text +]
@@ -90,7 +90,7 @@ RO.law(Q, 'slow', () => {
 RO.add(Q, {army_discipline: 2, right_threat: 3, rel_kad: -2});
 RO.boost(Q, {soldiers: 4});
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Trust the committees and send commissars to every unit");
 !}
 
 Government commissars now sit with the committees in every regiment. The soldiers like the arrangement more than the officers do. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -105,7 +105,7 @@ RO.law(Q, 'decree', () => {
 RO.add(Q, {army_discipline: 2, right_threat: 3, rel_kad: -2});
 RO.boost(Q, {soldiers: 4});
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Trust the committees and send commissars to every unit");
 !}
 
 Government commissars now sit with the committees in every regiment. The soldiers like the arrangement more than the officers do.
@@ -122,7 +122,7 @@ RO.law(Q, 'force', () => {
 RO.add(Q, {army_discipline: 2, right_threat: 3, rel_kad: -2});
 RO.boost(Q, {soldiers: 4});
 RO.fac(Q, 'rightdef', 0, 3);
-});
+}, "Trust the committees and send commissars to every unit");
 !}
 
 Government commissars now sit with the committees in every regiment. The soldiers like the arrangement more than the officers do. [+ law_text +]
@@ -146,7 +146,7 @@ RO.add(Q, {army_discipline: 8, bolshevik: 4, rel_kad: 4, right_threat: 3});
 RO.boost(Q, {soldiers: -6, workers: -2});
 RO.fac(Q, 'intl', 0, 8);
 RO.fac(Q, 'defencist', 0, 2);
-});
+}, "Restore the death penalty at the front");
 !}
 
 The death penalty at the front was restored for desertion and treason. The Bolshevik press called it "the gallows of the Menshevik ministers". It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
@@ -162,7 +162,7 @@ RO.add(Q, {army_discipline: 8, bolshevik: 4, rel_kad: 4, right_threat: 3});
 RO.boost(Q, {soldiers: -6, workers: -2});
 RO.fac(Q, 'intl', 0, 8);
 RO.fac(Q, 'defencist', 0, 2);
-});
+}, "Restore the death penalty at the front");
 !}
 
 The death penalty at the front was restored for desertion and treason. The Bolshevik press called it "the gallows of the Menshevik ministers".
@@ -180,7 +180,7 @@ RO.add(Q, {army_discipline: 8, bolshevik: 4, rel_kad: 4, right_threat: 3});
 RO.boost(Q, {soldiers: -6, workers: -2});
 RO.fac(Q, 'intl', 0, 8);
 RO.fac(Q, 'defencist', 0, 2);
-});
+}, "Restore the death penalty at the front");
 !}
 
 The death penalty at the front was restored for desertion and treason. The Bolshevik press called it "the gallows of the Menshevik ministers". [+ law_text +]

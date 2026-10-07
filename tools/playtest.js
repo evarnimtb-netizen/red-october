@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Headless playtester for Red October.
 // usage: node tools/playtest.js [runs] [policy] [seed]
-//   policy: random | first | cautious
+//   policy: random | first | cautious | bot:<name> (tools/bots.js)
+// STRICT=1 makes it exit with status 1 on an error, a stuck game or a broken bit of text (for CI).
 // Loads out/game.json (run `npx dendrynexus make-html` first) and plays complete games with a simple policy.
 var path = require('path');
 var fs = require('fs');
@@ -202,3 +203,18 @@ console.log(JSON.stringify(counts));
 results.filter(function(r) { return !r.game_over; }).slice(0, 5).forEach(function(r) {
   console.log('STUCK', JSON.stringify({steps: r.steps, y: r.year, m: r.month, last: r.lastScenes, log: r.log.slice(-3)}));
 });
+// text that should never reach the player: unset values and unparsed markup
+var LEAK = /undefined|NaN|\[\+|\+\]|\[\?|\?\]|\{!|!\}/;
+var leaks = allText.filter(function(t) { return LEAK.test(t); });
+if (leaks.length) {
+  console.log('TEXT LEAKS: ' + leaks.length);
+  leaks.slice(0, 5).forEach(function(t) { console.log('  ' + t.slice(0, 200)); });
+}
+if (process.env.STRICT) {
+  var stuck = results.filter(function(r) { return !r.game_over; }).length;
+  if (errors || stuck || leaks.length || !results.length) {
+    console.log('FAIL: errors=' + errors + ' stuck=' + stuck + ' leaks=' + leaks.length);
+    process.exit(1);
+  }
+  console.log('OK');
+}
