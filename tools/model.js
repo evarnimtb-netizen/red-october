@@ -641,6 +641,11 @@ var RO = (function() {
     if (a.length >= COUNCIL_SIZE) { a.shift(); }
     a.push(id); Q.adv_active = a; syncAdvisors(Q);
   }
+  // The player chose both: incoming takes outgoing's seat on the council.
+  function swapAdvisor(Q, incoming, outgoing) {
+    var a = (Q.adv_active || []).filter(function(x) { return x !== outgoing && x !== incoming; });
+    a.push(incoming); Q.adv_active = a; syncAdvisors(Q);
+  }
   function replaceAdvisor(Q, id) {
     var a = (Q.adv_active || []).filter(function(x) { return x !== id; });
     var avail = advisorsAvailable(Q);
@@ -1013,7 +1018,7 @@ var RO = (function() {
   }
 
 
-  return {campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, swapAdvisor: swapAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

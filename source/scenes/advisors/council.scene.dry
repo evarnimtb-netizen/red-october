@@ -11,69 +11,69 @@ RO.syncAdvisors(Q);
 
 = The Council
 
-You listen to four advisors at a time; the others wait in the corridor. Changing the council takes a turn, and it cannot be done again for three months.
+You listen to four advisors at a time; the others wait in the corridor. Each advisor offers one action. Changing the council takes a turn, and it cannot be done again for three months.
 
 *Advising now: [+ council_list +].* *In reserve: [+ reserve_list +].*
 
 - @shuffle: Draw a new council at random.
-- @bring_martov: Call on Julius Martov. (The longest-serving advisor steps down.)
-- @bring_dan: Call on Fyodor Dan. (The longest-serving advisor steps down.)
-- @bring_tsereteli: Call on Irakli Tsereteli. (The longest-serving advisor steps down.)
-- @bring_chkheidze: Call on Nikolai Chkheidze. (The longest-serving advisor steps down.)
-- @bring_skobelev: Call on Matvei Skobelev. (The longest-serving advisor steps down.)
-- @bring_gvozdev: Call on Kuzma Gvozdev. (The longest-serving advisor steps down.)
-- @bring_potresov: Call on Alexander Potresov. (The longest-serving advisor steps down.)
-- @bring_axelrod: Call on Pavel Axelrod. (The longest-serving advisor steps down.)
-- @bring_abramovich: Call on Raphael Abramovich. (The longest-serving advisor steps down.)
-- @bring_liber: Call on Mikhail Liber. (The longest-serving advisor steps down.)
-- @bring_broido: Call on Eva Broido. (The longest-serving advisor steps down.)
-- @bring_lidia: Call on Lidia Dan. (The longest-serving advisor steps down.)
-- @bring_sukhanov: Call on Nikolai Sukhanov. (The longest-serving advisor steps down.)
-- @bring_batursky: Call on Boris Batursky. (The longest-serving advisor steps down.)
-- @bring_khinchuk: Call on Lev Khinchuk. (The longest-serving advisor steps down.)
-- @bring_zhordania: Call on Noe Zhordania. (The longest-serving advisor steps down.)
-- @bring_chernov: Call on Viktor Chernov. (The longest-serving advisor steps down.)
-- @bring_avksentiev: Call on Nikolai Avksentiev. (The longest-serving advisor steps down.)
-- @bring_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya. (The longest-serving advisor steps down.)
-- @bring_gots: Call on Abram Gots. (The longest-serving advisor steps down.)
-- @bring_zenzinov: Call on Vladimir Zenzinov. (The longest-serving advisor steps down.)
-- @bring_volsky: Call on Vladimir Volsky. (The longest-serving advisor steps down.)
-- @bring_spiridonova: Call on Maria Spiridonova. (The longest-serving advisor steps down.)
-- @bring_kamkov: Call on Boris Kamkov. (The longest-serving advisor steps down.)
-- @bring_natanson: Call on Mark Natanson. (The longest-serving advisor steps down.)
-- @bring_steinberg: Call on Isaac Steinberg. (The longest-serving advisor steps down.)
-- @bring_kolegaev: Call on Andrei Kolegaev. (The longest-serving advisor steps down.)
-- @bring_proshian: Call on Prosh Proshian. (The longest-serving advisor steps down.)
-- @bring_aleksandrovich: Call on Pyotr Aleksandrovich. (The longest-serving advisor steps down.)
-- @drop_martov: Replace Julius Martov with someone from the reserve.
-- @drop_dan: Replace Fyodor Dan with someone from the reserve.
-- @drop_tsereteli: Replace Irakli Tsereteli with someone from the reserve.
-- @drop_chkheidze: Replace Nikolai Chkheidze with someone from the reserve.
-- @drop_skobelev: Replace Matvei Skobelev with someone from the reserve.
-- @drop_gvozdev: Replace Kuzma Gvozdev with someone from the reserve.
-- @drop_potresov: Replace Alexander Potresov with someone from the reserve.
-- @drop_axelrod: Replace Pavel Axelrod with someone from the reserve.
-- @drop_abramovich: Replace Raphael Abramovich with someone from the reserve.
-- @drop_liber: Replace Mikhail Liber with someone from the reserve.
-- @drop_broido: Replace Eva Broido with someone from the reserve.
-- @drop_lidia: Replace Lidia Dan with someone from the reserve.
-- @drop_sukhanov: Replace Nikolai Sukhanov with someone from the reserve.
-- @drop_batursky: Replace Boris Batursky with someone from the reserve.
-- @drop_khinchuk: Replace Lev Khinchuk with someone from the reserve.
-- @drop_zhordania: Replace Noe Zhordania with someone from the reserve.
-- @drop_chernov: Replace Viktor Chernov with someone from the reserve.
-- @drop_avksentiev: Replace Nikolai Avksentiev with someone from the reserve.
-- @drop_breshkovskaya: Replace Ekaterina Breshko-Breshkovskaya with someone from the reserve.
-- @drop_gots: Replace Abram Gots with someone from the reserve.
-- @drop_zenzinov: Replace Vladimir Zenzinov with someone from the reserve.
-- @drop_volsky: Replace Vladimir Volsky with someone from the reserve.
-- @drop_spiridonova: Replace Maria Spiridonova with someone from the reserve.
-- @drop_kamkov: Replace Boris Kamkov with someone from the reserve.
-- @drop_natanson: Replace Mark Natanson with someone from the reserve.
-- @drop_steinberg: Replace Isaac Steinberg with someone from the reserve.
-- @drop_kolegaev: Replace Andrei Kolegaev with someone from the reserve.
-- @drop_proshian: Replace Prosh Proshian with someone from the reserve.
-- @drop_aleksandrovich: Replace Pyotr Aleksandrovich with someone from the reserve.
+- @bring_martov: Call on Julius Martov.
+- @bring_dan: Call on Fyodor Dan.
+- @bring_tsereteli: Call on Irakli Tsereteli.
+- @bring_chkheidze: Call on Nikolai Chkheidze.
+- @bring_skobelev: Call on Matvei Skobelev.
+- @bring_gvozdev: Call on Kuzma Gvozdev.
+- @bring_potresov: Call on Alexander Potresov.
+- @bring_axelrod: Call on Pavel Axelrod.
+- @bring_abramovich: Call on Raphael Abramovich.
+- @bring_liber: Call on Mikhail Liber.
+- @bring_broido: Call on Eva Broido.
+- @bring_lidia: Call on Lidia Dan.
+- @bring_sukhanov: Call on Nikolai Sukhanov.
+- @bring_batursky: Call on Boris Batursky.
+- @bring_khinchuk: Call on Lev Khinchuk.
+- @bring_zhordania: Call on Noe Zhordania.
+- @bring_chernov: Call on Viktor Chernov.
+- @bring_avksentiev: Call on Nikolai Avksentiev.
+- @bring_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya.
+- @bring_gots: Call on Abram Gots.
+- @bring_zenzinov: Call on Vladimir Zenzinov.
+- @bring_volsky: Call on Vladimir Volsky.
+- @bring_spiridonova: Call on Maria Spiridonova.
+- @bring_kamkov: Call on Boris Kamkov.
+- @bring_natanson: Call on Mark Natanson.
+- @bring_steinberg: Call on Isaac Steinberg.
+- @bring_kolegaev: Call on Andrei Kolegaev.
+- @bring_proshian: Call on Prosh Proshian.
+- @bring_aleksandrovich: Call on Pyotr Aleksandrovich.
+- @drop_martov: Replace Julius Martov.
+- @drop_dan: Replace Fyodor Dan.
+- @drop_tsereteli: Replace Irakli Tsereteli.
+- @drop_chkheidze: Replace Nikolai Chkheidze.
+- @drop_skobelev: Replace Matvei Skobelev.
+- @drop_gvozdev: Replace Kuzma Gvozdev.
+- @drop_potresov: Replace Alexander Potresov.
+- @drop_axelrod: Replace Pavel Axelrod.
+- @drop_abramovich: Replace Raphael Abramovich.
+- @drop_liber: Replace Mikhail Liber.
+- @drop_broido: Replace Eva Broido.
+- @drop_lidia: Replace Lidia Dan.
+- @drop_sukhanov: Replace Nikolai Sukhanov.
+- @drop_batursky: Replace Boris Batursky.
+- @drop_khinchuk: Replace Lev Khinchuk.
+- @drop_zhordania: Replace Noe Zhordania.
+- @drop_chernov: Replace Viktor Chernov.
+- @drop_avksentiev: Replace Nikolai Avksentiev.
+- @drop_breshkovskaya: Replace Ekaterina Breshko-Breshkovskaya.
+- @drop_gots: Replace Abram Gots.
+- @drop_zenzinov: Replace Vladimir Zenzinov.
+- @drop_volsky: Replace Vladimir Volsky.
+- @drop_spiridonova: Replace Maria Spiridonova.
+- @drop_kamkov: Replace Boris Kamkov.
+- @drop_natanson: Replace Mark Natanson.
+- @drop_steinberg: Replace Isaac Steinberg.
+- @drop_kolegaev: Replace Andrei Kolegaev.
+- @drop_proshian: Replace Prosh Proshian.
+- @drop_aleksandrovich: Replace Pyotr Aleksandrovich.
 - @root: Return to main
 
 @shuffle
@@ -88,638 +88,3229 @@ The advisors were thanked and sent home, and a new circle was called together.
 
 @bring_martov
 view-if: avail_martov = 1 and on_martov = 0
+subtitle: Offers: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'martov');
+Q.adv_in = 'martov';
+Q.adv_in_name = "Julius Martov";
 !}
 
-Julius Martov has been called to the council. The one who had served longest has gone back to the party's work.
+Julius Martov would offer: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_dan
 view-if: avail_dan = 1 and on_dan = 0
+subtitle: Offers: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'dan');
+Q.adv_in = 'dan';
+Q.adv_in_name = "Fyodor Dan";
 !}
 
-Fyodor Dan has been called to the council. The one who had served longest has gone back to the party's work.
+Fyodor Dan would offer: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_tsereteli
 view-if: avail_tsereteli = 1 and on_tsereteli = 0
+subtitle: Offers: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'tsereteli');
+Q.adv_in = 'tsereteli';
+Q.adv_in_name = "Irakli Tsereteli";
 !}
 
-Irakli Tsereteli has been called to the council. The one who had served longest has gone back to the party's work.
+Irakli Tsereteli would offer: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_chkheidze
 view-if: avail_chkheidze = 1 and on_chkheidze = 0
+subtitle: Offers: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'chkheidze');
+Q.adv_in = 'chkheidze';
+Q.adv_in_name = "Nikolai Chkheidze";
 !}
 
-Nikolai Chkheidze has been called to the council. The one who had served longest has gone back to the party's work.
+Nikolai Chkheidze would offer: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_skobelev
 view-if: avail_skobelev = 1 and on_skobelev = 0
+subtitle: Offers: Labour Arbitration (Skobelev settles a strike through conciliation boards)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'skobelev');
+Q.adv_in = 'skobelev';
+Q.adv_in_name = "Matvei Skobelev";
 !}
 
-Matvei Skobelev has been called to the council. The one who had served longest has gone back to the party's work.
+Matvei Skobelev would offer: Labour Arbitration (Skobelev settles a strike through conciliation boards)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_gvozdev
 view-if: avail_gvozdev = 1 and on_gvozdev = 0
+subtitle: Offers: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'gvozdev');
+Q.adv_in = 'gvozdev';
+Q.adv_in_name = "Kuzma Gvozdev";
 !}
 
-Kuzma Gvozdev has been called to the council. The one who had served longest has gone back to the party's work.
+Kuzma Gvozdev would offer: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_potresov
 view-if: avail_potresov = 1 and on_potresov = 0
+subtitle: Offers: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'potresov');
+Q.adv_in = 'potresov';
+Q.adv_in_name = "Alexander Potresov";
 !}
 
-Alexander Potresov has been called to the council. The one who had served longest has gone back to the party's work.
+Alexander Potresov would offer: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_axelrod
 view-if: avail_axelrod = 1 and on_axelrod = 0
+subtitle: Offers: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'axelrod');
+Q.adv_in = 'axelrod';
+Q.adv_in_name = "Pavel Axelrod";
 !}
 
-Pavel Axelrod has been called to the council. The one who had served longest has gone back to the party's work.
+Pavel Axelrod would offer: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_abramovich
 view-if: avail_abramovich = 1 and on_abramovich = 0
+subtitle: Offers: Bridge-Builder (Abramovich eases tension between the party currents)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'abramovich');
+Q.adv_in = 'abramovich';
+Q.adv_in_name = "Raphael Abramovich";
 !}
 
-Raphael Abramovich has been called to the council. The one who had served longest has gone back to the party's work.
+Raphael Abramovich would offer: Bridge-Builder (Abramovich eases tension between the party currents)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_liber
 view-if: avail_liber = 1 and on_liber = 0
+subtitle: Offers: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'liber');
+Q.adv_in = 'liber';
+Q.adv_in_name = "Mikhail Liber";
 !}
 
-Mikhail Liber has been called to the council. The one who had served longest has gone back to the party's work.
+Mikhail Liber would offer: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_broido
 view-if: avail_broido = 1 and on_broido = 0
+subtitle: Offers: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'broido');
+Q.adv_in = 'broido';
+Q.adv_in_name = "Eva Broido";
 !}
 
-Eva Broido has been called to the council. The one who had served longest has gone back to the party's work.
+Eva Broido would offer: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_lidia
 view-if: avail_lidia = 1 and on_lidia = 0
+subtitle: Offers: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'lidia');
+Q.adv_in = 'lidia';
+Q.adv_in_name = "Lidia Dan";
 !}
 
-Lidia Dan has been called to the council. The one who had served longest has gone back to the party's work.
+Lidia Dan would offer: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_sukhanov
 view-if: avail_sukhanov = 1 and on_sukhanov = 0
+subtitle: Offers: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'sukhanov');
+Q.adv_in = 'sukhanov';
+Q.adv_in_name = "Nikolai Sukhanov";
 !}
 
-Nikolai Sukhanov has been called to the council. The one who had served longest has gone back to the party's work.
+Nikolai Sukhanov would offer: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_batursky
 view-if: avail_batursky = 1 and on_batursky = 0
+subtitle: Offers: Independent Unions (Batursky builds union influence and argues the case for independence)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'batursky');
+Q.adv_in = 'batursky';
+Q.adv_in_name = "Boris Batursky";
 !}
 
-Boris Batursky has been called to the council. The one who had served longest has gone back to the party's work.
+Boris Batursky would offer: Independent Unions (Batursky builds union influence and argues the case for independence)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_khinchuk
 view-if: avail_khinchuk = 1 and on_khinchuk = 0
+subtitle: Offers: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'khinchuk');
+Q.adv_in = 'khinchuk';
+Q.adv_in_name = "Lev Khinchuk";
 !}
 
-Lev Khinchuk has been called to the council. The one who had served longest has gone back to the party's work.
+Lev Khinchuk would offer: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_zhordania
 view-if: avail_zhordania = 1 and on_zhordania = 0
+subtitle: Offers: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'zhordania');
+Q.adv_in = 'zhordania';
+Q.adv_in_name = "Noe Zhordania";
 !}
 
-Noe Zhordania has been called to the council. The one who had served longest has gone back to the party's work.
+Noe Zhordania would offer: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_chernov
 view-if: avail_chernov = 1 and on_chernov = 0
+subtitle: Offers: Land Socialisation (Chernov pushes the land law forward)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'chernov');
+Q.adv_in = 'chernov';
+Q.adv_in_name = "Viktor Chernov";
 !}
 
-Viktor Chernov has been called to the council. The one who had served longest has gone back to the party's work.
+Viktor Chernov would offer: Land Socialisation (Chernov pushes the land law forward)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_avksentiev
 view-if: avail_avksentiev = 1 and on_avksentiev = 0
+subtitle: Offers: Order and Republic (Avksentiev steadies the government, and angers the left)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'avksentiev');
+Q.adv_in = 'avksentiev';
+Q.adv_in_name = "Nikolai Avksentiev";
 !}
 
-Nikolai Avksentiev has been called to the council. The one who had served longest has gone back to the party's work.
+Nikolai Avksentiev would offer: Order and Republic (Avksentiev steadies the government, and angers the left)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_breshkovskaya
 view-if: avail_breshkovskaya = 1 and on_breshkovskaya = 0
+subtitle: Offers: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'breshkovskaya');
+Q.adv_in = 'breshkovskaya';
+Q.adv_in_name = "Ekaterina Breshko-Breshkovskaya";
 !}
 
-Ekaterina Breshko-Breshkovskaya has been called to the council. The one who had served longest has gone back to the party's work.
+Ekaterina Breshko-Breshkovskaya would offer: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_gots
 view-if: avail_gots = 1 and on_gots = 0
+subtitle: Offers: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'gots');
+Q.adv_in = 'gots';
+Q.adv_in_name = "Abram Gots";
 !}
 
-Abram Gots has been called to the council. The one who had served longest has gone back to the party's work.
+Abram Gots would offer: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_zenzinov
 view-if: avail_zenzinov = 1 and on_zenzinov = 0
+subtitle: Offers: Party Machine (Zenzinov builds the party's organisation and its membership)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'zenzinov');
+Q.adv_in = 'zenzinov';
+Q.adv_in_name = "Vladimir Zenzinov";
 !}
 
-Vladimir Zenzinov has been called to the council. The one who had served longest has gone back to the party's work.
+Vladimir Zenzinov would offer: Party Machine (Zenzinov builds the party's organisation and its membership)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_volsky
 view-if: avail_volsky = 1 and on_volsky = 0
+subtitle: Offers: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'volsky');
+Q.adv_in = 'volsky';
+Q.adv_in_name = "Vladimir Volsky";
 !}
 
-Vladimir Volsky has been called to the council. The one who had served longest has gone back to the party's work.
+Vladimir Volsky would offer: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_spiridonova
 view-if: avail_spiridonova = 1 and on_spiridonova = 0
+subtitle: Offers: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'spiridonova');
+Q.adv_in = 'spiridonova';
+Q.adv_in_name = "Maria Spiridonova";
 !}
 
-Maria Spiridonova has been called to the council. The one who had served longest has gone back to the party's work.
+Maria Spiridonova would offer: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_kamkov
 view-if: avail_kamkov = 1 and on_kamkov = 0
+subtitle: Offers: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'kamkov');
+Q.adv_in = 'kamkov';
+Q.adv_in_name = "Boris Kamkov";
 !}
 
-Boris Kamkov has been called to the council. The one who had served longest has gone back to the party's work.
+Boris Kamkov would offer: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_natanson
 view-if: avail_natanson = 1 and on_natanson = 0
+subtitle: Offers: Elder's Authority (Natanson's authority calms the party's quarrels)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'natanson');
+Q.adv_in = 'natanson';
+Q.adv_in_name = "Mark Natanson";
 !}
 
-Mark Natanson has been called to the council. The one who had served longest has gone back to the party's work.
+Mark Natanson would offer: Elder's Authority (Natanson's authority calms the party's quarrels)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_steinberg
 view-if: avail_steinberg = 1 and on_steinberg = 0
+subtitle: Offers: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'steinberg');
+Q.adv_in = 'steinberg';
+Q.adv_in_name = "Isaac Steinberg";
 !}
 
-Isaac Steinberg has been called to the council. The one who had served longest has gone back to the party's work.
+Isaac Steinberg would offer: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_kolegaev
 view-if: avail_kolegaev = 1 and on_kolegaev = 0
+subtitle: Offers: Land Decree (Kolegaev carries out the redistribution of land)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'kolegaev');
+Q.adv_in = 'kolegaev';
+Q.adv_in_name = "Andrei Kolegaev";
 !}
 
-Andrei Kolegaev has been called to the council. The one who had served longest has gone back to the party's work.
+Andrei Kolegaev would offer: Land Decree (Kolegaev carries out the redistribution of land)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_proshian
 view-if: avail_proshian = 1 and on_proshian = 0
+subtitle: Offers: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'proshian');
+Q.adv_in = 'proshian';
+Q.adv_in_name = "Prosh Proshian";
 !}
 
-Prosh Proshian has been called to the council. The one who had served longest has gone back to the party's work.
+Prosh Proshian would offer: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
 
-- @root: Continue.
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
 
 @bring_aleksandrovich
 view-if: avail_aleksandrovich = 1 and on_aleksandrovich = 0
+subtitle: Offers: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, 'aleksandrovich');
+Q.adv_in = 'aleksandrovich';
+Q.adv_in_name = "Pyotr Aleksandrovich";
 !}
 
-Pyotr Aleksandrovich has been called to the council. The one who had served longest has gone back to the party's work.
+Pyotr Aleksandrovich would offer: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
+
+Who should give up a seat on the council?
+
+- @out_martov: Julius Martov gives up the seat.
+- @out_dan: Fyodor Dan gives up the seat.
+- @out_tsereteli: Irakli Tsereteli gives up the seat.
+- @out_chkheidze: Nikolai Chkheidze gives up the seat.
+- @out_skobelev: Matvei Skobelev gives up the seat.
+- @out_gvozdev: Kuzma Gvozdev gives up the seat.
+- @out_potresov: Alexander Potresov gives up the seat.
+- @out_axelrod: Pavel Axelrod gives up the seat.
+- @out_abramovich: Raphael Abramovich gives up the seat.
+- @out_liber: Mikhail Liber gives up the seat.
+- @out_broido: Eva Broido gives up the seat.
+- @out_lidia: Lidia Dan gives up the seat.
+- @out_sukhanov: Nikolai Sukhanov gives up the seat.
+- @out_batursky: Boris Batursky gives up the seat.
+- @out_khinchuk: Lev Khinchuk gives up the seat.
+- @out_zhordania: Noe Zhordania gives up the seat.
+- @out_chernov: Viktor Chernov gives up the seat.
+- @out_avksentiev: Nikolai Avksentiev gives up the seat.
+- @out_breshkovskaya: Ekaterina Breshko-Breshkovskaya gives up the seat.
+- @out_gots: Abram Gots gives up the seat.
+- @out_zenzinov: Vladimir Zenzinov gives up the seat.
+- @out_volsky: Vladimir Volsky gives up the seat.
+- @out_spiridonova: Maria Spiridonova gives up the seat.
+- @out_kamkov: Boris Kamkov gives up the seat.
+- @out_natanson: Mark Natanson gives up the seat.
+- @out_steinberg: Isaac Steinberg gives up the seat.
+- @out_kolegaev: Andrei Kolegaev gives up the seat.
+- @out_proshian: Prosh Proshian gives up the seat.
+- @out_aleksandrovich: Pyotr Aleksandrovich gives up the seat.
+- @root: Think again.
+
+@out_martov
+view-if: on_martov = 1
+subtitle: Gives up: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'martov');
+!}
+
+Julius Martov has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_dan
+view-if: on_dan = 1
+subtitle: Gives up: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'dan');
+!}
+
+Fyodor Dan has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_tsereteli
+view-if: on_tsereteli = 1
+subtitle: Gives up: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'tsereteli');
+!}
+
+Irakli Tsereteli has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_chkheidze
+view-if: on_chkheidze = 1
+subtitle: Gives up: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'chkheidze');
+!}
+
+Nikolai Chkheidze has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_skobelev
+view-if: on_skobelev = 1
+subtitle: Gives up: Labour Arbitration (Skobelev settles a strike through conciliation boards)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'skobelev');
+!}
+
+Matvei Skobelev has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_gvozdev
+view-if: on_gvozdev = 1
+subtitle: Gives up: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'gvozdev');
+!}
+
+Kuzma Gvozdev has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_potresov
+view-if: on_potresov = 1
+subtitle: Gives up: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'potresov');
+!}
+
+Alexander Potresov has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_axelrod
+view-if: on_axelrod = 1
+subtitle: Gives up: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'axelrod');
+!}
+
+Pavel Axelrod has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_abramovich
+view-if: on_abramovich = 1
+subtitle: Gives up: Bridge-Builder (Abramovich eases tension between the party currents)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'abramovich');
+!}
+
+Raphael Abramovich has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_liber
+view-if: on_liber = 1
+subtitle: Gives up: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'liber');
+!}
+
+Mikhail Liber has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_broido
+view-if: on_broido = 1
+subtitle: Gives up: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'broido');
+!}
+
+Eva Broido has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_lidia
+view-if: on_lidia = 1
+subtitle: Gives up: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'lidia');
+!}
+
+Lidia Dan has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_sukhanov
+view-if: on_sukhanov = 1
+subtitle: Gives up: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'sukhanov');
+!}
+
+Nikolai Sukhanov has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_batursky
+view-if: on_batursky = 1
+subtitle: Gives up: Independent Unions (Batursky builds union influence and argues the case for independence)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'batursky');
+!}
+
+Boris Batursky has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_khinchuk
+view-if: on_khinchuk = 1
+subtitle: Gives up: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'khinchuk');
+!}
+
+Lev Khinchuk has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_zhordania
+view-if: on_zhordania = 1
+subtitle: Gives up: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'zhordania');
+!}
+
+Noe Zhordania has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_chernov
+view-if: on_chernov = 1
+subtitle: Gives up: Land Socialisation (Chernov pushes the land law forward)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'chernov');
+!}
+
+Viktor Chernov has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_avksentiev
+view-if: on_avksentiev = 1
+subtitle: Gives up: Order and Republic (Avksentiev steadies the government, and angers the left)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'avksentiev');
+!}
+
+Nikolai Avksentiev has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_breshkovskaya
+view-if: on_breshkovskaya = 1
+subtitle: Gives up: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'breshkovskaya');
+!}
+
+Ekaterina Breshko-Breshkovskaya has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_gots
+view-if: on_gots = 1
+subtitle: Gives up: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'gots');
+!}
+
+Abram Gots has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_zenzinov
+view-if: on_zenzinov = 1
+subtitle: Gives up: Party Machine (Zenzinov builds the party's organisation and its membership)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'zenzinov');
+!}
+
+Vladimir Zenzinov has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_volsky
+view-if: on_volsky = 1
+subtitle: Gives up: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'volsky');
+!}
+
+Vladimir Volsky has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_spiridonova
+view-if: on_spiridonova = 1
+subtitle: Gives up: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'spiridonova');
+!}
+
+Maria Spiridonova has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_kamkov
+view-if: on_kamkov = 1
+subtitle: Gives up: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'kamkov');
+!}
+
+Boris Kamkov has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_natanson
+view-if: on_natanson = 1
+subtitle: Gives up: Elder's Authority (Natanson's authority calms the party's quarrels)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'natanson');
+!}
+
+Mark Natanson has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_steinberg
+view-if: on_steinberg = 1
+subtitle: Gives up: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'steinberg');
+!}
+
+Isaac Steinberg has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_kolegaev
+view-if: on_kolegaev = 1
+subtitle: Gives up: Land Decree (Kolegaev carries out the redistribution of land)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'kolegaev');
+!}
+
+Andrei Kolegaev has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_proshian
+view-if: on_proshian = 1
+subtitle: Gives up: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'proshian');
+!}
+
+Prosh Proshian has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
+
+- @root: Continue.
+
+@out_aleksandrovich
+view-if: on_aleksandrovich = 1
+subtitle: Gives up: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, 'aleksandrovich');
+!}
+
+Pyotr Aleksandrovich has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
 
 - @root: Continue.
 
 @drop_martov
 view-if: on_martov = 1 and adv_reserve >= 1
+subtitle: Now offers: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'martov');
+Q.adv_out = 'martov';
+Q.adv_out_name = "Julius Martov";
 !}
 
-Julius Martov has stepped down from the council, and somebody from the reserve has taken the seat.
+Julius Martov offers: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_dan
 view-if: on_dan = 1 and adv_reserve >= 1
+subtitle: Now offers: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'dan');
+Q.adv_out = 'dan';
+Q.adv_out_name = "Fyodor Dan";
 !}
 
-Fyodor Dan has stepped down from the council, and somebody from the reserve has taken the seat.
+Fyodor Dan offers: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_tsereteli
 view-if: on_tsereteli = 1 and adv_reserve >= 1
+subtitle: Now offers: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'tsereteli');
+Q.adv_out = 'tsereteli';
+Q.adv_out_name = "Irakli Tsereteli";
 !}
 
-Irakli Tsereteli has stepped down from the council, and somebody from the reserve has taken the seat.
+Irakli Tsereteli offers: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_chkheidze
 view-if: on_chkheidze = 1 and adv_reserve >= 1
+subtitle: Now offers: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'chkheidze');
+Q.adv_out = 'chkheidze';
+Q.adv_out_name = "Nikolai Chkheidze";
 !}
 
-Nikolai Chkheidze has stepped down from the council, and somebody from the reserve has taken the seat.
+Nikolai Chkheidze offers: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_skobelev
 view-if: on_skobelev = 1 and adv_reserve >= 1
+subtitle: Now offers: Labour Arbitration (Skobelev settles a strike through conciliation boards)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'skobelev');
+Q.adv_out = 'skobelev';
+Q.adv_out_name = "Matvei Skobelev";
 !}
 
-Matvei Skobelev has stepped down from the council, and somebody from the reserve has taken the seat.
+Matvei Skobelev offers: Labour Arbitration (Skobelev settles a strike through conciliation boards)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_gvozdev
 view-if: on_gvozdev = 1 and adv_reserve >= 1
+subtitle: Now offers: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'gvozdev');
+Q.adv_out = 'gvozdev';
+Q.adv_out_name = "Kuzma Gvozdev";
 !}
 
-Kuzma Gvozdev has stepped down from the council, and somebody from the reserve has taken the seat.
+Kuzma Gvozdev offers: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_potresov
 view-if: on_potresov = 1 and adv_reserve >= 1
+subtitle: Now offers: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'potresov');
+Q.adv_out = 'potresov';
+Q.adv_out_name = "Alexander Potresov";
 !}
 
-Alexander Potresov has stepped down from the council, and somebody from the reserve has taken the seat.
+Alexander Potresov offers: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_axelrod
 view-if: on_axelrod = 1 and adv_reserve >= 1
+subtitle: Now offers: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'axelrod');
+Q.adv_out = 'axelrod';
+Q.adv_out_name = "Pavel Axelrod";
 !}
 
-Pavel Axelrod has stepped down from the council, and somebody from the reserve has taken the seat.
+Pavel Axelrod offers: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_abramovich
 view-if: on_abramovich = 1 and adv_reserve >= 1
+subtitle: Now offers: Bridge-Builder (Abramovich eases tension between the party currents)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'abramovich');
+Q.adv_out = 'abramovich';
+Q.adv_out_name = "Raphael Abramovich";
 !}
 
-Raphael Abramovich has stepped down from the council, and somebody from the reserve has taken the seat.
+Raphael Abramovich offers: Bridge-Builder (Abramovich eases tension between the party currents)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_liber
 view-if: on_liber = 1 and adv_reserve >= 1
+subtitle: Now offers: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'liber');
+Q.adv_out = 'liber';
+Q.adv_out_name = "Mikhail Liber";
 !}
 
-Mikhail Liber has stepped down from the council, and somebody from the reserve has taken the seat.
+Mikhail Liber offers: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_broido
 view-if: on_broido = 1 and adv_reserve >= 1
+subtitle: Now offers: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'broido');
+Q.adv_out = 'broido';
+Q.adv_out_name = "Eva Broido";
 !}
 
-Eva Broido has stepped down from the council, and somebody from the reserve has taken the seat.
+Eva Broido offers: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_lidia
 view-if: on_lidia = 1 and adv_reserve >= 1
+subtitle: Now offers: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'lidia');
+Q.adv_out = 'lidia';
+Q.adv_out_name = "Lidia Dan";
 !}
 
-Lidia Dan has stepped down from the council, and somebody from the reserve has taken the seat.
+Lidia Dan offers: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_sukhanov
 view-if: on_sukhanov = 1 and adv_reserve >= 1
+subtitle: Now offers: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'sukhanov');
+Q.adv_out = 'sukhanov';
+Q.adv_out_name = "Nikolai Sukhanov";
 !}
 
-Nikolai Sukhanov has stepped down from the council, and somebody from the reserve has taken the seat.
+Nikolai Sukhanov offers: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_batursky
 view-if: on_batursky = 1 and adv_reserve >= 1
+subtitle: Now offers: Independent Unions (Batursky builds union influence and argues the case for independence)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'batursky');
+Q.adv_out = 'batursky';
+Q.adv_out_name = "Boris Batursky";
 !}
 
-Boris Batursky has stepped down from the council, and somebody from the reserve has taken the seat.
+Boris Batursky offers: Independent Unions (Batursky builds union influence and argues the case for independence)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_khinchuk
 view-if: on_khinchuk = 1 and adv_reserve >= 1
+subtitle: Now offers: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'khinchuk');
+Q.adv_out = 'khinchuk';
+Q.adv_out_name = "Lev Khinchuk";
 !}
 
-Lev Khinchuk has stepped down from the council, and somebody from the reserve has taken the seat.
+Lev Khinchuk offers: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_zhordania
 view-if: on_zhordania = 1 and adv_reserve >= 1
+subtitle: Now offers: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'zhordania');
+Q.adv_out = 'zhordania';
+Q.adv_out_name = "Noe Zhordania";
 !}
 
-Noe Zhordania has stepped down from the council, and somebody from the reserve has taken the seat.
+Noe Zhordania offers: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_chernov
 view-if: on_chernov = 1 and adv_reserve >= 1
+subtitle: Now offers: Land Socialisation (Chernov pushes the land law forward)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'chernov');
+Q.adv_out = 'chernov';
+Q.adv_out_name = "Viktor Chernov";
 !}
 
-Viktor Chernov has stepped down from the council, and somebody from the reserve has taken the seat.
+Viktor Chernov offers: Land Socialisation (Chernov pushes the land law forward)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_avksentiev
 view-if: on_avksentiev = 1 and adv_reserve >= 1
+subtitle: Now offers: Order and Republic (Avksentiev steadies the government, and angers the left)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'avksentiev');
+Q.adv_out = 'avksentiev';
+Q.adv_out_name = "Nikolai Avksentiev";
 !}
 
-Nikolai Avksentiev has stepped down from the council, and somebody from the reserve has taken the seat.
+Nikolai Avksentiev offers: Order and Republic (Avksentiev steadies the government, and angers the left)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_breshkovskaya
 view-if: on_breshkovskaya = 1 and adv_reserve >= 1
+subtitle: Now offers: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'breshkovskaya');
+Q.adv_out = 'breshkovskaya';
+Q.adv_out_name = "Ekaterina Breshko-Breshkovskaya";
 !}
 
-Ekaterina Breshko-Breshkovskaya has stepped down from the council, and somebody from the reserve has taken the seat.
+Ekaterina Breshko-Breshkovskaya offers: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_gots
 view-if: on_gots = 1 and adv_reserve >= 1
+subtitle: Now offers: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'gots');
+Q.adv_out = 'gots';
+Q.adv_out_name = "Abram Gots";
 !}
 
-Abram Gots has stepped down from the council, and somebody from the reserve has taken the seat.
+Abram Gots offers: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_zenzinov
 view-if: on_zenzinov = 1 and adv_reserve >= 1
+subtitle: Now offers: Party Machine (Zenzinov builds the party's organisation and its membership)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'zenzinov');
+Q.adv_out = 'zenzinov';
+Q.adv_out_name = "Vladimir Zenzinov";
 !}
 
-Vladimir Zenzinov has stepped down from the council, and somebody from the reserve has taken the seat.
+Vladimir Zenzinov offers: Party Machine (Zenzinov builds the party's organisation and its membership)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_volsky
 view-if: on_volsky = 1 and adv_reserve >= 1
+subtitle: Now offers: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'volsky');
+Q.adv_out = 'volsky';
+Q.adv_out_name = "Vladimir Volsky";
 !}
 
-Vladimir Volsky has stepped down from the council, and somebody from the reserve has taken the seat.
+Vladimir Volsky offers: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_spiridonova
 view-if: on_spiridonova = 1 and adv_reserve >= 1
+subtitle: Now offers: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'spiridonova');
+Q.adv_out = 'spiridonova';
+Q.adv_out_name = "Maria Spiridonova";
 !}
 
-Maria Spiridonova has stepped down from the council, and somebody from the reserve has taken the seat.
+Maria Spiridonova offers: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_kamkov
 view-if: on_kamkov = 1 and adv_reserve >= 1
+subtitle: Now offers: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'kamkov');
+Q.adv_out = 'kamkov';
+Q.adv_out_name = "Boris Kamkov";
 !}
 
-Boris Kamkov has stepped down from the council, and somebody from the reserve has taken the seat.
+Boris Kamkov offers: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_natanson
 view-if: on_natanson = 1 and adv_reserve >= 1
+subtitle: Now offers: Elder's Authority (Natanson's authority calms the party's quarrels)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'natanson');
+Q.adv_out = 'natanson';
+Q.adv_out_name = "Mark Natanson";
 !}
 
-Mark Natanson has stepped down from the council, and somebody from the reserve has taken the seat.
+Mark Natanson offers: Elder's Authority (Natanson's authority calms the party's quarrels)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_steinberg
 view-if: on_steinberg = 1 and adv_reserve >= 1
+subtitle: Now offers: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'steinberg');
+Q.adv_out = 'steinberg';
+Q.adv_out_name = "Isaac Steinberg";
 !}
 
-Isaac Steinberg has stepped down from the council, and somebody from the reserve has taken the seat.
+Isaac Steinberg offers: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_kolegaev
 view-if: on_kolegaev = 1 and adv_reserve >= 1
+subtitle: Now offers: Land Decree (Kolegaev carries out the redistribution of land)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'kolegaev');
+Q.adv_out = 'kolegaev';
+Q.adv_out_name = "Andrei Kolegaev";
 !}
 
-Andrei Kolegaev has stepped down from the council, and somebody from the reserve has taken the seat.
+Andrei Kolegaev offers: Land Decree (Kolegaev carries out the redistribution of land)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_proshian
 view-if: on_proshian = 1 and adv_reserve >= 1
+subtitle: Now offers: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'proshian');
+Q.adv_out = 'proshian';
+Q.adv_out_name = "Prosh Proshian";
 !}
 
-Prosh Proshian has stepped down from the council, and somebody from the reserve has taken the seat.
+Prosh Proshian offers: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
 
-- @root: Continue.
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
 
 @drop_aleksandrovich
 view-if: on_aleksandrovich = 1 and adv_reserve >= 1
+subtitle: Now offers: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, 'aleksandrovich');
+Q.adv_out = 'aleksandrovich';
+Q.adv_out_name = "Pyotr Aleksandrovich";
 !}
 
-Pyotr Aleksandrovich has stepped down from the council, and somebody from the reserve has taken the seat.
+Pyotr Aleksandrovich offers: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
+
+Who should take the seat?
+
+- @in_martov: Call on Julius Martov instead.
+- @in_dan: Call on Fyodor Dan instead.
+- @in_tsereteli: Call on Irakli Tsereteli instead.
+- @in_chkheidze: Call on Nikolai Chkheidze instead.
+- @in_skobelev: Call on Matvei Skobelev instead.
+- @in_gvozdev: Call on Kuzma Gvozdev instead.
+- @in_potresov: Call on Alexander Potresov instead.
+- @in_axelrod: Call on Pavel Axelrod instead.
+- @in_abramovich: Call on Raphael Abramovich instead.
+- @in_liber: Call on Mikhail Liber instead.
+- @in_broido: Call on Eva Broido instead.
+- @in_lidia: Call on Lidia Dan instead.
+- @in_sukhanov: Call on Nikolai Sukhanov instead.
+- @in_batursky: Call on Boris Batursky instead.
+- @in_khinchuk: Call on Lev Khinchuk instead.
+- @in_zhordania: Call on Noe Zhordania instead.
+- @in_chernov: Call on Viktor Chernov instead.
+- @in_avksentiev: Call on Nikolai Avksentiev instead.
+- @in_breshkovskaya: Call on Ekaterina Breshko-Breshkovskaya instead.
+- @in_gots: Call on Abram Gots instead.
+- @in_zenzinov: Call on Vladimir Zenzinov instead.
+- @in_volsky: Call on Vladimir Volsky instead.
+- @in_spiridonova: Call on Maria Spiridonova instead.
+- @in_kamkov: Call on Boris Kamkov instead.
+- @in_natanson: Call on Mark Natanson instead.
+- @in_steinberg: Call on Isaac Steinberg instead.
+- @in_kolegaev: Call on Andrei Kolegaev instead.
+- @in_proshian: Call on Prosh Proshian instead.
+- @in_aleksandrovich: Call on Pyotr Aleksandrovich instead.
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
+
+@in_martov
+view-if: avail_martov = 1 and on_martov = 0
+subtitle: Offers: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'martov', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Julius Martov has taken the seat.
+
+- @root: Continue.
+
+@in_dan
+view-if: avail_dan = 1 and on_dan = 0
+subtitle: Offers: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'dan', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Fyodor Dan has taken the seat.
+
+- @root: Continue.
+
+@in_tsereteli
+view-if: avail_tsereteli = 1 and on_tsereteli = 0
+subtitle: Offers: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'tsereteli', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Irakli Tsereteli has taken the seat.
+
+- @root: Continue.
+
+@in_chkheidze
+view-if: avail_chkheidze = 1 and on_chkheidze = 0
+subtitle: Offers: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'chkheidze', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Nikolai Chkheidze has taken the seat.
+
+- @root: Continue.
+
+@in_skobelev
+view-if: avail_skobelev = 1 and on_skobelev = 0
+subtitle: Offers: Labour Arbitration (Skobelev settles a strike through conciliation boards)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'skobelev', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Matvei Skobelev has taken the seat.
+
+- @root: Continue.
+
+@in_gvozdev
+view-if: avail_gvozdev = 1 and on_gvozdev = 0
+subtitle: Offers: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'gvozdev', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Kuzma Gvozdev has taken the seat.
+
+- @root: Continue.
+
+@in_potresov
+view-if: avail_potresov = 1 and on_potresov = 0
+subtitle: Offers: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'potresov', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Alexander Potresov has taken the seat.
+
+- @root: Continue.
+
+@in_axelrod
+view-if: avail_axelrod = 1 and on_axelrod = 0
+subtitle: Offers: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'axelrod', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Pavel Axelrod has taken the seat.
+
+- @root: Continue.
+
+@in_abramovich
+view-if: avail_abramovich = 1 and on_abramovich = 0
+subtitle: Offers: Bridge-Builder (Abramovich eases tension between the party currents)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'abramovich', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Raphael Abramovich has taken the seat.
+
+- @root: Continue.
+
+@in_liber
+view-if: avail_liber = 1 and on_liber = 0
+subtitle: Offers: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'liber', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Mikhail Liber has taken the seat.
+
+- @root: Continue.
+
+@in_broido
+view-if: avail_broido = 1 and on_broido = 0
+subtitle: Offers: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'broido', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Eva Broido has taken the seat.
+
+- @root: Continue.
+
+@in_lidia
+view-if: avail_lidia = 1 and on_lidia = 0
+subtitle: Offers: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'lidia', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Lidia Dan has taken the seat.
+
+- @root: Continue.
+
+@in_sukhanov
+view-if: avail_sukhanov = 1 and on_sukhanov = 0
+subtitle: Offers: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'sukhanov', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Nikolai Sukhanov has taken the seat.
+
+- @root: Continue.
+
+@in_batursky
+view-if: avail_batursky = 1 and on_batursky = 0
+subtitle: Offers: Independent Unions (Batursky builds union influence and argues the case for independence)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'batursky', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Boris Batursky has taken the seat.
+
+- @root: Continue.
+
+@in_khinchuk
+view-if: avail_khinchuk = 1 and on_khinchuk = 0
+subtitle: Offers: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'khinchuk', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Lev Khinchuk has taken the seat.
+
+- @root: Continue.
+
+@in_zhordania
+view-if: avail_zhordania = 1 and on_zhordania = 0
+subtitle: Offers: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'zhordania', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Noe Zhordania has taken the seat.
+
+- @root: Continue.
+
+@in_chernov
+view-if: avail_chernov = 1 and on_chernov = 0
+subtitle: Offers: Land Socialisation (Chernov pushes the land law forward)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'chernov', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Viktor Chernov has taken the seat.
+
+- @root: Continue.
+
+@in_avksentiev
+view-if: avail_avksentiev = 1 and on_avksentiev = 0
+subtitle: Offers: Order and Republic (Avksentiev steadies the government, and angers the left)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'avksentiev', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Nikolai Avksentiev has taken the seat.
+
+- @root: Continue.
+
+@in_breshkovskaya
+view-if: avail_breshkovskaya = 1 and on_breshkovskaya = 0
+subtitle: Offers: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'breshkovskaya', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Ekaterina Breshko-Breshkovskaya has taken the seat.
+
+- @root: Continue.
+
+@in_gots
+view-if: avail_gots = 1 and on_gots = 0
+subtitle: Offers: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'gots', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Abram Gots has taken the seat.
+
+- @root: Continue.
+
+@in_zenzinov
+view-if: avail_zenzinov = 1 and on_zenzinov = 0
+subtitle: Offers: Party Machine (Zenzinov builds the party's organisation and its membership)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'zenzinov', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Vladimir Zenzinov has taken the seat.
+
+- @root: Continue.
+
+@in_volsky
+view-if: avail_volsky = 1 and on_volsky = 0
+subtitle: Offers: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'volsky', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Vladimir Volsky has taken the seat.
+
+- @root: Continue.
+
+@in_spiridonova
+view-if: avail_spiridonova = 1 and on_spiridonova = 0
+subtitle: Offers: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'spiridonova', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Maria Spiridonova has taken the seat.
+
+- @root: Continue.
+
+@in_kamkov
+view-if: avail_kamkov = 1 and on_kamkov = 0
+subtitle: Offers: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'kamkov', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Boris Kamkov has taken the seat.
+
+- @root: Continue.
+
+@in_natanson
+view-if: avail_natanson = 1 and on_natanson = 0
+subtitle: Offers: Elder's Authority (Natanson's authority calms the party's quarrels)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'natanson', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Mark Natanson has taken the seat.
+
+- @root: Continue.
+
+@in_steinberg
+view-if: avail_steinberg = 1 and on_steinberg = 0
+subtitle: Offers: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'steinberg', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Isaac Steinberg has taken the seat.
+
+- @root: Continue.
+
+@in_kolegaev
+view-if: avail_kolegaev = 1 and on_kolegaev = 0
+subtitle: Offers: Land Decree (Kolegaev carries out the redistribution of land)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'kolegaev', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Andrei Kolegaev has taken the seat.
+
+- @root: Continue.
+
+@in_proshian
+view-if: avail_proshian = 1 and on_proshian = 0
+subtitle: Offers: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'proshian', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Prosh Proshian has taken the seat.
+
+- @root: Continue.
+
+@in_aleksandrovich
+view-if: avail_aleksandrovich = 1 and on_aleksandrovich = 0
+subtitle: Offers: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, 'aleksandrovich', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and Pyotr Aleksandrovich has taken the seat.
+
+- @root: Continue.
+
+@in_random
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and somebody from the reserve has taken the seat.
 
 - @root: Continue.

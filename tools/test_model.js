@@ -143,5 +143,13 @@ test('display() publishes the strength and the odds the scenes read', function()
   ['kad', 'gen', 'bol'].forEach(function(k) { assert.ok(Q['odds_' + k] >= 10 && Q['odds_' + k] <= 90); });
 });
 
+test('swapping advisors keeps the council at four, with the one chosen in and the one chosen out', function() {
+  var Q = state({player_party: 'menshevik', adv_active: ['dan', 'chkheidze', 'potresov', 'lidia']});
+  ['dan', 'chkheidze', 'potresov', 'lidia', 'abramovich', 'liber', 'sukhanov', 'khinchuk'].forEach(function(id) { Q[id + '_advisor'] = 1; });
+  RO.swapAdvisor(Q, 'abramovich', 'dan');
+  assert.strictEqual(Q.adv_active.length, 4);
+  assert.ok(Q.adv_active.indexOf('abramovich') >= 0 && Q.adv_active.indexOf('dan') < 0, Q.adv_active.join(','));
+});
+
 console.log(passed + ' passed, ' + failed + ' failed');
 if (failed) { process.exit(1); }

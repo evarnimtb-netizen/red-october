@@ -174,6 +174,8 @@ def write_model_table(table):
     open(path, 'w', encoding='utf-8').write(src)
 
 def write_council(table):
+    """The Council card. table: id -> (name, party, what the advisor can do). Calling an advisor in asks who gives up the
+    seat, and replacing one asks who takes it; every choice shows what the advisor offers."""
     lines = ['''title: The Council
 subtitle: Change the advisors you are listening to.
 is-pinned-card: true
@@ -187,15 +189,15 @@ RO.syncAdvisors(Q);
 
 = The Council
 
-You listen to four advisors at a time; the others wait in the corridor. Changing the council takes a turn, and it cannot be done again for three months.
+You listen to four advisors at a time; the others wait in the corridor. Each advisor offers one action. Changing the council takes a turn, and it cannot be done again for three months.
 
 *Advising now: [+ council_list +].* *In reserve: [+ reserve_list +].*
 
 - @shuffle: Draw a new council at random.''']
     for k, v in table.items():
-        lines.append('- @bring_%s: Call on %s. (The longest-serving advisor steps down.)' % (k, v[0]))
+        lines.append('- @bring_%s: Call on %s.' % (k, v[0]))
     for k, v in table.items():
-        lines.append('- @drop_%s: Replace %s with someone from the reserve.' % (k, v[0]))
+        lines.append('- @drop_%s: Replace %s.' % (k, v[0]))
     lines.append('- @root: Return to main')
     lines.append('')
     lines.append('''@shuffle
@@ -208,31 +210,86 @@ The advisors were thanked and sent home, and a new circle was called together.
 
 - @root: Continue.
 ''')
+    # call someone in: then choose who makes room
     for k, v in table.items():
+        out = '\n'.join('- @out_%s: %s gives up the seat.' % (o, table[o][0]) for o in table)
         lines.append('''@bring_%s
 view-if: avail_%s = 1 and on_%s = 0
+subtitle: Offers: %s
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.callAdvisor(Q, '%s');
+Q.adv_in = '%s';
+Q.adv_in_name = "%s";
 !}
 
-%s has been called to the council. The one who had served longest has gone back to the party's work.
+%s would offer: %s
+
+Who should give up a seat on the council?
+
+%s
+- @root: Think again.
+''' % (k, k, k, v[2], k, v[0], v[0], v[2], out))
+    for k, v in table.items():
+        lines.append('''@out_%s
+view-if: on_%s = 1
+subtitle: Gives up: %s
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, Q.adv_in, '%s');
+!}
+
+%s has gone back to the party's work, and [+ adv_in_name +] has taken the seat on the council.
 
 - @root: Continue.
-''' % (k, k, k, k, v[0]))
+''' % (k, k, v[2], k, v[0]))
+    # replace someone: then choose who takes the seat
     for k, v in table.items():
+        inn = '\n'.join('- @in_%s: Call on %s instead.' % (o, table[o][0]) for o in table)
         lines.append('''@drop_%s
 view-if: on_%s = 1 and adv_reserve >= 1
+subtitle: Now offers: %s
 on-arrival: {!
-Q.month_actions += 1; Q.council_timer = 3;
-RO.replaceAdvisor(Q, '%s');
+Q.adv_out = '%s';
+Q.adv_out_name = "%s";
 !}
 
-%s has stepped down from the council, and somebody from the reserve has taken the seat.
+%s offers: %s
+
+Who should take the seat?
+
+%s
+- @in_random: Whoever the party sends from the reserve.
+- @root: Think again.
+''' % (k, k, v[2], k, v[0], v[0], v[2], inn))
+    for k, v in table.items():
+        lines.append('''@in_%s
+view-if: avail_%s = 1 and on_%s = 0
+subtitle: Offers: %s
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.swapAdvisor(Q, '%s', Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and %s has taken the seat.
 
 - @root: Continue.
-''' % (k, k, k, v[0]))
+''' % (k, k, k, v[2], k, v[0]))
+    lines.append('''@in_random
+on-arrival: {!
+Q.month_actions += 1; Q.council_timer = 3;
+RO.replaceAdvisor(Q, Q.adv_out);
+!}
+
+[+ adv_out_name +] has stepped down from the council, and somebody from the reserve has taken the seat.
+
+- @root: Continue.
+''')
     open(os.path.join(OUT, 'council.scene.dry'), 'w', encoding='utf-8').write('\n'.join(lines))
+
+
+def offers(actions):
+    """What an advisor can do, in a line: the action's name and what it does."""
+    return '; '.join('%s (%s)' % (t, sub.rstrip('.')) for t, sub in actions)
+
 
 def card_image(aid):
     """The advisor's period photograph if tools/fetch_art.py has placed one, otherwise the plain placeholder."""
@@ -328,9 +385,9 @@ view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1) and on_{aid
             f.write(text.rstrip() + '\n')
     table = {}
     for (aid, title, tag, flag, bio, atitle, asub, cond, unavail, js, result) in ADVISORS:
-        table[aid] = (title, 'menshevik')
+        table[aid] = (title, 'menshevik', offers([(atitle, asub)]))
     for (aid, title, tag, flag, bio, party, actions) in OTHERS:
-        table[aid] = (title, party)
+        table[aid] = (title, party, offers([(a[0], a[1]) for a in actions]))
     write_model_table(table)
     # the served copy of the model must match (tools/test_model.js checks it)
     here = os.path.dirname(__file__)
