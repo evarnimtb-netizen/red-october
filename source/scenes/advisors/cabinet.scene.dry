@@ -12,7 +12,7 @@ view-if: (in_coalition = 1 and bol_regime = 0) or lsr_in_gov = 1
 
 [? if ant_kad >= 40 : The liberals are in an angry mood. ?][? if ant_gen >= 40 : The generals are muttering about the government. ?][? if ant_bol >= 40 and bol_regime = 0 : Pravda has begun to campaign against the cabinet. ?]Each camp that opposes a policy will first try sanctions, and then, if it is angry enough, take up arms: see the Opposition tab on the right. An unpopular law can be phased in gently, passed by decree, or, if the party is strong enough (its strength is shown there), passed and enforced against its opponents: the odds are shown for each camp, and a failure makes the camp angrier.
 
-Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Food: [+ pol_food : pol_food +]. Labour: [+ pol_labour : pol_labour +]. ?][? if at_war = 1 and in_coalition = 1 and bol_regime = 0 : The war: [+ pol_war : pol_war +]. ?]Order: [+ pol_order : pol_order +].
+Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Food: [+ pol_food : pol_food +]. Finance: [+ pol_finance : pol_finance +]. Labour: [+ pol_labour : pol_labour +]. ?][? if at_war = 1 and in_coalition = 1 and bol_regime = 0 : The war: [+ pol_war : pol_war +]. ?]Order: [+ pol_order : pol_order +].
 
 - @land_0: Leave the land to the Assembly.
 - @land_1: Let the land committees regulate the transfers of land.
@@ -26,6 +26,9 @@ Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Foo
 - @order_0: Govern by the ordinary law.
 - @order_1: Introduce emergency measures against disorder.
 - @order_2: Proclaim broad liberties and an amnesty.
+- @finance_0: Pay for the state with the printing press.
+- @finance_1: Tax war profits and the rich, and float a Liberty Loan.
+- @finance_2: Borrow from the Allies, on their terms.
 - @labour_0: Leave industry to the employers.
 - @labour_1: Guarantee the eight-hour day and the factory committees.
 - @labour_2: Regulate industry through the state.
@@ -510,6 +513,150 @@ RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad
 !}
 
 An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful. [+ law_text +]
+
+- @root: Continue.
+
+@finance_0
+view-if: (in_coalition = 1 and bol_regime = 0) and pol_finance != 0
+choose-if: cabinet_timer <= 0
+unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_finance = 0;
+Q.soft_finance = 0;
+RO.add(Q, {bread: 1});
+!}
+
+The Treasury will print what the state costs. It is the easiest way to pay, and every month it is a little less so.
+
+- @root: Continue.
+
+@finance_1
+view-if: (in_coalition = 1 and bol_regime = 0) and pol_finance != 1
+choose-if: cabinet_timer <= 0
+unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @finance_1_slow: Phase it in, with compensation and negotiation.
+- @finance_1_decree: Pass it by decree, as written.
+- @finance_1_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@finance_1_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_finance = 1;
+Q.soft_finance = 1;
+RO.law(Q, 'slow', () => {
+RO.add(Q, {ruble: 4, rel_kad: -4, ant_kad: 6}); RO.boost(Q, {middle: -2, workers: 2});
+}, "Tax war profits and the rich, and float a Liberty Loan");
+!}
+
+An excess-profits tax was passed, and the Liberty Loan was advertised on every hoarding. The banks call it confiscation; the ruble has steadied. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@finance_1_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_finance = 1;
+Q.soft_finance = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {ruble: 4, rel_kad: -4, ant_kad: 6}); RO.boost(Q, {middle: -2, workers: 2});
+}, "Tax war profits and the rich, and float a Liberty Loan");
+!}
+
+An excess-profits tax was passed, and the Liberty Loan was advertised on every hoarding. The banks call it confiscation; the ruble has steadied.
+
+- @root: Continue.
+
+@finance_1_force
+choose-if: strength >= 18
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_finance = 1;
+Q.soft_finance = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {ruble: 4, rel_kad: -4, ant_kad: 6}); RO.boost(Q, {middle: -2, workers: 2});
+}, "Tax war profits and the rich, and float a Liberty Loan");
+!}
+
+An excess-profits tax was passed, and the Liberty Loan was advertised on every hoarding. The banks call it confiscation; the ruble has steadied. [+ law_text +]
+
+- @root: Continue.
+
+@finance_2
+view-if: (in_coalition = 1 and bol_regime = 0) and pol_finance != 2
+choose-if: cabinet_timer <= 0 and (at_war = 1)
+unavailable-subtitle: [? if cabinet_timer > 0 : The cabinet has changed course too recently. ?][? if not (at_war = 1) : There is no war for the Allies to lend to. ?]
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @finance_2_slow: Phase it in, with compensation and negotiation.
+- @finance_2_decree: Pass it by decree, as written.
+- @finance_2_force: Pass it by decree, and break any opposition by force.
+- @root: Think again.
+
+@finance_2_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_finance = 2;
+Q.soft_finance = 1;
+RO.law(Q, 'slow', () => {
+RO.add(Q, {ruble: 5, rel_bol: -3, war_weariness: 1, ant_bol: 6}); RO.boost(Q, {soldiers: -1});
+}, "Borrow from the Allies, on their terms");
+!}
+
+London and Washington have opened credits to the Provisional Government. They expect the front to hold, and they have said so. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+- @root: Continue.
+
+@finance_2_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_finance = 2;
+Q.soft_finance = 0;
+RO.law(Q, 'decree', () => {
+RO.add(Q, {ruble: 5, rel_bol: -3, war_weariness: 1, ant_bol: 6}); RO.boost(Q, {soldiers: -1});
+}, "Borrow from the Allies, on their terms");
+!}
+
+London and Washington have opened credits to the Provisional Government. They expect the front to hold, and they have said so.
+
+- @root: Continue.
+
+@finance_2_force
+choose-if: strength >= 18
+subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+Q.month_actions += 1;
+Q.cabinet_timer = 2;
+Q.pol_finance = 2;
+Q.soft_finance = 0;
+RO.law(Q, 'force', () => {
+RO.add(Q, {ruble: 5, rel_bol: -3, war_weariness: 1, ant_bol: 6}); RO.boost(Q, {soldiers: -1});
+}, "Borrow from the Allies, on their terms");
+!}
+
+London and Washington have opened credits to the Provisional Government. They expect the front to hold, and they have said so. [+ law_text +]
 
 - @root: Continue.
 

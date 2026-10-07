@@ -151,5 +151,30 @@ test('swapping advisors keeps the council at four, with the one chosen in and th
   assert.ok(Q.adv_active.indexOf('abramovich') >= 0 && Q.adv_active.indexOf('dan') < 0, Q.adv_active.join(','));
 });
 
+test('a weak camp only grumbles: furious but powerless Bolsheviks never act', function() {
+  for (var i = 0; i < 300; i++) {
+    var Q = state({dix: 12, bolshevik: 12, ant_bol: 95, order: 1, pol_order: 1});
+    RO.oppositionTurn(Q, 1);
+    assert.strictEqual(Q.opp_bol_ev || 0, 0);
+  }
+});
+
+test('a camp needs strength 40 to take up arms', function() {
+  for (var i = 0; i < 300; i++) {
+    var Q = state({right_threat: 30, ant_gen: 99, opp_gen_n: 2});
+    RO.oppositionTurn(Q, 1);
+    assert.ok((Q.opp_gen_ev || 0) < 2);
+  }
+});
+
+test('without the war the ruble recovers under a republic, and falls under War Communism', function() {
+  var Q = state({at_war: 0, ruble: 10, bread: 40, war_weariness: 40, land_pressure: 40, bol_regime: 0});
+  for (var i = 0; i < 12; i++) { RO.drift(Q, 1); }
+  assert.ok(Q.ruble > 25, 'republic ruble ' + Q.ruble);
+  var B = state({at_war: 0, ruble: 30, bread: 40, war_weariness: 40, land_pressure: 40, bol_regime: 1, dix: 50, repression: 10, legality: 2, red_army: 20});
+  for (i = 0; i < 6; i++) { RO.drift(B, 1); }
+  assert.ok(B.ruble < 30, 'War Communism ruble ' + B.ruble);
+});
+
 console.log(passed + ' passed, ' + failed + ' failed');
 if (failed) { process.exit(1); }

@@ -1,0 +1,95 @@
+title: Paying for the Revolution
+card-image: img/cards/finance.svg?v=2
+subtitle: The ruble, the Liberty Loan and the printing press.
+new-page: true
+is-card: true
+tags: coalition_affairs
+view-if: finance_timer <= 0 and bol_regime = 0 and dix >= 4
+on-arrival: month_actions += 1; finance_timer = 3
+
+The war costs forty million rubles a day, and the Treasury covers most of it with the printing press. Prices in Petrograd have trebled since February; the peasants will not sell grain for paper. (The ruble: [+ ruble : ruble +].)
+
+- @loan: Campaign for the Liberty Loan. (1 resource)
+- @tax: Demand a tax on war profits and the great fortunes.
+- @austerity: Cut the state's spending, and the army's.
+- @print: Let the Treasury print, and feed the cities with it.
+- @easy_discard
+
+@loan
+choose-if: resources >= 1
+unavailable-subtitle: We cannot afford the campaign.
+on-arrival: {!
+Q.resources -= 1;
+RO.add(Q, {ruble: 4, rel_kad: 1});
+RO.boost(Q, {middle: 2});
+!}
+
+The party's speakers sold the Liberty Loan in the factories and the barracks as a loan to the revolution. Some of it was even bought by people who could not afford it.
+
+@tax
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @tax_slow: Phase it in, with compensation and negotiation.
+- @tax_decree: Pass it by decree, as written.
+- @tax_force: Pass it by decree, and break any opposition by force.
+
+@tax_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
+on-arrival: {!
+
+RO.law(Q, 'slow', () => {
+RO.add(Q, {ruble: 6, rel_kad: -5, right_threat: 1});
+RO.boost(Q, {workers: 3, middle: -3});
+}, "Demand a tax on war profits and the great fortunes");
+!}
+
+The excess-profits tax was carried, and the great fortunes were assessed. The Moscow industrialists say that they will close their factories first; the ruble has steadied for the first time since the spring. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@tax_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.add(Q, {ruble: 6, rel_kad: -5, right_threat: 1});
+RO.boost(Q, {workers: 3, middle: -3});
+}, "Demand a tax on war profits and the great fortunes");
+!}
+
+The excess-profits tax was carried, and the great fortunes were assessed. The Moscow industrialists say that they will close their factories first; the ruble has steadied for the first time since the spring.
+
+
+
+@tax_force
+choose-if: strength >= 18
+subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.add(Q, {ruble: 6, rel_kad: -5, right_threat: 1});
+RO.boost(Q, {workers: 3, middle: -3});
+}, "Demand a tax on war profits and the great fortunes");
+!}
+
+The excess-profits tax was carried, and the great fortunes were assessed. The Moscow industrialists say that they will close their factories first; the ruble has steadied for the first time since the spring. [+ law_text +]
+
+@austerity
+on-arrival: {!
+RO.add(Q, {ruble: 5, army_discipline: -3, war_weariness: 1, bread: -1});
+RO.boost(Q, {bureaucrats: -2, soldiers: -2});
+!}
+
+The ministries were told to cut, and the army's quartermasters with them. The ruble is a little firmer; the officers and the officials are not happy, and neither are the men who are owed their pay.
+
+@print
+on-arrival: {!
+RO.add(Q, {ruble: -3, bread: 3});
+RO.boost(Q, {workers: 1});
+!}
+
+The presses ran through the night, and the cities were fed for another month. Everyone knows what it costs, and that the bill is paid later.

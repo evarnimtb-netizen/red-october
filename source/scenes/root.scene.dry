@@ -133,7 +133,7 @@ Q.timers = ['advisor_action', 'rally', 'fundraising', 'media', 'campaigning', 'i
             'labor_affairs', 'economic_policy', 'foreign_policy', 'agricultural_policy', 'military_policy',
             'constitutional_reform', 'nationalities', 'police',
             'economic_democracy', 'labor_rights', 'social_welfare', 'domestic_enemies', 'judiciary', 'fiscal_policy',
-            'crisis', 'alt_coup', 'right_plot', 'council', 'cabinet', 'inside_sr', 'the_split', 'sovnarkom_seats', 'cheka_board', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army', 'opp_kad', 'opp_gen', 'opp_bol', 'cow_kad', 'cow_gen', 'cow_bol'];
+            'crisis', 'alt_coup', 'right_plot', 'council', 'cabinet', 'inside_sr', 'the_split', 'sovnarkom_seats', 'cheka_board', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army', 'opp_kad', 'opp_gen', 'opp_bol', 'cow_kad', 'cow_gen', 'cow_bol', 'finance', 'money'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -181,6 +181,7 @@ Q.pol_food = 1;
 Q.pol_war = 0;
 Q.pol_order = 0;
 Q.pol_labour = 0;
+Q.pol_finance = 0;
 for (var fl of flags) { Q[fl] = 0; }
 Q.dues_income = 1;
 

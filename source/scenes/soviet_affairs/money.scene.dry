@@ -1,0 +1,86 @@
+title: Money and the Market
+card-image: img/cards/money.svg?v=2
+subtitle: The ruble under War Communism.
+new-page: true
+is-card: true
+tags: soviet_affairs
+view-if: money_timer <= 0 and bol_regime = 1 and dix >= 30
+on-arrival: month_actions += 1; money_timer = 3
+
+The ruble is printed by the trainload and is worth less than the paper. Wages are paid in rations; the peasants sell to the black market or not at all. The party can still say, and sometimes do, something about it. (The ruble: [+ ruble : ruble +].)
+
+- @market: Campaign for a free grain market in place of requisitioning.
+- @coops: Rebuild the cooperatives, which still trade with the villages.
+- @currency: Call for a stable currency, backed by gold.
+- @easy_discard
+
+@market
+
+How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+
+- @market_slow: Phase it in, with compensation and negotiation.
+- @market_decree: Pass it by decree, as written.
+- @market_force: Pass it by decree, and break any opposition by force.
+
+@market_slow
+choose-if: resources >= 1
+subtitle: Milder effects and little anger. Costs 1 resource.
+unavailable-subtitle: We have nothing to pay the compensation with.
+on-arrival: {!
+
+RO.law(Q, 'slow', () => {
+RO.add(Q, {ruble: 4, bread: 2, rel_bol: -4, repression: 1});
+RO.boost(Q, {peasants: 3, workers: 1});
+}, "Campaign for a free grain market in place of requisitioning");
+!}
+
+The party's resolutions for a free grain market were read out at every congress that would hear them. In the provinces where the local authorities listened, grain came to market and the ruble was worth something again. In Moscow, the Cheka took note. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+
+
+
+@market_decree
+subtitle: The law as written. Its opponents will answer.
+on-arrival: {!
+
+RO.law(Q, 'decree', () => {
+RO.add(Q, {ruble: 4, bread: 2, rel_bol: -4, repression: 1});
+RO.boost(Q, {peasants: 3, workers: 1});
+}, "Campaign for a free grain market in place of requisitioning");
+!}
+
+The party's resolutions for a free grain market were read out at every congress that would hear them. In the provinces where the local authorities listened, grain came to market and the ruble was worth something again. In Moscow, the Cheka took note.
+
+
+
+@market_force
+choose-if: strength >= 18
+subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+unavailable-subtitle: We lack the force and the allies to break the opposition.
+on-arrival: {!
+
+RO.law(Q, 'force', () => {
+RO.add(Q, {ruble: 4, bread: 2, rel_bol: -4, repression: 1});
+RO.boost(Q, {peasants: 3, workers: 1});
+}, "Campaign for a free grain market in place of requisitioning");
+!}
+
+The party's resolutions for a free grain market were read out at every congress that would hear them. In the provinces where the local authorities listened, grain came to market and the ruble was worth something again. In Moscow, the Cheka took note. [+ law_text +]
+
+@coops
+on-arrival: {!
+RO.add(Q, {ruble: 2, bread: 3});
+RO.boost(Q, {peasants: 2, middle: 1});
+RO.fac(Q, 'unions', 2, -2);
+!}
+
+The cooperatives were the last trading network that the state had not taken over. The party's members went to work in them, and some goods began to move between the towns and the villages.
+
+@currency
+choose-if: nep_early = 1 or dix >= 108
+unavailable-subtitle: Nobody in power will listen while War Communism lasts.
+on-arrival: {!
+RO.add(Q, {ruble: 7});
+RO.boost(Q, {middle: 2, workers: 1});
+!}
+
+The party's economists argued for a currency backed by gold, and some of them were asked to draft it. The chervonets that followed was not ours, but the argument was.

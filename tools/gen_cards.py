@@ -63,6 +63,8 @@ def read_header(path):
 
 def add_image_line(path, rel):
     s = open(path, encoding='utf-8').read()
+    if re.search(r'^card-image: img/portraits/', s, re.M):
+        return  # a period photograph placed by tools/fetch_art.py: keep it
     if re.search(r'^card-image:', s, re.M):
         s = re.sub(r'^card-image:.*$', 'card-image: ' + rel, s, count=1, flags=re.M)
     else:

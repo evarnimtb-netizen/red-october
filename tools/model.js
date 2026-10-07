@@ -315,7 +315,11 @@ var RO = (function() {
     } else {
       Q.war_weariness += (Q.bol_regime ? 0.5 : 0.2) * tl;
       Q.bread -= (Q.bol_regime ? 0.4 : 0.2) * tl;
-      Q.ruble -= (Q.bol_regime ? 1.5 : 0.8) * tl;
+      // without the war the ruble can recover: towards 50 under a republic, and under the Bolsheviks only once the
+      // market is allowed back (the NEP, or the party's programme adopted early); War Communism prints it away
+      if (!Q.bol_regime) { Q.ruble += (0.05 * (50 - Q.ruble) - 0.3) * tl; }
+      else if (Q.nep_early || Q.dix >= 108) { Q.ruble += (0.05 * (40 - Q.ruble) - 0.2) * tl; }
+      else { Q.ruble -= 1.5 * tl; }
       if (!Q.land_decree) { Q.land_pressure += 1.0 * tl; }
     }
     if (Q.land_decree) { Q.land_pressure -= 1.0 * tl; }
@@ -674,6 +678,9 @@ var RO = (function() {
       if (war === 1) { Q.war_weariness -= 0.2 * tl; Q.army_discipline -= 0.2 * tl; }
       if (war === 2) { Q.war_weariness += 0.6 * tl; Q.army_discipline -= 0.3 * tl; }
     }
+    var finance = Q.pol_finance || 0;
+    if (finance === 1) { Q.ruble += 1.2 * tl; }
+    if (finance === 2) { Q.ruble += (Q.at_war ? 1.5 : 0.5) * tl; if (Q.at_war) { Q.war_weariness += 0.2 * tl; } }
     if (labour === 0) { Q.ruble += 0.2 * tl; Q.bolshevik += 0.1 * tl; }
     if (labour === 1) { Q.ruble -= 0.2 * tl; Q.bolshevik -= 0.15 * tl; }
     if (labour === 2) { Q.ruble += 0.15 * tl; Q.bread += 0.1 * tl; Q.soviet_democracy -= 0.05 * tl; }
@@ -781,6 +788,7 @@ var RO = (function() {
   function offence(Q) {
     // the Cabinet's standing settings only count while the party sits in the government that keeps them
     var gov = !!Q.in_coalition, atWar = !!Q.at_war, out = {};
+    var finance = gov ? (Q.pol_finance || 0) : 0;
     var land = gov ? (Q.pol_land || 0) : 0, labour = gov ? (Q.pol_labour || 0) : 0, war = gov ? (Q.pol_war || 0) : 0, order = gov ? (Q.pol_order || 0) : 0;
     var food = (!gov || Q.pol_food === undefined) ? 1 : Q.pol_food, lc = Math.min(Q.land_committees || 0, 4);
     function put(k, s, t, area) { if (s > 0 && Q['soft_' + area]) { s *= 0.6; } if (s !== 0) { out[k].why.push({s: s, t: t, area: area}); } }
@@ -798,6 +806,8 @@ var RO = (function() {
     if (gov && !Q.gov_kadets && Q.homogeneous_gov) { put('kad', 1.5, 'a cabinet without Kadets', 'kadets'); }
     if (gov && Q.gov_kadets) { put('kad', -1.5, 'their ministers in the cabinet', 'kadets'); }
     if (Q.rel_kad < 20) { put('kad', 1, 'a broken relationship', 'none'); }
+    if (finance === 1) { put('kad', 2, 'the tax on war profits', 'finance'); }
+    if (finance === 2) { put('kad', -0.5, 'the Allied credits', 'finance'); }
     // the generals and the Right
     if (land === 2) { put('gen', 2.5, 'the socialisation of the land', 'land'); }
     else if (land === 1) { put('gen', 0.8, 'land committees redistributing the estates', 'land'); }
@@ -824,6 +834,8 @@ var RO = (function() {
     if (labour === 2) { put('bol', -1, 'state regulation of industry', 'labour'); }
     if (land === 2) { put('bol', -1.5, 'the socialisation of the land', 'land'); }
     if (Q.july_repressed) { put('bol', 2, 'the arrests of July', 'none'); }
+    if (finance === 2) { put('bol', 2, 'borrowing from the imperialists', 'finance'); }
+    if (finance === 1) { put('bol', -0.5, 'the tax on war profits', 'finance'); }
     CAMPS.forEach(function(k) {
       var t = 0;
       out[k].why.forEach(function(w) { t += w.s; });
@@ -850,6 +862,7 @@ var RO = (function() {
       if (a === 'labour' && (Q.pol_labour || 0) > 0) { Q.pol_labour = 0; return 'the labour policy'; }
       if (a === 'war' && (Q.pol_war || 0) > 0) { Q.pol_war = (k === 'bol') ? 1 : 0; return 'the war policy'; }
       if (a === 'order' && (Q.pol_order || 0) > 0) { Q.pol_order = 0; return 'the policy on order'; }
+      if (a === 'finance' && (Q.pol_finance || 0) > 0) { Q.pol_finance = 0; return 'the finance policy'; }
       if (a === 'kadets') {
         if (k === 'bol') { Q.gov_kadets = 0; Q.homogeneous_gov = 1; } else { Q.gov_kadets = 1; Q.homogeneous_gov = 0; }
         return 'the make-up of the cabinet';
@@ -984,6 +997,17 @@ var RO = (function() {
     return t;
   }
 
+  // How strong a camp is, 0 to 100, apart from how angry it is. A weak camp grumbles but cannot act: under 20 it does
+  // nothing, it acts more readily up to 50, and it needs 40 to take up arms. The Kadets' strength is their money and the
+  // officers who listen to them (the Right), the generals' is the Right itself, the Bolsheviks' is their following.
+  var ACT_FROM = 20, ACT_FULL = 50, ARMS_AT = 40;
+  function campPower(Q, k) {
+    if (k === 'kad') { return clamp(15 + 0.6 * (Q.right_threat || 0) + (Q.gov_kadets ? 10 : 0), 0, 100); }
+    if (k === 'gen') { return clamp(Q.right_threat || 0, 0, 100); }
+    return clamp(Q.bolshevik || 0, 0, 100);
+  }
+  function campReadiness(Q, k) { return clamp((campPower(Q, k) - ACT_FROM) / (ACT_FULL - ACT_FROM), 0, 1); }
+
   function oppositionTurn(Q, tl) {
     var off = offence(Q);
     CAMPS.forEach(function(k) {
@@ -999,10 +1023,10 @@ var RO = (function() {
       var a = Q[key];
       if (!campActive(Q, k)) { Q['opp_' + k + '_ev'] = 0; return; }
       if (Q.game_end || Q['opp_' + k + '_ev'] || (Q['opp_' + k + '_timer'] || 0) > 0) { return; }
-      var stage = 0, thr = SANCTION_AT;
-      if (a >= REVOLT_AT && ((Q['opp_' + k + '_n'] || 0) >= 1 || a >= 85)) { stage = 2; thr = REVOLT_AT; }
+      var stage = 0, thr = SANCTION_AT, ready = campReadiness(Q, k);
+      if (a >= REVOLT_AT && campPower(Q, k) >= ARMS_AT && ((Q['opp_' + k + '_n'] || 0) >= 1 || a >= 85)) { stage = 2; thr = REVOLT_AT; }
       else if (a >= SANCTION_AT) { stage = 1; }
-      if (stage && chance((0.2 + (a - thr) / 80) * Math.min(1, tl))) { Q['opp_' + k + '_ev'] = stage; }
+      if (stage && chance((0.2 + (a - thr) / 80) * ready * Math.min(1, tl))) { Q['opp_' + k + '_ev'] = stage; }
     });
   }
 
@@ -1012,13 +1036,14 @@ var RO = (function() {
     CAMPS.forEach(function(k) {
       if (!campActive(Q, k)) { return; }
       out.push({id: k, name: CAMP_NAMES[k], ant: Q['ant_' + k] || 0, why: off[k].why, pending: Q['opp_' + k + '_ev'] || 0,
-                cooling: (Q['opp_' + k + '_timer'] || 0) > 0, odds: squashOdds(Q, k)});
+                cooling: (Q['opp_' + k + '_timer'] || 0) > 0, odds: squashOdds(Q, k), power: campPower(Q, k),
+                canAct: campPower(Q, k) > ACT_FROM, canArm: campPower(Q, k) >= ARMS_AT});
     });
     return out;
   }
 
 
-  return {campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, swapAdvisor: swapAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {campPower: campPower, campReadiness: campReadiness, ACT_FROM: ACT_FROM, ARMS_AT: ARMS_AT, campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, swapAdvisor: swapAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

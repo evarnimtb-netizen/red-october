@@ -102,6 +102,7 @@
       var off = RO.offence(Q);
       RO.CAMPS.forEach(function(k) {
         add('hostility ' + k + ' (now / target / months)', r1(Q['ant_' + k]) + ' / ' + r1(RO.campTarget(Q, k, off)) + ' / ' + r1(Q['opp_' + k + '_age']));
+        add('strength ' + k, Math.round(RO.campPower(Q, k)) + ' (acts from ' + RO.ACT_FROM + ', arms from ' + RO.ARMS_AT + ')');
         add('odds ' + k + ' / timer / pending', Math.round(100 * RO.squashOdds(Q, k)) + '% / ' + r1(Q['opp_' + k + '_timer']) + ' / ' + num(Q['opp_' + k + '_ev']));
       });
       add('relations ally / third / bol / kad', [Q.rel_ally, Q.rel_lsr, Q.rel_bol, Q.rel_kad].map(r1).join(' / '));
@@ -292,7 +293,7 @@
   // ---------- the Opposition tab: the camps that answer your policies ----------
   function antWord(a) { return a < 20 ? 'Calm' : (a < 40 ? 'Uneasy' : (a < 70 ? 'Hostile' : 'On the brink')); }
   function renderOpposition(Q, camps) {
-    var h = '<div class="sb-section">Opposition</div><div class="sb-note">The camps that answer your policies. At ' + window.RO.SANCTION_AT + ' they try to sanction you; at ' + window.RO.REVOLT_AT + ' they take up arms.</div>';
+    var h = '<div class="sb-section">Opposition</div><div class="sb-note">The camps that answer your policies. At ' + window.RO.SANCTION_AT + ' hostility they try to sanction you; at ' + window.RO.REVOLT_AT + ' they take up arms. A camp also needs the strength to act: under ' + window.RO.ACT_FROM + ' it only grumbles, and it needs ' + window.RO.ARMS_AT + ' to take up arms.</div>';
     if (!camps.length) { return h + '<div class="sb-note">No camp is organised against you now.</div>'; }
     var st = Math.round(window.RO.strength(Q));
     h += '<div class="opp-camp"><div class="sb-label"><span>Your strength</span><span class="sb-word">' + st + (st >= 18 ? ' · enough to strike' : ' · too weak to strike') + '</span></div>' +
@@ -304,7 +305,9 @@
       h += '<div class="opp-camp"><div class="sb-label"><span>' + esc(c.name) + '</span><span class="sb-word">' + antWord(a) + ' · ' + a + '</span></div>' +
            '<div class="sb-bar opp-bar"><div class="sb-fill" style="width:' + clamp(a, 0, 100) + '%;background:#9a3b2e"></div>' +
            '<i class="opp-tick" style="left:' + window.RO.SANCTION_AT + '%"></i><i class="opp-tick" style="left:' + window.RO.REVOLT_AT + '%"></i></div>';
-      if (st >= 18) { h += '<div class="rs-meta">Chance to break it by force: ' + Math.round(c.odds * 100) + '%' + (c.odds < 0.45 ? ' (a law\'s force option leaves it alone below 45%)' : '') + '.</div>'; }
+      var pw = Math.round(c.power);
+      h += '<div class="rs-meta">Its strength: ' + pw + ' · ' + (!c.canAct ? 'too weak to act, it can only grumble' : (!c.canArm ? 'strong enough to sanction you, not to take up arms' : 'strong enough to take up arms')) + '.</div>';
+      if (st >= 18) { h += '<div class="rs-meta">Chance to break it by force:' + Math.round(c.odds * 100) + '%' + (c.odds < 0.45 ? ' (a law\'s force option leaves it alone below 45%)' : '') + '.</div>'; }
       if (c.pending) { h += '<div class="rs-meta opp-alert">' + (c.pending === 2 ? 'An uprising is under way.' : 'Sanctions are coming.') + '</div>'; }
       else if (c.cooling) { h += '<div class="rs-meta">It has just acted, and is regrouping.</div>'; }
       if (objects.length) { h += '<div class="rs-meta">Objects to: ' + objects.map(function(w) { return esc(w.t); }).join('; ') + '.</div>'; }

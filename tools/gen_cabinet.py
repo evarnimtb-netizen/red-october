@@ -62,6 +62,17 @@ AREAS = [
     "RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad: 2, ant_bol: -4});",
     "An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful."),
  ]),
+ ('finance', 'Finance', 'in_coalition = 1 and bol_regime = 0', [
+   ('the printing press', 'Pay for the state with the printing press.', '', '',
+    "RO.add(Q, {bread: 1});",
+    "The Treasury will print what the state costs. It is the easiest way to pay, and every month it is a little less so."),
+   ('taxes on war profits and a Liberty Loan', 'Tax war profits and the rich, and float a Liberty Loan.', '', '',
+    "RO.add(Q, {ruble: 4, rel_kad: -4, ant_kad: 6}); RO.boost(Q, {middle: -2, workers: 2});",
+    "An excess-profits tax was passed, and the Liberty Loan was advertised on every hoarding. The banks call it confiscation; the ruble has steadied."),
+   ('Allied credits', 'Borrow from the Allies, on their terms.', 'at_war = 1', 'There is no war for the Allies to lend to.',
+    "RO.add(Q, {ruble: 5, rel_bol: -3, war_weariness: 1, ant_bol: 6}); RO.boost(Q, {soldiers: -1});",
+    "London and Washington have opened credits to the Provisional Government. They expect the front to hold, and they have said so."),
+ ]),
  ('labour', 'Labour and industry', 'in_coalition = 1 and bol_regime = 0', [
    ('left to the employers', 'Leave industry to the employers.', '', '',
     "RO.add(Q, {ruble: 1}); RO.boost(Q, {workers: -2});",
@@ -109,7 +120,7 @@ view-if: (in_coalition = 1 and bol_regime = 0) or lsr_in_gov = 1
 
 [? if ant_kad >= 40 : The liberals are in an angry mood. ?][? if ant_gen >= 40 : The generals are muttering about the government. ?][? if ant_bol >= 40 and bol_regime = 0 : Pravda has begun to campaign against the cabinet. ?]Each camp that opposes a policy will first try sanctions, and then, if it is angry enough, take up arms: see the Opposition tab on the right. An unpopular law can be phased in gently, passed by decree, or, if the party is strong enough (its strength is shown there), passed and enforced against its opponents: the odds are shown for each camp, and a failure makes the camp angrier.
 
-Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Food: [+ pol_food : pol_food +]. Labour: [+ pol_labour : pol_labour +]. ?][? if at_war = 1 and in_coalition = 1 and bol_regime = 0 : The war: [+ pol_war : pol_war +]. ?]Order: [+ pol_order : pol_order +].
+Land: [+ pol_land : pol_land +]. [? if in_coalition = 1 and bol_regime = 0 : Food: [+ pol_food : pol_food +]. Finance: [+ pol_finance : pol_finance +]. Labour: [+ pol_labour : pol_labour +]. ?][? if at_war = 1 and in_coalition = 1 and bol_regime = 0 : The war: [+ pol_war : pol_war +]. ?]Order: [+ pol_order : pol_order +].
 ''')
     for key, title, when, settings in AREAS:
         for i, st in enumerate(settings):

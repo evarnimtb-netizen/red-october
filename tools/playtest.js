@@ -63,7 +63,7 @@ function playOne(idx) {
     var sid = eng.state.sceneId;
     maxwf = Math.max(maxwf, eng.state.qualities.white_front || 0);
     scenes.push(sid);
-    var watch = {'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1, 'sr_programme_1919': 1};
+    var watch = {alt_armistice: 1, alt_recovery: 1, alt_republic: 1, 'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1, 'sr_programme_1919': 1};
     if (watch[sid] && !snaps[sid]) {
       var qq = eng.state.qualities;
       snaps[sid] = {G: Math.round(RO.grievance(qq)), bol: Math.round(qq.bolshevik), rt: Math.round(qq.right_threat), army: Math.round(qq.army_discipline), power: Math.round(RO.bolPower(qq)), war: Math.round(qq.war_weariness), bread: Math.round(qq.bread), land: Math.round(qq.land_pressure), ruble: Math.round(qq.ruble), sd: Math.round(qq.soviet_democracy), men: Math.round(qq.player_poll), mil: qq.militia, rr: Math.round(RO.kornilovResistance(qq, 10)), kf: Math.round(RO.kornilovForce(qq)), relsr: Math.round(qq.rel_ally), relbol: Math.round(qq.rel_bol), rep: Math.round(qq.repression), wf: Math.round(qq.white_front), red: Math.round(qq.red_army), bpow: Math.round(qq.bol_power || 0), po: qq.peasant_organised || 0, homog: qq.homogeneous_gov, ca: qq.ca_elected, lc: qq.land_committees, ak: Math.round(qq.ant_kad), ag: Math.round(qq.ant_gen), ab: Math.round(qq.ant_bol), st: Math.round(RO.strength(qq)), od: Math.round(100 * RO.squashOdds(qq, 'kad')), odg: Math.round(100 * RO.squashOdds(qq, 'gen'))};
