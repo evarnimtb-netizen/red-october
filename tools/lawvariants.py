@@ -30,19 +30,38 @@ def law_name(label):
     return re.sub(r'\s*\([^)]*\)\s*$', '', label).strip().rstrip('.')
 
 
-INTRO = ("How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. "
-         "By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.")
+# The Cabinet passes laws; the deck cards are measures the party may only campaign for (and, under the Bolsheviks,
+# there is nobody the party can break by force, so the force option is offered only before October).
+WORDS = {
+    'law': {
+        'intro': ("How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. "
+                  "By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them."),
+        'slow': 'Phase it in, with compensation and negotiation.', 'decree': 'Pass it by decree, as written.',
+        'force': 'Pass it by decree, and break any opposition by force.',
+        'slow_sub': 'Milder effects and little anger. Costs 1 resource.', 'decree_sub': 'The law as written. Its opponents will answer.',
+        'slow_note': '(It was phased in, with compensation where it was owed.)'},
+    'measure': {
+        'intro': ("How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. "
+                  "In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents."),
+        'slow': 'Go about it cautiously, with compromises.', 'decree': 'Carry it out in full.',
+        'force': 'Carry it out in full, and break any opposition by force.',
+        'slow_sub': 'Milder effects and little anger. Costs 1 resource.', 'decree_sub': 'All that it says. Its opponents will answer.',
+        'slow_note': '(It was done cautiously, with compromises.)'},
+}
+INTRO = WORDS['law']['intro']
 
 
-def variants(name, head, js, text, tail, prefix, back=False, intro=INTRO, label=''):
-    """head: header lines of the router (view-if, choose-if...); prefix(style): JS run before the effects; tail: lines after the text."""
+def variants(name, head, js, text, tail, prefix, back=False, intro=None, label='', kind='law'):
+    """head: header lines of the router (view-if, choose-if...); prefix(style): JS run before the effects; tail: lines after the text.
+    kind: 'law' (the Cabinet) or 'measure' (a deck card)."""
+    w = WORDS[kind]
     camps = law_camps(js)
     odds = ', '.join('%s [+ odds_%s +]%%' % (NAMES[k], k) for k in camps)
     out = []
-    r = ['@%s' % name] + head + ['', intro, '',
-         '- @%s_slow: Phase it in, with compensation and negotiation.' % name,
-         '- @%s_decree: Pass it by decree, as written.' % name,
-         '- @%s_force: Pass it by decree, and break any opposition by force.' % name]
+    r = ['@%s' % name] + head + ['', intro or w['intro'], '',
+         '- @%s_slow: %s' % (name, w['slow']),
+         '- @%s_decree: %s' % (name, w['decree']),
+         '- @%s_force: %s' % (name, w['force'])]
     if back:
         r.append('- @root: Think again.')
     out.append('\n'.join(r) + '\n')
@@ -60,11 +79,10 @@ RO.law(Q, '%s', () => {
 
 %s
 ''' % (name, style, '\n'.join(head2), prefix(style), style, js, json.dumps(law_name(label)), text2, tail)
-    out.append(block('slow', ['choose-if: resources >= 1', 'subtitle: Milder effects and little anger. Costs 1 resource.',
-                              'unavailable-subtitle: We have nothing to pay the compensation with.'],
-                     text + ' It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.'))
-    out.append(block('decree', ['subtitle: The law as written. Its opponents will answer.'], text))
-    out.append(block('force', ['choose-if: strength >= 18',
-                               'subtitle: Chance of breaking its opponents: %s. A camp under 45%% is too strong to touch, and is left alone.' % odds,
+    out.append(block('slow', ['choose-if: resources >= 1', 'subtitle: ' + w['slow_sub'],
+                              'unavailable-subtitle: We have nothing to pay the compensation with.'], text + ' ' + w['slow_note']))
+    out.append(block('decree', ['subtitle: ' + w['decree_sub']], text))
+    out.append(block('force', ['view-if: bol_regime = 0', 'choose-if: strength >= 18',
+                               'subtitle: Your chance of breaking each camp it angers: %s. Any camp under 45%% is too strong for you, and is left alone.' % odds,
                                'unavailable-subtitle: We lack the force and the allies to break the opposition.'], text + ' [+ law_text +]'))
     return '\n'.join(out)

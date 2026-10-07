@@ -12,7 +12,7 @@ On 13 March the first assembly of authorised factory representatives met in Petr
 
 The movement spread to Moscow and a dozen other cities by the spring. In June it will be dispersed.
 
-- @endorse: Endorse the assemblies, as the party did on 7 April.
+- @endorse: Endorse the assemblies.
 - @ignore: Leave them to the workers.
 
 @endorse
@@ -23,7 +23,7 @@ RO.fac(Q, 'unions', 1, -1);
 Q.endorsed_reps = 1;
 !}
 
-The party's Central Committee endorsed the assemblies on 7 April. A number of our members were elected as delegates, and several were arrested within the month.
+The party's Central Committee endorsed the assemblies. A number of our members were elected as delegates, and several were arrested within the month.
 
 @ignore
 on-arrival: {!

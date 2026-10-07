@@ -2,7 +2,7 @@ title: Chernov Leaves the Government
 subtitle: The Kadets' price.
 new-page: true
 tags: event
-view-if: player_party = 'sr' and dix >= 15 and chernov_gov = 1
+view-if: bol_regime = 0 and player_party = 'sr' and dix >= 15 and chernov_gov = 1
 priority: 15
 max-visits: 1
 

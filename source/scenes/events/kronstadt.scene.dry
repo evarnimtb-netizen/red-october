@@ -45,7 +45,7 @@ Q.kronstadt_stance = 2;
 Q.members -= 10 * Q.mem_scale;
 !}
 
-Our party's leaflets called on the government to negotiate with Kronstadt on the basis of its fifteen demands, which are close to our own. The Cheka made arrests within the week. Kronstadt fell on 18 March.
+Our party's leaflets called on the government to negotiate with Kronstadt on the basis of its fifteen demands, which are close to our own. The Cheka made arrests within the week. Kronstadt will not hold out for long.
 
 @quiet
 on-arrival: {!

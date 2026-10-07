@@ -1,13 +1,13 @@
 title: Money and the Market
 card-image: img/cards/money.svg?v=2
-subtitle: The ruble under War Communism.
+subtitle: The ruble, the market and the peasants.
 new-page: true
 is-card: true
 tags: soviet_affairs
 view-if: money_timer <= 0 and bol_regime = 1 and dix >= 30
 on-arrival: month_actions += 1; money_timer = 3
 
-The ruble is printed by the trainload and is worth less than the paper. Wages are paid in rations; the peasants sell to the black market or not at all. The party can still say, and sometimes do, something about it. (The ruble: [+ ruble : ruble +].)
+[? if dix < 108 : The ruble is printed by the trainload and is worth less than the paper. Wages are paid in rations; the peasants sell to the black market or not at all. ?][? if dix >= 108 : The New Economic Policy has brought back the market, but not yet a currency anyone trusts. ?] The party can still say, and sometimes do, something about it. (The ruble: [+ ruble : ruble +].)
 
 - @market: Campaign for a free grain market in place of requisitioning.
 - @coops: Rebuild the cooperatives, which still trade with the villages.
@@ -15,12 +15,13 @@ The ruble is printed by the trainload and is worth less than the paper. Wages ar
 - @easy_discard
 
 @market
+view-if: dix < 108
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @market_slow: Phase it in, with compensation and negotiation.
-- @market_decree: Pass it by decree, as written.
-- @market_force: Pass it by decree, and break any opposition by force.
+- @market_slow: Go about it cautiously, with compromises.
+- @market_decree: Carry it out in full.
+- @market_force: Carry it out in full, and break any opposition by force.
 
 @market_slow
 choose-if: resources >= 1
@@ -34,12 +35,12 @@ RO.boost(Q, {peasants: 3, workers: 1});
 }, "Campaign for a free grain market in place of requisitioning");
 !}
 
-The party's resolutions for a free grain market were read out at every congress that would hear them. In the provinces where the local authorities listened, grain came to market and the ruble was worth something again. In Moscow, the Cheka took note. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The party's resolutions for a free grain market were read out at every congress that would hear them. In the provinces where the local authorities listened, grain came to market and the ruble was worth something again. In Moscow, the Cheka took note. (It was done cautiously, with compromises.)
 
 
 
 @market_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -53,8 +54,9 @@ The party's resolutions for a free grain market were read out at every congress 
 
 
 @market_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Bolsheviks [+ odds_bol +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

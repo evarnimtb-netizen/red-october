@@ -16,11 +16,11 @@ The peasants want the landlords' land, and some of them are taking it. The SR mi
 
 @committees
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @committees_slow: Phase it in, with compensation and negotiation.
-- @committees_decree: Pass it by decree, as written.
-- @committees_force: Pass it by decree, and break any opposition by force.
+- @committees_slow: Go about it cautiously, with compromises.
+- @committees_decree: Carry it out in full.
+- @committees_force: Carry it out in full, and break any opposition by force.
 
 @committees_slow
 choose-if: resources >= 1
@@ -35,12 +35,12 @@ Q.land_committees = (Q.land_committees || 0) + 1;
 }, "Back the land committees' temporary transfers now");
 !}
 
-The land committees regulate the transfers of land until the Assembly meets. Landowners are alarmed, and so are their friends in the officer corps. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The land committees regulate the transfers of land until the Assembly meets. Landowners are alarmed, and so are their friends in the officer corps. (It was done cautiously, with compromises.)
 
 
 
 @committees_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -55,8 +55,9 @@ The land committees regulate the transfers of land until the Assembly meets. Lan
 
 
 @committees_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -79,11 +80,11 @@ The land question will be settled by the Constituent Assembly. The peasants say 
 
 @reform
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @reform_slow: Phase it in, with compensation and negotiation.
-- @reform_decree: Pass it by decree, as written.
-- @reform_force: Pass it by decree, and break any opposition by force.
+- @reform_slow: Go about it cautiously, with compromises.
+- @reform_decree: Carry it out in full.
+- @reform_force: Carry it out in full, and break any opposition by force.
 
 @reform_slow
 choose-if: resources >= 1
@@ -98,12 +99,12 @@ Q.land_committees = (Q.land_committees || 0) + 1;
 }, "Move state and Church lands to the committees at once");
 !}
 
-State, appanage and Church lands were put at the committees' disposal. The private estates are still untouched. It is a gesture, and the peasants know it. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+State, appanage and Church lands were put at the committees' disposal. The private estates are still untouched. It is a gesture, and the peasants know it. (It was done cautiously, with compromises.)
 
 
 
 @reform_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -118,8 +119,9 @@ State, appanage and Church lands were put at the committees' disposal. The priva
 
 
 @reform_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

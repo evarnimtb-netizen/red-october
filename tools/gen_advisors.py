@@ -182,7 +182,9 @@ is-pinned-card: true
 card-image: img/cards/council.svg?v=2
 tags: advisor
 new-page: true
-view-if: adv_reserve >= 1 and council_timer <= 0
+view-if: adv_reserve >= 1
+choose-if: council_timer <= 0
+unavailable-subtitle: The council was changed recently. It can be changed again three months after the last change.
 on-arrival: {!
 RO.syncAdvisors(Q);
 !}
@@ -201,6 +203,7 @@ You listen to four advisors at a time; the others wait in the corridor. Each adv
     lines.append('- @root: Return to main')
     lines.append('')
     lines.append('''@shuffle
+new-page: true
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
 RO.reshuffleCouncil(Q);
@@ -231,6 +234,7 @@ Who should give up a seat on the council?
     for k, v in table.items():
         lines.append('''@out_%s
 view-if: on_%s = 1
+new-page: true
 subtitle: Gives up: %s
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -263,6 +267,7 @@ Who should take the seat?
     for k, v in table.items():
         lines.append('''@in_%s
 view-if: avail_%s = 1 and on_%s = 0
+new-page: true
 subtitle: Offers: %s
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -274,6 +279,7 @@ RO.swapAdvisor(Q, '%s', Q.adv_out);
 - @root: Continue.
 ''' % (k, k, k, v[2], k, v[0]))
     lines.append('''@in_random
+new-page: true
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
 RO.replaceAdvisor(Q, Q.adv_out);
@@ -307,6 +313,7 @@ def main():
         if cond:
             un += '[? if not (' + cond + ') : ' + unavail + ' ?]'
         text = f"""title: {title}
+subtitle: {offers([(atitle, asub)])}
 is-pinned-card: true
 card-image: {card_image(aid)}
 tags: advisor, {tag}
@@ -368,6 +375,7 @@ Q.month_actions += 1;
 
 """
         text = f"""title: {title}
+subtitle: {offers([(a[0], a[1]) for a in actions])}
 is-pinned-card: true
 card-image: {card_image(aid)}
 tags: advisor, {tag}

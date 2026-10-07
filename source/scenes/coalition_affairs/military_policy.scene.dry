@@ -16,11 +16,11 @@ Order No. 1 gave the soldiers' committees power over their units. The army is he
 
 @authority
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @authority_slow: Phase it in, with compensation and negotiation.
-- @authority_decree: Pass it by decree, as written.
-- @authority_force: Pass it by decree, and break any opposition by force.
+- @authority_slow: Go about it cautiously, with compromises.
+- @authority_decree: Carry it out in full.
+- @authority_force: Carry it out in full, and break any opposition by force.
 
 @authority_slow
 choose-if: resources >= 1
@@ -36,12 +36,12 @@ RO.fac(Q, 'intl', 0, 2);
 }, "Restore officers' authority; keep the committees only for supply");
 !}
 
-Officers regained their authority over operational orders. The committees have been told to concern themselves with food and boots. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+Officers regained their authority over operational orders. The committees have been told to concern themselves with food and boots. (It was done cautiously, with compromises.)
 
 
 
 @authority_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -57,8 +57,9 @@ Officers regained their authority over operational orders. The committees have b
 
 
 @authority_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -74,11 +75,11 @@ Officers regained their authority over operational orders. The committees have b
 
 @trust
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @trust_slow: Phase it in, with compensation and negotiation.
-- @trust_decree: Pass it by decree, as written.
-- @trust_force: Pass it by decree, and break any opposition by force.
+- @trust_slow: Go about it cautiously, with compromises.
+- @trust_decree: Carry it out in full.
+- @trust_force: Carry it out in full, and break any opposition by force.
 
 @trust_slow
 choose-if: resources >= 1
@@ -93,12 +94,12 @@ RO.fac(Q, 'rightdef', 0, 3);
 }, "Trust the committees and send commissars to every unit");
 !}
 
-Government commissars now sit with the committees in every regiment. The soldiers like the arrangement more than the officers do. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+Government commissars now sit with the committees in every regiment. The soldiers like the arrangement more than the officers do. (It was done cautiously, with compromises.)
 
 
 
 @trust_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -113,8 +114,9 @@ Government commissars now sit with the committees in every regiment. The soldier
 
 
 @trust_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -129,11 +131,11 @@ Government commissars now sit with the committees in every regiment. The soldier
 
 @death_penalty
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @death_penalty_slow: Phase it in, with compensation and negotiation.
-- @death_penalty_decree: Pass it by decree, as written.
-- @death_penalty_force: Pass it by decree, and break any opposition by force.
+- @death_penalty_slow: Go about it cautiously, with compromises.
+- @death_penalty_decree: Carry it out in full.
+- @death_penalty_force: Carry it out in full, and break any opposition by force.
 
 @death_penalty_slow
 choose-if: resources >= 1
@@ -149,12 +151,12 @@ RO.fac(Q, 'defencist', 0, 2);
 }, "Restore the death penalty at the front");
 !}
 
-The death penalty at the front was restored for desertion and treason. The Bolshevik press called it "the gallows of the Menshevik ministers". It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The death penalty at the front was restored for desertion and treason. The Bolshevik press called it "the gallows of the Menshevik ministers". (It was done cautiously, with compromises.)
 
 
 
 @death_penalty_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -170,8 +172,9 @@ The death penalty at the front was restored for desertion and treason. The Bolsh
 
 
 @death_penalty_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

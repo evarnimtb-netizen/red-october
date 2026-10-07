@@ -1,6 +1,6 @@
 title: The Spring Soviet Elections
 face-image: img/events/spring_elections.jpg
-subtitle: Nineteen of thirty.
+subtitle: The provincial capitals vote.
 new-page: true
 tags: event
 view-if: dix >= 30 and bol_regime = 1
@@ -18,7 +18,7 @@ Q.poll_men_d = Math.round(Q.res_men);
 
 = The Spring Soviet Elections
 
-During the spring of 1918, soviets across Russia held new elections. The Bolsheviks had expected to win; in a majority of the provincial capitals they did not. In the cities where the Soviet government had been recognised, the opposition (the Mensheviks, the SRs and their allies) won majorities in [+ capitals_won +] of the 30 provincial capitals where elections were held. In the second half of the spring, the new soviets were dispersed by force, on the ground that the "mood of the masses had been misread".
+During the spring of 1918, soviets across Russia held new elections. The Bolsheviks had expected to win everywhere. In the cities where the Soviet government had been recognised, the opposition (the Mensheviks, the SRs and their allies) won majorities in [+ capitals_won +] of the 30 provincial capitals where elections were held. In the second half of the spring, the new soviets were dispersed by force, on the ground that the "mood of the masses had been misread".
 
 By our count, the vote was:
 

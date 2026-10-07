@@ -17,7 +17,7 @@ Q.fault_text = RO.fault(Q, 'brest');
 
 On 3 March the Soviet government signed the Treaty of Brest-Litovsk with Germany and her allies: Russia lost Poland, the Baltic provinces, Ukraine and a quarter of her population, and a third of her industry. Lenin had to threaten to resign to get it ratified: Trotsky's formula, "neither war nor peace", had failed and the Germans had advanced on Petrograd.
 
-Martov and Kamkov, the Left SR leader, both spoke against ratification. The Left SRs left the government on 19 March, over the treaty; the Soviet Congress ratified the treaty by 784 votes to 261. The war with Germany is over, for now.
+Martov and Kamkov, the Left SR leader, both spoke against ratification.[? if player_party != 'lsr' : The Left SRs left the government on 19 March, over the treaty; ?] The Soviet Congress ratified the treaty by 784 votes to 261. The war with Germany is over, for now.
 
 [? if fault_flag = 1 : [+ fault_text +] ?]
 

@@ -4,7 +4,9 @@ is-pinned-card: true
 card-image: img/cards/council.svg?v=2
 tags: advisor
 new-page: true
-view-if: adv_reserve >= 1 and council_timer <= 0
+view-if: adv_reserve >= 1
+choose-if: council_timer <= 0
+unavailable-subtitle: The council was changed recently. It can be changed again three months after the last change.
 on-arrival: {!
 RO.syncAdvisors(Q);
 !}
@@ -77,6 +79,7 @@ You listen to four advisors at a time; the others wait in the corridor. Each adv
 - @root: Return to main
 
 @shuffle
+new-page: true
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
 RO.reshuffleCouncil(Q);
@@ -1335,6 +1338,7 @@ Who should give up a seat on the council?
 
 @out_martov
 view-if: on_martov = 1
+new-page: true
 subtitle: Gives up: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1347,6 +1351,7 @@ Julius Martov has gone back to the party's work, and [+ adv_in_name +] has taken
 
 @out_dan
 view-if: on_dan = 1
+new-page: true
 subtitle: Gives up: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1359,6 +1364,7 @@ Fyodor Dan has gone back to the party's work, and [+ adv_in_name +] has taken th
 
 @out_tsereteli
 view-if: on_tsereteli = 1
+new-page: true
 subtitle: Gives up: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1371,6 +1377,7 @@ Irakli Tsereteli has gone back to the party's work, and [+ adv_in_name +] has ta
 
 @out_chkheidze
 view-if: on_chkheidze = 1
+new-page: true
 subtitle: Gives up: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1383,6 +1390,7 @@ Nikolai Chkheidze has gone back to the party's work, and [+ adv_in_name +] has t
 
 @out_skobelev
 view-if: on_skobelev = 1
+new-page: true
 subtitle: Gives up: Labour Arbitration (Skobelev settles a strike through conciliation boards)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1395,6 +1403,7 @@ Matvei Skobelev has gone back to the party's work, and [+ adv_in_name +] has tak
 
 @out_gvozdev
 view-if: on_gvozdev = 1
+new-page: true
 subtitle: Gives up: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1407,6 +1416,7 @@ Kuzma Gvozdev has gone back to the party's work, and [+ adv_in_name +] has taken
 
 @out_potresov
 view-if: on_potresov = 1
+new-page: true
 subtitle: Gives up: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1419,6 +1429,7 @@ Alexander Potresov has gone back to the party's work, and [+ adv_in_name +] has 
 
 @out_axelrod
 view-if: on_axelrod = 1
+new-page: true
 subtitle: Gives up: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1431,6 +1442,7 @@ Pavel Axelrod has gone back to the party's work, and [+ adv_in_name +] has taken
 
 @out_abramovich
 view-if: on_abramovich = 1
+new-page: true
 subtitle: Gives up: Bridge-Builder (Abramovich eases tension between the party currents)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1443,6 +1455,7 @@ Raphael Abramovich has gone back to the party's work, and [+ adv_in_name +] has 
 
 @out_liber
 view-if: on_liber = 1
+new-page: true
 subtitle: Gives up: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1455,6 +1468,7 @@ Mikhail Liber has gone back to the party's work, and [+ adv_in_name +] has taken
 
 @out_broido
 view-if: on_broido = 1
+new-page: true
 subtitle: Gives up: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1467,6 +1481,7 @@ Eva Broido has gone back to the party's work, and [+ adv_in_name +] has taken th
 
 @out_lidia
 view-if: on_lidia = 1
+new-page: true
 subtitle: Gives up: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1479,6 +1494,7 @@ Lidia Dan has gone back to the party's work, and [+ adv_in_name +] has taken the
 
 @out_sukhanov
 view-if: on_sukhanov = 1
+new-page: true
 subtitle: Gives up: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1491,6 +1507,7 @@ Nikolai Sukhanov has gone back to the party's work, and [+ adv_in_name +] has ta
 
 @out_batursky
 view-if: on_batursky = 1
+new-page: true
 subtitle: Gives up: Independent Unions (Batursky builds union influence and argues the case for independence)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1503,6 +1520,7 @@ Boris Batursky has gone back to the party's work, and [+ adv_in_name +] has take
 
 @out_khinchuk
 view-if: on_khinchuk = 1
+new-page: true
 subtitle: Gives up: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1515,6 +1533,7 @@ Lev Khinchuk has gone back to the party's work, and [+ adv_in_name +] has taken 
 
 @out_zhordania
 view-if: on_zhordania = 1
+new-page: true
 subtitle: Gives up: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1527,6 +1546,7 @@ Noe Zhordania has gone back to the party's work, and [+ adv_in_name +] has taken
 
 @out_chernov
 view-if: on_chernov = 1
+new-page: true
 subtitle: Gives up: Land Socialisation (Chernov pushes the land law forward)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1539,6 +1559,7 @@ Viktor Chernov has gone back to the party's work, and [+ adv_in_name +] has take
 
 @out_avksentiev
 view-if: on_avksentiev = 1
+new-page: true
 subtitle: Gives up: Order and Republic (Avksentiev steadies the government, and angers the left)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1551,6 +1572,7 @@ Nikolai Avksentiev has gone back to the party's work, and [+ adv_in_name +] has 
 
 @out_breshkovskaya
 view-if: on_breshkovskaya = 1
+new-page: true
 subtitle: Gives up: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1563,6 +1585,7 @@ Ekaterina Breshko-Breshkovskaya has gone back to the party's work, and [+ adv_in
 
 @out_gots
 view-if: on_gots = 1
+new-page: true
 subtitle: Gives up: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1575,6 +1598,7 @@ Abram Gots has gone back to the party's work, and [+ adv_in_name +] has taken th
 
 @out_zenzinov
 view-if: on_zenzinov = 1
+new-page: true
 subtitle: Gives up: Party Machine (Zenzinov builds the party's organisation and its membership)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1587,6 +1611,7 @@ Vladimir Zenzinov has gone back to the party's work, and [+ adv_in_name +] has t
 
 @out_volsky
 view-if: on_volsky = 1
+new-page: true
 subtitle: Gives up: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1599,6 +1624,7 @@ Vladimir Volsky has gone back to the party's work, and [+ adv_in_name +] has tak
 
 @out_spiridonova
 view-if: on_spiridonova = 1
+new-page: true
 subtitle: Gives up: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1611,6 +1637,7 @@ Maria Spiridonova has gone back to the party's work, and [+ adv_in_name +] has t
 
 @out_kamkov
 view-if: on_kamkov = 1
+new-page: true
 subtitle: Gives up: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1623,6 +1650,7 @@ Boris Kamkov has gone back to the party's work, and [+ adv_in_name +] has taken 
 
 @out_natanson
 view-if: on_natanson = 1
+new-page: true
 subtitle: Gives up: Elder's Authority (Natanson's authority calms the party's quarrels)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1635,6 +1663,7 @@ Mark Natanson has gone back to the party's work, and [+ adv_in_name +] has taken
 
 @out_steinberg
 view-if: on_steinberg = 1
+new-page: true
 subtitle: Gives up: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1647,6 +1676,7 @@ Isaac Steinberg has gone back to the party's work, and [+ adv_in_name +] has tak
 
 @out_kolegaev
 view-if: on_kolegaev = 1
+new-page: true
 subtitle: Gives up: Land Decree (Kolegaev carries out the redistribution of land)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1659,6 +1689,7 @@ Andrei Kolegaev has gone back to the party's work, and [+ adv_in_name +] has tak
 
 @out_proshian
 view-if: on_proshian = 1
+new-page: true
 subtitle: Gives up: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -1671,6 +1702,7 @@ Prosh Proshian has gone back to the party's work, and [+ adv_in_name +] has take
 
 @out_aleksandrovich
 view-if: on_aleksandrovich = 1
+new-page: true
 subtitle: Gives up: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -2959,6 +2991,7 @@ Who should take the seat?
 
 @in_martov
 view-if: avail_martov = 1 and on_martov = 0
+new-page: true
 subtitle: Offers: All-Socialist Government (Martov opens talks with the SRs, Left SRs and moderate Bolsheviks)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -2971,6 +3004,7 @@ RO.swapAdvisor(Q, 'martov', Q.adv_out);
 
 @in_dan
 view-if: avail_dan = 1 and on_dan = 0
+new-page: true
 subtitle: Offers: Soviet Floor Manager (Dan whips the votes in the Soviet and prepares the speeches)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -2983,6 +3017,7 @@ RO.swapAdvisor(Q, 'dan', Q.adv_out);
 
 @in_tsereteli
 view-if: avail_tsereteli = 1 and on_tsereteli = 0
+new-page: true
 subtitle: Offers: Coalition Broker (Tsereteli keeps the cabinet together and smooths over disputes with the Kadets)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -2995,6 +3030,7 @@ RO.swapAdvisor(Q, 'tsereteli', Q.adv_out);
 
 @in_chkheidze
 view-if: avail_chkheidze = 1 and on_chkheidze = 0
+new-page: true
 subtitle: Offers: Chairman's Gavel (Chkheidze calms a split or steers a Soviet session)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3007,6 +3043,7 @@ RO.swapAdvisor(Q, 'chkheidze', Q.adv_out);
 
 @in_skobelev
 view-if: avail_skobelev = 1 and on_skobelev = 0
+new-page: true
 subtitle: Offers: Labour Arbitration (Skobelev settles a strike through conciliation boards)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3019,6 +3056,7 @@ RO.swapAdvisor(Q, 'skobelev', Q.adv_out);
 
 @in_gvozdev
 view-if: avail_gvozdev = 1 and on_gvozdev = 0
+new-page: true
 subtitle: Offers: Defence-Industry Pact (Gvozdev wins the war-industry workers' loyalty, at some cost among the radical ones)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3031,6 +3069,7 @@ RO.swapAdvisor(Q, 'gvozdev', Q.adv_out);
 
 @in_potresov
 view-if: avail_potresov = 1 and on_potresov = 0
+new-page: true
 subtitle: Offers: Den Editorial (Potresov writes a sharp editorial against the Bolsheviks)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3043,6 +3082,7 @@ RO.swapAdvisor(Q, 'potresov', Q.adv_out);
 
 @in_axelrod
 view-if: avail_axelrod = 1 and on_axelrod = 0
+new-page: true
 subtitle: Offers: Western Socialist Network (Axelrod lobbies the Western socialists for pressure and aid)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3055,6 +3095,7 @@ RO.swapAdvisor(Q, 'axelrod', Q.adv_out);
 
 @in_abramovich
 view-if: avail_abramovich = 1 and on_abramovich = 0
+new-page: true
 subtitle: Offers: Bridge-Builder (Abramovich eases tension between the party currents)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3067,6 +3108,7 @@ RO.swapAdvisor(Q, 'abramovich', Q.adv_out);
 
 @in_liber
 view-if: avail_liber = 1 and on_liber = 0
+new-page: true
 subtitle: Offers: Jewish Workers' Link (Liber rallies the Jewish workers' organisations)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3079,6 +3121,7 @@ RO.swapAdvisor(Q, 'liber', Q.adv_out);
 
 @in_broido
 view-if: avail_broido = 1 and on_broido = 0
+new-page: true
 subtitle: Offers: Party Secretary (Broido strengthens the party's organisation and its work among women workers)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3091,6 +3134,7 @@ RO.swapAdvisor(Q, 'broido', Q.adv_out);
 
 @in_lidia
 view-if: avail_lidia = 1 and on_lidia = 0
+new-page: true
 subtitle: Offers: Family Bridge (Lidia Dan mediates between the Martov and Dan circles)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3103,6 +3147,7 @@ RO.swapAdvisor(Q, 'lidia', Q.adv_out);
 
 @in_sukhanov
 view-if: avail_sukhanov = 1 and on_sukhanov = 0
+new-page: true
 subtitle: Offers: Insider Chronicler (Sukhanov's table talk reveals what the other parties intend)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3115,6 +3160,7 @@ RO.swapAdvisor(Q, 'sukhanov', Q.adv_out);
 
 @in_batursky
 view-if: avail_batursky = 1 and on_batursky = 0
+new-page: true
 subtitle: Offers: Independent Unions (Batursky builds union influence and argues the case for independence)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3127,6 +3173,7 @@ RO.swapAdvisor(Q, 'batursky', Q.adv_out);
 
 @in_khinchuk
 view-if: avail_khinchuk = 1 and on_khinchuk = 0
+new-page: true
 subtitle: Offers: Moscow Machine (Khinchuk mobilises food and cooperative networks in Moscow)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3139,6 +3186,7 @@ RO.swapAdvisor(Q, 'khinchuk', Q.adv_out);
 
 @in_zhordania
 view-if: avail_zhordania = 1 and on_zhordania = 0
+new-page: true
 subtitle: Offers: Georgian Model (Zhordania offers Georgia as a model of democratic socialism, and as a refuge)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3151,6 +3199,7 @@ RO.swapAdvisor(Q, 'zhordania', Q.adv_out);
 
 @in_chernov
 view-if: avail_chernov = 1 and on_chernov = 0
+new-page: true
 subtitle: Offers: Land Socialisation (Chernov pushes the land law forward)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3163,6 +3212,7 @@ RO.swapAdvisor(Q, 'chernov', Q.adv_out);
 
 @in_avksentiev
 view-if: avail_avksentiev = 1 and on_avksentiev = 0
+new-page: true
 subtitle: Offers: Order and Republic (Avksentiev steadies the government, and angers the left)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3175,6 +3225,7 @@ RO.swapAdvisor(Q, 'avksentiev', Q.adv_out);
 
 @in_breshkovskaya
 view-if: avail_breshkovskaya = 1 and on_breshkovskaya = 0
+new-page: true
 subtitle: Offers: Founding Prestige (The grandmother of the revolution speaks to the peasants and the soldiers)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3187,6 +3238,7 @@ RO.swapAdvisor(Q, 'breshkovskaya', Q.adv_out);
 
 @in_gots
 view-if: avail_gots = 1 and on_gots = 0
+new-page: true
 subtitle: Offers: Soviet Majority (Gots votes the SR delegations together with the Mensheviks)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3199,6 +3251,7 @@ RO.swapAdvisor(Q, 'gots', Q.adv_out);
 
 @in_zenzinov
 view-if: avail_zenzinov = 1 and on_zenzinov = 0
+new-page: true
 subtitle: Offers: Party Machine (Zenzinov builds the party's organisation and its membership)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3211,6 +3264,7 @@ RO.swapAdvisor(Q, 'zenzinov', Q.adv_out);
 
 @in_volsky
 view-if: avail_volsky = 1 and on_volsky = 0
+new-page: true
 subtitle: Offers: Komuch (Volsky builds a government on the Volga with an armed force); Compromise (Volsky opens talks with the soviets)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3223,6 +3277,7 @@ RO.swapAdvisor(Q, 'volsky', Q.adv_out);
 
 @in_spiridonova
 view-if: avail_spiridonova = 1 and on_spiridonova = 0
+new-page: true
 subtitle: Offers: Peasant Congress (Spiridonova turns the peasants' deputies to the left)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3235,6 +3290,7 @@ RO.swapAdvisor(Q, 'spiridonova', Q.adv_out);
 
 @in_kamkov
 view-if: avail_kamkov = 1 and on_kamkov = 0
+new-page: true
 subtitle: Offers: Against the Treaty (Kamkov rallies anti-Brest feeling among the soldiers and the peasants)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3247,6 +3303,7 @@ RO.swapAdvisor(Q, 'kamkov', Q.adv_out);
 
 @in_natanson
 view-if: avail_natanson = 1 and on_natanson = 0
+new-page: true
 subtitle: Offers: Elder's Authority (Natanson's authority calms the party's quarrels)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3259,6 +3316,7 @@ RO.swapAdvisor(Q, 'natanson', Q.adv_out);
 
 @in_steinberg
 view-if: avail_steinberg = 1 and on_steinberg = 0
+new-page: true
 subtitle: Offers: Revolutionary Legality (Steinberg fights the Cheka's powers from inside the government)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3271,6 +3329,7 @@ RO.swapAdvisor(Q, 'steinberg', Q.adv_out);
 
 @in_kolegaev
 view-if: avail_kolegaev = 1 and on_kolegaev = 0
+new-page: true
 subtitle: Offers: Land Decree (Kolegaev carries out the redistribution of land)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3283,6 +3342,7 @@ RO.swapAdvisor(Q, 'kolegaev', Q.adv_out);
 
 @in_proshian
 view-if: avail_proshian = 1 and on_proshian = 0
+new-page: true
 subtitle: Offers: Telegraph Lines (Proshian's telegraph network carries news and the party's organisation)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3295,6 +3355,7 @@ RO.swapAdvisor(Q, 'proshian', Q.adv_out);
 
 @in_aleksandrovich
 view-if: avail_aleksandrovich = 1 and on_aleksandrovich = 0
+new-page: true
 subtitle: Offers: Inside the Cheka (Aleksandrovich blocks a wave of arrests before it begins)
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
@@ -3306,6 +3367,7 @@ RO.swapAdvisor(Q, 'aleksandrovich', Q.adv_out);
 - @root: Continue.
 
 @in_random
+new-page: true
 on-arrival: {!
 Q.month_actions += 1; Q.council_timer = 3;
 RO.replaceAdvisor(Q, Q.adv_out);

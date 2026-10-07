@@ -313,7 +313,8 @@ var RO = (function() {
       Q.army_discipline -= 1.3 * tl;
       if (!Q.land_decree) { Q.land_pressure += 2.2 * tl; }
     } else {
-      Q.war_weariness += (Q.bol_regime ? 0.5 : 0.2) * tl;
+      // the Civil War wears on until Wrangel leaves the Crimea (November 1920); then the country begins to rest
+      Q.war_weariness += (Q.bol_regime ? (Q.dix >= 94 ? -1.5 : 0.5) : 0.2) * tl;
       Q.bread -= (Q.bol_regime ? 0.4 : 0.2) * tl;
       // without the war the ruble can recover: towards 50 under a republic, and under the Bolsheviks only once the
       // market is allowed back (the NEP, or the party's programme adopted early); War Communism prints it away

@@ -21,7 +21,7 @@ def main():
                 head = [l for l in m.group(1).split('\n') if l.strip()]
                 text = m.group(3).strip()
                 lm = re.search(r'^- @%s: (.+)$' % re.escape(name), s, re.M)
-                out.append(variants(name, head, m.group(2), text, '', lambda style: '', label=lm.group(1) if lm else '').rstrip('\n') + '\n')
+                out.append(variants(name, head, m.group(2), text, '', lambda style: '', label=lm.group(1) if lm else '', kind='measure').rstrip('\n') + '\n')
                 changed = True; n += 1
             else:
                 out.append(p)

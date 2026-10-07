@@ -23,7 +23,7 @@ The other side of the civil war has now shown its hand. A White Russia would be 
 
 [? if player_party = 'menshevik' : For the Mensheviks it is a sign that the policy of "neither side" is not so foolish after all, and that armed struggle against the Bolsheviks can only help the Whites. ?][? if player_party = 'sr' and armed_struggle = 1 : The party's own leaders sat in that Directory. It was the party's attempt to make a democratic government with the help of generals, foreign troops and Cossack atamans, and the generals have answered. ?][? if player_party = 'sr' and armed_struggle = 0 : The party had stayed out of the Directory, and its leaders in Moscow, though in prison, have not been shot by officers. ?]
 
-- @sr_pullout: Pull out of the Directory before the coup.
+- @sr_pullout: Pull the party's people out of Siberia and break with the Directory's remnants.
 - @sr_stay: Stay in the Directory.
 
 @sr_pullout

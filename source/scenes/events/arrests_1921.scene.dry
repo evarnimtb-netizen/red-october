@@ -21,4 +21,4 @@ In August 1921, the Cheka arrested most of the members of the public famine reli
 
 [? if player_party = 'menshevik' : Dan and Lidia Dan were arrested, and the remaining leaders of the party were arrested in the weeks that followed, by the hundred. The last legal opposition party in Russia is on the point of being dissolved. The party's leaders will be exiled in January 1922; the party's newspaper will be published in Berlin. ?][? if player_party = 'sr' : The SR leaders already in prison are being prepared for a trial: the Cheka has gathered thirty-four of them, among them Gots and Timofeev, and will charge them with the attempt on Lenin, with armed insurrection and with collusion with the Allies. The trial will be held in the summer of 1922, and will end with twelve death sentences, suspended. ?]
 
-The game ends in December.
+

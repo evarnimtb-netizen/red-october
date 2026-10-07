@@ -10,7 +10,7 @@ on-arrival: month_actions += 1; fundraising_timer = 4
 Dues are the party's lifeblood. They are paid in kopecks, in factories and in unions, and not always on time.
 
 - @dues: Ordinary dues. [? if dues_income <= 1 : (Few members are left to pay.) ?]
-- @appeal: A special appeal to the members.
+- @appeal: A special appeal to the members. (More money, but some members will drift away.)
 - @coops: Ask the cooperatives and the unions for support.
 - @easy_discard
 
@@ -24,18 +24,21 @@ The collectors made their rounds. The money arrives slowly, but it arrives.
 @appeal
 on-arrival: {!
 Q.resources += Math.max(2, Math.round(Q.dues_income * 1.5));
-RO.fac(Q, 'unions', 0, 2);
-RO.fac(Q, 'intl', 0, 2);
+// asking too much costs members, and patience in every current
+Q.members = Math.max(3, Q.members - 2 * Q.mem_scale);
+RO.fac(Q, 'unions', 0, 5);
+RO.fac(Q, 'intl', 0, 5);
+RO.fac(Q, 'defencist', 0, 3);
 !}
 
-A special appeal brought in more, and a few members complained about being asked.
+A special appeal brought in more. Some members complained about being asked, and some stopped coming to meetings.
 
 @coops
 view-if: unions_strength >= 5
 on-arrival: {!
 Q.resources += 2;
-RO.fac(Q, 'unions', 2, 0);
-RO.add(Q, {bread: 1});
+RO.fac(Q, 'unions', 3, 0);
+RO.add(Q, {bread: 2, ruble: 1});
 !}
 
 The cooperatives are friendly to us, and have lent a hall, some paper and a little money. The union leaders expect that we will remember it.

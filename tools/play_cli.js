@@ -26,7 +26,11 @@ compiler.convertJSONToGame(fs.readFileSync(path.join(__dirname, '..', 'out', 'ga
 
 function flat(x) {
   if (x === null || x === undefined) { return ''; }
-  if (typeof x === 'string' || typeof x === 'number') { return String(x); }
+  if (typeof x === 'string' || typeof x === 'number') {
+    // the web page draws charts in these placeholders; here they are only named
+    return String(x).replace(/<div class="parliament"[^>]*><\/div>/g, '[a parliament chart is drawn here in the browser]')
+                    .replace(/<div class="recap"><\/div>/g, '[the run in review is drawn here in the browser]').replace(/<[^>]+>/g, '');
+  }
   if (Array.isArray(x)) { return x.map(flat).join(''); }
   if (x.type === 'paragraph') { return flat(x.content) + '\n\n'; }
   if (x.type === 'heading') { return '== ' + flat(x.content) + ' ==\n\n'; }
@@ -67,10 +71,10 @@ function numbers() {
   if (!q.started) { return ''; }
   var date = (q.turn_length < 1 ? (q.half_month ? 'Late ' : 'Early ') : '') + MONTHS[q.month] + ' ' + q.year;
   var lines = ['--- ' + date + ' · ' + (q.pname || q.player_party) + ' ---',
-    'Resources ' + r(q.resources) + ' · Members ' + r(q.members) + ',000 · Legal status ' + ['banned', 'persecuted', 'harassed', 'legal'][Math.max(0, Math.min(3, r(q.legality)))] +
-      ' · Dissent ' + r(q.dissent * 100) + '% · Your support ' + r(q.player_poll) + '%',
+    'Resources ' + r(q.resources) + ' · Members ' + (r(q.members) * 1000).toLocaleString('en-GB') + (q.members >= (q.mem_cap || 400) - 0.5 ? ' (the most the party can hold)' : '') + ' · Legal status ' + ['banned', 'persecuted', 'harassed', 'legal'][Math.max(0, Math.min(3, r(q.legality)))] +
+      ' · Dissent ' + r(q.dissent * 100) + '% · Your support ' + r(q.player_poll) + '% (' + ({soviets: 'in the Congress of Soviets', assembly: 'in the Constituent Assembly', provincial: 'in the city soviets'})[RO.currentArena(q)] + ')',
     'Bread ' + r(q.bread) + ' · Ruble ' + r(q.ruble) + ' · War weariness ' + r(q.war_weariness) + ' · Army discipline ' + r(q.army_discipline) +
-      ' · Land pressure ' + r(q.land_pressure) + ' · Bolsheviks ' + r(q.bolshevik) + ' · Right ' + r(q.right_threat) + ' · Soviet democracy ' + r(q.soviet_democracy) +
+      ' · Land pressure ' + r(q.land_pressure) + (q.bol_regime ? '' : ' · Bolsheviks ' + r(q.bolshevik) + ' · Right ' + r(q.right_threat)) + ' · Soviet democracy ' + r(q.soviet_democracy) +
       (q.bol_regime ? ' · Repression ' + r(q.repression) + ' · White front ' + r(q.white_front) : ''),
     'In government: ' + (q.in_coalition && !q.bol_regime ? 'yes' : (q.lsr_in_gov ? 'a few commissariats' : 'no')) + ' · Bolshevik regime: ' + (q.bol_regime ? 'yes' : 'no') +
       ' · Relations: ally ' + r(q.rel_ally) + ', Bolsheviks ' + r(q.rel_bol) + ', Kadets ' + r(q.rel_kad)];
@@ -131,6 +135,7 @@ if (cmd === 'new') {
   var n = parseInt(arg, 10);
   try {
     if (cmd === 'choose') {
+      if (eng.getCurrentScene().isHand) { console.log('This is the main page: use draw, play or advisor.'); show(); process.exit(1); }
       var c = eng.getCurrentChoices();
       if (!c || !c[n]) { console.log('No choice ' + arg + '.'); show(); process.exit(1); }
       if (c[n].canChoose === false) { console.log('That choice is unavailable.'); show(); process.exit(1); }

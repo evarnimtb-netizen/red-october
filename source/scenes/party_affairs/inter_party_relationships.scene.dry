@@ -5,9 +5,16 @@ new-page: true
 is-card: true
 tags: party_affairs
 view-if: inter_party_relationships_timer <= 0
-on-arrival: month_actions += 1; inter_party_relationships_timer = 3
+on-arrival: {!
+Q.month_actions += 1;
+Q.inter_party_relationships_timer = 3;
+// which alliances could go further now (the Formalize page offers only those)
+Q.can_form_ally = RO.allianceTarget(Q, 'ally') > (Q.ally_lvl || 0) ? 1 : 0;
+Q.can_form_third = RO.allianceTarget(Q, 'third') > (Q.ally_lsr || 0) ? 1 : 0;
+Q.can_form_bol = RO.allianceTarget(Q, 'bol') > (Q.ally_bol || 0) ? 1 : 0;
+!}
 
-The bloc of the Mensheviks and the SRs is the Soviet majority, and every party is calculating how long it will last.
+[? if bol_regime = 0 : The bloc of the Mensheviks and the SRs is the Soviet majority, and every party is calculating how long it will last. ?][? if bol_regime = 1 : The Bolsheviks hold power, and every other socialist party is calculating whom it can still trust. ?]
 
 - @partner: Talks with the [+ partner_name +]. (Relations: [+ rel_ally : relationships +])
 - @lsr: Talks with the [+ third_name +]. (Relations: [+ rel_lsr : relationships +])
@@ -54,6 +61,8 @@ RO.fac(Q, 'intl', 0, 4);
 The Kadets are the coalition's only serious bourgeois party. Milyukov listened politely.
 
 @formalize
+choose-if: can_form_ally = 1 or can_form_third = 1 or can_form_bol = 1
+unavailable-subtitle: No party is close enough to us yet for a closer alliance: relations of 40 make cooperation, 60 a bloc, 75 a coalition.
 
 Alliances grow with relations: cooperation at 40, a bloc at 60 (if our lines on the war and the soviets are compatible) and a coalition at 75 (if there is a government or a soviet majority to share). They also erode when relations fall. (Now: [+ partner_name +], [+ ally_lvl : alliance +]; [+ third_name +], [+ ally_lsr : alliance +]; Bolsheviks, [+ ally_bol : alliance +].) Whom do you propose it to?
 
@@ -63,6 +72,8 @@ Alliances grow with relations: cooperation at 40, a bloc at 60 (if our lines on 
 - @back: Never mind.
 
 @form_partner
+choose-if: can_form_ally = 1
+unavailable-subtitle: Relations are not warm enough, or our lines not close enough, to go further yet.
 on-arrival: {!
 RO.formalize(Q, 'ally');
 !}
@@ -70,12 +81,16 @@ go-to: formalized if alliance_msg = 1; not_formalized if alliance_msg = 0
 
 @form_lsr
 view-if: player_party = 'menshevik' or player_party = 'lsr' or (player_party = 'sr' and lsr_split = 1)
+choose-if: can_form_third = 1
+unavailable-subtitle: Relations are not warm enough, or our lines not close enough, to go further yet.
 on-arrival: {!
 RO.formalize(Q, 'third');
 !}
 go-to: formalized if alliance_msg = 1; not_formalized if alliance_msg = 0
 
 @form_bol
+choose-if: can_form_bol = 1
+unavailable-subtitle: Relations are not warm enough, or our lines not close enough, to go further yet.
 on-arrival: {!
 RO.formalize(Q, 'bol');
 !}

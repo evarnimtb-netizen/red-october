@@ -25,11 +25,11 @@ Our members stood for election as delegates. The assemblies met, passed resoluti
 
 @rival
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @rival_slow: Phase it in, with compensation and negotiation.
-- @rival_decree: Pass it by decree, as written.
-- @rival_force: Pass it by decree, and break any opposition by force.
+- @rival_slow: Go about it cautiously, with compromises.
+- @rival_decree: Carry it out in full.
+- @rival_force: Carry it out in full, and break any opposition by force.
 
 @rival_slow
 choose-if: resources >= 1
@@ -45,12 +45,12 @@ if (Q.legality > 1) { Q.legality -= 1; }
 }, "Make them a rival to the Bolshevik-controlled soviets");
 !}
 
-We tried to turn the assemblies into a rival to the soviets. It was a bold move, and the Bolsheviks answered with arrests and banned delegates from the factory gates. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+We tried to turn the assemblies into a rival to the soviets. It was a bold move, and the Bolsheviks answered with arrests and banned delegates from the factory gates. (It was done cautiously, with compromises.)
 
 
 
 @rival_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -66,8 +66,9 @@ We tried to turn the assemblies into a rival to the soviets. It was a bold move,
 
 
 @rival_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Bolsheviks [+ odds_bol +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

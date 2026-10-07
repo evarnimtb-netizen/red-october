@@ -3,7 +3,7 @@ face-image: img/events/first_coalition.jpg
 subtitle: Tsereteli and Skobelev become ministers.
 new-page: true
 tags: event
-view-if: player_party != 'lsr' and (dix >= 9 and in_coalition = 0)
+view-if: bol_regime = 0 and dix < 20 and player_party != 'lsr' and (dix >= 9 and in_coalition = 0)
 priority: 15
 max-visits: 1
 
@@ -47,7 +47,7 @@ We have stayed out of the cabinet. The SRs have entered without us, and it is no
 @no_kadets
 view-if: (player_party = 'menshevik' or player_party = 'sr')
 choose-if: rel_ally >= 60 and ally_lvl >= 2
-unavailable-subtitle: This needs a formal bloc with the SRs. (Alliance level 2.)
+unavailable-subtitle: This needs a formal bloc with the SRs (alliance level 2) and relations with them of 60 or more.
 on-arrival: {!
 Q.in_coalition = 1;
 Q.gov_kadets = 0;

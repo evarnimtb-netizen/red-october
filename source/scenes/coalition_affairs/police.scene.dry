@@ -24,11 +24,11 @@ A militia chosen and supervised by the city dumas has taken shape. It is poorly 
 
 @old
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @old_slow: Phase it in, with compensation and negotiation.
-- @old_decree: Pass it by decree, as written.
-- @old_force: Pass it by decree, and break any opposition by force.
+- @old_slow: Go about it cautiously, with compromises.
+- @old_decree: Carry it out in full.
+- @old_force: Carry it out in full, and break any opposition by force.
 
 @old_slow
 choose-if: resources >= 1
@@ -43,12 +43,12 @@ RO.fac(Q, 'intl', 0, 3);
 }, "Recall the experienced police officers");
 !}
 
-Many old officers were recalled. They are more experienced. They are also less trusted by the workers. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+Many old officers were recalled. They are more experienced. They are also less trusted by the workers. (It was done cautiously, with compromises.)
 
 
 
 @old_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -63,8 +63,9 @@ Many old officers were recalled. They are more experienced. They are also less t
 
 
 @old_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -79,11 +80,11 @@ Many old officers were recalled. They are more experienced. They are also less t
 
 @workers
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @workers_slow: Phase it in, with compensation and negotiation.
-- @workers_decree: Pass it by decree, as written.
-- @workers_force: Pass it by decree, and break any opposition by force.
+- @workers_slow: Go about it cautiously, with compromises.
+- @workers_decree: Carry it out in full.
+- @workers_force: Carry it out in full, and break any opposition by force.
 
 @workers_slow
 choose-if: resources >= 1
@@ -98,12 +99,12 @@ Q.militia = (Q.militia || 0) + 1;
 }, "Rely on the workers' guards");
 !}
 
-The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The factory guards have been legalised and paid by the city. The Bolsheviks were quick to recruit among them. (It was done cautiously, with compromises.)
 
 
 
 @workers_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -118,8 +119,9 @@ The factory guards have been legalised and paid by the city. The Bolsheviks were
 
 
 @workers_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

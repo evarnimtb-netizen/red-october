@@ -6,7 +6,7 @@ Q.game_over = 1;
 if (Q.ending == 'final') {
     if (Q.bol_regime == 0) {
         Q.ending = Q.vikzhel_deal ? 'all_socialist' : 'constituent_republic';
-    } else if (Q.sd_win_check = (Q.soviet_democracy >= 55 && Q.legality >= 2 && Q.nep_early && Q.free_soviets && Q.repression <= 40)) {
+    } else if (Q.sd_win_check = (Q.soviet_democracy >= 55 && Q.legality >= 2 && (Q.nep_early || Q.program_adopted) && Q.free_soviets && Q.repression <= 40)) {
         Q.ending = 'soviet_democracy';
     } else if (Q.legality <= (Q.difficulty < 0 ? 0 : 1) || Q.members <= (Q.difficulty < 0 ? 12 : 20) * Q.mem_scale) {
         // on Easy a party that is banned in name but still has its members has not been driven abroad

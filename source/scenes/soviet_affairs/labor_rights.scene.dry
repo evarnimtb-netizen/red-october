@@ -25,11 +25,11 @@ The Soviet debated the petition for a whole afternoon. It was rejected, but the 
 
 @strike
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @strike_slow: Phase it in, with compensation and negotiation.
-- @strike_decree: Pass it by decree, as written.
-- @strike_force: Pass it by decree, and break any opposition by force.
+- @strike_slow: Go about it cautiously, with compromises.
+- @strike_decree: Carry it out in full.
+- @strike_force: Carry it out in full, and break any opposition by force.
 
 @strike_slow
 choose-if: resources >= 1
@@ -45,12 +45,12 @@ if (Q.legality > 1 && Q.repression >= 25) { Q.legality -= 1; }
 }, "Back a railway and printers' strike in defence of union rights");
 !}
 
-The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The railwaymen and printers stopped work for a day. The Cheka arrested several strike leaders, including two of our own. (It was done cautiously, with compromises.)
 
 
 
 @strike_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -66,8 +66,9 @@ The railwaymen and printers stopped work for a day. The Cheka arrested several s
 
 
 @strike_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Bolsheviks [+ odds_bol +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

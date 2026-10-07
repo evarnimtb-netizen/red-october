@@ -24,6 +24,7 @@ The party has taken its share of responsibility, and with it, the blame for the 
 
 @oppose
 on-arrival: {!
+Q.in_coalition = 0;
 RO.boost(Q, {peasants: 3, soldiers: 3});
 RO.add(Q, {rel_ally: -5, rel_bol: 3});
 RO.fac(Q, 'rightdef', 0, 6);
@@ -46,6 +47,7 @@ The left voted for the coalition, on the principle that a divided party is no us
 choose-if: lsr_split = 0
 unavailable-subtitle: We are already a separate party.
 on-arrival: {!
+Q.in_coalition = 0;
 Q.lsr_split = 1;
 Q.early_split = 1;
 RO.add(Q, {rel_ally: -15, rel_bol: 3});

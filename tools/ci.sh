@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 # The checks that CI runs (npm test): build, model unit tests, generated files up to date, and full games with every party.
 # RUNS sets the number of games per party and difficulty (default 30).
-set -e
+set -eo pipefail
 cd "$(dirname "$0")/.."
 RUNS=${RUNS:-30}
 

@@ -17,11 +17,11 @@ The Allies want the offensive. The soldiers want peace. The Soviet's formula is 
 
 @note
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @note_slow: Phase it in, with compensation and negotiation.
-- @note_decree: Pass it by decree, as written.
-- @note_force: Pass it by decree, and break any opposition by force.
+- @note_slow: Go about it cautiously, with compromises.
+- @note_decree: Carry it out in full.
+- @note_force: Carry it out in full, and break any opposition by force.
 
 @note_slow
 choose-if: resources >= 1
@@ -36,12 +36,12 @@ Q.war_aims_note = 1;
 }, "Send a new note to the Allies on war aims");
 !}
 
-A note on war aims went to London and Paris. They replied politely, and not at all. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+A note on war aims went to London and Paris. They replied politely, and not at all. (It was done cautiously, with compromises.)
 
 
 
 @note_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -56,8 +56,9 @@ A note on war aims went to London and Paris. They replied politely, and not at a
 
 
 @note_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -72,11 +73,11 @@ A note on war aims went to London and Paris. They replied politely, and not at a
 
 @stockholm
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @stockholm_slow: Phase it in, with compensation and negotiation.
-- @stockholm_decree: Pass it by decree, as written.
-- @stockholm_force: Pass it by decree, and break any opposition by force.
+- @stockholm_slow: Go about it cautiously, with compromises.
+- @stockholm_decree: Carry it out in full.
+- @stockholm_force: Carry it out in full, and break any opposition by force.
 
 @stockholm_slow
 choose-if: resources >= 1
@@ -93,12 +94,12 @@ RO.fac(Q, 'rightdef', 0, 4);
 }, "Back the Stockholm conference of the International");
 !}
 
-The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?] It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The government has officially endorsed a socialist conference at Stockholm. The Allied governments refuse passports to their own socialists. [? if stockholm >= 3 : Delegates from four neutral and enemy countries are on their way. ?] (It was done cautiously, with compromises.)
 
 
 
 @stockholm_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -115,8 +116,9 @@ The government has officially endorsed a socialist conference at Stockholm. The 
 
 
 @stockholm_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 
@@ -146,11 +148,11 @@ Kerensky is visiting the front, and the Soviet has given its blessing. The army 
 choose-if: stockholm >= 2
 unavailable-subtitle: We must first have shown our commitment to a general peace at Stockholm.
 
-How should it be carried out? Phased in, with compensation and negotiation, it will cost a resource, do less and anger less. By decree it will do all that it says, and its opponents will answer. And a party strong enough can pass it and enforce it against them.
+How should the party go about it? Cautiously, with compromises, it will cost a resource, do less and anger less. In full, it will do all that it says, and its opponents will answer. And a party strong enough can carry it out and break its opponents.
 
-- @separate_slow: Phase it in, with compensation and negotiation.
-- @separate_decree: Pass it by decree, as written.
-- @separate_force: Pass it by decree, and break any opposition by force.
+- @separate_slow: Go about it cautiously, with compromises.
+- @separate_decree: Carry it out in full.
+- @separate_force: Carry it out in full, and break any opposition by force.
 
 @separate_slow
 choose-if: resources >= 1
@@ -167,12 +169,12 @@ RO.fac(Q, 'intl', 0, -1);
 }, "Sound out Germany through neutral intermediaries");
 !}
 
-An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+An unofficial approach, through a Swedish socialist, asked if Germany would consider terms on the basis of no annexations. The answer was not hostile. The Kadets learned of it and are furious. (It was done cautiously, with compromises.)
 
 
 
 @separate_decree
-subtitle: The law as written. Its opponents will answer.
+subtitle: All that it says. Its opponents will answer.
 on-arrival: {!
 
 RO.law(Q, 'decree', () => {
@@ -189,8 +191,9 @@ An unofficial approach, through a Swedish socialist, asked if Germany would cons
 
 
 @separate_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 

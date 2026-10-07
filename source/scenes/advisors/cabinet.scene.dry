@@ -78,7 +78,7 @@ RO.add(Q, {land_pressure: -4, rel_kad: -3, right_threat: 1, ant_kad: 4, ant_gen:
 }, "Let the land committees regulate the transfers of land");
 !}
 
-The land committees now have the government's authority to regulate the transfers until the Assembly meets. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The land committees now have the government's authority to regulate the transfers until the Assembly meets. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -99,8 +99,9 @@ The land committees now have the government's authority to regulate the transfer
 - @root: Continue.
 
 @land_1_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -142,7 +143,7 @@ RO.add(Q, {land_pressure: -8, rel_kad: -8, right_threat: 3, ant_kad: 14, ant_gen
 }, "Socialise the land now, by decree");
 !}
 
-A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+A decree abolished private ownership of land, and put it in the hands of the village communities. The landowners, and everyone who sits on their boards, are in uproar. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -163,8 +164,9 @@ A decree abolished private ownership of land, and put it in the hands of the vil
 - @root: Continue.
 
 @land_2_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -270,7 +272,7 @@ RO.add(Q, {war_weariness: -3, rel_kad: -3, ant_kad: 5, ant_gen: 7, ant_bol: -3})
 }, "Press for a general peace: Stockholm and the neutrals");
 !}
 
-The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The government's diplomacy now aims at a general peace without annexations. The Allied ambassadors have asked for explanations. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -291,8 +293,9 @@ The government's diplomacy now aims at a general peace without annexations. The 
 - @root: Continue.
 
 @war_1_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -334,7 +337,7 @@ RO.add(Q, {war_weariness: 3, army_discipline: 3, rel_kad: 3, ant_bol: 8, ant_gen
 }, "Prepare an offensive with the Allies");
 !}
 
-The army is told to prepare to attack. The Allies are pleased; the soldiers are not. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The army is told to prepare to attack. The Allies are pleased; the soldiers are not. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -355,8 +358,9 @@ The army is told to prepare to attack. The Allies are pleased; the soldiers are 
 - @root: Continue.
 
 @war_2_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Bolsheviks [+ odds_bol +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -414,7 +418,7 @@ RO.add(Q, {right_threat: -3, repression: 2, soviet_democracy: -2, rel_kad: 2, an
 }, "Introduce emergency measures against disorder");
 !}
 
-Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+Emergency measures give the government the right to arrest agitators and close newspapers. The generals are reassured; the soviets are not. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -435,8 +439,9 @@ Emergency measures give the government the right to arrest agitators and close n
 - @root: Continue.
 
 @order_1_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Bolsheviks [+ odds_bol +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -478,7 +483,7 @@ RO.add(Q, {soviet_democracy: 3, rel_bol: 4, right_threat: 2, ant_gen: 5, ant_kad
 }, "Proclaim broad liberties and an amnesty");
 !}
 
-An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+An amnesty empties the prisons of those held for political offences, and the press is freed of all censorship. Every party, including the ones that would abolish them, is grateful. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -499,8 +504,9 @@ An amnesty empties the prisons of those held for political offences, and the pre
 - @root: Continue.
 
 @order_2_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -558,7 +564,7 @@ RO.add(Q, {ruble: 4, rel_kad: -4, ant_kad: 6}); RO.boost(Q, {middle: -2, workers
 }, "Tax war profits and the rich, and float a Liberty Loan");
 !}
 
-An excess-profits tax was passed, and the Liberty Loan was advertised on every hoarding. The banks call it confiscation; the ruble has steadied. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+An excess-profits tax was passed, and the Liberty Loan was advertised on every hoarding. The banks call it confiscation; the ruble has steadied. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -579,8 +585,9 @@ An excess-profits tax was passed, and the Liberty Loan was advertised on every h
 - @root: Continue.
 
 @finance_1_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -622,7 +629,7 @@ RO.add(Q, {ruble: 5, rel_bol: -3, war_weariness: 1, ant_bol: 6}); RO.boost(Q, {s
 }, "Borrow from the Allies, on their terms");
 !}
 
-London and Washington have opened credits to the Provisional Government. They expect the front to hold, and they have said so. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+London and Washington have opened credits to the Provisional Government. They expect the front to hold, and they have said so. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -643,8 +650,9 @@ London and Washington have opened credits to the Provisional Government. They ex
 - @root: Continue.
 
 @finance_2_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Bolsheviks [+ odds_bol +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Bolsheviks [+ odds_bol +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -702,7 +710,7 @@ RO.boost(Q, {workers: 4}); RO.add(Q, {rel_kad: -3, ruble: -2, ant_kad: 6, ant_ge
 }, "Guarantee the eight-hour day and the factory committees");
 !}
 
-The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The eight-hour day and the factory committees are written into law. The workers cheer; the employers threaten to close their plants. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -723,8 +731,9 @@ The eight-hour day and the factory committees are written into law. The workers 
 - @root: Continue.
 
 @labour_1_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -766,7 +775,7 @@ RO.boost(Q, {workers: 2}); RO.add(Q, {ruble: 1, rel_kad: -4, ant_kad: 8, ant_gen
 }, "Regulate industry through the state");
 !}
 
-A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+A committee of the state now regulates prices, wages and supplies in the war industries. It is a first step, which the liberals do not like. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -787,8 +796,9 @@ A committee of the state now regulates prices, wages and supplies in the war ind
 - @root: Continue.
 
 @labour_2_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;
@@ -842,7 +852,7 @@ Q.gov_kadets = 0; Q.homogeneous_gov = 1; RO.add(Q, {rel_kad: -12, right_threat: 
 }, "Dismiss the Kadet ministers and govern with the Soviet parties alone");
 !}
 
-The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame. It was phased in slowly, with compensation where it was owed, and the opposition grumbled rather than raged.
+The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Soviet parties alone, with nobody to blame. (It was phased in, with compensation where it was owed.)
 
 - @root: Continue.
 
@@ -861,8 +871,9 @@ The Kadet ministers have been dismissed. The cabinet is now a cabinet of the Sov
 - @root: Continue.
 
 @kadets_out_force
+view-if: bol_regime = 0
 choose-if: strength >= 18
-subtitle: Chance of breaking its opponents: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. A camp under 45% is too strong to touch, and is left alone.
+subtitle: Your chance of breaking each camp it angers: Kadets [+ odds_kad +]%, generals [+ odds_gen +]%. Any camp under 45% is too strong for you, and is left alone.
 unavailable-subtitle: We lack the force and the allies to break the opposition.
 on-arrival: {!
 Q.month_actions += 1;

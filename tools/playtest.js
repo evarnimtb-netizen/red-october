@@ -26,6 +26,24 @@ function Ui() {
   this.decks = []; this.hand = []; this.pinned = []; this.choices = null; this.text = [];
 }
 engine.UserInterface.makeParentOf(Ui);
+// When more than one go-to condition is true, the engine picks a target at random: always a bug in this game. Catch it:
+// inside a scene change, the engine only draws a random number to break such a tie.
+var ambiguousGoTo = {};
+var origChangeScene = engine.DendryEngine.prototype.__changeScene;
+engine.DendryEngine.prototype.__changeScene = function() {
+  var self = this, rnd = this.random;
+  if (rnd && !rnd.__watched) {
+    var orig = rnd.uint32;
+    rnd.uint32 = function() {
+      var sc = self.__changing && self.game.scenes[self.state.sceneId];
+      if (sc && (sc.goTo || sc.goToRef)) { ambiguousGoTo[self.state.sceneId] = (ambiguousGoTo[self.state.sceneId] || 0) + 1; }
+      return orig.apply(rnd, arguments);
+    };
+    rnd.__watched = true;
+  }
+  this.__changing = (this.__changing || 0) + 1;
+  try { return origChangeScene.apply(this, arguments); } finally { this.__changing--; }
+};
 function flat(x) {
   if (x === null || x === undefined) { return ''; }
   if (typeof x === 'string' || typeof x === 'number') { return String(x); }
@@ -128,7 +146,7 @@ function playOne(idx) {
     cs.forEach(function(c, i) { if (c.canChoose) { avail.push(i); } });
     if (!avail.length) { log.push('NO CHOICES at ' + sid); break; }
     var pick;
-    var onlyReturn = avail.every(function(i) { return /Return card|Cancel action|Return to main/.test(cs[i].title); });
+    var onlyReturn = avail.every(function(i) { return /Return card|Cancel action|Return to main|Never mind|Think again/.test(cs[i].title); });
     if (onlyReturn && lastCard && sid.split('.')[0] === lastCard) { banned[lastCard] = Q().turn; }
     if (policy.indexOf('bot:') === 0) {
       var bot2 = bots[policy.slice(4)];
@@ -150,13 +168,13 @@ function playOne(idx) {
         if (pick === undefined) { for (var lj = 0; lj < avail.length && pick === undefined; lj++) { if (/as written/.test(cs[avail[lj]].title)) { pick = avail[lj]; } } }
       }
       if (pick === undefined) {
-        var nonret2 = avail.filter(function(i) { return !/Return card|Cancel action|Return to main/.test(cs[i].title); });
+        var nonret2 = avail.filter(function(i) { return !/Return card|Cancel action|Return to main|Never mind|Think again/.test(cs[i].title); });
         pick = (nonret2.length ? nonret2 : avail)[0];
       }
     } else if (policy === 'first') { pick = avail[0]; }
     else if (policy === 'cautious') {
       // avoid "return to main"/"cancel" loops: prefer non-return options
-      var nonret = avail.filter(function(i) { return !/Return card|Cancel action|Return to main/.test(cs[i].title); });
+      var nonret = avail.filter(function(i) { return !/Return card|Cancel action|Return to main|Never mind|Think again/.test(cs[i].title); });
       var pool = nonret.length ? nonret : avail;
       pick = pool[rnd(pool.length)];
     } else { pick = avail[rnd(avail.length)]; }
@@ -221,10 +239,12 @@ if (leaks.length) {
   console.log('TEXT LEAKS: ' + leaks.length);
   leaks.slice(0, 5).forEach(function(t) { console.log('  ' + t.slice(0, 200)); });
 }
+var ambiguous = Object.keys(ambiguousGoTo);
+if (ambiguous.length) { console.log('AMBIGUOUS GO-TO (more than one condition true): ' + ambiguous.map(function(k) { return k + ' x' + ambiguousGoTo[k]; }).join(', ')); }
 if (process.env.STRICT) {
   var stuck = results.filter(function(r) { return !r.game_over; }).length;
-  if (errors || stuck || leaks.length || !results.length) {
-    console.log('FAIL: errors=' + errors + ' stuck=' + stuck + ' leaks=' + leaks.length);
+  if (errors || stuck || leaks.length || ambiguous.length || !results.length) {
+    console.log('FAIL: errors=' + errors + ' stuck=' + stuck + ' leaks=' + leaks.length + ' ambiguous go-to=' + ambiguous.length);
     process.exit(1);
   }
   console.log('OK');

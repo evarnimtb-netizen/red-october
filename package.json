@@ -5,7 +5,7 @@
   "main": "out/html/index.html",
   "scripts": {
     "dendrynexus": "dendrynexus",
-    "test": "sh tools/ci.sh",
+    "test": "bash tools/ci.sh",
     "build": "npx dendrynexus make-html && sh tools/sync_model.sh"
   },
   "repository": {

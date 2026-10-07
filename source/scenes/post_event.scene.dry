@@ -48,7 +48,10 @@ if (Q.month_actions >= 1) {
     // membership follows the party's popularity and its legal status
     RO.clampStats(Q);
     RO.updatePolls(Q);
-    Q.members += Q.turn_length * Q.mem_scale * (0.7 * (Q.player_poll - (Q.poll_neutral || 9)) - (3 - Q.legality) * 1.5 - Q.repression / 25);
+    // a persecuted party recruits little, and a banned one hardly at all, however popular it is
+    var mem_gain = 0.7 * (Q.player_poll - (Q.poll_neutral || 9));
+    if (mem_gain > 0) { mem_gain *= [0.1, 0.3, 0.7, 1][Math.max(0, Math.min(3, Math.round(Q.legality)))]; }
+    Q.members += Q.turn_length * Q.mem_scale * (mem_gain - (3 - Q.legality) * 1.5 - Q.repression / 25);
     if (Q.members < 3) { Q.members = 3; }
     Q.dues_income = Math.max(1, Math.round(Q.members / Q.mem_div));
 }
@@ -79,7 +82,7 @@ if (choices && choices[0].title != "Continue...") {
     Q.has_event = 1;
 }
 !}
-go-to: game_over if game_end = 1; events_choice if has_event = 1; main if has_event = 0 and hand_size = 3; main.main_easy if has_event = 0 and hand_size = 4
+go-to: game_over if game_end = 1; events_choice if has_event = 1 and game_end = 0; main if has_event = 0 and hand_size = 3 and game_end = 0; main.main_easy if has_event = 0 and hand_size = 4 and game_end = 0
 
 = [? if turn_length < 1 : [+ half_month : half_month +] ?][+ month : month +] [+ year +]
 

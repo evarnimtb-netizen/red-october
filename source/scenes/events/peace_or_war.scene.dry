@@ -9,7 +9,7 @@ on-arrival: {!
 Q.peace_ok = (Q.stockholm >= 3 || Q.separate_feelers || Q.war_weariness <= 55) ? 1 : 0;
 Q.army_collapse = (Q.war_weariness >= 80 && Q.army_discipline < 30) ? 1 : 0;
 !}
-go-to: war_peace if peace_ok = 1; war_collapse if army_collapse = 1; war_goes_on if peace_ok = 0 and army_collapse = 0
+go-to: war_peace if peace_ok = 1; war_collapse if army_collapse = 1 and peace_ok = 0; war_goes_on if peace_ok = 0 and army_collapse = 0
 
 @war_peace
 on-arrival: {!
