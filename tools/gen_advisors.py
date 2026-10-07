@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate source/scenes/advisors/*.scene.dry from the table below (Menshevik advisors)."""
 import os
+import shutil
 
 OUT = os.path.join(os.path.dirname(__file__), '..', 'source', 'scenes', 'advisors')
 
@@ -331,6 +332,9 @@ view-if: {flag} = 1 and (player_party = '{party}' or lent_{aid} = 1) and on_{aid
     for (aid, title, tag, flag, bio, party, actions) in OTHERS:
         table[aid] = (title, party)
     write_model_table(table)
+    # the served copy of the model must match (tools/test_model.js checks it)
+    here = os.path.dirname(__file__)
+    shutil.copyfile(os.path.join(here, 'model.js'), os.path.join(here, '..', 'out', 'html', 'model.js'))
     write_council(table)
     print('wrote', len(ADVISORS), '+', len(OTHERS), 'advisors and the council')
 
