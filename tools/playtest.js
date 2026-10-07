@@ -105,6 +105,8 @@ function playOne(idx) {
       if (!options.length) {
         // nothing playable this turn: play any card from hand, ignoring bans
         options = hand.map(function(c) { return {kind: 'card', id: c.id}; });
+        // an empty hand and no advisor action: Wait and See is always there, as in the game
+        if (!options.length) { ui.pinned.forEach(function(c) { if (c.id === 'wait' && c.canChoose !== false) { options.push({kind: 'pinned', id: c.id}); } }); }
         if (!options.length) { log.push('NO OPTIONS in hand at ' + Q().year + '/' + Q().month); break; }
       }
       var o = options[rnd(options.length)];
@@ -133,15 +135,17 @@ function playOne(idx) {
       var prefs = bot2.choices[sid] || bot2.choices[top] || [];
       if (sid.indexOf('.') >= 0 && top === 'inter_party_relationships' && sid.split('.')[1] === 'formalize') { prefs = bot2.choices.inter_party_relationships_formalize; }
       pick = undefined;
+      // a preference is a RegExp on the choice's title, or a function(title, subtitle, Q) for choices that depend on the state
+      var prefers = function(pref, c) { return typeof pref === 'function' ? pref(c.title, flat(c.subtitle), Q()) : pref.test(c.title); };
       for (var pi = 0; pi < prefs.length && pick === undefined; pi++) {
         for (var ci = 0; ci < avail.length; ci++) {
-          if (prefs[pi].test(cs[avail[ci]].title)) { pick = avail[ci]; break; }
+          if (prefers(prefs[pi], cs[avail[ci]])) { pick = avail[ci]; break; }
         }
       }
       if (pick === undefined) {
         // laws with a choice of implementation: the bot's preferred style, by default the law as written
         var lawRe = bot2.law || /as written/;
-        for (var li = 0; li < avail.length && pick === undefined; li++) { if (lawRe.test(cs[avail[li]].title)) { pick = avail[li]; } }
+        for (var li = 0; li < avail.length && pick === undefined; li++) { if (prefers(lawRe, cs[avail[li]])) { pick = avail[li]; } }
         if (pick === undefined) { for (var lj = 0; lj < avail.length && pick === undefined; lj++) { if (/as written/.test(cs[avail[lj]].title)) { pick = avail[lj]; } } }
       }
       if (pick === undefined) {

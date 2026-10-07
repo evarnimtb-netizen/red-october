@@ -879,13 +879,13 @@ var RO = (function() {
       Q['opp_' + k + '_timer'] = Math.max(Q['opp_' + k + '_timer'] || 0, 8);
       Q['opp_' + k + '_ev'] = 0;
       Q['cow_' + k + '_timer'] = 10;
-      if (k === 'kad') { add(Q, {rel_kad: -6, repression: 1}); boost(Q, {middle: -3}); }
+      if (k === 'kad') { add(Q, {rel_kad: -6, repression: 1, right_threat: -4}); boost(Q, {middle: -3}); Q.ant_gen = Math.max(0, (Q.ant_gen || 0) - 8); }
       if (k === 'gen') { add(Q, {right_threat: -8, army_discipline: -2, soviet_democracy: -1}); }
       if (k === 'bol') { add(Q, {bolshevik: -5, rel_bol: -10, repression: 2}); boost(Q, {workers: -2}); }
       if ((Q.ally_lvl || 0) >= 2 && Q.partner_name && (Q.sq_text || '').indexOf(' stood with us.') < 0) { sent += ' ' + Q.partner_name + ' stood with us.'; }
     } else {
       Q['ant_' + k] = clamp((Q['ant_' + k] || 0) + 15, 0, 100);
-      add(Q, {right_threat: (k === 'gen' ? 6 : 4), army_discipline: -3, soviet_democracy: -2});
+      add(Q, {right_threat: (k === 'gen' ? 6 : 3), army_discipline: (k === 'gen' ? -3 : -1), soviet_democracy: -2});
       Q.resources = Math.max(0, (Q.resources || 0) - 1);
       if (!inEvent) {
         Q['opp_' + k + '_timer'] = 0;

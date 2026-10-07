@@ -291,23 +291,26 @@
   window.dendryModifyUI = main;
   console.log("Modifying stats: see dendryUI.dendryEngine.state.qualities");
 
+  // The font size of the content, in em (1.1 by default). A first visit has no saved settings, so the value may be missing.
+  function currentFontSize() {
+    var fs = Number(window.dendryUI.font_size);
+    if (!isFinite(fs) || fs <= 0) { fs = 1.1; }
+    return Math.min(2.5, Math.max(0.6, fs));
+  }
+  function applyFontSize(fs) {
+    window.dendryUI.font_size = fs;
+    document.getElementById("content").style.fontSize = fs + "em";
+    document.getElementById("stats_sidebar").style.fontSize = (fs - 0.1) + "em";
+    document.getElementById('font_size_value').textContent = fs.toFixed(1) + "em";
+  }
+
   window.increaseFontSize = function() {
-        window.dendryUI.font_size += 0.1;
-        var fs = window.dendryUI.font_size;
-        var sidebar_fs = fs - 0.1;
-        document.getElementById("content").style.fontSize = fs + "em";
-        document.getElementById("stats_sidebar").style.fontSize = sidebar_fs + "em";
-        document.getElementById('font_size_value').textContent = window.dendryUI.font_size.toFixed(1) + "em";
+        applyFontSize(Math.round((currentFontSize() + 0.1) * 10) / 10);
         window.dendryUI.saveSettings();
   }
 
   window.decreaseFontSize = function() {
-        window.dendryUI.font_size -= 0.1;
-        var fs = window.dendryUI.font_size;
-        var sidebar_fs = fs - 0.1;
-        document.getElementById("content").style.fontSize = fs + "em";
-        document.getElementById("stats_sidebar").style.fontSize = sidebar_fs + "em";
-        document.getElementById('font_size_value').textContent = window.dendryUI.font_size.toFixed(1) + "em";
+        applyFontSize(Math.round((currentFontSize() - 0.1) * 10) / 10);
         window.dendryUI.saveSettings();
   }
 
@@ -316,13 +319,9 @@
     if (window.dendryUI.dark_mode) {
         document.body.classList.add('dark-mode');
     }
-    if (window.dendryUI.font_size != 1.1) {
-        var fs = window.dendryUI.font_size;
-        var sidebar_fs = fs - 0.1;
-        document.getElementById("content").style.fontSize = fs + "em";
-        document.getElementById("stats_sidebar").style.fontSize = sidebar_fs + "em";
-    }
-    document.getElementById('font_size_value').textContent = window.dendryUI.font_size.toFixed(1) + "em";
+    var fs = currentFontSize();
+    if (fs !== 1.1) { applyFontSize(fs); }
+    else { window.dendryUI.font_size = fs; document.getElementById('font_size_value').textContent = fs.toFixed(1) + "em"; }
     window.pinnedCardsDescription = "Advisor cards - actions are only usable once per 6 months.";
   };
 

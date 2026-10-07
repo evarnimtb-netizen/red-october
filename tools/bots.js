@@ -1,3 +1,4 @@
+var RO = require('./model.js');
 // Scripted strategies for tools/playtest.js. Each strategy has:
 //   choices: scene id -> list of regexes tried in order against the available option titles
 //   cards:   card/advisor ids in priority order (first available is played)
@@ -164,15 +165,28 @@ var socializer = {
   }),
   cards: ['cabinet', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'fundraising', 'rally']
 };
+// The breaker strikes only when the odds are good (BREAK_ODDS or better against every camp it would strike);
+// otherwise it holds firm in the events and passes laws as written.
+var BREAK_ODDS = 0.6;
+var CAMP_WORDS = {kad: /Kadets/, gen: /generals/, bol: /Bolsheviks/};
+function breakIfGood(k, re) {
+  return function(title, sub, Q) { return re.test(title) && RO.squashOdds(Q, k) >= BREAK_ODDS; };
+}
+function forceIfGood(title, sub, Q) {
+  if (!/break any opposition/.test(title)) { return false; }
+  var camps = Object.keys(CAMP_WORDS).filter(function(k) { return CAMP_WORDS[k].test(sub); });
+  return camps.length > 0 && camps.every(function(k) { return RO.squashOdds(Q, k) >= BREAK_ODDS; });
+}
 var breaker = {
   choices: merge(merge(democrat.choices, srCommon), {
     sr_komuch: [/Refuse/], october: [/Leniency/, /Stay in the hall/, /Walk out/], vikzhel: [/Sign/],
     cabinet: [/Socialise the land/, /committees regulate/],
-    opp_kad_sanction: [/Break the opposition/, /Hold firm/], opp_kad_revolt: [/Send the loyal/], opp_gen_ultimatum: [/Break the Officers/, /Refuse the memorandum/],
-    opp_gen_coup: [/stop the trains/], opp_bol_agitation: [/Shut down Pravda/, /Debate/], opp_bol_strike: [/Offer the Bolsheviks/]
+    opp_kad_sanction: [breakIfGood('kad', /Break the opposition/), /Hold firm/], opp_kad_revolt: [/Send the loyal/],
+    opp_gen_ultimatum: [breakIfGood('gen', /Break the Officers/), /Refuse the memorandum/],
+    opp_gen_coup: [/stop the trains/], opp_bol_agitation: [breakIfGood('bol', /Shut down Pravda/), /Debate/], opp_bol_strike: [/Offer the Bolsheviks/]
   }),
   cards: ['cabinet', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'fundraising', 'rally'],
-  law: /break any opposition/
+  law: forceIfGood
 };
 var sr_komuchbot = {
   choices: merge(merge(opposition.choices, srCommon), {
