@@ -574,7 +574,7 @@ var RO = (function() {
     potresov: {name: "Alexander Potresov", party: 'menshevik'},
     axelrod: {name: "Pavel Axelrod", party: 'menshevik'},
     abramovich: {name: "Raphael Abramovich", party: 'menshevik'},
-    liber: {name: "Mark Liber", party: 'menshevik'},
+    liber: {name: "Mikhail Liber", party: 'menshevik'},
     broido: {name: "Eva Broido", party: 'menshevik'},
     lidia: {name: "Lidia Dan", party: 'menshevik'},
     sukhanov: {name: "Nikolai Sukhanov", party: 'menshevik'},
