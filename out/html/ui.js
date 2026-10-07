@@ -306,12 +306,45 @@
     $('#' + btn).addClass('active');
     renderRight();
   };
+  // On a phone the two side panels are drawers: Status on the left, Support and parliament on the right.
+  function phone() { return window.innerWidth <= 900; }
+  window.closeDrawers = function() { $('body').removeClass('show-status show-support'); return false; };
+  window.toggleStatus = function() {
+    var open = $('body').hasClass('show-status');
+    window.closeDrawers();
+    if (!open) { $('body').addClass('show-status'); }
+    return false;
+  };
   window.toggleSupport = function() {
-    if (window.innerWidth <= 1200) { $('body').toggleClass('show-support'); }
+    if (phone()) {
+      var open = $('body').hasClass('show-support');
+      window.closeDrawers();
+      if (!open) { $('body').addClass('show-support'); }
+    } else if (window.innerWidth <= 1200) { $('body').toggleClass('show-support'); }
     else { $('body').toggleClass('hide-support'); }
     renderRight();
     return false;
   };
+  $(document).on('keydown', function(ev) { if (ev.key === 'Escape') { window.closeDrawers(); } });
+
+  // the bar at the top of a phone screen: the date and the two numbers that matter, and a flag on Support when a camp is angry
+  function renderMobileBar(Q, started) {
+    $('body').toggleClass('in-game', !!started);
+    if (!started) { return; }
+    $('#mb_summary').html('<b>' + esc(dateText(Q)) + '</b><span>Res ' + Math.round(num(Q.resources)) + ' · ' + Math.round(num(Q.members)) + 'k members</span>');
+    var hot = 0;
+    try { window.RO.opposition(Q).forEach(function(c) { hot = Math.max(hot, c.ant); }); } catch (e) { /* no model yet */ }
+    $('#mb_support').toggleClass('alert', hot >= window.RO.SANCTION_AT);
+  }
+
+  // on a touch screen there is no hover: show each card's subtitle under its name
+  function cardSubtitles() {
+    $('#content li.card-in-hand, #content li.pinned-card').each(function() {
+      var li = $(this), tip = li.find('.card-tooltip').first();
+      if (tip.length && !li.find('.card-sub').length) { li.append($('<span class="card-sub"></span>').text(tip.text())); }
+    });
+  }
+
   $(document).on('click', '.rs-class', function() {
     var id = $(this).data('id');
     openClass[id] = !openClass[id];
@@ -326,9 +359,11 @@
     if (!Q || Q.started !== 1 || !window.RO || sceneId().indexOf('root.') === 0) {
       side.hide();
       $('#support_sidebar').hide();
+      renderMobileBar(Q || {}, false);
       return;
     }
     side.show();
+    renderMobileBar(Q, true);
     // refresh the derived numbers (polls, rounded stats) before drawing
     try { window.RO.updateFactions(Q); window.RO.updatePolls(Q); window.RO.display(Q); } catch (e) { /* the engine will recompute at the next turn */ }
     var html;
@@ -528,6 +563,8 @@
     showEffects();
     decorateParties();
     renderParliaments();
+    cardSubtitles();
+    if (phone()) { window.closeDrawers(); }
   };
 
   // the first page is displayed before this script runs: draw (or hide) the sidebar once the page is ready
@@ -535,7 +572,7 @@
 
   // no native tooltips on the cards (the card shows its own subtitle inside itself)
   $(function() {
-    var strip = function() { $('#content a.card[title]').removeAttr('title'); };
+    var strip = function() { $('#content a.card[title]').removeAttr('title'); cardSubtitles(); };
     var target = document.getElementById('content');
     if (target && window.MutationObserver) { new MutationObserver(strip).observe(target, {childList: true, subtree: true}); }
     strip();

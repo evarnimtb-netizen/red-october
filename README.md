@@ -10,6 +10,7 @@ The design is in [`docs/design-plan.md`](docs/design-plan.md).
 
 All three campaigns are **playable from start to finish**: the Mensheviks (hard), the SRs (normal) and the Left SRs (hard).
 
+- A phone layout (900px and under): a bar at the top with the date, resources and members, and two drawers, Status on the left and Support and parliament on the right; cards become rows with their subtitles visible, and everything has touch-sized targets. Tablets and narrow windows get the same bar.
 - 69 turns: two-week turns until the calendar reform of February 1918, then monthly turns to December 1921.
 - An alliance web between the three playable parties and the Bolsheviks, with three levels (cooperation, bloc, coalition), each with its own effects, and fault lines (Brest-Litovsk, Komuch, the July 1918 rising, Kolchak's coup) at which alliances break.
 - Cards in three decks (Party Affairs, Coalition Affairs, Soviet Affairs), with party-only cards for each campaign, and 29 advisors, of whom four sit on your council at a time (reshuffle or swap them from the Council card). A Cabinet card sets the country's standing policies while your party is in government.

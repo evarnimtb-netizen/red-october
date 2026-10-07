@@ -2,18 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f2f1e4">
     <meta prefix="ifiction: http://babel.ifarchive.org/protocol/iFiction/"
         property="ifiction:ifid" content="3E9B08B2-65FC-4DC1-8CEA-47269AFAA2AF">
     <title>Red October: Fall of Empire</title>
-    <link rel="stylesheet" type="text/css" href="game.css?v=19">
+    <link rel="stylesheet" type="text/css" href="game.css?v=25">
     <script src="jquery-1.11.1.min.js"></script>
-        <script src="d3.v7.min.js?v=19"></script>
-    <script src="d3-parliament.js?v=19"></script>
-    <script src="model.js?v=19"></script>
+        <script src="d3.v7.min.js?v=25"></script>
+    <script src="d3-parliament.js?v=25"></script>
+    <script src="model.js?v=25"></script>
     <script src="core.js"></script>
-    <script src="game.js?v=19"></script>
-    <script src="ui.js?v=19"></script>
+    <script src="game.js?v=25"></script>
+    <script src="ui.js?v=25"></script>
   </head>
   <body>
     <div class="background" id="bg2">
@@ -336,6 +337,14 @@
         <div class="sprite" id="bottomRightSprite"></div>
     </div>
 
+    <!-- phone layout: a bar with the two drawers (status on the left, support and parliament on the right) -->
+    <div id="mobile_bar">
+        <button id="mb_status" type="button" onclick="window.toggleStatus();">&#9776; Status</button>
+        <div id="mb_summary"></div>
+        <button id="mb_support" type="button" onclick="window.toggleSupport();">Support</button>
+    </div>
+    <div id="drawer_backdrop" onclick="window.closeDrawers();"></div>
+
     <div id='page'>
         <div id="mid_panel">
             <header>
@@ -351,6 +360,7 @@
             </header>
             <div id="tools_wrapper">
                 <div id='stats_sidebar' class='tools left' style='display: none;'>
+                    <button class="drawer-close" type="button" onclick="window.closeDrawers();">Close &#10005;</button>
                     <div class="tab_container">
                         <button class="tab_button active" id="main_tab" onclick="window.changeTab('status', 'main_tab');">Main</button>
                         <button class="tab_button" id="politics_tab" onclick="window.changeTab('status.politics', 'politics_tab');">Parties</button>
@@ -361,6 +371,7 @@
                     </div>
                 </div>
                 <div id='support_sidebar' class='tools right' style='display: none;'>
+                    <button class="drawer-close" type="button" onclick="window.closeDrawers();">Close &#10005;</button>
                     <div class="tab_container">
                         <button class="tab_button active" id="rt_classes" onclick="window.changeRightTab('classes', 'rt_classes');">Classes</button>
                         <button class="tab_button" id="rt_pop" onclick="window.changeRightTab('popularity', 'rt_pop');">Popularity</button>

@@ -736,12 +736,85 @@ header, #content, footer { box-sizing: border-box; max-width: 34rem; }
 @media screen and (max-width: 1200px) {
   #mid_panel { margin-left: 17.5rem; margin-right: 0.8em; }
 }
-/* too narrow for a column beside the sidebar: put the sidebar above the content */
+/* ---------- phones and small tablets (900px and under): the side panels become drawers ---------- */
+#mobile_bar, #drawer_backdrop, .drawer-close, .card-sub { display: none; }
+html { -webkit-text-size-adjust: 100%; }
+a, button, ul.choices li, .tab_button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(120, 90, 40, 0.15); }
 @media screen and (max-width: 900px) {
+  body { padding-bottom: env(safe-area-inset-bottom); }
   #page { position: static; }
   #tools_wrapper { position: static; }
-  .tools { width: auto; margin: 0.4em; }
-  .tools.left, .tools.right { float: none; left: 0; right: 0; }
-  #mid_panel { margin: 0 0.4em; }
-  header, #content, footer { max-width: none; }
+  #mid_panel { margin: 0 0.5rem; }
+  header, #content, footer { max-width: 40rem; }
+  #content { font-size: 1.02em; padding: 0.9em 1em 1.2em 1em; }
+
+  /* the bar at the top */
+  body.in-game #mobile_bar {
+    display: flex; align-items: center; gap: 0.5em; position: sticky; top: 0; z-index: 60;
+    padding: 0.35em 0.5em; padding-top: calc(0.35em + env(safe-area-inset-top));
+    background: var(--content-bg-color); color: var(--text-color); border-bottom: 2px solid #876; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  #mobile_bar button {
+    flex: 0 0 auto; min-height: 44px; padding: 0 0.8em; font-family: "Minion Pro", Georgia, serif; font-size: 0.95em;
+    color: var(--text-color); background: var(--tab-color); border: 1px solid #876; border-radius: 6px; cursor: pointer;
+  }
+  #mobile_bar button.alert::after { content: " \25CF"; color: #b3261e; font-size: 0.8em; }
+  #mb_summary { flex: 1 1 auto; min-width: 0; text-align: center; line-height: 1.25em; }
+  #mb_summary b { display: block; font-weight: normal; font-variant: small-caps; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #mb_summary span { display: block; font-size: 0.78em; opacity: 0.8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* a smaller header */
+  header { text-align: center; }
+  #game-title { display: block; font-size: 1.15em; margin: 0.3em 0 0 0; text-align: center; }
+  #game-author { display: none; }
+  #header-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.3em; }
+  #header-links a { padding: 0.55em 0.7em; }
+  #header-links { float: none; display: flex; width: auto; margin: 0.3em 0 0.5em 0; padding-left: 0; text-align: center; }
+  #header-links a { padding-right: 0.7em; }
+  #support-link { display: none; }
+
+  /* the drawers */
+  #stats_sidebar, #support_sidebar { display: none !important; }
+  body.in-game.show-status #stats_sidebar, body.in-game.show-support #support_sidebar {
+    display: block !important; position: fixed; top: 0; bottom: 0; margin: 0; float: none; z-index: 80; max-height: none; border: none;
+    width: min(90vw, 360px); overflow-y: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box;
+    padding-bottom: calc(1em + env(safe-area-inset-bottom)); box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+  }
+  body.in-game.show-status #stats_sidebar { left: 0; right: auto; }
+  body.in-game.show-support #support_sidebar { right: 0; left: auto; }
+  body.show-status #drawer_backdrop, body.show-support #drawer_backdrop { display: block; position: fixed; inset: 0; z-index: 70; background: rgba(0, 0, 0, 0.55); }
+  .drawer-close {
+    display: block; width: 100%; min-height: 44px; margin: -0.6em 0 0.5em 0; font-family: "Minion Pro", Georgia, serif; font-size: 1em;
+    color: var(--text-color); background: var(--tab-color); border: none; border-bottom: 1px solid #876; cursor: pointer;
+  }
+  .tab_button { padding: 12px 10px; }
+  #support_sidebar .tab_button { padding: 12px 4px; }
+
+  .overlay { background: rgba(0, 0, 0, 0.94); }
+
+  /* things to tap */
+  ul.choices li { padding: 0.8em 0.7em; min-height: 44px; }
+  ul.choices li div.subtitle { margin-left: 1em; }
+  .pp-pill { padding: 0.45em 0.9em; }
+}
+@media screen and (max-width: 560px) {
+  #content { padding: 0.8em 0.8em 1.1em 0.8em; font-size: 1em; line-height: 1.5; }
+  #content h1:first-child { font-size: 1.25em; }
+  .title-banner img { width: 100%; height: auto; }
+
+  /* cards become rows: the card, its name, and under it what it does (there is no hover on a phone) */
+  .card-in-hand, .pinned-card, .deck {
+    display: grid; grid-template-columns: 76px 1fr; grid-template-rows: auto auto; column-gap: 0.8em; align-items: center;
+    max-width: none; width: 100%; margin: 0 0 0.4em 0; padding: 0.3em 0; box-sizing: border-box;
+  }
+  a.card, div.blank-card { width: 76px; height: 95px; border-width: 5px; margin: 0; grid-row: 1 / span 2; grid-column: 1; box-sizing: border-box; }
+  a.card:hover { left: 0; top: 0; }
+  .card-img { width: 66px; height: 85px; }
+  .card-tooltip { display: none !important; }
+  .card-caption { grid-column: 2; grid-row: 1; text-align: left; font-weight: bold; align-self: end; line-height: 1.25em; }
+  .card-sub { display: block; grid-column: 2; grid-row: 2; align-self: start; font-size: 0.85em; font-style: italic; opacity: 0.85; line-height: 1.3em; }
+  .card-in-hand a.card, .pinned-card a.card, .deck a.card { min-height: 44px; }
+  .card-in-hand:has(> .blank-card) { display: none; }
+  .parl-legend { font-size: 0.8em; }
+  .effects { font-size: 0.9em; }
 }
