@@ -83,7 +83,35 @@
     h += statRow(Q, 'soviet_democracy', 'Soviet democracy', 'level', true);
     if (num(Q.repression) > 4) { h += statRow(Q, 'repression', 'Repression', 'level', false); }
     if (Q.bol_regime && num(Q.dix) >= 34) { h += statRow(Q, 'white_front', 'The front', 'front', false); }
+    if (DEBUG) { h += renderDebug(Q); }
     return h;
+  }
+
+  // ---------- hidden numbers, for balance testing: open the game with ?debug in the address ----------
+  var DEBUG = /[?&]debug\b/.test(window.location.search);
+  function renderDebug(Q) {
+    var RO = window.RO, rows = [], r1 = function(x) { return Math.round(num(x) * 10) / 10; };
+    var add = function(k, v) { rows.push('<tr><td>' + esc(k) + '</td><td>' + esc(String(v)) + '</td></tr>'); };
+    try {
+      add('turn / dix / phase', num(Q.turn) + ' / ' + num(Q.dix) + ' / ' + num(Q.phase));
+      add('difficulty', num(Q.difficulty));
+      add('grievance', r1(RO.grievance(Q)));
+      add('Bolshevik power (insurrection)', r1(RO.bolPower(Q)));
+      add('Kornilov force / resistance', r1(RO.kornilovForce(Q)) + ' / ' + r1(RO.kornilovResistance(Q, 0)));
+      add('strength (break threshold 18)', r1(RO.strength(Q)));
+      var off = RO.offence(Q);
+      RO.CAMPS.forEach(function(k) {
+        add('hostility ' + k + ' (now / target)', r1(Q['ant_' + k]) + ' / ' + r1(10 * off[k].score * (1 + 0.12 * num(Q.difficulty))));
+        add('odds ' + k + ' / timer / pending', Math.round(100 * RO.squashOdds(Q, k)) + '% / ' + r1(Q['opp_' + k + '_timer']) + ' / ' + num(Q['opp_' + k + '_ev']));
+      });
+      add('relations ally / third / bol / kad', [Q.rel_ally, Q.rel_lsr, Q.rel_bol, Q.rel_kad].map(r1).join(' / '));
+      add('alliances ally / third / bol', [Q.ally_lvl, Q.ally_lsr, Q.ally_bol].map(num).join(' / '));
+      add('dissent', r1(num(Q.dissent) * 100) + '%');
+      add('white front / red army', r1(Q.white_front) + ' / ' + r1(Q.red_army));
+      add('legality / members', num(Q.legality) + ' / ' + Math.round(num(Q.members)));
+      add('Vikzhel score', r1(Q.vik_score));
+    } catch (e) { add('error', e.message); }
+    return '<div class="sb-section">Hidden numbers</div><table class="sb-kv sb-debug">' + rows.join('') + '</table>';
   }
 
   function thirdLabel(Q) {

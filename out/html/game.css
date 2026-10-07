@@ -836,3 +836,7 @@ a, button, ul.choices li, .tab_button { touch-action: manipulation; -webkit-tap-
 .recap-list { margin: 0.2em 0 0 0; padding-left: 1.1em; font-size: 0.9em; }
 .recap-list li { margin-bottom: 0.15em; }
 .recap-list span { opacity: 0.7; margin-right: 0.3em; }
+
+/* ?debug: the hidden numbers in the sidebar */
+.sb-debug td { font-size: 0.78em; line-height: 1.3em; }
+.sb-debug td:last-child { font-family: Menlo, Consolas, monospace; }

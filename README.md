@@ -33,6 +33,12 @@ Not yet done from the design plan: public-domain period images and music (the ol
 
 `npm test` (or `sh tools/ci.sh`) builds the game, runs the model's unit tests (`tools/test_model.js`), checks that the generated scenes match their generators, and plays full games for every party and difficulty and every scripted strategy, failing on an error, a stuck game or broken text (`STRICT=1`). GitHub Actions runs the same checks on every push and pull request, and only publishes the game if they pass.
 
+## Balance
+
+`node tools/balance_report.js [games]` plays every party at every difficulty, and every scripted strategy, and writes [`docs/balance.md`](docs/balance.md): how often each ending comes up, how often the opposition moves, and how support fares. For playing it yourself, open the game with `?debug` at the end of the address (for example `index.html?debug`): the sidebar then shows the hidden numbers (the Bolsheviks' power for an insurrection, Kornilov's force against the resistance, each camp's hostility and its target, the odds of breaking it, relations and alliances, the front).
+
+Difficulty: Easy gives more resources, a bigger hand and returnable cards, and its currents, opposition and generals are a little gentler (and a party that is banned in name but keeps its members is not counted as driven abroad). Hard takes resources away, makes the currents 15% harder to hold together, the opposition anger 12% faster and the generals stronger.
+
 ## Tools
 
 - `tools/model.js`: the numbers behind the game: the support model for each voter group and arena, the monthly drift of the stats, factions and dissent, the Civil War front, and helpers for cards and events. It is plain JavaScript, loaded by the game and by the tests.

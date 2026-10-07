@@ -6,7 +6,7 @@ view-if: opp_bol_ev = 2 and bol_regime = 0
 priority: 25
 on-arrival: {!
 Q.opp_bol_ev = 0;
-Q.opp_bol_timer = 6;
+Q.opp_bol_timer = 9;
 Q.opp_bol_n = (Q.opp_bol_n || 0) + 1;
 Q.opp_why = RO.mainGrievance(Q, 'bol');
 RO.add(Q, {bolshevik: 4});

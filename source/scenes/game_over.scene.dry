@@ -8,7 +8,8 @@ if (Q.ending == 'final') {
         Q.ending = Q.vikzhel_deal ? 'all_socialist' : 'constituent_republic';
     } else if (Q.sd_win_check = (Q.soviet_democracy >= 55 && Q.legality >= 2 && Q.nep_early && Q.free_soviets && Q.repression <= 40)) {
         Q.ending = 'soviet_democracy';
-    } else if (Q.legality <= 1 || Q.members <= 20 * Q.mem_scale) {
+    } else if (Q.legality <= (Q.difficulty < 0 ? 0 : 1) || Q.members <= (Q.difficulty < 0 ? 12 : 20) * Q.mem_scale) {
+        // on Easy a party that is banned in name but still has its members has not been driven abroad
         Q.ending = 'exile';
     } else {
         Q.ending = 'one_party';

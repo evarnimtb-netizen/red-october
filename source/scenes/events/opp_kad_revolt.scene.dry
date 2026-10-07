@@ -6,7 +6,7 @@ view-if: opp_kad_ev = 2 and bol_regime = 0
 priority: 26
 on-arrival: {!
 Q.opp_kad_ev = 0;
-Q.opp_kad_timer = 6;
+Q.opp_kad_timer = 9;
 Q.opp_kad_n = (Q.opp_kad_n || 0) + 1;
 Q.opp_why = RO.mainGrievance(Q, 'kad');
 RO.add(Q, {right_threat: 5});

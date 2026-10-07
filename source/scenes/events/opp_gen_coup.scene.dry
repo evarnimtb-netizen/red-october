@@ -6,7 +6,7 @@ view-if: opp_gen_ev = 2 and dix >= 6 and bol_regime = 0
 priority: 26
 on-arrival: {!
 Q.opp_gen_ev = 0;
-Q.opp_gen_timer = 8;
+Q.opp_gen_timer = 10;
 Q.opp_gen_n = (Q.opp_gen_n || 0) + 1;
 Q.opp_why = RO.mainGrievance(Q, 'gen');
 Q.opp_bonus = 0;

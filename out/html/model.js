@@ -281,7 +281,8 @@ var RO = (function() {
       Q[f + '_strength'] = 100 * Q[f + '_strength'] / total;
       d += Q[f + '_strength'] * Q[f + '_dissent'];
     }
-    Q.dissent = clamp(d / 10000 + (Q.dissent_extra || 0), 0, 0.95);
+    // difficulty (-1 easy, 0 normal, 1 hard): the currents are harder to hold together on Hard
+    Q.dissent = clamp(d / 10000 * (1 + 0.15 * (Q.difficulty || 0)) + (Q.dissent_extra || 0), 0, 0.95);
     Q.dissent_percent = Q.dissent * 100;
   }
 
@@ -426,7 +427,7 @@ var RO = (function() {
   }
   function kornilovResistance(Q, bonus) {
     return 40 + (bonus || 0) + 5 * Math.min(Q.militia || 0, 4) + 0.2 * (Q.boost_railway || 0) + 0.25 * (Q.boost_soldiers || 0) +
-           (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 60) / 8 + (Q.player_party === 'sr' ? 6 : 0);
+           (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 60) / 8 + (Q.player_party === 'sr' ? 6 : 0) - 4 * (Q.difficulty || 0);
   }
 
 
@@ -968,7 +969,8 @@ var RO = (function() {
     var off = offence(Q);
     CAMPS.forEach(function(k) {
       var key = 'ant_' + k, cur = Q[key] || 0;
-      var target = campActive(Q, k) ? clamp(10 * off[k].score, 0, 100) : 0;
+      // the camps anger faster on Hard and slower on Easy
+      var target = campActive(Q, k) ? clamp(10 * off[k].score * (1 + 0.12 * (Q.difficulty || 0)), 0, 100) : 0;
       if ((Q['cow_' + k + '_timer'] || 0) > 0) { target = Math.min(target, 30); }
       Q[key] = clamp(cur + (target - cur) * Math.min(1, 0.3 * tl), 0, 100);
       var a = Q[key];
@@ -977,7 +979,7 @@ var RO = (function() {
       var stage = 0, thr = SANCTION_AT;
       if (a >= REVOLT_AT && ((Q['opp_' + k + '_n'] || 0) >= 1 || a >= 85)) { stage = 2; thr = REVOLT_AT; }
       else if (a >= SANCTION_AT) { stage = 1; }
-      if (stage && chance((0.3 + (a - thr) / 60) * Math.min(1, tl))) { Q['opp_' + k + '_ev'] = stage; }
+      if (stage && chance((0.2 + (a - thr) / 80) * Math.min(1, tl))) { Q['opp_' + k + '_ev'] = stage; }
     });
   }
 

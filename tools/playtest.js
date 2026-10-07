@@ -169,7 +169,11 @@ function playOne(idx) {
           bol_regime: q.bol_regime, vikzhel: q.vikzhel_deal, assembly: q.assembly_survives,
           legality: q.legality, sd: Math.round(q.soviet_democracy), members: Math.round(q.members),
           wf: Math.round(maxwf), rt: Math.round(q.right_threat), bol: Math.round(q.bolshevik),
-          dissent: Math.round(q.dissent * 100), bpow_final: Math.round(q.bol_power || 0), homog: q.homogeneous_gov, lc: q.land_committees, ca: q.ca_elected, stock: q.stockholm, bread: Math.round(q.bread), dbg: {al: [q.ally_lvl, q.ally_lsr, q.ally_bol], blocs: q.blocs, kav: q.komuch_averted, nep: q.nep_early, free: q.free_soviets, leg: q.legality, sd: Math.round(q.soviet_democracy), rep: Math.round(q.repression), po: q.peasant_organised, rb: Math.round(q.rel_bol), prog: q.program_adopted, wa: q.white_aid, prb: Math.round(q.prog_rb || 0), brb: Math.round(q.brest_rb || 0), bsd: Math.round(q.brest_sd || 0), sqrb: Math.round(q.sq_rb || 0), ppo: q.prog_po || 0}, takeover: q.takeover, vs: Math.round(q.vik_score || 0), snaps: snaps, log: log, lastScenes: scenes.slice(-6)};
+          dissent: Math.round(q.dissent * 100), bpow_final: Math.round(q.bol_power || 0), homog: q.homogeneous_gov, lc: q.land_committees, ca: q.ca_elected, stock: q.stockholm, bread: Math.round(q.bread), dbg: {al: [q.ally_lvl, q.ally_lsr, q.ally_bol], blocs: q.blocs, kav: q.komuch_averted, nep: q.nep_early, free: q.free_soviets, leg: q.legality, sd: Math.round(q.soviet_democracy), rep: Math.round(q.repression), po: q.peasant_organised, rb: Math.round(q.rel_bol), prog: q.program_adopted, wa: q.white_aid, prb: Math.round(q.prog_rb || 0), brb: Math.round(q.brest_rb || 0), bsd: Math.round(q.brest_sd || 0), sqrb: Math.round(q.sq_rb || 0), ppo: q.prog_po || 0}, takeover: q.takeover, vs: Math.round(q.vik_score || 0),
+          opp: [q.opp_kad_n || 0, q.opp_gen_n || 0, q.opp_bol_n || 0], laws: (q.laws_log || []).length,
+          breaks: (q.break_log || []).length, broke: (q.break_log || []).filter(function(b) { return b[2]; }).length,
+          peak: (q.hist || []).reduce(function(m, r) { return Math.max(m, r[1]); }, 0), final_poll: Math.round(q.player_poll || 0),
+          snaps: snaps, log: log, lastScenes: scenes.slice(-6)};
 }
 
 var results = [];
@@ -197,6 +201,13 @@ results.forEach(function(r) { var k = r.game_over ? r.ending : 'STUCK'; counts[k
 if (process.env.DBG) { results.forEach(function(r) { console.log(r.ending + ' ' + JSON.stringify(r.dbg)); }); }
 if (process.env.POW) { results.forEach(function(r) { console.log(JSON.stringify({e: r.ending, p: r.bpow_final, h: r.homog, lc: r.lc, ca: r.ca, st: r.stock, tk: r.takeover, vs: r.vs})); }); }
 if (process.env.TEXT) { fs.writeFileSync(process.env.TEXT, allText.join('\n')); }
+// JSON=file writes one summary per game, for tools/balance_report.js
+if (process.env.JSON) {
+  fs.writeFileSync(process.env.JSON, JSON.stringify(results.map(function(r) {
+    return {ending: r.game_over ? r.ending : 'STUCK', opp: r.opp, laws: r.laws, breaks: r.breaks, broke: r.broke, peak: r.peak, final_poll: r.final_poll,
+            bol_regime: r.bol_regime, members: r.members};
+  })));
+}
 if (results.length) { console.log('max pinned cards shown: ' + Math.max.apply(null, results.map(function(r) { return r.maxPinned; }))); }
 console.log('policy=' + policy + ' runs=' + runs + ' errors=' + errors);
 console.log(JSON.stringify(counts));
