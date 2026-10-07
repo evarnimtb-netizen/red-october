@@ -64,8 +64,22 @@ test('no camp reacts under the Bolshevik regime, and pending reactions are dropp
 
 test('hostility moves towards what the camp objects to', function() {
   var Q = state({pol_land: 2, pol_labour: 2, gov_kadets: 0, homogeneous_gov: 1});
-  for (var i = 0; i < 12; i++) { Q.opp_kad_timer = 1; RO.oppositionTurn(Q, 1); }
-  assert.ok(Q.ant_kad > 60, 'ant_kad ' + Q.ant_kad);
+  for (var i = 0; i < 6; i++) { Q.opp_kad_timer = 1; RO.oppositionTurn(Q, 1); }
+  assert.ok(Q.ant_kad > 50, 'ant_kad ' + Q.ant_kad);
+});
+
+test('a standing grievance fades: hostility drops slowly, and a new offence rekindles it', function() {
+  var Q = state({pol_land: 2, pol_labour: 2, gov_kadets: 0, homogeneous_gov: 1});
+  var month = function() { Q.opp_kad_timer = 1; RO.oppositionTurn(Q, 1); };
+  for (var i = 0; i < 6; i++) { month(); }
+  var peak = Q.ant_kad;
+  for (i = 0; i < 12; i++) { month(); }
+  assert.ok(Q.ant_kad < peak - 10, 'peak ' + peak + ' now ' + Q.ant_kad);
+  var before = Q.ant_kad;
+  month();
+  assert.ok(before - Q.ant_kad < 5, 'it falls slowly: ' + before + ' -> ' + Q.ant_kad);
+  Q.pol_war = 1; month(); month();
+  assert.ok(Q.ant_kad > before, 'a new offence rekindles it');
 });
 
 test('the Break answer in an event always tries, and a failure does not re-queue the event', function() {

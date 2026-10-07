@@ -965,14 +965,32 @@ var RO = (function() {
     return camps;
   }
 
+  // Grievances fade: the longer the same complaints stand without a new one, the less they anger (to half after ten
+  // months), and hostility falls more slowly than it rises. A new offence (the camp's complaints grow) starts the
+  // clock again. Q.opp_<camp>_age counts the months, Q.opp_<camp>_base remembers what the complaints were.
+  var FADE_PER_MONTH = 0.05, FADE_FLOOR = 0.5, RISE_RATE = 0.3, FALL_RATE = 0.12, COOL_DRAIN = 0.15;
+  function campTarget(Q, k, off) {
+    if (!campActive(Q, k)) { return 0; }
+    off = off || offence(Q);
+    var fade = Math.max(FADE_FLOOR, 1 - FADE_PER_MONTH * (Q['opp_' + k + '_age'] || 0));
+    // the camps anger faster on Hard and slower on Easy
+    var t = clamp(10 * off[k].score * fade * (1 + 0.12 * (Q.difficulty || 0)), 0, 100);
+    if ((Q['cow_' + k + '_timer'] || 0) > 0) { t = Math.min(t, 30); }
+    return t;
+  }
+
   function oppositionTurn(Q, tl) {
     var off = offence(Q);
     CAMPS.forEach(function(k) {
-      var key = 'ant_' + k, cur = Q[key] || 0;
-      // the camps anger faster on Hard and slower on Easy
-      var target = campActive(Q, k) ? clamp(10 * off[k].score * (1 + 0.12 * (Q.difficulty || 0)), 0, 100) : 0;
-      if ((Q['cow_' + k + '_timer'] || 0) > 0) { target = Math.min(target, 30); }
-      Q[key] = clamp(cur + (target - cur) * Math.min(1, 0.3 * tl), 0, 100);
+      var key = 'ant_' + k, cur = Q[key] || 0, score = off[k].score;
+      if (score > (Q['opp_' + k + '_base'] || 0) + 0.5) { Q['opp_' + k + '_age'] = 0; }
+      else { Q['opp_' + k + '_age'] = (Q['opp_' + k + '_age'] || 0) + tl; }
+      Q['opp_' + k + '_base'] = score;
+      var target = campTarget(Q, k, off);
+      var rate = target > cur ? RISE_RATE : FALL_RATE;
+      Q[key] = clamp(cur + (target - cur) * Math.min(1, rate * tl), 0, 100);
+      // as the propertied camps and the generals cool down, the Right loses its money and its officers
+      if ((k === 'kad' || k === 'gen') && Q[key] < cur) { Q.right_threat = Math.max(0, (Q.right_threat || 0) - COOL_DRAIN * (cur - Q[key])); }
       var a = Q[key];
       if (!campActive(Q, k)) { Q['opp_' + k + '_ev'] = 0; return; }
       if (Q.game_end || Q['opp_' + k + '_ev'] || (Q['opp_' + k + '_timer'] || 0) > 0) { return; }
@@ -995,7 +1013,7 @@ var RO = (function() {
   }
 
 
-  return {recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

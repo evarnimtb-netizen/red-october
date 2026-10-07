@@ -101,7 +101,7 @@
       add('strength (break threshold 18)', r1(RO.strength(Q)));
       var off = RO.offence(Q);
       RO.CAMPS.forEach(function(k) {
-        add('hostility ' + k + ' (now / target)', r1(Q['ant_' + k]) + ' / ' + r1(10 * off[k].score * (1 + 0.12 * num(Q.difficulty))));
+        add('hostility ' + k + ' (now / target / months)', r1(Q['ant_' + k]) + ' / ' + r1(RO.campTarget(Q, k, off)) + ' / ' + r1(Q['opp_' + k + '_age']));
         add('odds ' + k + ' / timer / pending', Math.round(100 * RO.squashOdds(Q, k)) + '% / ' + r1(Q['opp_' + k + '_timer']) + ' / ' + num(Q['opp_' + k + '_ev']));
       });
       add('relations ally / third / bol / kad', [Q.rel_ally, Q.rel_lsr, Q.rel_bol, Q.rel_kad].map(r1).join(' / '));
@@ -312,7 +312,7 @@
       if (likes.length) { h += '<div class="rs-meta">Likes: ' + esc(likes[0].t) + '.</div>'; }
       h += '</div>';
     });
-    h += '<div class="sb-note">Hostility moves towards what each camp objects to in your policies (the Cabinet card, the land committees, the decrees) and eases when you give way.</div>';
+    h += '<div class="sb-note">Hostility moves towards what each camp objects to in your policies (the Cabinet card, the land committees, the decrees). It eases when you give way, and it fades slowly as old grievances grow stale; a new offence rekindles it.</div>';
     return h;
   }
 
