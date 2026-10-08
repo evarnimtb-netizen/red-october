@@ -793,6 +793,23 @@ var RO = (function() {
     if (Q.hist.length && Q.hist[Q.hist.length - 1][0] === row[0]) { Q.hist[Q.hist.length - 1] = row; } else { Q.hist.push(row); }
   }
 
+  // Will the party be driven abroad when the game ends (the Menshevik exile ending, decided in game_over.scene.dry)?
+  // Returns null, or {level: 1 (close) or 2 (as things stand, exile), reasons: [...]}, for the sidebar warning and the
+  // exile_warning event. The arrests of August 1921 cost a step of legality unless repression is low and the 1919
+  // programme was adopted, so a party one step above the line is warned about them from 1920.
+  function exileRisk(Q) {
+    if (!Q.bol_regime || Q.player_party !== 'menshevik' || Q.game_over || Q.game_end) { return null; }
+    var legMin = Q.difficulty < 0 ? 0 : 1, memMin = (Q.difficulty < 0 ? 12 : 20) * (Q.mem_scale || 1);
+    var leg = Math.round(Q.legality || 0), reasons = [], level = 0;
+    if (leg <= legMin) { level = 2; reasons.push(leg <= 0 ? 'the party is banned' : 'the party is expelled from the soviets'); }
+    else if (leg === legMin + 1 && Q.dix >= 80 && Q.dix < 110 && ((Q.repression || 0) >= 40 || !(Q.program_adopted || Q.nep_early))) {
+      level = 1; reasons.push('the arrests expected in 1921 would leave the party ' + (legMin === 0 ? 'banned' : 'expelled from the soviets'));
+    }
+    if (Q.members <= memMin) { level = 2; reasons.push('too few members are left'); }
+    else if (Q.members <= memMin * 1.5) { level = Math.max(level, 1); reasons.push('the membership is close to collapse'); }
+    return level ? {level: level, reasons: reasons} : null;
+  }
+
   // A weighted coin for the decisions that no stat can settle.
   function chance(p) { return Math.random() < clamp(p, 0, 1); }
 
@@ -1012,7 +1029,7 @@ var RO = (function() {
   // Grievances fade: the longer the same complaints stand without a new one, the less they anger (to half after ten
   // months), and hostility falls more slowly than it rises. A new offence (the camp's complaints grow) starts the
   // clock again. Q.opp_<camp>_age counts the months, Q.opp_<camp>_base remembers what the complaints were.
-  var FADE_PER_MONTH = 0.05, FADE_FLOOR = 0.5, RISE_RATE = 0.3, FALL_RATE = 0.12, COOL_DRAIN = 0.15;
+  var FADE_PER_MONTH = 0.035, FADE_FLOOR = 0.6, RISE_RATE = 0.3, FALL_RATE = 0.1, COOL_DRAIN = 0.15;
   function campTarget(Q, k, off) {
     if (!campActive(Q, k)) { return 0; }
     off = off || offence(Q);
@@ -1069,7 +1086,7 @@ var RO = (function() {
   }
 
 
-  return {allianceBlocker: allianceBlocker, campPower: campPower, campReadiness: campReadiness, ACT_FROM: ACT_FROM, ARMS_AT: ARMS_AT, campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, swapAdvisor: swapAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {exileRisk: exileRisk, allianceBlocker: allianceBlocker, campPower: campPower, campReadiness: campReadiness, ACT_FROM: ACT_FROM, ARMS_AT: ARMS_AT, campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, swapAdvisor: swapAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

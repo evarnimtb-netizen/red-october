@@ -32,7 +32,8 @@ var common = {
   social_welfare: [/Expand cooperative/, /cooperative credit/],
   domestic_enemies: [/Send our members to the Red Army/, /prisoners are released/],
   judiciary: [/Use our contacts/, /European socialists/, /public campaign/],
-  fiscal_policy: [/Join the committee/]
+  fiscal_policy: [/Join the committee/],
+  treasury: [/famine/, /cooperatives/, /lawyers/, /organisers/, /presses/]
 };
 
 function merge(a, b) { var o = {}; for (var k in a) { o[k] = a[k]; } for (var j in b) { o[j] = b[j]; } return o; }
@@ -79,10 +80,7 @@ var democrat = {
     vikzhel_check: [],
     peace_or_war: []
   }),
-  cards: ['constitutional_reform', 'inter_party_relationships', 'agricultural_policy', 'foreign_policy', 'international_relations',
-          'neorevisionism', 'peoples_party', 'campaigning', 'reichsbanner', 'domestic_enemies', 'judiciary', 'economic_policy', 'military_policy',
-          'rally', 'media', 'labor_affairs', 'economic_democracy', 'social_welfare', 'party_disunity', 'fundraising', 'nationalities', 'police',
-          'labor_rights', 'fiscal_policy', 'martov', 'liber', 'dan', 'broido']
+  cards: ['constitutional_reform', 'inter_party_relationships', 'agricultural_policy', 'treasury', 'foreign_policy', 'international_relations', 'neorevisionism', 'peoples_party', 'campaigning', 'reichsbanner', 'domestic_enemies', 'judiciary', 'economic_policy', 'military_policy', 'rally', 'media', 'labor_affairs', 'economic_democracy', 'social_welfare', 'party_disunity', 'fundraising', 'nationalities', 'police', 'labor_rights', 'fiscal_policy', 'martov', 'liber', 'dan', 'broido']
 };
 
 var vikzhelist = {
@@ -92,9 +90,7 @@ var vikzhelist = {
     october: [/Stay in the hall/, /Leniency/],
     vikzhel: [/Sign/]
   }),
-  cards: ['inter_party_relationships', 'martov', 'international_relations', 'agricultural_policy', 'foreign_policy', 'campaigning', 'rally',
-          'media', 'party_disunity', 'neorevisionism', 'peoples_party', 'judiciary', 'domestic_enemies', 'economic_policy', 'military_policy',
-          'sukhanov', 'fundraising', 'economic_democracy', 'social_welfare', 'police', 'nationalities', 'liber', 'lidia']
+  cards: ['inter_party_relationships', 'martov', 'international_relations', 'treasury', 'agricultural_policy', 'foreign_policy', 'campaigning', 'rally', 'media', 'party_disunity', 'neorevisionism', 'peoples_party', 'judiciary', 'domestic_enemies', 'economic_policy', 'military_policy', 'sukhanov', 'fundraising', 'economic_democracy', 'social_welfare', 'police', 'nationalities', 'liber', 'lidia']
 };
 
 var opposition = {
@@ -107,8 +103,7 @@ var opposition = {
     october: [/Walk out/],
     vikzhel: [/Refuse/]
   }),
-  cards: ['neorevisionism', 'peoples_party', 'inter_party_relationships', 'international_relations', 'domestic_enemies', 'judiciary', 'campaigning',
-          'rally', 'media', 'economic_democracy', 'social_welfare', 'labor_rights', 'party_disunity', 'fundraising', 'fiscal_policy', 'martov', 'dan']
+  cards: ['neorevisionism', 'peoples_party', 'inter_party_relationships', 'treasury', 'international_relations', 'domestic_enemies', 'judiciary', 'campaigning', 'rally', 'media', 'economic_democracy', 'social_welfare', 'labor_rights', 'party_disunity', 'fundraising', 'fiscal_policy', 'martov', 'dan']
 };
 
 var whiteaid = {
@@ -124,7 +119,7 @@ var whiteaid = {
     denikin: [/Stay neutral/],
     domestic_enemies: [/neither side/]
   }),
-  cards: ['reichsbanner', 'campaigning', 'media', 'rally', 'inter_party_relationships', 'fundraising', 'party_disunity', 'economic_democracy', 'labor_rights', 'social_welfare']
+  cards: ['reichsbanner', 'campaigning', 'media', 'treasury', 'rally', 'inter_party_relationships', 'fundraising', 'party_disunity', 'economic_democracy', 'labor_rights', 'social_welfare']
 };
 var srCommon = {
   february: [/Demand a Soviet government/, /Back Kerensky/],
@@ -152,9 +147,7 @@ var sr_land = {
   choices: merge(merge(democrat.choices, srCommon), {
     sr_komuch: [/Refuse/], october: [/Leniency/, /Stay in the hall/, /Walk out/], vikzhel: [/Sign/]
   }),
-  cards: ['land_committees', 'constitutional_reform', 'agricultural_policy', 'peasant_congress', 'inter_party_relationships', 'foreign_policy',
-          'international_relations', 'campaigning', 'peasant_meeting', 'media', 'economic_policy', 'military_policy', 'chernov', 'gots', 'zenzinov',
-          'party_disunity', 'fundraising', 'domestic_enemies', 'judiciary', 'economic_democracy', 'social_welfare', 'rally']
+  cards: ['land_committees', 'constitutional_reform', 'agricultural_policy', 'treasury', 'peasant_congress', 'inter_party_relationships', 'foreign_policy', 'international_relations', 'campaigning', 'peasant_meeting', 'media', 'economic_policy', 'military_policy', 'chernov', 'gots', 'zenzinov', 'party_disunity', 'fundraising', 'domestic_enemies', 'judiciary', 'economic_democracy', 'social_welfare', 'rally']
 };
 var socializer = {
   choices: merge(merge(democrat.choices, srCommon), {
@@ -163,7 +156,7 @@ var socializer = {
     opp_kad_sanction: [/Hold firm/], opp_kad_revolt: [/Send the loyal/], opp_gen_ultimatum: [/Refuse the memorandum/],
     opp_gen_coup: [/stop the trains/], opp_bol_agitation: [/Debate/], opp_bol_strike: [/Offer the Bolsheviks/]
   }),
-  cards: ['cabinet', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'fundraising', 'rally']
+  cards: ['cabinet', 'land_committees', 'peasant_congress', 'treasury', 'campaigning', 'peasant_meeting', 'media', 'fundraising', 'rally']
 };
 // The breaker strikes only when the odds are good (BREAK_ODDS or better against every camp it would strike);
 // otherwise it holds firm in the events and passes laws as written.
@@ -185,7 +178,7 @@ var breaker = {
     opp_gen_ultimatum: [breakIfGood('gen', /Break the Officers/), /Refuse the memorandum/],
     opp_gen_coup: [/stop the trains/], opp_bol_agitation: [breakIfGood('bol', /Shut down Pravda/), /Debate/], opp_bol_strike: [/Offer the Bolsheviks/]
   }),
-  cards: ['cabinet', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'fundraising', 'rally'],
+  cards: ['cabinet', 'land_committees', 'peasant_congress', 'treasury', 'campaigning', 'peasant_meeting', 'media', 'fundraising', 'rally'],
   law: forceIfGood
 };
 var sr_komuchbot = {
@@ -193,7 +186,7 @@ var sr_komuchbot = {
     february: [/Back Kerensky/], first_coalition: [/Chernov takes Agriculture/], october: [/Walk out/], vikzhel: [/Refuse/],
     sr_komuch: [/Join Komuch, and raise/], sr_directory: [/Join the Directory/], kolchak: [/Fight on/], sr_ufa: [/Let the Ufa/], denikin: [/Stay neutral/], people_army: [/Raise the People/]
   }),
-  cards: ['people_army', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'inter_party_relationships', 'fundraising', 'volsky']
+  cards: ['people_army', 'land_committees', 'peasant_congress', 'treasury', 'campaigning', 'peasant_meeting', 'media', 'inter_party_relationships', 'fundraising', 'volsky']
 };
 var sr_peasant = {
   choices: merge(merge(opposition.choices, srCommon), {
@@ -201,8 +194,7 @@ var sr_peasant = {
     february: [/Back Kerensky/], first_coalition: [/Chernov takes Agriculture/], october: [/Walk out/], vikzhel: [/Refuse/],
     sr_komuch: [/Refuse/], sr_ufa: [/Adopt the Ufa/], denikin: [/Mobilise/], expelled: [/Pledge/]
   }),
-  cards: ['peasant_congress', 'land_committees', 'inter_party_relationships', 'domestic_enemies', 'judiciary', 'campaigning', 'peasant_meeting', 'media',
-          'social_welfare', 'economic_democracy', 'fundraising', 'party_disunity', 'international_relations', 'gots', 'zenzinov']
+  cards: ['peasant_congress', 'land_committees', 'inter_party_relationships', 'treasury', 'domestic_enemies', 'judiciary', 'campaigning', 'peasant_meeting', 'media', 'social_welfare', 'economic_democracy', 'fundraising', 'party_disunity', 'international_relations', 'gots', 'zenzinov']
 };
 var lsrCommon = {
   april_theses: [/Welcome the land and peace/],
@@ -239,14 +231,22 @@ var lsrCommon = {
 };
 var lsr_coalition_bot = {
   choices: merge(democrat.choices, lsrCommon),
-  cards: ['inter_party_relationships', 'sovnarkom_seats', 'cheka_board', 'inside_sr', 'the_split', 'peasant_congress', 'spiridonova', 'natanson', 'steinberg', 'kolegaev', 'campaigning', 'peasant_meeting', 'media', 'party_disunity', 'fundraising', 'domestic_enemies', 'judiciary']
+  cards: ['inter_party_relationships', 'sovnarkom_seats', 'cheka_board', 'treasury', 'inside_sr', 'the_split', 'peasant_congress', 'spiridonova', 'natanson', 'steinberg', 'kolegaev', 'campaigning', 'peasant_meeting', 'media', 'party_disunity', 'fundraising', 'domestic_enemies', 'judiciary']
 };
 var lsr_rising_bot = {
   choices: merge(democrat.choices, merge(lsrCommon, { lsr_july: [/Carry out/], brest: [/Leave the government/], lsr_government: [/Stay outside/] })),
-  cards: ['inside_sr', 'the_split', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'kamkov', 'spiridonova']
+  cards: ['inside_sr', 'the_split', 'peasant_congress', 'treasury', 'campaigning', 'peasant_meeting', 'media', 'kamkov', 'spiridonova']
+};
+// outside the government, without the rising: the peasant soviets, and the bargain of 1921
+var lsr_villages_bot = {
+  choices: merge(democrat.choices, merge(lsrCommon, {
+    lsr_government: [/Stay outside/], brest: [/Leave the government/, /Vote for ratification/, /against/i], lsr_july: [/Protest the treaty/, /Call it off/],
+    kronstadt: [/Condemn/, /Stay silent/], lsr_1921: [/Offer Lenin peace/, /Keep quiet/], red_terror: [/Bargain/, /Condemn/]
+  })),
+  cards: ['peasant_congress', 'spiridonova', 'peasant_meeting', 'treasury', 'inter_party_relationships', 'natanson', 'campaigning', 'media', 'domestic_enemies', 'judiciary', 'fundraising', 'party_disunity']
 };
 var persuader = {
   choices: merge(opposition.choices, { komuch: [/Persuade/, /Neither/], inter_party_relationships: [/Formalize/, /Talks with the SRs/] }),
-  cards: ['inter_party_relationships', 'neorevisionism', 'peoples_party', 'international_relations', 'domestic_enemies', 'judiciary', 'campaigning', 'rally', 'media', 'party_disunity', 'fundraising']
+  cards: ['inter_party_relationships', 'neorevisionism', 'peoples_party', 'treasury', 'international_relations', 'domestic_enemies', 'judiciary', 'campaigning', 'rally', 'media', 'party_disunity', 'fundraising']
 };
-module.exports = {breaker: breaker, socializer: socializer, persuader: persuader, lsr_coalition: lsr_coalition_bot, lsr_rising: lsr_rising_bot, sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};
+module.exports = {breaker: breaker, socializer: socializer, persuader: persuader, lsr_coalition: lsr_coalition_bot, lsr_rising: lsr_rising_bot, lsr_villages: lsr_villages_bot, sr_land: sr_land, sr_komuch: sr_komuchbot, sr_peasant: sr_peasant, democrat: democrat, vikzhelist: vikzhelist, opposition: opposition, whiteaid: whiteaid};

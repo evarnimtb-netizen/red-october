@@ -7,12 +7,8 @@ priority: 35
 max-visits: 1
 on-arrival: {!
 Q.lsr_still = Q.lsr_in_gov ? 1 : 0;
-if (!Q.lsr_still) {
-    Q.legality = 0;
-    Q.members -= Math.round(Q.members * 0.5);
-}
 !}
-go-to: l21_yes if lsr_still = 1; l21_no if lsr_still = 0
+go-to: l21_yes if lsr_still = 1; l21_choice if lsr_still = 0
 
 @l21_yes
 
@@ -22,10 +18,53 @@ In March 1921 sailors at Kronstadt called for free soviets, and the Cheka made a
 
 It is a coalition of a kind: a government of two parties, one of which holds all the guns. It is the only coalition that the Russian Revolution produced.
 
-@l21_no
+@l21_choice
 
-= The Last Arrests
+= Kronstadt and Tambov
 
-In March 1921 sailors at Kronstadt called for free soviets, and the Cheka made arrests in every opposition party. The Left SRs, who had supported the sailors' programme, were arrested in their hundreds. Their last congress was held in a prison. By May 1921 the party's activity had ceased.
+In March 1921 the sailors at Kronstadt called for free soviets, and the Cheka is making arrests in every opposition party. In Tambov province fifty thousand peasants are in arms under Antonov, an old SR, against the requisitions; the revolt has spread to the Volga and to Siberia. The Tenth Congress of the Bolshevik party has voted to end the requisitions and to tax the peasants in kind instead. Lenin has told the Congress that the peasants must be made peace with.
+
+The Bolsheviks have the cities and the army. They do not have the villages, and the party that the villages listen to is ours.
+
+- @villages: Offer Lenin peace in the villages, in return for free elections to the rural soviets.
+- @sailors: Stand by the sailors' programme, whatever it costs.
+- @quiet: Keep quiet, and wait for the arrests to pass.
+
+@villages
+choose-if: legality >= 2 and peasant_organised >= 6 and rel_bol >= 38 and soviet_democracy >= 48 and lsr_rising = 0
+unavailable-subtitle: [? if lsr_rising = 1 : The Bolsheviks have not forgotten July 1918. ?][? if legality < 2 : The party is too persecuted to bargain. ?][? if peasant_organised < 6 : We have not organised enough of the peasant soviets. ?][? if rel_bol < 38 : The Bolsheviks do not trust us enough to listen. ?][? if soviet_democracy < 48 : The soviets no longer hold elections worth bargaining for. ?]
+on-arrival: {!
+Q.lsr_peasant_soviets = 1;
+if (Q.legality < 3) { Q.legality += 1; }
+Q.members += 15 * Q.mem_scale;
+RO.add(Q, {rel_bol: 4, repression: -10, soviet_democracy: 8, land_pressure: -6, bread: 3});
+RO.boost(Q, {peasants: 8, soldiers: 2});
+RO.fac(Q, 'intl', 3, -6);
+RO.fac(Q, 'defencist', 0, 4);
+!}
+
+Spiridonova wrote to Lenin from her sanatorium, and the Central Committee sent Kamkov's deputy, under a safe conduct, to the Kremlin. The party offered to send its agitators into Tambov and the Volga villages with the news of the tax in kind and an amnesty, and to tell the peasants to go home. In return it asked for free elections to the volost and village soviets, in which every Soviet party could stand.
+
+Lenin took the bargain, as he took the tax in kind: as a retreat, for as long as it was needed. The decree on the rural soviets was published in April. By the summer, Antonov's men had gone home, and the Left SRs held a majority in hundreds of volost soviets. The Cheka keeps a file on every one of them.
+
+@sailors
+on-arrival: {!
+Q.legality = 0;
+Q.members -= Math.round(Q.members * 0.5);
+RO.add(Q, {rel_bol: -8, repression: 6});
+RO.boost(Q, {workers: 2, soldiers: 2});
+!}
+
+The Left SRs, who had supported the sailors' programme, were arrested in their hundreds. Their last congress was held in a prison. By May 1921 the party's activity had ceased.
 
 The party that had the peasants and the sailors, and, for a time, a seat in the government, has, in 1921, thousands of members in prison and a few more abroad.
+
+@quiet
+on-arrival: {!
+if (Q.legality > 1) { Q.legality = 1; }
+Q.members -= Math.round(Q.members * 0.25);
+RO.add(Q, {repression: 3});
+RO.fac(Q, 'intl', 0, 6);
+!}
+
+The party said nothing about Kronstadt and nothing about Tambov. Its members were arrested anyway, though fewer of them, and those who were left went on meeting in each other's rooms. It is a party that exists in the files of the Cheka more than in the villages.

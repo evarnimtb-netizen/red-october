@@ -17,11 +17,12 @@ if (Q.ending == 'final') {
 }
 if (Q.player_party == 'sr' && (Q.ending == 'exile' || Q.ending == 'one_party')) { Q.ending = 'sr_historical'; }
 if (Q.player_party == 'lsr' && (Q.ending == 'exile' || Q.ending == 'one_party' || Q.ending == 'soviet_democracy')) {
-    Q.ending = (Q.bol_regime && Q.lsr_in_gov && !Q.lsr_rising) ? 'soviet_coalition' : 'lsr_historical';
+    Q.ending = (Q.bol_regime && Q.lsr_in_gov && !Q.lsr_rising) ? 'soviet_coalition' : ((Q.bol_regime && Q.lsr_peasant_soviets && Q.legality >= 1) ? 'peasant_soviets' : 'lsr_historical');
 }
 this.achieve('game_completed');
 if (Q.ending == 'exile' || Q.ending == 'one_party' || Q.ending == 'sr_historical' || Q.ending == 'lsr_historical') { this.achieve('dustbin_of_history'); }
 if (Q.ending == 'soviet_coalition') { this.achieve('soviet_coalition_win'); }
+if (Q.ending == 'peasant_soviets') { this.achieve('peasant_soviets_win'); }
 if (Q.player_party == 'sr' && Q.komuch_alive && Q.white_front < 72 && Q.bol_regime) { this.achieve('komuch_without_kolchak'); }
 if (Q.player_party == 'sr' && Q.lsr_kept && !Q.lsr_split) { this.achieve('one_party_sr'); }
 if (Q.player_party == 'lsr' && Q.seven_commissars && Q.bol_regime) { this.achieve('seven_commissars'); }
@@ -33,7 +34,7 @@ if (Q.program_adopted && Q.program_dix < 72) { this.achieve('chto_delat'); }
 if (Q.georgia_survives && Q.bol_regime) { this.achieve('free_georgia'); }
 Q.ending_exile = (Q.ending == 'exile') ? 1 : 0;
 !}
-go-to: eg_kornilov if ending = 'kornilov'; eg_right_coup if ending = 'right_coup'; eg_white if ending = 'white'; eg_exile if ending = 'exile'; eg_sr_historical if ending = 'sr_historical'; eg_lsr_historical if ending = 'lsr_historical'; eg_soviet_coalition if ending = 'soviet_coalition'; eg_one_party if ending = 'one_party'; eg_all_socialist if ending = 'all_socialist'; eg_constituent_republic if ending = 'constituent_republic'; eg_soviet_democracy if ending = 'soviet_democracy'
+go-to: eg_kornilov if ending = 'kornilov'; eg_right_coup if ending = 'right_coup'; eg_white if ending = 'white'; eg_exile if ending = 'exile'; eg_sr_historical if ending = 'sr_historical'; eg_lsr_historical if ending = 'lsr_historical'; eg_soviet_coalition if ending = 'soviet_coalition'; eg_peasant_soviets if ending = 'peasant_soviets'; eg_one_party if ending = 'one_party'; eg_all_socialist if ending = 'all_socialist'; eg_constituent_republic if ending = 'constituent_republic'; eg_soviet_democracy if ending = 'soviet_democracy'
 
 @eg_kornilov
 
@@ -127,6 +128,20 @@ It is not a democracy. It is a government of two parties, one of which holds all
 
 - @eg_menu: Continue.
 
+@eg_peasant_soviets
+
+= The Peasant Soviets
+
+*A win.*
+
+In this world, the Left SRs did not rise in July 1918, and they did not stay in Lenin's government either. They spent the civil war in the villages, in the peasant soviets that were theirs before they were anyone's, and in March 1921, when Kronstadt and Tambov rose together, they had what the Bolsheviks needed: the peasants' trust.
+
+The bargain of 1921 gave the villages their own soviets, freely elected. The cities belong to the Bolsheviks, and so do the army and the Cheka; the volost soviets belong to whoever the peasants send to them, and, for now, that is often a Left SR. [? if rel_bol >= 45 : Lenin calls it the peasant NEP, and says that it will last as long as the other one. ?][? if rel_bol < 45 : Dzerzhinsky calls it a concession to the kulaks, and is waiting for the harvest. ?]
+
+It is not the Constituent Assembly, and it is not the all-socialist government. It is a country in which a peasant can vote against the ruling party and go home afterwards, and in 1921 that is a great deal.
+
+- @eg_menu: Continue.
+
 @eg_one_party
 
 = The One-Party State
@@ -215,6 +230,10 @@ go-to: eg_menu
 [? if game_achievement_constituent_republic_win : **The Constituent Republic** - the Assembly governs. ?]
 
 [? if game_achievement_all_socialist_win : **The All-Socialist Government** - the coalition holds. ?]
+
+[? if game_achievement_soviet_coalition_win : **The Soviet Coalition** - the Left SRs govern beside the Bolsheviks to the end. ?]
+
+[? if game_achievement_peasant_soviets_win : **The Peasant Soviets** - the villages elect their own soviets. ?]
 
 [? if game_achievement_komuch_without_kolchak : **Komuch Without Kolchak** - an SR government on the Volga that the Whites never capture. ?]
 

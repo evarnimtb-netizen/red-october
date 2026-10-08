@@ -1,0 +1,96 @@
+title: The Party Treasury
+card-image: img/cards/treasury.svg?v=2
+subtitle: Money in the bank, and nothing to show for it.
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: treasury_timer <= 0 and resources >= 10
+on-arrival: {!
+Q.month_actions += 1;
+Q.treasury_timer = 3;
+Q.treasury_shown = Math.round(Q.resources);
+!}
+
+The party's treasurer has come to the Central Committee with the accounts. The dues have come in month after month, and most of the money is still in the bank, or in a cashbox in somebody's flat, where it does the party no good. [? if bol_regime = 1 : Money that sits still in Soviet Russia is money that the Cheka will find. ?][? if bol_regime = 0 : Money that sits still is losing its value with the ruble. ?] The party has [+ treasury_shown +] in hand.
+
+- @coops: Fund the consumer cooperatives' grain purchases. (10 resources)
+- @organisers: Pay full-time organisers for every current in the party. (10 resources)
+- @press: Buy presses and paper, and start newspapers in the provinces. (15 resources)
+- @strike_fund: Set up a strike fund for the railwaymen and the printers. (15 resources)
+- @prisoners: Pay for lawyers, bail and food parcels for the arrested. (10 resources)
+- @relief: Send grain and money to the famine on the Volga. (20 resources)
+- @easy_discard
+
+@coops
+choose-if: resources >= 10 and legality >= 1
+unavailable-subtitle: [? if resources < 10 : We cannot afford it. ?][? if legality < 1 : The cooperatives will not touch a banned party's money. ?]
+on-arrival: {!
+RO.pay(Q, 10);
+RO.add(Q, {bread: 4, ruble: 1});
+RO.boost(Q, {peasants: 2, workers: 1});
+RO.fac(Q, 'unions', 2, -2);
+!}
+
+The cooperatives bought grain in the black-earth provinces and brought it to the cities by the trainload, and sold it at the fixed price. It is not much, against the hunger of a whole country. It is more than the party has done for bread with speeches.
+
+@organisers
+choose-if: resources >= 10
+unavailable-subtitle: We cannot afford it.
+on-arrival: {!
+RO.pay(Q, 10);
+for (var f of Q.factions) { RO.fac(Q, f, 0, -6); }
+Q.members += 5 * Q.mem_scale;
+!}
+
+Every current in the party now has its own paid organisers, and every one of them is grateful to the Central Committee that pays them. The quarrels go on, but they go on in meetings, and not in the press.
+
+@press
+view-if: legality >= 1
+choose-if: resources >= 15
+unavailable-subtitle: We cannot afford it.
+on-arrival: {!
+RO.pay(Q, 15);
+RO.boost(Q, {workers: 2, middle: 2, peasants: 2});
+Q.members += 8 * Q.mem_scale;
+if (Q.bol_regime) { RO.add(Q, {repression: 2}); }
+!}
+
+The party's presses are running in a dozen provincial towns, and the papers are read aloud in the tea-rooms and the barracks. [? if bol_regime = 1 : The local Cheka has the list of them, and has started to close them one by one. ?]
+
+@strike_fund
+view-if: player_party != 'lsr'
+choose-if: resources >= 15
+unavailable-subtitle: We cannot afford it.
+on-arrival: {!
+RO.pay(Q, 15);
+RO.boost(Q, {workers: 3, railway: 3});
+RO.fac(Q, 'unions', 4, -4);
+if (Q.bol_regime) { RO.add(Q, {rel_bol: -3, repression: 2}); }
+!}
+
+The strike fund is in the hands of the unions, and the unions know where it came from. A strike that can last a month is a different thing from a strike that has to end on Saturday.
+
+@prisoners
+view-if: bol_regime = 1 and repression >= 15
+choose-if: resources >= 10
+unavailable-subtitle: We cannot afford it.
+on-arrival: {!
+RO.pay(Q, 10);
+RO.add(Q, {repression: -4});
+Q.members += 4 * Q.mem_scale;
+RO.fac(Q, 'intl', 0, -3);
+!}
+
+The Political Red Cross, which Ekaterina Peshkova runs with the blessing of Dzerzhinsky, has taken the party's money and sends the parcels. The lawyers get some of the prisoners out on bail, and the rest know that the party has not forgotten them.
+
+@relief
+view-if: dix >= 106 and bol_regime = 1
+choose-if: resources >= 20 and legality >= 1
+unavailable-subtitle: [? if resources < 20 : We cannot afford it. ?][? if legality < 1 : No one will take relief from a banned party. ?]
+on-arrival: {!
+RO.pay(Q, 20);
+RO.add(Q, {rel_bol: 3, repression: -3, soviet_democracy: 2, bread: 2});
+RO.boost(Q, {peasants: 6});
+!}
+
+The party's money went to the Volga in the name of the public relief committee, and bought grain that reached villages where people were eating grass. The Bolsheviks could not refuse it, and the peasants of Samara and Saratov will remember who sent it.

@@ -133,7 +133,7 @@ Q.timers = ['advisor_action', 'rally', 'fundraising', 'media', 'campaigning', 'i
             'labor_affairs', 'economic_policy', 'foreign_policy', 'agricultural_policy', 'military_policy',
             'constitutional_reform', 'nationalities', 'police',
             'economic_democracy', 'labor_rights', 'social_welfare', 'domestic_enemies', 'judiciary', 'fiscal_policy',
-            'crisis', 'alt_coup', 'right_plot', 'council', 'cabinet', 'inside_sr', 'the_split', 'sovnarkom_seats', 'cheka_board', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army', 'opp_kad', 'opp_gen', 'opp_bol', 'cow_kad', 'cow_gen', 'cow_bol', 'finance', 'money'];
+            'crisis', 'alt_coup', 'right_plot', 'council', 'cabinet', 'inside_sr', 'the_split', 'sovnarkom_seats', 'cheka_board', 'peasant_meeting', 'land_committees', 'peasant_congress', 'people_army', 'opp_kad', 'opp_gen', 'opp_bol', 'cow_kad', 'cow_gen', 'cow_bol', 'finance', 'money', 'treasury'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -159,7 +159,7 @@ Q.zhordania_advisor = 0;
 // counters and flags used by cards and events (all start at 0)
 var flags = ['may_crisis_seen', 'larin_seen', 'crisis_count', 'vik_check_1', 'alt_coup_n', 'right_plot_n',
              'kornilov_won', 'militia', 'stockholm', 'famine_relief', 'program_dix', 'foreign_pressure',
-             'georgia_support', 'workers_congress', 'insight', 'expelled', 'underground', 'readmission_hope',
+             'georgia_support', 'workers_congress', 'insight', 'expelled', 'exile_risk', 'exile_low_members', 'underground', 'readmission_hope',
              'october_necessary', 'spring_honoured', 'capitals_won', 'nep_early', 'free_soviets', 'ca_elected',
              'ca_moderate', 'stayed_in_congress', 'took_power_july', 'separate_feelers', 'offensive_prepared',
              'land_committees', 'bol_freed', 'defended', 'prisoner_deal', 'coops', 'refused_coalition',
@@ -167,7 +167,7 @@ var flags = ['may_crisis_seen', 'larin_seen', 'crisis_count', 'vik_check_1', 'al
              'martov_line', 'war_aims_note', 'bol_unity', 'soviet_power_motion', 'reconvene_assembly',
              'ca_extra', 'prisoners_freed', 'steinberg_line', 'constitution', 'dissent_dummy',
              'land_law_draft', 'peasant_organised', 'army_raised', 'komuch_alive', 'chernov_gov', 'lsr_kept', 'ufa_line',
-             'lsr_in_gov', 'lsr_seats', 'lsr_backs_bol', 'lsr_survives', 'split_planned', 'cheka_shield', 'seven_commissars', 'lsr_squeezed',
+             'lsr_in_gov', 'lsr_seats', 'lsr_backs_bol', 'lsr_survives', 'split_planned', 'cheka_shield', 'seven_commissars', 'lsr_squeezed', 'lsr_peasant_soviets',
              'kolchak_seen', 'land_socialised', 'prog_rb', 'prog_po', 'cheka_seats', 'lsr_rising', 'anti_brest', 'early_split', 'blocs', 'bloc_lean', 'dissent_extra',
              'turmoil_men', 'turmoil_sr', 'turmoil_lsr', 'turmoil_bol', 'komuch_averted', 'lsr_uprising_averted',
              'split_alliance_done', 'anti_brest_front', 'lent_chernov', 'lent_dan', 'lent_spiridonova', 'lent_martov',

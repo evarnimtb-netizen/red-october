@@ -1,0 +1,17 @@
+title: The Sealed Train Back
+subtitle: The Central Committee is warned that the party may not survive in Russia.
+new-page: true
+tags: event
+view-if: player_party = 'menshevik' and bol_regime = 1 and exile_risk = 2
+priority: 15
+max-visits: 1
+
+= The Sealed Train Back
+
+Martov came back to Russia in 1917 through Germany, in a sealed train, a few weeks after Lenin. At the Central Committee's meeting this week, someone said aloud what many have been thinking: that the party may leave the same way. [? if legality = 0 : The party is banned: its clubs are closed, its press is seized, and its members are arrested on sight. ?][? if legality = 1 : The party has been thrown out of the soviets: its clubs are closed, its press is seized, and its members are arrested on sight. ?][? if exile_low_members = 1 : So many members have been arrested, conscripted or frightened away that in many cities the party is a name on a list. ?]
+
+If the party is still in this state when the Civil War ends, its leaders will be put on a train to Berlin, and the party will become an émigré newspaper. It is not too late:
+
+[? if dix < 46 and expelled = 1 : If the soviets offer to readmit us this autumn, accepting will restore the party's standing. ?][? if dix < 66 : When the Whites next march on Moscow, standing with the Red Army will win back the party's place in the soviets. ?][? if dix >= 66 : Sending our members to the Red Army, more than once, will win back the party's place in the soviets (the card "Defend the Revolution"). ?] Strikes, public campaigns and rival assemblies cost the party its standing whenever repression is high; keeping repression down and the membership growing keeps the party alive. [? if program_adopted = 0 : A programme for the new economic policy, adopted in time, will also spare the party in the arrests that everyone expects in 1921. ?]
+
+The sidebar will show the danger while it lasts.

@@ -68,6 +68,12 @@
     h += '<table class="sb-kv"><tr><td>Resources</td><td>' + Math.round(num(Q.resources)) + '</td></tr>' +
          '<tr><td>Members</td><td>' + members(num(Q.members)) + (num(Q.members) >= num(Q.mem_cap) - 0.5 && num(Q.mem_cap) > 0 ? ' <small title="The most members the party can hold">(at its limit)</small>' : '') + '</td></tr>' +
          '<tr><td>Legal status</td><td>' + LEGALITY[clamp(Math.round(num(Q.legality)), 0, 3)] + '</td></tr></table>';
+    // the Menshevik exile ending is decided by the party's state at the end: warn while it is in danger (RO.exileRisk)
+    var risk = window.RO && window.RO.exileRisk ? window.RO.exileRisk(Q) : null;
+    if (risk) {
+      h += '<div class="sb-warn" title="Standing with the Red Army against the Whites, readmission to the soviets and keeping repression down win back the party\'s standing.">⚠ ' +
+        (risk.level === 2 ? 'If the war ended now, the party would be driven abroad: ' : 'The party is close to exile: ') + esc(risk.reasons.join('; ')) + '.</div>';
+    }
     var d = num(Q.dissent) * 100;
     h += barRow('Party dissent', d, pick(d, WORDS.dissent), scoreColor(d * 1.6, false), '');
     h += '<div class="sb-section">The country</div>';

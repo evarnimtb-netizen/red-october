@@ -73,6 +73,9 @@ RO.updatePolls(Q);
 RO.display(Q);
 RO.syncAdvisors(Q);
 RO.recordTurn(Q);
+var risk = RO.exileRisk(Q);
+Q.exile_risk = risk ? risk.level : 0;
+Q.exile_low_members = risk && risk.reasons.some(function(r) { return /members/.test(r); }) ? 1 : 0;
 
 // 2. immediate endings
 if (!Q.game_end) {

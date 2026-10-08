@@ -3,6 +3,7 @@
 // usage: node tools/playtest.js [runs] [policy] [seed]
 //   policy: random | first | cautious | bot:<name> (tools/bots.js)
 // STRICT=1 makes it exit with status 1 on an error, a stuck game or a broken bit of text (for CI).
+// NOISE=p makes a bot pick a random option with probability p. SEED=n makes the games repeatable (game i uses seed n+i).
 // Loads out/game.json (run `npx dendrynexus make-html` first) and plays complete games with a simple policy.
 var path = require('path');
 var fs = require('fs');
@@ -61,13 +62,29 @@ Ui.prototype.removeChoices = function() { this.choices = null; this.decks = []; 
 Ui.prototype.displayGameOver = function() { this.over = true; };
 
 function rnd(n) { return Math.floor(Math.random() * n); }
+var NOISE = parseFloat(process.env.NOISE || '0');
+var SEED = process.env.SEED ? parseInt(process.env.SEED, 10) : null;
+// a seeded Math.random, so that a game can be played again move for move (the engine gets the same seed)
+function seedRandom(seed) {
+  var a = seed >>> 0;
+  Math.random = function() {
+    a = (a + 0x6D2B79F5) >>> 0;
+    var t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
 function playOne(idx) {
   var ui = new Ui();
   var eng = new engine.DendryEngine(ui, game);
-  eng.beginGame();
+  if (SEED !== null) { seedRandom(SEED + idx); eng.beginGame([SEED + idx]); } else { eng.beginGame(); }
   var Q = function() { return eng.state.qualities; };
   var steps = 0, log = [], scenes = [], snaps = {}, banned = {}, lastCard = null, maxwf = 0, maxPinned = 0;
+  var picks = [], played = {}, lo = {}, hi = {}, zeroRes = 0, turns = 0, error = null;
+  var TRACK = ['bread', 'ruble', 'members', 'resources', 'legality', 'dissent', 'player_poll', 'soviet_democracy', 'war_weariness', 'ant_kad', 'ant_gen', 'ant_bol', 'right_threat', 'bolshevik', 'repression', 'white_front'];
+  try {
   // start menu -> start -> difficulty
   function pickByTitle(re) {
     if (!ui.choices) { return false; }
@@ -81,10 +98,11 @@ function playOne(idx) {
     var sid = eng.state.sceneId;
     maxwf = Math.max(maxwf, eng.state.qualities.white_front || 0);
     scenes.push(sid);
-    var watch = {alt_armistice: 1, alt_recovery: 1, alt_republic: 1, 'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1, 'sr_programme_1919': 1};
-    if (watch[sid] && !snaps[sid]) {
+    var watch = {alt_armistice: 1, alt_recovery: 1, alt_republic: 1, 'kornilov': 1, 'october': 1, 'vikzhel': 1, 'congress_of_soviets': 1, 'july_days': 1, 'expelled': 1, 'denikin': 1, 'spring_elections': 1, 'sr_programme_1919': 1, 'lsr_1921': 1, 'lsr_july': 1, 'nep': 1};
+    var skey = watch[sid.split('.')[0]] ? sid.split('.')[0] : (eng.state.qualities.dix >= 96 && eng.state.qualities.dix < 100 && eng.getCurrentScene().isHand ? 'dix99' : null);
+    if (skey && !snaps[skey]) {
       var qq = eng.state.qualities;
-      snaps[sid] = {G: Math.round(RO.grievance(qq)), bol: Math.round(qq.bolshevik), rt: Math.round(qq.right_threat), army: Math.round(qq.army_discipline), power: Math.round(RO.bolPower(qq)), war: Math.round(qq.war_weariness), bread: Math.round(qq.bread), land: Math.round(qq.land_pressure), ruble: Math.round(qq.ruble), sd: Math.round(qq.soviet_democracy), men: Math.round(qq.player_poll), mil: qq.militia, rr: Math.round(RO.kornilovResistance(qq, 10)), kf: Math.round(RO.kornilovForce(qq)), relsr: Math.round(qq.rel_ally), relbol: Math.round(qq.rel_bol), rep: Math.round(qq.repression), wf: Math.round(qq.white_front), red: Math.round(qq.red_army), bpow: Math.round(qq.bol_power || 0), po: qq.peasant_organised || 0, homog: qq.homogeneous_gov, ca: qq.ca_elected, lc: qq.land_committees, ak: Math.round(qq.ant_kad), ag: Math.round(qq.ant_gen), ab: Math.round(qq.ant_bol), st: Math.round(RO.strength(qq)), od: Math.round(100 * RO.squashOdds(qq, 'kad')), odg: Math.round(100 * RO.squashOdds(qq, 'gen'))};
+      snaps[skey] = {G: Math.round(RO.grievance(qq)), bol: Math.round(qq.bolshevik), rt: Math.round(qq.right_threat), army: Math.round(qq.army_discipline), power: Math.round(RO.bolPower(qq)), war: Math.round(qq.war_weariness), bread: Math.round(qq.bread), land: Math.round(qq.land_pressure), ruble: Math.round(qq.ruble), sd: Math.round(qq.soviet_democracy), men: Math.round(qq.player_poll), mil: qq.militia, rr: Math.round(RO.kornilovResistance(qq, 10)), kf: Math.round(RO.kornilovForce(qq)), relsr: Math.round(qq.rel_ally), relbol: Math.round(qq.rel_bol), rep: Math.round(qq.repression), wf: Math.round(qq.white_front), red: Math.round(qq.red_army), bpow: Math.round(qq.bol_power || 0), po: qq.peasant_organised || 0, homog: qq.homogeneous_gov, ca: qq.ca_elected, lc: qq.land_committees, ak: Math.round(qq.ant_kad), ag: Math.round(qq.ant_gen), ab: Math.round(qq.ant_bol), st: Math.round(RO.strength(qq)), leg: qq.legality, ingov: qq.lsr_in_gov || 0, rising: qq.lsr_rising || 0, mem: Math.round(qq.members), res: Math.round(qq.resources), od: Math.round(100 * RO.squashOdds(qq, 'kad')), odg: Math.round(100 * RO.squashOdds(qq, 'gen'))};
     }
     if (sid.indexOf('root.start_menu') === 0 && Q().started !== 1) {
       if (!pickByTitle(/Start game/)) { break; }
@@ -104,6 +122,12 @@ function playOne(idx) {
     }
     var scene = eng.getCurrentScene();
     if (scene.isHand) {
+      turns++;
+      TRACK.forEach(function(k) {
+        var v = Q()[k];
+        if (typeof v === 'number' && isFinite(v)) { lo[k] = Math.min(lo[k] === undefined ? v : lo[k], v); hi[k] = Math.max(hi[k] === undefined ? v : hi[k], v); }
+      });
+      if (Q().resources <= 0.5) { zeroRes++; }
       // fill the hand, then play something
       var canDraw = ui.decks.filter(function(d) { return d.canChoose; });
       maxPinned = Math.max(maxPinned, ui.pinned.length);
@@ -133,8 +157,9 @@ function playOne(idx) {
         var bot = bots[policy.slice(4)];
         var best = null, bestRank = 1e9;
         options.forEach(function(op) { var r = bot.cards.indexOf(op.id); if (r < 0) { r = 500; } if (r < bestRank) { bestRank = r; best = op; } });
-        o = best || o;
+        if (!(NOISE && Math.random() < NOISE)) { o = best || o; }
       }
+      played[o.id] = (played[o.id] || 0) + 1;
       if (verbose) { log.push('play ' + o.id); }
       lastCard = o.id;
       if (o.kind === 'card') { eng.playCard(o.id); } else { eng.playPinnedCard(o.id); }
@@ -148,7 +173,10 @@ function playOne(idx) {
     var pick;
     var onlyReturn = avail.every(function(i) { return /Return card|Cancel action|Return to main|Never mind|Think again/.test(cs[i].title); });
     if (onlyReturn && lastCard && sid.split('.')[0] === lastCard) { banned[lastCard] = Q().turn; }
-    if (policy.indexOf('bot:') === 0) {
+    if (policy.indexOf('bot:') === 0 && NOISE && Math.random() < NOISE) {
+      var nonret3 = avail.filter(function(i) { return !/Return card|Cancel action|Return to main|Never mind|Think again/.test(cs[i].title); });
+      pick = (nonret3.length ? nonret3 : avail)[rnd((nonret3.length ? nonret3 : avail).length)];
+    } else if (policy.indexOf('bot:') === 0) {
       var bot2 = bots[policy.slice(4)];
       var top = sid.split('.')[0];
       var prefs = bot2.choices[sid] || bot2.choices[top] || [];
@@ -179,10 +207,16 @@ function playOne(idx) {
       pick = pool[rnd(pool.length)];
     } else { pick = avail[rnd(avail.length)]; }
     if (verbose) { log.push(sid + ' -> ' + cs[pick].title); }
+    picks.push(sid + ' | ' + flat(cs[pick].title));
     // avoid looping in the achievements/eg menus
     eng.choose(pick);
   }
+  } catch (e) {
+    error = {message: String(e && e.message || e), stack: String(e && e.stack || '').split('\n').slice(0, 4).join(' | '), scene: eng.state && eng.state.sceneId};
+  }
   var q = Q();
+  var seen = {};
+  scenes.forEach(function(x) { seen[x.split('.')[0]] = 1; });
   return {idx: idx, maxPinned: maxPinned, steps: steps, ending: q.ending, year: q.year, month: q.month, dix: q.dix, game_over: q.game_over,
           bol_regime: q.bol_regime, vikzhel: q.vikzhel_deal, assembly: q.assembly_survives,
           legality: q.legality, sd: Math.round(q.soviet_democracy), members: Math.round(q.members),
@@ -191,20 +225,22 @@ function playOne(idx) {
           opp: [q.opp_kad_n || 0, q.opp_gen_n || 0, q.opp_bol_n || 0], laws: (q.laws_log || []).length,
           breaks: (q.break_log || []).length, broke: (q.break_log || []).filter(function(b) { return b[2]; }).length,
           peak: (q.hist || []).reduce(function(m, r) { return Math.max(m, r[1]); }, 0), final_poll: Math.round(q.player_poll || 0),
-          snaps: snaps, log: log, lastScenes: scenes.slice(-6)};
+          snaps: snaps, log: log, lastScenes: scenes.slice(-6),
+          error: error, picks: picks, seed: SEED === null ? null : SEED + idx, played: played, seen: Object.keys(seen), lo: lo, hi: hi, zeroRes: zeroRes, turns: turns, party: q.player_party, difficulty: q.difficulty,
+          fin: TRACK.reduce(function(o, k) { if (typeof q[k] === 'number') { o[k] = Math.round(q[k] * 100) / 100; } return o; }, {mem_cap: q.mem_cap})};
 }
 
 var results = [];
 var errors = 0;
 for (var i = 0; i < runs; i++) {
-  try {
-    var r = playOne(i);
-    results.push(r);
-    if (verbose) { console.log(r.log.join('\n')); }
-  } catch (e) {
+  var r = playOne(i);
+  if (r.error) {
     errors++;
-    console.log('ERROR in run ' + i + ': ' + (e && e.stack || e));
+    console.log('ERROR in run ' + i + (r.seed !== null ? ' (seed ' + r.seed + ')' : '') + ' at ' + r.error.scene + ': ' + r.error.stack);
+  } else {
+    results.push(r);
   }
+  if (verbose) { console.log(r.log.join('\n')); }
 }
 var counts = {};
 if (process.env.WF) { console.log('max wf per run: ' + results.map(function(r) { return r.wf; }).join(',')); }
@@ -223,7 +259,8 @@ if (process.env.TEXT) { fs.writeFileSync(process.env.TEXT, allText.join('\n')); 
 if (process.env.JSON) {
   fs.writeFileSync(process.env.JSON, JSON.stringify(results.map(function(r) {
     return {ending: r.game_over ? r.ending : 'STUCK', year: r.year, month: r.month, legality: r.legality, sd: r.sd, opp: r.opp, laws: r.laws, breaks: r.breaks, broke: r.broke, peak: r.peak, final_poll: r.final_poll,
-            bol_regime: r.bol_regime, members: r.members};
+            bol_regime: r.bol_regime, members: r.members,
+            steps: r.steps, seed: r.seed, played: r.played, seen: r.seen, lo: r.lo, hi: r.hi, fin: r.fin, zeroRes: r.zeroRes, turns: r.turns, picks: process.env.PICKS ? r.picks : undefined, snaps: process.env.PICKS ? r.snaps : undefined, last: r.game_over ? undefined : r.lastScenes};
   })));
 }
 if (results.length) { console.log('max pinned cards shown: ' + Math.max.apply(null, results.map(function(r) { return r.maxPinned; }))); }

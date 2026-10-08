@@ -652,6 +652,7 @@ ul.choices li.party-choice .party-emblem { width: 76px; height: 76px; flex: 0 0 
 .sb-arrow.good, .sb-diss.good { color: var(--good-color); }
 .sb-arrow.bad, .sb-diss.bad { color: var(--bad-color); }
 .sb-diss.mid { opacity: 0.85; }
+.sb-warn { font-size: 0.85em; color: var(--bad-color); border-left: 3px solid var(--bad-color); padding: 0.2em 0 0.2em 0.5em; margin: 0 0 0.6em 0; }
 .sb-note { font-size: 0.8em; font-style: italic; opacity: 0.7; margin: 0.2em 0 0.4em 0; }
 .sb-badge { font-size: 0.8em; border: 1px solid #876; border-radius: 3px; padding: 0 0.3em; }
 .sb-badge.lvl1 { background: rgba(120, 90, 40, 0.15); }

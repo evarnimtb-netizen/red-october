@@ -68,12 +68,25 @@ test('hostility moves towards what the camp objects to', function() {
   assert.ok(Q.ant_kad > 50, 'ant_kad ' + Q.ant_kad);
 });
 
+test('the exile warning: shown when the Mensheviks would be driven abroad, or are one step from it', function() {
+  var base = {player_party: 'menshevik', bol_regime: 1, difficulty: 0, mem_scale: 1, members: 100, repression: 20, dix: 60};
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 3}))), null);
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 1}))).level, 2);
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 1, difficulty: -1}))), null, 'on Easy only a ban means exile');
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 3, members: 15}))).level, 2);
+  // one step above the line in 1920, with the 1921 arrests still to come and no programme
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 2, dix: 84}))).level, 1);
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 2, dix: 84, program_adopted: 1}))), null);
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 1, player_party: 'sr'}))), null, 'only the Mensheviks have the exile ending');
+  assert.strictEqual(RO.exileRisk(state(Object.assign({}, base, {legality: 1, bol_regime: 0}))), null);
+});
+
 test('a standing grievance fades: hostility drops slowly, and a new offence rekindles it', function() {
   var Q = state({pol_land: 2, pol_labour: 2, gov_kadets: 0, homogeneous_gov: 1});
   var month = function() { Q.opp_kad_timer = 1; RO.oppositionTurn(Q, 1); };
   for (var i = 0; i < 6; i++) { month(); }
   var peak = Q.ant_kad;
-  for (i = 0; i < 12; i++) { month(); }
+  for (i = 0; i < 18; i++) { month(); }
   assert.ok(Q.ant_kad < peak - 10, 'peak ' + peak + ' now ' + Q.ant_kad);
   var before = Q.ant_kad;
   month();

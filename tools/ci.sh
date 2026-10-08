@@ -27,5 +27,5 @@ done
 echo "-- scripted strategies"
 for BOT in democrat vikzhelist whiteaid; do PARTY="Mensheviks" STRICT=1 node tools/playtest.js 10 "bot:$BOT" | tail -2; done
 for BOT in sr_land sr_komuch socializer breaker; do PARTY="Socialist Revolutionaries" STRICT=1 node tools/playtest.js 10 "bot:$BOT" | tail -2; done
-for BOT in lsr_coalition lsr_rising; do PARTY="Left SRs" STRICT=1 node tools/playtest.js 10 "bot:$BOT" | tail -2; done
+for BOT in lsr_coalition lsr_rising lsr_villages; do PARTY="Left SRs" STRICT=1 node tools/playtest.js 10 "bot:$BOT" | tail -2; done
 echo "== all checks passed"

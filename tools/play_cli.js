@@ -78,6 +78,8 @@ function numbers() {
       (q.bol_regime ? ' · Repression ' + r(q.repression) + ' · White front ' + r(q.white_front) : ''),
     'In government: ' + (q.in_coalition && !q.bol_regime ? 'yes' : (q.lsr_in_gov ? 'a few commissariats' : 'no')) + ' · Bolshevik regime: ' + (q.bol_regime ? 'yes' : 'no') +
       ' · Relations: ally ' + r(q.rel_ally) + ', Bolsheviks ' + r(q.rel_bol) + ', Kadets ' + r(q.rel_kad)];
+  var risk = RO.exileRisk(q);
+  if (risk) { lines.push('WARNING: ' + (risk.level === 2 ? 'if the war ended now, the party would be driven abroad: ' : 'the party is close to exile: ') + risk.reasons.join('; ') + '.'); }
   try {
     var opp = RO.opposition(q);
     if (opp.length) {
