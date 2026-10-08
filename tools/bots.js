@@ -191,7 +191,7 @@ var breaker = {
 var sr_komuchbot = {
   choices: merge(merge(opposition.choices, srCommon), {
     february: [/Back Kerensky/], first_coalition: [/Chernov takes Agriculture/], october: [/Walk out/], vikzhel: [/Refuse/],
-    sr_komuch: [/Join Komuch, and raise/], kolchak: [/Stay in/], sr_ufa: [/Let the Ufa/], denikin: [/Stay neutral/], people_army: [/Raise the People/]
+    sr_komuch: [/Join Komuch, and raise/], sr_directory: [/Join the Directory/], kolchak: [/Fight on/], sr_ufa: [/Let the Ufa/], denikin: [/Stay neutral/], people_army: [/Raise the People/]
   }),
   cards: ['people_army', 'land_committees', 'peasant_congress', 'campaigning', 'peasant_meeting', 'media', 'inter_party_relationships', 'fundraising', 'volsky']
 };

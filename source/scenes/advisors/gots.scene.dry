@@ -27,5 +27,4 @@ RO.add(Q, {rel_ally: 6, soviet_democracy: 1}); RO.boost(Q, {workers: 2, soldiers
 
 Gots met Dan and Tsereteli before every session, and the two delegations voted as one. The Bolsheviks call it the Menshevik-SR gang.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

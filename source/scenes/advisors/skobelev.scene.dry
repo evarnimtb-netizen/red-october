@@ -8,7 +8,7 @@ view-if: skobelev_advisor = 1 and (player_party = 'menshevik' or lent_skobelev =
 
 = Matvei Skobelev
 
-Skobelev (1885-1938) is the Minister of Labour in the first coalition cabinet, a young Social Democrat from Baku.
+Skobelev (1885-1938) is a young Social Democrat from Baku and the Soviet's man for labour disputes.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {ruble: 2, rel_kad: 2}); RO.boost(Q, {workers: -1}); RO.fac(Q, 'unions
 
 Skobelev's boards settled a transport strike on compromise terms. The employers are grateful, and the strikers feel cheated.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

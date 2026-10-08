@@ -15,7 +15,7 @@ Q.k_force_d = Math.round(Q.k_force);
 
 On 9 September, General Lavr Kornilov, the commander-in-chief, ordered the Third Cavalry Corps to march on Petrograd. Whether Kerensky had asked for the troops or had been misled by an intermediary is not clear; by the time the matter was clear Kerensky had dismissed the general, and the general had refused to go.
 
-The troops are a few days from the capital. The railways are in the hands of unions that favour the Soviet. The garrison is in the hands of committees that distrust the Soviet. The Bolsheviks, a few weeks after being hunted, can bring several thousand armed men to the capital's defence.
+The troops are a few days from the capital. The railways are in the hands of unions that favour the Soviet. The garrison is in the hands of committees that distrust the Soviet. The Bolsheviks, [? if bol_freed = 0 : a few weeks after being hunted, ?][? if bol_freed = 1 : whom the Soviet refused to hand over in July, ?] can bring several thousand armed men to the capital's defence.
 
 The Right is stronger than it has been since February, and the democracy is weaker. How should the Soviet respond?
 
@@ -34,13 +34,13 @@ RO.fac(Q, 'defencist', 0, 6);
 RO.fac(Q, 'rightdef', 0, 8);
 !}
 
-The Soviet set up the Committee, and the Bolshevik leaders were released from prison to sit on it. The railwaymen stopped the cavalry's trains, and Soviet agitators went out to meet the troops.
+The Soviet set up the Committee, and [? if bol_freed = 0 : the Bolshevik leaders were released from prison to sit on it. ?][? if bol_freed = 1 : the Bolshevik leaders, whom the Soviet had refused to hand over in July, sat on it. ?] The railwaymen stopped the cavalry's trains, and Soviet agitators went out to meet the troops.
 
 - @kornilov_result: Continue...
 
 @gov
 choose-if: rel_ally >= 50
-unavailable-subtitle: The SRs will not agree to this.
+unavailable-subtitle: The [+ partner_name +] will not agree to this.
 on-arrival: {!
 Q.k_bonus = 10;
 Q.gov_kadets = 0;
@@ -106,6 +106,6 @@ RO.boost(Q, {soldiers: 3, peasants: 2});
 RO.fac(Q, 'intl', 2, -2);
 !}
 
-The Left SRs have called out the Kronstadt sailors, and the peasant soviets of Petrograd province. Within two days thousands of armed men were at Pulkovo. The Bolsheviks, released from prison, are with them.
+The Left SRs have called out the Kronstadt sailors, and the peasant soviets of Petrograd province. Within two days thousands of armed men were at Pulkovo. The Bolsheviks[? if bol_freed = 0 : , released from prison, ?] are with them.
 
 - @kornilov_result: Continue...

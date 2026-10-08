@@ -26,7 +26,7 @@ Dan spoke as a member of a loyal opposition, and was heard.
 
 @demand
 on-arrival: {!
-Q.free_ok = (Q.soviet_democracy >= 55 && Q.rel_bol >= 40 && Q.program_adopted) ? 1 : 0;
+Q.free_ok = (Q.soviet_democracy >= 45 && Q.rel_bol >= 40 && Q.program_adopted) ? 1 : 0;
 if (Q.free_ok) {
     Q.free_soviets = 1;
     RO.add(Q, {soviet_democracy: 10, repression: -6, rel_bol: 2});

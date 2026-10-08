@@ -7,7 +7,7 @@ tags: party_affairs
 view-if: (player_party = 'sr' or player_party = 'lsr') and peasant_congress_timer <= 0
 on-arrival: month_actions += 1; peasant_congress_timer = 5
 
-The Soviets of Peasants' Deputies are the party's own organisations, and the Bolsheviks have none of their own. Whoever controls them controls the villages. (Peasants organised so far: [+ peasant_organised +].)
+The Soviets of Peasants' Deputies are the party's own organisations, and the Bolsheviks have none of their own. Whoever controls them controls the villages. [? if peasant_organised < 1 : (The party has hardly begun to organise them.) ?][? if peasant_organised >= 1 and peasant_organised < 2 : (The party has organised some of them.) ?][? if peasant_organised >= 2 : (The party has organised many of them.) ?]
 
 - @call: Call a congress of peasants' deputies. (1 resource)
 - @committees: Work through the village committees and the volost soviets.

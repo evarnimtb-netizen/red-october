@@ -8,7 +8,7 @@ view-if: dan_advisor = 1 and (player_party = 'menshevik' or lent_dan = 1) and on
 
 = Fyodor Dan
 
-Dan (1871-1947) is a physician and a leading figure in the Soviet executive. He will be the party's speaker at the 1919 and 1920 Congresses of Soviets.
+Dan (1871-1947) is a physician and a leading figure in the Soviet executive. He is the party's best speaker in a hostile hall.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.boost(Q, {workers: 3, soldiers: 3, railway: 2}); RO.add(Q, {soviet_democracy:
 
 Dan has organised the speakers, the resolutions and the votes. The Soviet runs a little more smoothly, and our delegates are better prepared.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

@@ -27,5 +27,4 @@ for (var f of Q.factions) { RO.fac(Q, f, 0, -4); } RO.add(Q, {soviet_democracy: 
 
 Chkheidze ruled a heated session out of order and then spent an hour in the corridors. Tempers are lower.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

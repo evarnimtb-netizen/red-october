@@ -176,5 +176,22 @@ test('without the war the ruble recovers under a republic, and falls under War C
   assert.ok(B.ruble < 30, 'War Communism ruble ' + B.ruble);
 });
 
+test('advisors leave the council when they leave Russia, are jailed or die', function() {
+  var Q = state({player_party: 'sr', chernov_advisor: 1, gots_advisor: 1, avksentiev_advisor: 1, zenzinov_advisor: 1, volsky_advisor: 1, dix: 60});
+  var a = RO.advisorsAvailable(Q);
+  assert.ok(a.indexOf('chernov') >= 0 && a.indexOf('gots') >= 0);
+  Q.dix = 95;
+  a = RO.advisorsAvailable(Q);
+  assert.ok(a.indexOf('chernov') < 0 && a.indexOf('gots') < 0, a.join(','));
+  assert.ok(a.indexOf('volsky') >= 0);
+});
+
+test('an alliance that cannot go further says why', function() {
+  var Q = state({player_party: 'menshevik', rel_bol: 83, ally_bol: 2, vikzhel_deal: 0, assembly_survives: 0, lsr_in_gov: 0, bol_regime: 1});
+  RO.formalize(Q, 'bol');
+  assert.strictEqual(Q.alliance_msg, 0);
+  assert.ok(['power', 'lines'].indexOf(Q.alliance_why) >= 0, Q.alliance_why);
+});
+
 console.log(passed + ' passed, ' + failed + ' failed');
 if (failed) { process.exit(1); }

@@ -8,7 +8,7 @@ view-if: gvozdev_advisor = 1 and (player_party = 'menshevik' or lent_gvozdev = 1
 
 = Kuzma Gvozdev
 
-Gvozdev (1880-?), a lathe worker and chairman of the Central War Industries Committee's workers' group, becomes Minister of Labour in the last coalition.
+Gvozdev (1880-?), a lathe worker and chairman of the Central War Industries Committee's workers' group, is the workers' voice that the industrialists listen to.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.boost(Q, {workers: 4, railway: 1}); RO.add(Q, {bolshevik: 1, ruble: 1}); RO.f
 
 The war-industry workers have a wage agreement and a minister of their own. The metalworkers of the Vyborg side called it a sell-out.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

@@ -49,7 +49,7 @@ Chkheidze was offered the Ministry of Labour. We have chosen to share responsibi
 @soviet_gov
 view-if: player_party = 'menshevik'
 choose-if: rel_ally >= 60
-unavailable-subtitle: The SRs will not agree to this.
+unavailable-subtitle: The [+ partner_name +] will not agree to this.
 on-arrival: {!
 Q.in_coalition = 1;
 Q.gov_kadets = 0;

@@ -7,6 +7,7 @@ priority: 40
 max-visits: 1
 on-arrival: {!
 Q.assembly_survives = 1;
+Q.assembly_met = 1;
 Q.land_decree = 1;
 RO.add(Q, {soviet_democracy: 6, bolshevik: -4, land_pressure: -15, war_weariness: -3});
 if (Q.land_law_draft) { RO.add(Q, {land_pressure: -10, soviet_democracy: 2}); Q.land_socialised = 1; }
@@ -16,7 +17,7 @@ this.achieve('all_power_to_the_assembly');
 
 = The Constituent Assembly Meets
 
-On 18 January, the Constituent Assembly met in the Tauride Palace. [? if vikzhel_deal = 1 : The Bolsheviks sat in the hall as members of the all-socialist government. ?][? if vikzhel_deal = 0 : The Bolsheviks sat on the left, in the minority. ?] Viktor Chernov was elected chairman, and the Assembly proclaimed Russia a democratic federal republic. Within a night it passed the land law: private ownership of land was abolished, and the land transferred to the peasants, to be allocated by elected committees.
+On 18 January, the Constituent Assembly met in the Tauride Palace. [? if vikzhel_deal = 1 : The Bolsheviks sat in the hall as members of the all-socialist government. ?][? if vikzhel_deal = 0 : The Bolsheviks sat on the left, in the minority. ?] Viktor Chernov was elected chairman, and the Assembly proclaimed Russia a democratic republic, its form to be settled by a constitution. Within a night it passed the land law: private ownership of land was abolished, and the land transferred to the peasants, to be allocated by elected committees.
 
 The Assembly ratified the government. It sat for thirteen hours, instead of one night, and the guard was not tired.
 

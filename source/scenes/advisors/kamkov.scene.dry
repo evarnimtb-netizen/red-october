@@ -8,7 +8,7 @@ view-if: kamkov_advisor = 1 and (player_party = 'lsr' or lent_kamkov = 1) and on
 
 = Boris Kamkov
 
-Kamkov (1885-1938) is the Left SR leader and its expert on the village. He will be the loudest voice against the Treaty of Brest-Litovsk.
+Kamkov (1885-1938) is the Left SR leader and its expert on the village. He is the loudest voice for a revolutionary war.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.boost(Q, {soldiers: 4, peasants: 3}); Q.anti_brest = (Q.anti_brest || 0) + 1;
 
 Kamkov denounced the peace as a betrayal of the German workers and of the revolutionary war. The soldiers cheered. Lenin did not.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

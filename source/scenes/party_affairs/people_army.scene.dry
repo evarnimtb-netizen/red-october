@@ -7,7 +7,7 @@ tags: party_affairs
 view-if: player_party = 'sr' and people_army_timer <= 0 and bol_regime = 1 and dix >= 30
 on-arrival: month_actions += 1; people_army_timer = 4
 
-The Bolsheviks have dispersed the Assembly and fired on its defenders, and the party's old instinct, the combat organisation that killed ministers and governors, has not died. On the Volga the Komuch is raising an army. Others in the party say that every rifle fired at the Bolsheviks is a rifle that helps the generals. (Armed struggle: [? if armed_struggle = 1 : yes ?][? if armed_struggle = 0 : no ?].)
+The Bolsheviks have dispersed the Assembly and fired on its defenders, and the party's old instinct, the combat organisation that killed ministers and governors, has not died. On the Volga the Komuch is raising an army. Others in the party say that every rifle fired at the Bolsheviks is a rifle that helps the generals. [? if armed_struggle = 1 : (The party is fighting.) ?][? if armed_struggle = 0 : (The party is not fighting.) ?]
 
 - @raise: Raise the People's Army on the Volga. (1 resource)
 - @militia: Organise peasant self-defence, not an army.

@@ -65,7 +65,7 @@ Q.army_discipline = 50;
 Q.land_pressure = 40;
 Q.bolshevik = 20;
 Q.right_threat = 30;
-Q.soviet_democracy = 80;
+Q.soviet_democracy = 70;
 Q.repression = 0;
 // 3 = legal, 2 = tolerated, 1 = expelled from the Soviet executive, 0 = banned
 Q.legality = 3;
@@ -172,7 +172,7 @@ var flags = ['may_crisis_seen', 'larin_seen', 'crisis_count', 'vik_check_1', 'al
              'turmoil_men', 'turmoil_sr', 'turmoil_lsr', 'turmoil_bol', 'komuch_averted', 'lsr_uprising_averted',
              'split_alliance_done', 'anti_brest_front', 'lent_chernov', 'lent_dan', 'lent_spiridonova', 'lent_martov',
              'ant_kad', 'ant_gen', 'ant_bol', 'opp_kad_ev', 'opp_gen_ev', 'opp_bol_ev', 'opp_kad_n', 'opp_gen_n', 'opp_bol_n',
-             'opp_kad_age', 'opp_gen_age', 'opp_bol_age', 'opp_kad_base', 'opp_gen_base', 'opp_bol_base'];
+             'directory_joined', 'late_coup', 'late_peace', 'lost_petrosoviet', 'vik_ever', 'kadets_back', 'assembly_met', 'opp_kad_age', 'opp_gen_age', 'opp_bol_age', 'opp_kad_base', 'opp_gen_base', 'opp_bol_base'];
 Q.fault_text = '';
 Q.fault_flag = 0;
 // standing policies of the Cabinet: land, food, war, order, labour (food starts at the grain monopoly)
@@ -183,7 +183,7 @@ Q.pol_order = 0;
 Q.pol_labour = 0;
 Q.pol_finance = 0;
 for (var fl of flags) { Q[fl] = 0; }
-Q.dues_income = 1;
+Q.dues_income = Math.max(1, Math.round(Q.members / Q.mem_div));
 
 // records
 Q.polls_enabled = 1;

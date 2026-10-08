@@ -3,7 +3,7 @@ face-image: img/events/congress_of_soviets.jpg
 subtitle: "There is such a party."
 new-page: true
 tags: event
-view-if: player_party != 'lsr' and (dix >= 10)
+view-if: player_party != 'lsr' and (dix >= 11)
 priority: 15
 max-visits: 1
 on-arrival: {!
@@ -35,11 +35,11 @@ RO.fac(Q, 'intl', 0, 3);
 RO.boost(Q, {middle: 1});
 !}
 
-The Congress endorsed the coalition by a large majority. The Congress established a Central Executive Committee: the party has a hundred and twenty-three of the three hundred and twenty places.
+The Congress endorsed the coalition by a large majority. The Congress established a Central Executive Committee: the party has [? if player_party = 'menshevik' : [+ seat_men +] ?][? if player_party = 'sr' : [+ seat_sr +] ?] of the 777 delegates, and a share of the executive to match.
 
 @power
 choose-if: rel_ally >= 50
-unavailable-subtitle: The SRs will not support this.
+unavailable-subtitle: The [+ partner_name +] will not support this.
 on-arrival: {!
 RO.add(Q, {rel_kad: -5, soviet_democracy: 3, rel_ally: 2, rel_lsr: 4, rel_bol: 3, right_threat: 3});
 RO.boost(Q, {workers: 2, soldiers: 2, railway: 1});

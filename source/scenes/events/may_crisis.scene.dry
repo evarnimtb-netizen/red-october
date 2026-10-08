@@ -7,7 +7,7 @@ priority: 5
 max-visits: 1
 on-arrival: may_crisis_seen = 1;
 
-= The Cabinet in Crisis
+= The May Cabinet Crisis
 
 The Kadet ministers and the Soviet's ministers disagree about everything: the land, the eight-hour day, the army committees, the date of the Constituent Assembly. The Kadets have begun to talk about resignation. Tsereteli and Skobelev seek the middle ground, and [+ ilbl +] in the party say that the compromise is a surrender.
 
@@ -25,7 +25,7 @@ The cabinet holds. The party's ministers have given up more than the Kadets did.
 
 @no_kadets
 choose-if: rel_ally >= 55
-unavailable-subtitle: The SRs will not agree to this.
+unavailable-subtitle: The [+ partner_name +] will not agree to this.
 on-arrival: {!
 Q.gov_kadets = 0;
 Q.homogeneous_gov = 1;

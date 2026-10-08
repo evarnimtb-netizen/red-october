@@ -2,7 +2,7 @@ title: The Left Stands Out
 subtitle: The First Congress of Soviets.
 new-page: true
 tags: event
-view-if: player_party = 'lsr' and dix >= 10
+view-if: player_party = 'lsr' and dix >= 11
 priority: 15
 max-visits: 1
 on-arrival: {!

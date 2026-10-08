@@ -8,7 +8,7 @@ view-if: steinberg_advisor = 1 and (player_party = 'lsr' or lent_steinberg = 1) 
 
 = Isaac Steinberg
 
-Steinberg (1888-1957), a Left SR lawyer, is People's Commissar of Justice. He clashes with the Cheka over the right of the accused.
+Steinberg (1888-1957), a Left SR lawyer, is the party's conscience on the rights of the accused, and an enemy of arbitrary arrest.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {repression: -5, soviet_democracy: 2, rel_bol: -1}); RO.fac(Q, 'rightd
 
 Steinberg's commission released a number of prisoners and drafted a law on the courts. Dzerzhinsky says that Steinberg wants to turn the revolution into a law school.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

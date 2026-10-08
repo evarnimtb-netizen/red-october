@@ -18,7 +18,7 @@ The railway union has no army. It has no need of one: its members run the trains
 
 Kamenev, Rykov and several others resigned from the Bolshevik Central Committee on 17 November, in protest at Lenin's refusal to share power. The Bolsheviks in Moscow, meanwhile, are about to win the street fighting.
 
-*Where the talks stand: [+ vik_score_d +]. A deal that holds needs 68. It grows with good relations with the Bolsheviks, the other socialists and the Vikzhel leaders, with an alliance with the Bolsheviks, and with soviet democracy.*
+*Where the talks stand: [+ vik_score_d +], out of the 68 that a government of all the socialists needs to survive its first months. What counts, most first: relations with the Bolsheviks; relations with the other socialist parties; having stayed in the Congress in October; an alliance with the Bolsheviks; a bloc on the left; and, a little, soviet democracy.*
 
 - @refuse: Refuse the deal, and walk out of the talks.
 - @sign: Sign the draft agreement before the Bolsheviks win Moscow.
@@ -37,6 +37,7 @@ on-arrival: {!
 Q.vik_ok = Q.vik_score >= 68 ? 1 : 0;
 if (Q.vik_ok) {
     Q.vikzhel_deal = 1;
+    Q.vik_ever = 1;
     Q.bol_regime = 0;
     Q.in_coalition = 1;
     Q.homogeneous_gov = 1;

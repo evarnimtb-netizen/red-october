@@ -8,7 +8,7 @@ view-if: zhordania_advisor = 1 and (player_party = 'menshevik' or lent_zhordania
 
 = Noe Zhordania
 
-Zhordania (1868-1953), the leader of the Georgian Mensheviks, heads the government of independent Georgia from 1918 to 1921.
+Zhordania (1868-1953), the leader of the Georgian Mensheviks, is the master of Georgian social democracy, and of Tiflis.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {land_pressure: -3, soviet_democracy: 1}); Q.resources += 1; RO.boost(
 
 A delegation to Tiflis has seen a democratic republic with land reform, free elections and a working railway system. It is our best argument.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

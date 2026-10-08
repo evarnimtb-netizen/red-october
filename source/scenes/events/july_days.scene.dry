@@ -34,7 +34,7 @@ Loyal units dispersed the crowd, and the Bolshevik leaders went into hiding or t
 @power
 view-if: player_party != 'lsr'
 choose-if: rel_ally >= 60 and (militia >= 1 or army_discipline >= 45)
-unavailable-subtitle: We lack the armed force and the SR's support for this.
+unavailable-subtitle: We lack the armed force, or the [+ partner_name +]'s support, for this.
 on-arrival: {!
 Q.took_power_july = 1;
 Q.homogeneous_gov = 1;

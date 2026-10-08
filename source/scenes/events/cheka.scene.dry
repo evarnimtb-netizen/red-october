@@ -44,4 +44,4 @@ RO.fac(Q, 'rightdef', 1, -3);
 RO.fac(Q, 'intl', 0, -2);
 !}
 
-The Menshevik press called the commission a revival of the Okhrana. It was banned for a week.
+[? if player_party = 'menshevik' : Our press ?][? if player_party = 'sr' : The party's press ?] called the commission a revival of the Okhrana, and the paper was banned for a week.

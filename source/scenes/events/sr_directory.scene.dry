@@ -1,0 +1,58 @@
+title: The Ufa State Conference
+subtitle: One government against the Bolsheviks?
+new-page: true
+tags: event
+view-if: player_party = 'sr' and armed_struggle = 1 and bol_regime = 1 and dix >= 40 and dix < 44
+priority: 25
+max-visits: 1
+
+= The Ufa State Conference
+
+In September the anti-Bolshevik governments of the east met at Ufa: Komuch from Samara, the Siberian government from Omsk, the Cossack hosts, the national governments of the Urals, and the Kadets. They have agreed on a single All-Russian government, a Directory of five, to rule until the Constituent Assembly can meet again. Two of the five, Avksentiev and Zenzinov, are our own; another is a general, Boldyrev, and the Siberian ministers behind the Directory answer to the officers in Omsk.
+
+Komuch would cease to be a government and become a congress of Assembly members. The People's Army would pass under a joint command. The Allies have made it plain that they will deal with the Directory, and with no one else.
+
+- @join: Join the Directory: one government against the Bolsheviks.
+- @keep: Keep Komuch's own government, and refuse to share power with the Kadets and the officers.
+- @wind_down: Wind down the armed struggle, and look for terms with the soviets.
+
+@join
+on-arrival: {!
+Q.directory_joined = 1;
+Q.white_aid += 1;
+RO.add(Q, {rel_kad: 6, rel_bol: -4, right_threat: 3});
+RO.boost(Q, {middle: 2, peasants: -1});
+RO.fac(Q, 'rightdef', 3, -4);
+RO.fac(Q, 'intl', 0, 8);
+RO.fac(Q, 'bund', 0, 5);
+!}
+
+The party's delegates signed the Ufa act. Komuch handed over its powers and became a congress of Assembly members; Avksentiev became the Directory's chairman, and the government moved to Omsk, where the Siberian officers were waiting for it. The Allies sent their congratulations; the left of the party sent a protest.
+
+@keep
+on-arrival: {!
+Q.directory_joined = 0;
+Q.white_aid = Math.max(0, Q.white_aid - 1);
+RO.add(Q, {rel_kad: -5, right_threat: -1});
+RO.boost(Q, {peasants: 2, workers: 1});
+RO.fac(Q, 'bund', 3, -2);
+RO.fac(Q, 'rightdef', 0, 6);
+!}
+
+The party refused to dissolve Komuch into a government that the officers would run. Avksentiev and Zenzinov went to Omsk as individuals, and the party said that they spoke for themselves. The Allies' credits went to Omsk, and the People's Army on the Volga is short of everything. In October the Red Army took Samara, and Komuch moved east to Ufa, a government with a few thousand men and the party's flag.
+
+@wind_down
+choose-if: bund_strength >= 4 or rel_bol >= 20
+unavailable-subtitle: Nobody in the party is yet willing to make the case, and the Bolsheviks would not listen.
+on-arrival: {!
+Q.directory_joined = 0;
+Q.armed_struggle = 0;
+Q.komuch_alive = 0;
+Q.white_aid = Math.max(0, Q.white_aid - 1);
+RO.add(Q, {rel_bol: 5, repression: -2, rel_kad: -6});
+RO.boost(Q, {workers: 2, peasants: 1, middle: -2});
+RO.fac(Q, 'bund', 4, -3);
+RO.fac(Q, 'rightdef', 0, 10);
+!}
+
+The Central Committee voted to end the armed struggle, and sent a delegation across the lines to say so. The People's Army is going home, village by village, and Komuch has dissolved itself. The Bolsheviks have promised nothing; the officers in Omsk have noted the names of everyone who voted for it.

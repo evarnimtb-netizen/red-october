@@ -7,7 +7,7 @@ tags: party_affairs
 view-if: player_party = 'lsr' and lsr_split = 0 and inside_sr_timer <= 0
 on-arrival: month_actions += 1; inside_sr_timer = 3
 
-The left wing is a fifth of the delegates to any SR congress, and a larger share of the villages. It has its own newspaper in some provinces and its own caucus in the Petrograd Soviet. What it lacks is the party's machinery: the money, the committees, the printing presses. (Our share of the SR vote: [+ poll_lsr_in +]% of the electorate.)
+The left wing is a fifth of the delegates to any SR congress, and a larger share of the villages than of the voters. It has its own newspaper in some provinces and its own caucus in the Petrograd Soviet. What it lacks is the party's machinery: the money, the committees, the printing presses. (Our share of the SR vote: [+ poll_lsr_in +]% of the electorate.)
 
 - @caucus: Organise a left caucus in the provincial committees. (1 resource)
 - @committees: Win over local SR committees, one by one.

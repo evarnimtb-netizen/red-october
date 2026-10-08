@@ -27,5 +27,4 @@ RO.add(Q, {bolshevik: -4, rel_bol: -3}); RO.boost(Q, {middle: 3, workers: 1}); R
 
 Potresov's editorial was reprinted in every anti-Bolshevik paper. It also drew a sharp reply from Martov.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

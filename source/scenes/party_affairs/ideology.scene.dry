@@ -7,7 +7,7 @@ tags: party_affairs
 view-if: ideology_timer <= 0
 on-arrival: month_actions += 1; ideology_timer = 4
 
-[? if player_party = 'menshevik' : The party has no single line. The Revolutionary Defencists want to defend the revolution against the Kaiser and keep the alliance with the liberals. The Internationalists want an immediate general peace and a government of the socialists alone. ?][? if player_party = 'sr' : The party has no single line. The Right SRs want the war carried on and the coalition kept. Chernov's Centre wants a defensive war and a quick road to a general peace, and the land now. The Left SRs want an immediate peace, and no more compromise with the liberals. ?][? if at_war = 0 : The war with Germany is over; the question is now how to treat the Bolshevik state. ?]
+[? if player_party = 'menshevik' : The party has no single line. [? if at_war = 1 : The Revolutionary Defencists want to defend the revolution against the Kaiser and keep the alliance with the liberals. ?][? if at_war = 0 : The Revolutionary Defencists want an alliance of all the democrats, the liberals included. ?] The Internationalists want an immediate general peace and a government of the socialists alone. ?][? if player_party = 'sr' : The party has no single line. [? if at_war = 1 : The Right SRs want the war carried on and the coalition kept. ?][? if at_war = 0 : The Right SRs want a democratic front against the Bolsheviks, with anyone who will join it. ?] Chernov's Centre wants a defensive war and a quick road to a general peace, and the land now. [? if lsr_split = 0 : The Left SRs want an immediate peace, and no more compromise with the liberals. ?][? if lsr_split = 1 : The Left Centre wants the party to make its peace with the soviets. ?] ?][? if at_war = 0 : The war with Germany is over; the question is now how to treat the Bolshevik state. ?]
 
 - @right: Move toward [+ rlbl +].
 - @defencist: Move toward [+ dlbl +].
@@ -25,7 +25,7 @@ Q.war_line += 2;
 RO.add(Q, {rel_kad: 3});
 !}
 
-The line hardens toward war to victory and toward the liberals. [+ flabel_intl +] are alarmed, and some of their younger members are looking at Lenin's paper.
+The line hardens [? if at_war = 1 : toward war to victory ?][? if at_war = 0 : against the Bolsheviks ?] and toward the liberals. [+ flabel_intl +] are alarmed, and some of their younger members are looking at Lenin's paper.
 
 @defencist
 on-arrival: {!

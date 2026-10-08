@@ -7,7 +7,7 @@ tags: coalition_affairs
 view-if: economic_policy_timer <= 0
 on-arrival: month_actions += 1; economic_policy_timer = 3
 
-The state grain monopoly was declared in March. The peasants hold their grain back, because the ruble buys less every month. The cities have a few days of flour left. (Bread supply: [+ bread : bread +].)
+The state grain monopoly was declared in March. The peasants hold their grain back, because the ruble buys less every month. [? if bread < 30 : The cities have a few days of flour left. ?][? if bread >= 30 and bread < 60 : The bread queues are long, but the cities are fed, from week to week. ?][? if bread >= 60 : For now the cities are fed, and the question is how to keep them so. ?] (Bread supply: [+ bread : bread +].)
 
 - @monopoly: Enforce the monopoly and the fixed prices.
 - @prices: Raise the fixed price of grain.

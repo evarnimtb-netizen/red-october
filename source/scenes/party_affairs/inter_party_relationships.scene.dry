@@ -14,7 +14,7 @@ Q.can_form_third = RO.allianceTarget(Q, 'third') > (Q.ally_lsr || 0) ? 1 : 0;
 Q.can_form_bol = RO.allianceTarget(Q, 'bol') > (Q.ally_bol || 0) ? 1 : 0;
 !}
 
-[? if bol_regime = 0 : The bloc of the Mensheviks and the SRs is the Soviet majority, and every party is calculating how long it will last. ?][? if bol_regime = 1 : The Bolsheviks hold power, and every other socialist party is calculating whom it can still trust. ?]
+[? if bol_regime = 0 and lost_petrosoviet = 0 : The bloc of the Mensheviks and the SRs is the Soviet majority, and every party is calculating how long it will last. ?][? if bol_regime = 0 and lost_petrosoviet = 1 : The Bolsheviks have taken the Petrograd Soviet; the bloc of the Mensheviks and the SRs still holds the All-Russian executive, and every party is calculating how long that will last. ?][? if bol_regime = 1 : The Bolsheviks hold power, and every other socialist party is calculating whom it can still trust. ?]
 
 - @partner: Talks with the [+ partner_name +]. (Relations: [+ rel_ally : relationships +])
 - @lsr: Talks with the [+ third_name +]. (Relations: [+ rel_lsr : relationships +])
@@ -102,7 +102,7 @@ The talks produced an agreement: [+ alliance_level : alliance +].
 
 @not_formalized
 
-Relations are not warm enough, our lines are not compatible, or there is nothing yet to share, so we cannot go beyond what we already have.
+[? if alliance_why = 'relations' : Relations are not warm enough yet: 40 for cooperation, 60 for a bloc, 75 for a coalition. ?][? if alliance_why = 'lines' : Our lines on the war and the soviets are too far apart for a bloc. ?][? if alliance_why = 'power' : A coalition needs something to share: a government, a surviving Assembly, or a soviet majority. With the Bolsheviks it needs the Vikzhel agreement, a surviving Assembly, or Left SR commissars. ?] We cannot go beyond what we already have.
 
 @statement
 view-if: ally_lvl >= 1 or ally_lsr >= 1 or ally_bol >= 1

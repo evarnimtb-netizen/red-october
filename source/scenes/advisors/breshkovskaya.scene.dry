@@ -27,5 +27,4 @@ RO.boost(Q, {peasants: 4, soldiers: 3, middle: 2}); RO.fac(Q, 'rightdef', 1, -2)
 
 The old woman toured the front, and the garrison towns. Soldiers who had never read a party leaflet knelt to kiss her hand.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

@@ -20,6 +20,8 @@ if (Q.coup2) {
     Q.land_decree = 1;
     Q.soviet_democracy -= 15;
     RO.add(Q, {rel_bol: -6});
+    Q.late_coup = 1;
+    if (Q.at_war) { Q.at_war = 0; Q.late_peace = 1; RO.add(Q, {war_weariness: -15}); }
 } else {
     Q.bolshevik -= 6;
     Q.soviet_democracy += 1;
@@ -31,7 +33,7 @@ go-to: coup_yes if coup2 = 1; coup_no if coup2 = 0
 
 = The Bolsheviks Take Power
 
-The hunger, the war weariness and the discontent in the factories have given the Bolsheviks a new opening. In a night of arrests, the Red Guards seized the government's offices and the Soviet executive. The Assembly was dissolved, by decree.
+The hunger, the war weariness and the discontent in the factories have given the Bolsheviks a new opening. In a night of arrests, the Red Guards seized the government's offices and the Soviet executive. The Assembly was dissolved, by decree. [? if late_peace = 1 : The new government's first act was to ask Germany for peace, on any terms that Berlin would give. ?]
 
 The experiment in democratic government is over. The party is now an opposition party in a one-party state, with a strong democratic past.
 

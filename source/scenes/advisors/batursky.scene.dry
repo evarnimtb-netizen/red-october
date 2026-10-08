@@ -27,5 +27,4 @@ RO.boost(Q, {workers: 3, railway: 3}); RO.fac(Q, 'unions', 3, -3); RO.add(Q, {re
 
 Batursky's pamphlet on union independence was read at the metalworkers' union and the printers'. The authorities have taken note.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

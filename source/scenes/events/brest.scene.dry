@@ -3,13 +3,12 @@ face-image: img/events/brest.jpg
 subtitle: The treaty, and the Left SRs.
 new-page: true
 tags: event
-view-if: dix >= 28 and bol_regime = 1 and at_war = 1
+view-if: dix >= 28 and bol_regime = 1 and at_war = 1 and late_coup = 0
 priority: 40
 max-visits: 1
 on-arrival: {!
 Q.at_war = 0;
 RO.add(Q, {war_weariness: -20, army_discipline: 0, land_pressure: -5});
-Q.lsr_left_gov = (Q.player_party == 'lsr') ? 0 : 1;
 Q.fault_text = RO.fault(Q, 'brest');
 !}
 
@@ -17,7 +16,7 @@ Q.fault_text = RO.fault(Q, 'brest');
 
 On 3 March the Soviet government signed the Treaty of Brest-Litovsk with Germany and her allies: Russia lost Poland, the Baltic provinces, Ukraine and a quarter of her population, and a third of her industry. Lenin had to threaten to resign to get it ratified: Trotsky's formula, "neither war nor peace", had failed and the Germans had advanced on Petrograd.
 
-Martov and Kamkov, the Left SR leader, both spoke against ratification.[? if player_party != 'lsr' : The Left SRs left the government on 19 March, over the treaty; ?] The Soviet Congress ratified the treaty by 784 votes to 261. The war with Germany is over, for now.
+Martov, for the Menshevik Internationalists, and Kamkov, for the Left SRs, both spoke against ratification. [? if player_party != 'lsr' : The Soviet Congress ratified the treaty by 784 votes to 261, and the Left SRs left the government on 19 March, over the treaty. The war with Germany is over, for now. ?][? if player_party = 'lsr' : The Fourth Congress of Soviets meets on 14 March to vote on it, and the party must decide where it stands. ?]
 
 [? if fault_flag = 1 : [+ fault_text +] ?]
 
@@ -29,6 +28,7 @@ Martov and Kamkov, the Left SR leader, both spoke against ratification.[? if pla
 - @lsr_leave: Leave the government over the treaty.
 - @lsr_stay: Stay in the government and fight the treaty from inside.
 - @lsr_vote: Vote for ratification.
+- @lsr_against: Vote against ratification, from outside the government.
 - @lsr_front: Form an anti-Brest front with the Mensheviks.
 
 @against
@@ -89,7 +89,7 @@ RO.boost(Q, {peasants: 1});
 We abstained, and said that a peace which the peasants and soldiers have not been asked about is the Assembly's business. The Left SRs called it cowardice.
 
 @lsr_leave
-view-if: player_party = 'lsr'
+view-if: player_party = 'lsr' and lsr_in_gov = 1
 on-arrival: {!
 Q.lsr_in_gov = 0;
 Q.lsr_seats = 0;
@@ -101,7 +101,7 @@ RO.fac(Q, 'rightdef', 2, -2);
 Q.anti_brest = (Q.anti_brest || 0) + 1;
 !}
 
-On 19 March the Left SR People's Commissars resigned from the government, over the Treaty and over what they say is the abandonment of the revolutionary war. The seven commissariats were given to Bolsheviks within a week. The party is a party of opposition again, with a seat on the Cheka's board and a reputation for courage.
+The Congress ratified the treaty by 784 votes to 261. On 19 March the Left SR People's Commissars resigned from the government, over the Treaty and over what they say is the abandonment of the revolutionary war. The seven commissariats were given to Bolsheviks within a week. The party is a party of opposition again, with a seat on the Cheka's board and a reputation for courage.
 
 @lsr_stay
 view-if: player_party = 'lsr' and lsr_in_gov = 1
@@ -126,11 +126,11 @@ go-to: lsr_stay_yes if stay_ok = 1; lsr_stay_no if stay_ok = 0
 
 @lsr_stay_yes
 
-The Left SR commissars voted against the treaty in the Council of People's Commissars and in the Congress of Soviets, and stayed at their posts. Lenin, who needs the peasants' party more than he cares to say, allowed it. The first coalition in Russian history has survived a vote on a matter of principle.
+The Left SR commissars voted against the treaty in the Council of People's Commissars and in the Congress of Soviets, which ratified it all the same by 784 votes to 261, and they stayed at their posts. Lenin, who needs the peasants' party more than he cares to say, allowed it. The first coalition in Russian history has survived a vote on a matter of principle.
 
 @lsr_stay_no
 
-The Left SR commissars voted against the treaty and said that they were staying. Lenin told them that a government that voted in two ways was not a government, and that they would be treated as an opposition. The Left SR commissariats were reorganised in the course of the week.
+The Left SR commissars voted against the treaty, which the Congress ratified by 784 votes to 261, and said that they were staying. Lenin told them that a government that voted in two ways was not a government, and that they would be treated as an opposition. The Left SR commissariats were reorganised in the course of the week.
 
 @lsr_vote
 view-if: player_party = 'lsr'
@@ -143,7 +143,7 @@ RO.fac(Q, 'rightdef', 0, 8);
 if (Q.lsr_in_gov) { Q.seven_commissars = 1; }
 !}
 
-The party voted for ratification, with a heavy heart, and stayed in the government. The village delegations say that the Left SRs have become the Bolsheviks' junior partner. In the Baltic Fleet, they say worse.
+The party voted for ratification, with a heavy heart, and the Congress carried it by 784 votes to 261.[? if lsr_in_gov = 1 : The party stays in the government. ?] The village delegations say that the Left SRs have become the Bolsheviks' junior partner. In the Baltic Fleet, they say worse.
 
 @lsr_front
 view-if: player_party = 'lsr'
@@ -158,4 +158,15 @@ RO.fac(Q, 'rightdef', 1, 2);
 Q.anti_brest = (Q.anti_brest || 0) + 1;
 !}
 
-Martov and Kamkov spoke against ratification from the same platform. The Menshevik Internationalists and the Left SRs have published a joint declaration: no ratification without a vote of the Constituent Assembly, no peace over the heads of the German workers. It is the only front in the Congress that includes both parties.
+Martov and Kamkov spoke against ratification from the same platform. The Menshevik Internationalists and the Left SRs have published a joint declaration: no ratification without a vote of the Constituent Assembly, no peace over the heads of the German workers. It is the only front in the Congress that includes both parties. The Congress ratified the treaty all the same, by 784 votes to 261.
+
+@lsr_against
+view-if: player_party = 'lsr' and lsr_in_gov = 0
+on-arrival: {!
+RO.add(Q, {rel_bol: -4});
+RO.boost(Q, {soldiers: 2, peasants: 2});
+RO.fac(Q, 'intl', 0, 4);
+Q.anti_brest = (Q.anti_brest || 0) + 1;
+!}
+
+The party's delegates voted against the treaty, and lost: the Congress ratified it by 784 votes to 261. Outside the government, there was nothing more the party could do about it, except to say, loudly, that it had been right.

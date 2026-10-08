@@ -8,7 +8,7 @@ view-if: proshian_advisor = 1 and (player_party = 'lsr' or lent_proshian = 1) an
 
 = Prosh Proshian
 
-Proshian (1883-1918), a Left SR, is People's Commissar of Posts and Telegraphs. He has the telegraph in his hands, and a network of operators who are loyal to the party.
+Proshian (1883-1918), a Left SR, is a telegraph man, with a network of operators who are loyal to the party.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ Q.insight = (Q.insight || 0) + 1; Q.members += 10 * Q.mem_scale; RO.boost(Q, {wo
 
 The telegraphists of a dozen provincial towns now take their instructions from the party, and the party hears everything that goes over the wire.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

@@ -3,7 +3,7 @@ face-image: img/events/kronstadt.jpg
 subtitle: February and March 1921.
 new-page: true
 tags: event
-view-if: dix >= 98 and bol_regime = 1
+view-if: dix >= 100 and bol_regime = 1
 priority: 40
 max-visits: 1
 on-arrival: {!
@@ -13,7 +13,7 @@ if (!Q.georgia_survives) { Q.georgia_free = 0; Q.zhordania_advisor = 0; }
 
 = Georgia, the Strikes and Kronstadt
 
-In February 1921 the Red Army crossed the border of Georgia, and the Menshevik government of Zhordania fled to Constantinople. [? if georgia_survives = 1 : In this world it did not: the diplomatic pressure from Europe, and the strength of the Georgian army, led Moscow to postpone the invasion. Georgia is, so far, free. ?]
+[? if georgia_survives = 0 : In February 1921 the Red Army crossed the border of Georgia, and the Menshevik government of Zhordania fled to Constantinople. ?][? if georgia_survives = 1 : In February 1921 Moscow prepared to cross the border of Georgia, but the diplomatic pressure from Europe, and the strength of the Georgian army, led it to postpone the invasion. Georgia is, so far, free. ?]
 
 In the same weeks, strikes spread through Petrograd's factories. On 28 February the sailors of the battleship Petropavlovsk adopted a resolution that demanded new elections to the soviets, freedom of speech and press for workers, peasants and the left socialist parties, and the release of political prisoners. On 1 March they were joined by the whole garrison of Kronstadt; the Bolsheviks called it a White conspiracy.
 

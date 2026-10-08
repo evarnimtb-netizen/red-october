@@ -6,7 +6,7 @@ Q.game_over = 1;
 if (Q.ending == 'final') {
     if (Q.bol_regime == 0) {
         Q.ending = Q.vikzhel_deal ? 'all_socialist' : 'constituent_republic';
-    } else if (Q.sd_win_check = (Q.soviet_democracy >= 55 && Q.legality >= 2 && (Q.nep_early || Q.program_adopted) && Q.free_soviets && Q.repression <= 40)) {
+    } else if (Q.sd_win_check = (Q.soviet_democracy >= 45 && Q.legality >= 2 && (Q.nep_early || Q.program_adopted) && Q.free_soviets && Q.repression <= 40)) {
         Q.ending = 'soviet_democracy';
     } else if (Q.legality <= (Q.difficulty < 0 ? 0 : 1) || Q.members <= (Q.difficulty < 0 ? 12 : 20) * Q.mem_scale) {
         // on Easy a party that is banned in name but still has its members has not been driven abroad
@@ -157,7 +157,7 @@ The Bolsheviks sat in the Council of Ministers. Lenin was there, and Martov, and
 
 *A win.*
 
-The Constituent Assembly, which in our world sat for thirteen hours, sat in this one for a long time. It passed the land law, ended the war, drafted a constitution and elected a President. The Bolsheviks sat on the left, sometimes in the government and sometimes not, and in the end they accepted that they had lost.
+The Constituent Assembly, which in our world sat for thirteen hours, sat in this one for a long time. It passed the land law, ended the war and drafted a constitution[? if constitution = 2 : , and elected a President ?][? if constitution = 3 : , and kept the government answerable to itself alone ?][? if constitution = 1 : , for a federal republic with the soviets as its local government ?]. [? if vikzhel_deal = 1 : The Bolsheviks sat in the all-socialist government to the end, and in the end they accepted that they would not rule alone. ?][? if vikzhel_deal = 0 and vik_ever = 1 : The Bolsheviks sat in the government for a time and then left it, and in the end they accepted that they had lost. ?][? if vikzhel_deal = 0 and vik_ever = 0 : The Bolsheviks sat on the left, in opposition, and in the end they accepted that they had lost. ?]
 
 Russia in December 1921 is a poor, damaged, hungry republic. It is also a republic. [? if player_party = 'menshevik' : The Mensheviks, who said in March 1917 that Russia was not ready for socialism, are now the party that tells the peasants and workers what is possible. ?][? if player_party = 'lsr' : The Left SRs, who said in 1917 that the republic had to give the peasants the land and the soldiers the peace, sit in the Assembly as a party of the left, and have lived to see it. ?][? if player_party = 'sr' : The SRs, who have had the votes of the peasants since February, have the government, too. [? if land_socialised = 1 : The land has been socialised, as Chernov's law proposed, and is allocated by the village communities. ?] ?]
 

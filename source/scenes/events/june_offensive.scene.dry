@@ -20,7 +20,7 @@ if (Q.offensive_failed) {
 
 On 1 July, in the middle of the Soviet Congress, the army attacked in Galicia, on Kerensky's orders and the Allies' urging. The Petrograd Soviet had planned a demonstration for the same day; the Bolsheviks took over its slogans, and 400,000 marched under "All power to the soviets". Kerensky's offensive is the last attempt of the Russian army.
 
-[? if offensive_failed = 1 : After a brief advance the troops stopped, then refused to go on. By mid-July the Germans counter-attacked and the army lost up to 120 kilometres. Entire divisions are dissolving. ?][? if offensive_failed = 0 : The offensive made modest gains before stalling. Desertion continues. ?]
+[? if offensive_failed = 1 : After a brief advance the troops stopped, then refused to go on. Then the Germans counter-attacked and the army lost up to 120 kilometres. Entire divisions are dissolving. ?][? if offensive_failed = 0 : The offensive made modest gains before stalling. Desertion continues. ?]
 
 What position does the party take on the offensive?
 

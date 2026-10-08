@@ -237,3 +237,8 @@ No finding was left undecided. These points were not fully settled:
 - **`lsr_split_nov` timing in game.** The cause is clear from the source, but no clean in-game reproduction was achieved (the attempted jump to dix 19 landed on another event).
 - **Bolsheviks 44 to 60 and Right 33 to 12 after "Break the Officers' Union".** Traced to later events and drift, not to one step; the exact sequence was not reproduced.
 - **Coverage gaps.** Only Hard was played for Mensheviks, and no Menshevik coalition run, no Left SR Easy or Normal run and no difficulty comparison were done.
+
+
+---
+
+**Status (8 October 2026):** all 57 confirmed findings have been fixed. The Ufa Directory now has its own event (`source/scenes/events/sr_directory.scene.dry`), and Kolchak's coup follows from what the party chose there. See the commit "Fix all 57 confirmed findings of playtest round 2".

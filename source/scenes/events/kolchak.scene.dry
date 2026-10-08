@@ -10,46 +10,53 @@ RO.add(Q, {right_threat: 5});
 RO.boost(Q, {middle: -2});
 if (Q.player_party == 'menshevik') { RO.add(Q, {rel_ally: -3}); }
 Q.kolchak_seen = 1;
+// the SR members of the Directory are arrested and sent out of the country: they advise no one from now on
+Q.avksentiev_advisor = 0;
+Q.zenzinov_advisor = 0;
+if (Q.player_party == 'sr' && Q.directory_joined) {
+    Q.members -= 10 * Q.mem_scale;
+    RO.boost(Q, {peasants: -2, middle: -1});
+    RO.fac(Q, 'rightdef', -4, 6);
+}
 Q.fault_text = RO.fault(Q, 'kolchak');
 !}
 
 = Kolchak's Coup
 
-On 18 November, officers loyal to Admiral Alexander Kolchak arrested the SR members of the Directory in Omsk, the anti-Bolshevik government that had been formed in Ufa in September from the SR and Kadet delegates. Kolchak proclaimed himself Supreme Ruler. The SRs who had joined the anti-Bolshevik cause, among them Avksentiev and Zenzinov, were deported to the West.
+On 18 November, officers loyal to Admiral Alexander Kolchak arrested the SR members of the Directory in Omsk, the anti-Bolshevik government formed at Ufa in September. Kolchak proclaimed himself Supreme Ruler. Avksentiev, Zenzinov and the other SRs arrested with them were put on a train east and sent out of the country by way of China.
 
 [? if fault_flag = 1 : [+ fault_text +] ?]
 
 The other side of the civil war has now shown its hand. A White Russia would be a dictatorship of the officers, and the socialists, of every party, would be in prison.
 
-[? if player_party = 'menshevik' : For the Mensheviks it is a sign that the policy of "neither side" is not so foolish after all, and that armed struggle against the Bolsheviks can only help the Whites. ?][? if player_party = 'sr' and armed_struggle = 1 : The party's own leaders sat in that Directory. It was the party's attempt to make a democratic government with the help of generals, foreign troops and Cossack atamans, and the generals have answered. ?][? if player_party = 'sr' and armed_struggle = 0 : The party had stayed out of the Directory, and its leaders in Moscow, though in prison, have not been shot by officers. ?]
+[? if player_party = 'menshevik' : For the Mensheviks it is a sign that the policy of "neither side" is not so foolish after all, and that armed struggle against the Bolsheviks can only help the Whites. ?][? if player_party = 'sr' and directory_joined = 1 : The party had joined the Directory, and its leaders were arrested in their beds. It was the party's attempt to make a democratic government with the help of generals, foreign troops and Cossack atamans, and the generals have answered. ?][? if player_party = 'sr' and directory_joined = 0 and armed_struggle = 1 : The party had kept Komuch apart from the Directory. Its people in Omsk were arrested all the same, but the People's Army on the Volga is still the party's own. ?][? if player_party = 'sr' and armed_struggle = 0 : The party had laid down its arms before the officers struck, and its leaders in Moscow, though in prison, have not been shot by officers. ?]
 
-- @sr_pullout: Pull the party's people out of Siberia and break with the Directory's remnants.
-- @sr_stay: Stay in the Directory.
+- @sr_turn: Turn the People's Army against Kolchak, and seek a truce with the soviets.
+- @sr_fight_on: Fight on against the Bolsheviks, beside the Admiral.
 
-@sr_pullout
+@sr_turn
 view-if: player_party = 'sr' and armed_struggle = 1
-choose-if: bund_strength >= 4 or rel_kad < 30
-unavailable-subtitle: We have had no warning of the coup.
 on-arrival: {!
 Q.white_aid = Math.max(0, Q.white_aid - 1);
-RO.add(Q, {rel_bol: 3, right_threat: -3});
+RO.add(Q, {rel_bol: 4, right_threat: -3});
 RO.fac(Q, 'rightdef', 0, 6);
 RO.fac(Q, 'intl', 0, -4);
 RO.fac(Q, 'bund', 2, -2);
 Q.komuch_alive = 1;
 !}
 
-A few days before, the party's delegates withdrew from the Directory, on a warning from the Ufa group that the officers meant to act. They were criticised for deserting their allies, and then thanked, when the others were arrested.
+The Volga units that still obeyed the party turned their guns on Kolchak's officers, and a delegation went to Ufa to ask the Red Army for a truce. The Ufa group, which had warned of the coup for weeks, is now the party's voice in the east.
 
-@sr_stay
+@sr_fight_on
 view-if: player_party = 'sr' and armed_struggle = 1
 on-arrival: {!
-Q.members -= 15 * Q.mem_scale;
 Q.komuch_alive = 0;
-RO.boost(Q, {peasants: -3, middle: -2});
-RO.fac(Q, 'rightdef', -6, 8);
+Q.white_aid += 1;
+Q.members -= 5 * Q.mem_scale;
+RO.boost(Q, {peasants: -3, middle: -1});
+RO.fac(Q, 'rightdef', -4, 8);
 RO.fac(Q, 'bund', 4, 0);
-RO.add(Q, {rel_bol: -2});
+RO.add(Q, {rel_bol: -3});
 !}
 
-The party's leaders in the Directory were arrested in their beds. Avksentiev, Zenzinov and the others are on a train to Harbin. The party has paid in full for an alliance with the officers.
+The party's people in the east were told to serve under the Admiral, for the sake of the war against the Bolsheviks. Many did not; those who did will be fighting for a government that has just arrested their leaders.

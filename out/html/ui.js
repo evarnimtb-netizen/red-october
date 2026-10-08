@@ -66,7 +66,7 @@
   function renderMain(Q) {
     var h = '<div class="sb-date">' + esc(dateText(Q)) + '</div><div class="sb-phase">' + esc(PHASE[clamp(Q.phase || 1, 1, 5)]) + '</div>';
     h += '<table class="sb-kv"><tr><td>Resources</td><td>' + Math.round(num(Q.resources)) + '</td></tr>' +
-         '<tr><td>Members</td><td>' + members(num(Q.members)) + '</td></tr>' +
+         '<tr><td>Members</td><td>' + members(num(Q.members)) + (num(Q.members) >= num(Q.mem_cap) - 0.5 && num(Q.mem_cap) > 0 ? ' <small title="The most members the party can hold">(at its limit)</small>' : '') + '</td></tr>' +
          '<tr><td>Legal status</td><td>' + LEGALITY[clamp(Math.round(num(Q.legality)), 0, 3)] + '</td></tr></table>';
     var d = num(Q.dissent) * 100;
     h += barRow('Party dissent', d, pick(d, WORDS.dissent), scoreColor(d * 1.6, false), '');
@@ -294,7 +294,9 @@
   function antWord(a) { return a < 20 ? 'Calm' : (a < 40 ? 'Uneasy' : (a < 70 ? 'Hostile' : 'On the brink')); }
   function renderOpposition(Q, camps) {
     var h = '<div class="sb-section">Opposition</div><div class="sb-note">The camps that answer your policies. At ' + window.RO.SANCTION_AT + ' hostility they try to sanction you; at ' + window.RO.REVOLT_AT + ' they take up arms. A camp also needs the strength to act: under ' + window.RO.ACT_FROM + ' it only grumbles, and it needs ' + window.RO.ARMS_AT + ' to take up arms.</div>';
-    if (!camps.length) { return h + '<div class="sb-note">No camp is organised against you now.</div>'; }
+    if (!camps.length) {
+      return h + '<div class="sb-note">' + (Q.bol_regime ? 'The Bolsheviks hold power: the Kadets are banned, the generals are fighting the Civil War, and the open politics of 1917 is over. The camps no longer answer your policies; the Cheka does.' : 'No camp is organised against you now.') + '</div>';
+    }
     var st = Math.round(window.RO.strength(Q));
     h += '<div class="opp-camp"><div class="sb-label"><span>Your strength</span><span class="sb-word">' + st + (st >= 18 ? ' · enough to strike' : ' · too weak to strike') + '</span></div>' +
          '<div class="sb-bar opp-bar"><div class="sb-fill" style="width:' + clamp(st * 2, 0, 100) + '%;background:#4a6a8a"></div><i class="opp-tick" style="left:36%"></i></div>' +

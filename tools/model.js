@@ -319,7 +319,7 @@ var RO = (function() {
       // without the war the ruble can recover: towards 50 under a republic, and under the Bolsheviks only once the
       // market is allowed back (the NEP, or the party's programme adopted early); War Communism prints it away
       if (!Q.bol_regime) { Q.ruble += (0.05 * (50 - Q.ruble) - 0.3) * tl; }
-      else if (Q.nep_early || Q.dix >= 108) { Q.ruble += (0.05 * (40 - Q.ruble) - 0.2) * tl; }
+      else if (Q.nep_early || Q.dix >= 100) { Q.ruble += (0.05 * (40 - Q.ruble) - 0.2) * tl; }
       else { Q.ruble -= 1.5 * tl; }
       if (!Q.land_decree) { Q.land_pressure += 1.0 * tl; }
     }
@@ -333,6 +333,7 @@ var RO = (function() {
         Q.bolshevik += tl * Math.max(0.3, 1.2 + 9 * (G - 50) / 50);
       }
       Q.right_threat += (25 - Q.right_threat) * 0.04 * tl;
+      Q.soviet_democracy += (60 - Q.soviet_democracy) * 0.1 * tl;
     } else {
       Q.soviet_democracy -= (0.5 + Q.repression / 60) * tl;
       Q.repression += (Q.legality <= 1 ? 0.6 : 0.3) * tl;
@@ -432,7 +433,7 @@ var RO = (function() {
   }
   function kornilovResistance(Q, bonus) {
     return 40 + (bonus || 0) + 5 * Math.min(Q.militia || 0, 4) + 0.2 * (Q.boost_railway || 0) + 0.25 * (Q.boost_soldiers || 0) +
-           (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 60) / 8 + (Q.player_party === 'sr' ? 6 : 0) - 4 * (Q.difficulty || 0);
+           (Q.homogeneous_gov ? 5 : 0) + (Q.soviet_democracy - 50) / 8 + (Q.player_party === 'sr' ? 6 : 0) - 4 * (Q.difficulty || 0);
   }
 
 
@@ -474,11 +475,22 @@ var RO = (function() {
     return lvl;
   }
   // Try to raise an alliance. Returns the new level, or 0 if nothing changed.
+  // What stands between an alliance and the next level: 'relations', 'lines' (the parties' lines on the war and the
+  // soviets are not compatible) or 'power' (there is no government or soviet majority to share).
+  function allianceBlocker(Q, who) {
+    var rel = Q[REL[who]], cur = Q[LVL[who]] || 0;
+    if (cur < 1 && rel < 40) { return 'relations'; }
+    if (cur < 2) { return rel < 60 ? 'relations' : (compatible(Q, who) ? '' : 'lines'); }
+    if (rel < 75) { return 'relations'; }
+    if (!compatible(Q, who)) { return 'lines'; }
+    return sharedPower(Q, who) ? '' : 'power';
+  }
   function formalize(Q, who) {
     var t = allianceTarget(Q, who);
     Q.alliance_level = t;
     if (t > (Q[LVL[who]] || 0)) { Q[LVL[who]] = t; Q.alliance_msg = 1; return t; }
     Q.alliance_msg = 0;
+    Q.alliance_why = allianceBlocker(Q, who);
     return 0;
   }
   function levelName(l) { return LEVEL_NAMES[clamp(Math.round(l), 0, 3)]; }
@@ -603,9 +615,22 @@ var RO = (function() {
   // END ADVISORS
   var COUNCIL_SIZE = 4;
 
+  // Advisors who leave the scene in history: abroad, in prison or dead. From this dix on they no longer advise anyone.
+  // (Others leave through events: Chkheidze, Khinchuk, the Menshevik leaders arrested in 1921, the SRs of the Directory.)
+  var ADVISOR_UNTIL = {
+    axelrod: 18,       // abroad from the autumn of 1917, at Stockholm and then in Switzerland; he never came back
+    tsereteli: 26,     // to Georgia after the Assembly is dispersed, early 1918
+    breshkovskaya: 46, // leaves Russia for America at the end of 1918
+    natanson: 54,      // abroad for his health in 1919, dies in Switzerland in July
+    gots: 82,          // arrested in 1920, and tried in 1922
+    martov: 92,        // leaves for Berlin in September 1920
+    abramovich: 92,    // abroad with Martov in 1920
+    chernov: 92        // leaves Russia in 1920
+  };
   function advisorsAvailable(Q) {
     var out = [];
     for (var id in ADVISORS) {
+      if (ADVISOR_UNTIL[id] !== undefined && (Q.dix || 0) >= ADVISOR_UNTIL[id]) { continue; }
       if (Q[id + '_advisor'] && (ADVISORS[id].party === Q.player_party || Q['lent_' + id])) { out.push(id); }
     }
     return out;
@@ -1044,7 +1069,7 @@ var RO = (function() {
   }
 
 
-  return {campPower: campPower, campReadiness: campReadiness, ACT_FROM: ACT_FROM, ARMS_AT: ARMS_AT, campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, swapAdvisor: swapAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
+  return {allianceBlocker: allianceBlocker, campPower: campPower, campReadiness: campReadiness, ACT_FROM: ACT_FROM, ARMS_AT: ARMS_AT, campTarget: campTarget, recordTurn: recordTurn, law: law, lawHits: lawHits, breakCamp: breakCamp, squash: squash, squashAll: squashAll, squashOdds: squashOdds, strength: strength, allyPower: allyPower, recordParliament: recordParliament, projectParliament: projectParliament, PARL_SIZE: PARL_SIZE, oppositionTurn: oppositionTurn, opposition: opposition, offence: offence, rollback: rollback, mainGrievance: mainGrievance, CAMPS: CAMPS, CAMP_NAMES: CAMP_NAMES, SANCTION_AT: SANCTION_AT, REVOLT_AT: REVOLT_AT, classSupport: classSupport, popularity: popularity, BOOST_GROUPS: BOOST_GROUPS, CLASS_NAMES: CLASS_NAMES, policyDrift: policyDrift, syncAdvisors: syncAdvisors, reshuffleCouncil: reshuffleCouncil, callAdvisor: callAdvisor, swapAdvisor: swapAdvisor, replaceAdvisor: replaceAdvisor, advisorsAvailable: advisorsAvailable, allianceTarget: allianceTarget, formalize: formalize, levelName: levelName, alliancesTurn: alliancesTurn, worldTurmoil: worldTurmoil, fault: fault, allySlot: allySlot, compatible: compatible, chance: chance, PARTY: PARTY, initParty: initParty, boost: boost, fac: fac, add: add, pay: pay, display: display, GROUPS: GROUPS, PARTIES: PARTIES, PARTY_NAMES: PARTY_NAMES, FACTIONS: FACTIONS, BASE: BASE,
           ARENAS: ARENAS, ARENA_BIAS: ARENA_BIAS, clamp: clamp, dix: dix, grievance: grievance,
           setResults: setResults, bolPower: bolPower, kornilovForce: kornilovForce,
           kornilovResistance: kornilovResistance, groupSupport: groupSupport, arenaResult: arenaResult, currentArena: currentArena,

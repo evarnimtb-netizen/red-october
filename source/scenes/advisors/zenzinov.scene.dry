@@ -8,7 +8,7 @@ view-if: zenzinov_advisor = 1 and (player_party = 'sr' or lent_zenzinov = 1) and
 
 = Vladimir Zenzinov
 
-Zenzinov (1880-1953) is a member of the Central Committee and the party's organiser. In 1918 he will sit in the Directory, and be arrested in Kolchak's coup.
+Zenzinov (1880-1953) is a member of the Central Committee and the party's organiser. He believes in the party's machine, and in the Constituent Assembly.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ Q.members += 20 * Q.mem_scale; RO.boost(Q, {peasants: 2, workers: 1}); RO.fac(Q,
 
 Zenzinov opened a dozen new provincial committees and put the old ones in order. The party's membership is growing.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

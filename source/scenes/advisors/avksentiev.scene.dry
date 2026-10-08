@@ -8,7 +8,7 @@ view-if: avksentiev_advisor = 1 and (player_party = 'sr' or lent_avksentiev = 1)
 
 = Nikolai Avksentiev
 
-Avksentiev (1878-1943) is a Right SR, Minister of the Interior in the summer of 1917 and chairman of the Pre-Parliament. In 1918 he will head the Ufa Directory.
+Avksentiev (1878-1943) is a Right SR, a leader of the peasant soviets and a defender of order and the coalition.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {right_threat: -4, rel_kad: 3, soviet_democracy: -1}); RO.fac(Q, 'righ
 
 Avksentiev's circular to the provincial commissars told them to uphold the law, and to arrest those who seized land by force. The Left SRs called it an outrage.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

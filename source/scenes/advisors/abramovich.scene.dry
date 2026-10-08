@@ -8,7 +8,7 @@ view-if: abramovich_advisor = 1 and (player_party = 'menshevik' or lent_abramovi
 
 = Raphael Abramovich
 
-Abramovich (1880-1963) of the Bund is a member of the Soviet executive. In 1918 foreign socialists' appeals will help save him from the firing squad.
+Abramovich (1880-1963) of the Bund is a member of the Soviet executive. He has friends among the socialists of Europe, which may one day matter.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ for (var f of Q.factions) { RO.fac(Q, f, 0, -6); }
 
 Abramovich sat up with Internationalists and Defencists in turn. Nobody has changed their mind, but people are on speaking terms again.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

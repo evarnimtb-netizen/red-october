@@ -68,7 +68,7 @@ choose-if: ally_lvl >= 2 and rel_ally >= 65
 unavailable-subtitle: We have no bloc with the SRs strong enough to say this to them.
 on-arrival: {!
 Q.komuch_averted = 1;
-Q.white_aid = Math.max(-2, Q.white_aid - 1);
+Q.white_aid = Math.max(0, Q.white_aid - 1);
 RO.add(Q, {rel_ally: 6, rel_bol: 2});
 RO.fac(Q, 'rightdef', 0, 6);
 RO.fac(Q, 'intl', 1, -3);

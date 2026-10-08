@@ -27,5 +27,4 @@ Q.members += 8 * Q.mem_scale; RO.boost(Q, {workers: 2, middle: 1}); RO.fac(Q, 'i
 
 Broido has opened new party branches and a women workers' circle. Membership is growing.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

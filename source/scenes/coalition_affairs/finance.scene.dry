@@ -7,7 +7,7 @@ tags: coalition_affairs
 view-if: finance_timer <= 0 and bol_regime = 0 and dix >= 4
 on-arrival: month_actions += 1; finance_timer = 3
 
-The war costs forty million rubles a day, and the Treasury covers most of it with the printing press. Prices in Petrograd have trebled since February; the peasants will not sell grain for paper. (The ruble: [+ ruble : ruble +].)
+[? if at_war = 1 : The war costs forty million rubles a day, and the Treasury covers most of it with the printing press. ?][? if at_war = 0 : The war is over, but the Treasury still pays its way with the printing press. ?] Prices in Petrograd have trebled since February; the peasants will not sell grain for paper. (The ruble: [+ ruble : ruble +].)
 
 - @loan: Campaign for the Liberty Loan. (1 resource)
 - @tax: Demand a tax on war profits and the great fortunes.

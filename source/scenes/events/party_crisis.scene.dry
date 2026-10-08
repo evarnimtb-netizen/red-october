@@ -14,6 +14,7 @@ for (var f of Q.factions) {
     if (v > wd) { wd = v; worst = f; }
 }
 Q.crisis_faction = worst;
+Q.crisis_label = Q['flabel_' + worst] || 'One of its currents';
 Q.members -= Math.round(Q.members * 0.15);
 Q[worst + '_strength'] = Q[worst + '_strength'] * 0.4;
 for (var f of Q.factions) { Q[f + '_dissent'] = Math.max(0, Q[f + '_dissent'] - 20); }
@@ -24,6 +25,6 @@ RO.boost(Q, {workers: -3});
 
 = A Current Walks Out
 
-The party's quarrels have gone past the point of speeches. One of its currents has left the party in a body, with its local organisations, its press and its funds. The remaining members hold a meeting and agree on a common line.
+The party's quarrels have gone past the point of speeches. [+ crisis_label +] have left the party in a body, with their local organisations, their press and their funds; perhaps one member in seven has gone with them. The remaining members hold a meeting and agree on a common line.
 
-The party is smaller, and much more united.
+[? if crisis_faction = 'intl' : Many of them have gone over to the Bolsheviks. ?][? if crisis_faction = 'rightdef' or crisis_faction = 'defencist' : The liberals have welcomed them, and the Right is bolder for it. ?]The party is smaller, and much more united.

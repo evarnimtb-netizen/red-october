@@ -8,7 +8,7 @@ view-if: kolegaev_advisor = 1 and (player_party = 'lsr' or lent_kolegaev = 1) an
 
 = Andrei Kolegaev
 
-Kolegaev (1886-1937), a Left SR, is People's Commissar of Agriculture. He carries out the land decree, which the Left SRs themselves wrote.
+Kolegaev (1886-1937), a Left SR, is the party's expert on the land, and one of the authors of the land decree.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {land_pressure: -8}); RO.boost(Q, {peasants: 5}); RO.fac(Q, 'unions', 
 
 Kolegaev's commissars went out to the provinces with copies of the decree, and a thousand estates were divided in a week.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

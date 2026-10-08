@@ -7,7 +7,7 @@ priority: 45
 max-visits: 1
 on-arrival: {!
 Q.vik_check_1 = 1;
-Q.vik_holds = (Q.rel_bol >= 50 && Q.rel_lsr >= 45 && Q.soviet_democracy >= 60 && Q.dissent < 0.3) ? 1 : 0;
+Q.vik_holds = (Q.rel_bol >= 50 && Q.rel_lsr >= 45 && Q.soviet_democracy >= 50 && Q.dissent < 0.3) ? 1 : 0;
 if (!Q.vik_holds) {
     Q.vikzhel_deal = 0;
     Q.bol_regime = 1;
@@ -26,7 +26,7 @@ go-to: vik_holds_yes if vik_holds = 1; vik_holds_no if vik_holds = 0
 
 = The Coalition Holds
 
-The first test of the all-socialist government came in the early spring, over the treaty with Germany and the requisitioning of grain. In the Council of Ministers, Lenin demanded to be made chairman, and the Mensheviks, the SRs and the Left SRs said that they would walk out. Kamenev, speaking for the moderate Bolsheviks, sided with the majority.
+The first test of the all-socialist government came in the early spring, over peace with Germany and the requisitioning of grain. In the Council of Ministers, Lenin demanded to be made chairman, and the Mensheviks, the SRs and the Left SRs said that they would walk out. Kamenev, speaking for the moderate Bolsheviks, sided with the majority.
 
 The coalition holds. It is a government in which the parties sit in the same room and cannot stand each other, which is what a democratic government looks like.
 
@@ -34,6 +34,6 @@ The coalition holds. It is a government in which the parties sit in the same roo
 
 = The Coalition Collapses
 
-The first test of the all-socialist government came in the early spring, over the treaty with Germany and the requisitioning of grain. The Bolsheviks demanded that the government adopt their policy. When the other parties refused, Lenin withdrew the Bolshevik ministers, and on the same night the Red Guards took the ministries.
+The first test of the all-socialist government came in the early spring, over peace with Germany and the requisitioning of grain. The Bolsheviks demanded that the government adopt their policy. When the other parties refused, Lenin withdrew the Bolshevik ministers, and on the same night the Red Guards took the ministries.
 
 The coalition is over. The Bolsheviks rule alone, again, and the party that had signed the agreement with them has been left to explain why it had trusted them.

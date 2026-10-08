@@ -27,5 +27,4 @@ RO.add(Q, {bread: 3}); RO.boost(Q, {workers: 2, middle: 2}); RO.fac(Q, 'unions',
 
 The Moscow cooperatives have stretched their grain stores, and the Moscow workers know whose men run them.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

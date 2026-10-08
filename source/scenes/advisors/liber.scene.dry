@@ -8,7 +8,7 @@ view-if: liber_advisor = 1 and (player_party = 'menshevik' or lent_liber = 1) an
 
 = Mikhail Liber
 
-Liber (1880-1937) is a Bundist and a member of the Soviet executive. He will head the Menshevik list in Petrograd in November 1917.
+Liber (1880-1937) is a Bundist and a member of the Soviet executive. He speaks for the Jewish workers' organisations.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.boost(Q, {nations: 4, workers: 2}); RO.fac(Q, 'bund', 1, -5);
 
 The Bund's network of unions, clubs and mutual aid societies has rallied to our side in the towns of the Pale.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

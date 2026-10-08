@@ -222,7 +222,7 @@ if (process.env.TEXT) { fs.writeFileSync(process.env.TEXT, allText.join('\n')); 
 // JSON=file writes one summary per game, for tools/balance_report.js
 if (process.env.JSON) {
   fs.writeFileSync(process.env.JSON, JSON.stringify(results.map(function(r) {
-    return {ending: r.game_over ? r.ending : 'STUCK', opp: r.opp, laws: r.laws, breaks: r.breaks, broke: r.broke, peak: r.peak, final_poll: r.final_poll,
+    return {ending: r.game_over ? r.ending : 'STUCK', year: r.year, month: r.month, legality: r.legality, sd: r.sd, opp: r.opp, laws: r.laws, breaks: r.breaks, broke: r.broke, peak: r.peak, final_poll: r.final_poll,
             bol_regime: r.bol_regime, members: r.members};
   })));
 }

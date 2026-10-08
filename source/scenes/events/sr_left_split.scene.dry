@@ -8,9 +8,9 @@ max-visits: 1
 
 = The Left SRs Break Away
 
-In the second half of November the Left SRs, who have held their own congress, declared that the party's Central Committee no longer spoke for the peasants, and that they would form a party of their own. The Central Committee has expelled them for forming a separate organisation. The Left SRs have called a founding congress for early December: 116 delegates from 99 organisations. [? if bol_regime = 1 : They will take seven seats in Lenin's government before the month is out. ?]
+In November the Left SRs, who have held their own congress, declared that the party's Central Committee no longer spoke for the peasants, and that they would form a party of their own. The Central Committee has expelled them for forming a separate organisation. The Left SRs have called a founding congress for early December: 116 delegates from 99 organisations. [? if bol_regime = 1 : Lenin has let it be known that there are seats in his government for them. ?]
 
-The party's left wing is a fifth of its members, and nearly all of its voters in the Baltic Fleet, in the Petrograd garrison and in many a village.
+The party's left wing is a part of its members, and nearly all of its voters in the Baltic Fleet, in the Petrograd garrison and in many a village.
 
 - @reconcile: Reconcile with the Left SRs, and keep the party whole.
 - @letgo: Let them go.
@@ -35,6 +35,8 @@ Q.lsr_kept = 0;
 Q.lsr_split = 1;
 Q.intl_strength = Q.intl_strength * 0.3;
 Q.intl_dissent = 0;
+// the Left SRs are gone: what remains on the party's left is Chernov's Left Centre
+Q.flabel_intl = 'The Left Centre'; Q.ilbl = 'the Left Centre'; Q.Ilbl = 'The Left Centre';
 RO.add(Q, {rel_lsr: -10});
 RO.boost(Q, {peasants: -4, soldiers: -3});
 RO.fac(Q, 'rightdef', 0, -6);

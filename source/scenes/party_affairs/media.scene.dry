@@ -7,7 +7,7 @@ tags: party_affairs
 view-if: media_timer <= 0
 on-arrival: month_actions += 1; media_timer = 3
 
-[? if legality <= 1 : The censors read every line, and the print shop has been raided twice. ?][? if legality > 1 : The party press is the voice of the party. ?] [? if player_party = 'menshevik' and dix < 34 : Rabochaya Gazeta ?][? if player_party = 'menshevik' and dix >= 34 : Vsegda Vpered ?][? if player_party = 'sr' : Delo Naroda ?][? if player_party = 'lsr' : Znamya Truda ?] goes to press tomorrow. What is the main theme?
+[? if legality <= 1 : The censors read every line, and the print shop has been raided twice. ?][? if legality > 1 : The party press is the voice of the party. ?] [? if player_party = 'menshevik' and dix < 34 : Rabochaya Gazeta?][? if player_party = 'menshevik' and dix >= 34 : Vsegda Vpered?][? if player_party = 'sr' : Delo Naroda?][? if player_party = 'lsr' : Znamya Truda?] goes to press tomorrow. What is the main theme?
 
 - @defence: Defence of the revolution.
 - @peace: Peace without annexations.

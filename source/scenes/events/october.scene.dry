@@ -52,6 +52,7 @@ Q.stayed_in_congress = 0;
 The Mensheviks and the SRs walked out and left the Congress to the Bolsheviks and the Left SRs. Martov, who was not a Bolshevik and not a Defencist, stayed long enough to propose an all-socialist government. It has never been clear whether it was a mistake to leave.
 
 @stay
+view-if: player_party != 'lsr'
 choose-if: rel_lsr >= 35 or rel_bol >= 35
 unavailable-subtitle: Neither the Left SRs nor the Bolsheviks would listen.
 on-arrival: {!

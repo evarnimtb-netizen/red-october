@@ -27,5 +27,4 @@ for (var f of Q.factions) { RO.fac(Q, f, 0, -6); } RO.fac(Q, 'rightdef', 1, 0);
 
 The old man sat at the head of the table, and the quarrels stopped. There is no authority like that of a man who has spent his life in prison.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

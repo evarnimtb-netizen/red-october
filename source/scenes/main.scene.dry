@@ -57,7 +57,7 @@ is-deck: true
 @soviet
 title: Soviet Affairs
 card-image: img/cards/deck_soviet.svg?v=2
-subtitle: Working in the soviets, the unions and the cooperatives.
+subtitle: Working in the soviets, the unions and the cooperatives. When it is empty, its cards come back as their time comes.
 view-if: bol_regime = 1
 is-deck: true
 

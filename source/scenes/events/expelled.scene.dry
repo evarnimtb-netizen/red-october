@@ -1,12 +1,12 @@
-title: Expelled from the Soviet Executive
-subtitle: 14 June 1918.
+title: The Motion to Expel
+subtitle: The Soviet Executive votes, 14 June 1918.
 new-page: true
 tags: event
-view-if: player_party != 'lsr' and (dix >= 34 and bol_regime = 1)
+view-if: player_party != 'lsr' and (dix >= 35 and bol_regime = 1)
 priority: 40
 max-visits: 1
 on-arrival: {!
-Q.expelled_check = (Q.ally_bol >= 2 || (Q.soviet_democracy >= 65 && Q.spring_honoured)) ? 0 : 1;
+Q.expelled_check = (Q.ally_bol >= 2 || (Q.soviet_democracy >= 55 && Q.spring_honoured)) ? 0 : 1;
 if (Q.expelled_check) {
     if (Q.legality > 1) { Q.legality = 1; }
     Q.expelled = 1;
@@ -19,7 +19,7 @@ go-to: expel_yes if expelled_check = 1; expel_no if expelled_check = 0
 
 = Expelled
 
-On 14 June the Central Executive Committee, on a motion by Sverdlov, expelled the Mensheviks (the "Menshevik-Defencists") from its membership, on the ground that they were linked to the counter-revolutionary forces on the Volga. The decision is later extended to the SRs, and, in July, to the soviets as a whole.
+On 14 June the Central Executive Committee, on a motion by Sverdlov, expelled [? if player_party = 'menshevik' : the Mensheviks (the "Menshevik-Defencists") ?][? if player_party = 'sr' : the Right SRs and the Mensheviks ?] from its membership, on the ground that they were linked to the counter-revolutionary forces on the Volga. [? if player_party = 'menshevik' : The decision is extended to the Right SRs, and, in July, to the soviets as a whole. ?][? if player_party = 'sr' : In July the decision is extended to the soviets as a whole. ?]
 
 Our press has been closed in a dozen cities and our deputies expelled from the soviets of a dozen more. The party is not banned. It is not legal either.
 
@@ -66,6 +66,6 @@ The Central Committee has pledged that the party will never resort to armed stru
 
 = The Expulsion Is Averted
 
-On 14 June the Central Executive Committee considered a motion to expel the Mensheviks. It was opposed by the Left SRs, by the moderate Bolsheviks, and by the evidence of the spring elections, which showed that the Mensheviks speak for a large part of the workers. The motion was withdrawn.
+On 14 June the Central Executive Committee considered a motion to expel [? if player_party = 'menshevik' : the Mensheviks ?][? if player_party = 'sr' : the Right SRs and the Mensheviks ?]. It was opposed by the Left SRs, by the moderate Bolsheviks, and by the evidence of the spring elections, which showed that [? if player_party = 'menshevik' : the Mensheviks speak for a large part of the workers ?][? if player_party = 'sr' : the SRs still speak for a large part of the countryside ?]. The motion was withdrawn.
 
 We remain a legal party in the soviets, with all our rights, and the knowledge that nobody has any rights for long.

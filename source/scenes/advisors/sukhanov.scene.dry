@@ -27,5 +27,4 @@ Q.insight = (Q.insight || 0) + 1; RO.add(Q, {rel_lsr: 2, rel_bol: 2});
 
 Sukhanov told us what he heard at the Bolshevik meeting, and what the Left SRs are saying in the corridors. We will be better informed the next time a crisis breaks.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

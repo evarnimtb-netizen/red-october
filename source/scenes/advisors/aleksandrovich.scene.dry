@@ -8,7 +8,7 @@ view-if: aleksandrovich_advisor = 1 and (player_party = 'lsr' or lent_aleksandro
 
 = Pyotr Aleksandrovich
 
-Aleksandrovich (1887-1918) is the Left SR member of the Cheka's board and, until July 1918, Dzerzhinsky's deputy. He knows who is on the lists.
+Aleksandrovich (1887-1918) is a Left SR who knows the Cheka from the inside. He knows who is on the lists.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ Q.cheka_shield = 1; RO.add(Q, {repression: -2, rel_bol: -1}); RO.fac(Q, 'rightde
 
 Aleksandrovich saw the lists before they were signed. A number of names were crossed out, and a few of those named were warned.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

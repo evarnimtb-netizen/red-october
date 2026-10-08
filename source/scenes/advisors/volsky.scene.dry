@@ -8,7 +8,7 @@ view-if: volsky_advisor = 1 and (player_party = 'sr' or lent_volsky = 1) and on_
 
 = Vladimir Volsky
 
-Volsky (1877-1946) is chairman of Komuch in Samara in 1918, and later the leader of the Ufa delegation that rejects armed struggle against the Bolsheviks.
+Volsky (1877-1946) is a Right SR deputy from the Volga, ready to fight for the Constituent Assembly, and honest enough to stop when the fight is lost.
 
 - @action
 - @action2
@@ -28,7 +28,6 @@ Q.armed_struggle = 1; Q.white_aid += 1; Q.komuch_alive = 1; RO.add(Q, {rel_bol: 
 
 Volsky's Komuch has a government, a flag and an army of volunteers. It also has to rely on foreign bayonets.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.
 
 @action2
@@ -45,5 +44,4 @@ RO.add(Q, {rel_bol: 6, repression: -2}); RO.fac(Q, 'bund', 3, -3); RO.fac(Q, 'ri
 
 Volsky sent word to the Soviet government that the party was ready to talk. The Right SRs call it a betrayal, and the peasants call it common sense.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

@@ -3,7 +3,7 @@ face-image: img/events/assembly_dispersed.jpg
 subtitle: "The guard is tired."
 new-page: true
 tags: event
-view-if: dix >= 25 and bol_regime = 1
+view-if: dix >= 25 and bol_regime = 1 and assembly_met = 0 and ca_elected = 1
 priority: 40
 max-visits: 1
 on-arrival: {!
@@ -14,7 +14,7 @@ Q.assembly_survives = 0;
 
 On 18 January (5 January, Old Style) the Constituent Assembly met in the Tauride Palace. The Bolsheviks and the Left SRs held about a third of the seats. Viktor Chernov was elected chairman, and the Assembly declined to accept the Bolshevik declaration of the rights of the working people. The Bolsheviks and Left SRs left the hall. At four in the morning the head of the guard, the anarchist sailor Zheleznyakov, told Chernov: "The guard is tired." The deputies went home.
 
-The Assembly has been dissolved by decree. Demonstrations in its support were fired on in Petrograd. A few thousand workers were killed or wounded.
+The Assembly has been dissolved by decree. Demonstrations in its support were fired on in Petrograd. Some dozens of people were killed or wounded.
 
 [? if ca_moderate = 1 : The moderate socialists and their allies had the majority, and no armed force to defend it. ?][? if player_party = 'sr' : It was your party's Assembly: the largest delegation, the chairman and the land law that was to have been passed that night. ?]
 
@@ -70,4 +70,4 @@ RO.fac(Q, 'intl', 0, 6);
 RO.fac(Q, 'rightdef', 2, -2);
 !}
 
-We said that the Assembly should have been given a week to pass the land law, and that the Left SRs would have defended it. It is a position that nobody wanted to hear, on either side.
+We demanded new elections to the Assembly, on lists that show the split in the SR party, so that the peasants could choose between the two. It is a position that nobody wanted to hear, on either side.

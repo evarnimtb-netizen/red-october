@@ -8,7 +8,7 @@ view-if: tsereteli_advisor = 1 and (player_party = 'menshevik' or lent_tsereteli
 
 = Irakli Tsereteli
 
-Tsereteli (1881-1959), a Georgian Menshevik returned from Siberian exile, is the architect of revolutionary defencism and the coalition. He is Minister of Posts and Telegraphs.
+Tsereteli (1881-1959), a Georgian Menshevik returned from Siberian exile, is the architect of revolutionary defencism and the coalition. He believes the socialists must share power to save the revolution.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {rel_kad: 5, rel_ally: 4, right_threat: -2}); RO.fac(Q, 'intl', 0, 3);
 
 Tsereteli's patience has kept the coalition together for another few weeks. The Internationalists complain that he is protecting the Kadets.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

@@ -27,5 +27,4 @@ RO.boost(Q, {peasants: 8, soldiers: 2}); Q.peasant_organised = (Q.peasant_organi
 
 Spiridonova spoke at the provincial peasant congresses, and the delegates followed her. The SR leaders say that she hypnotises them.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

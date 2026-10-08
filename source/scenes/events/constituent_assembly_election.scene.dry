@@ -16,15 +16,18 @@ max-visits: 1
 - @alone: Run our own lists.
 - @joint: Run a joint list with the [+ partner_name +]. (Alliance level 2 or relations of 60 or better.)
 - @united: Run a united list of all moderate socialists.
+- @lsr_inside: Stay on the SR lists, and fight for places on them.
 - @lsr_separate: Run separate Left SR lists.
 
 @alone
+view-if: player_party != 'lsr'
 on-arrival: {!
 Q.ca_extra = 0;
 !}
 go-to: ca_results
 
 @joint
+view-if: player_party != 'lsr'
 choose-if: ally_lvl >= 2 or rel_ally >= 60
 unavailable-subtitle: The [+ partner_name +] will not agree to a joint list.
 on-arrival: {!
@@ -35,6 +38,7 @@ RO.fac(Q, 'intl', 0, 2);
 go-to: ca_results
 
 @united
+view-if: player_party != 'lsr'
 choose-if: (ally_lvl >= 2 and (ally_lsr >= 1 or rel_lsr >= 45)) or ally_lvl >= 3
 unavailable-subtitle: This needs a bloc with the [+ partner_name +] and relations with the Left SRs.
 on-arrival: {!
@@ -73,6 +77,14 @@ The results, by our count:
 {!<div class="parliament" data-name="assembly"></div>!}
 
 [? if player_party = 'sr' : Your party has won more votes than any other party in the history of Russia. ?][? if player_party = 'lsr' and lsr_split = 0 : The Left SRs, who ran on the SR lists, count about [+ res_lsr_in +] percent of the vote, a quarter of the SR delegation. ?][? if player_party = 'lsr' and lsr_split = 1 : The Left SRs, who ran on lists of their own, have [+ res_lsr +] percent of the vote and [+ seat_lsr +] seats. ?][? if ca_moderate = 1 : The moderate socialists and the national parties have a clear majority. The Assembly is theirs, if it meets. ?][? if ca_moderate = 0 : The moderate socialists do not have a majority. The Assembly will be a quarrelsome place. ?]
+
+@lsr_inside
+view-if: player_party = 'lsr'
+on-arrival: {!
+Q.ca_extra = 0;
+RO.add(Q, {rel_ally: 2});
+!}
+go-to: ca_results
 
 @lsr_separate
 view-if: player_party = 'lsr'

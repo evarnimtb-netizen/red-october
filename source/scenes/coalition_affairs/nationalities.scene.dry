@@ -36,7 +36,7 @@ RO.fac(Q, 'rightdef', 0, 3);
 }, "Recognise the Ukrainian Rada's autonomy");
 !}
 
-The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it. (It was done cautiously, with compromises.)
+The Rada is recognised as the government of Ukraine's autonomy. [? if gov_kadets = 1 : Three Kadet ministers have resigned over it. ?][? if gov_kadets = 0 : The Kadets, outside the cabinet, call it the end of Russia. ?] (It was done cautiously, with compromises.)
 
 
 
@@ -51,7 +51,7 @@ RO.fac(Q, 'rightdef', 0, 3);
 }, "Recognise the Ukrainian Rada's autonomy");
 !}
 
-The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it.
+The Rada is recognised as the government of Ukraine's autonomy. [? if gov_kadets = 1 : Three Kadet ministers have resigned over it. ?][? if gov_kadets = 0 : The Kadets, outside the cabinet, call it the end of Russia. ?]
 
 
 
@@ -69,7 +69,7 @@ RO.fac(Q, 'rightdef', 0, 3);
 }, "Recognise the Ukrainian Rada's autonomy");
 !}
 
-The Rada is recognised as the government of Ukraine's autonomy. Three Kadet ministers have resigned over it. [+ law_text +]
+The Rada is recognised as the government of Ukraine's autonomy. [? if gov_kadets = 1 : Three Kadet ministers have resigned over it. ?][? if gov_kadets = 0 : The Kadets, outside the cabinet, call it the end of Russia. ?] [+ law_text +]
 
 @finland
 

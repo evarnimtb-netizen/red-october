@@ -8,7 +8,7 @@ view-if: martov_advisor = 1 and (player_party = 'menshevik' or lent_martov = 1) 
 
 = Julius Martov
 
-Martov (1873-1923) is the leader of the Internationalists and the old friend and opponent of Lenin. He proposed an all-socialist government on the night of the October Revolution.
+Martov (1873-1923) is the leader of the Internationalists and the old friend and opponent of Lenin. He wants a government of all the socialist parties, and the war ended.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {rel_ally: 4, rel_lsr: 6, rel_bol: 6}); RO.fac(Q, 'intl', 2, -2); RO.f
 
 Martov's circle has sent word to the Left SRs, to the moderate Bolsheviks and to the Chernov group of the SRs. The Right Defencists are not pleased.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.

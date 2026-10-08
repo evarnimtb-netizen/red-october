@@ -12,7 +12,7 @@ Between 27 September and 5 October, 1,500 delegates from the soviets, the unions
 
 [? if player_party = 'menshevik' : The party's two leaders disagree. Tsereteli wants a coalition, with the Kadets, on the grounds that without the propertied classes, Russia will not be governed. Dan wants a homogeneous socialist government. ?][? if player_party = 'sr' : The party disagrees with itself. The Right SRs want a coalition, with the Kadets, on the grounds that without the propertied classes, Russia will not be governed. Chernov's Centre and the Left SRs want a government of the socialist parties alone. The conference elects Avksentiev, one of your own, to chair the Pre-Parliament that it creates. ?]In the corridors, Trotsky sits and watches.
 
-- @coalition: Back coalition with the liberals, as before.
+- @coalition: Back coalition with the liberals.
 - @socialist: Force a homogeneous socialist government.
 - @pre: Take seats in the Pre-Parliament, as a loyal opposition.
 - @lsr_boycott: Walk out with the Bolsheviks, and boycott the Pre-Parliament.
@@ -21,16 +21,19 @@ Between 27 September and 5 October, 1,500 delegates from the soviets, the unions
 view-if: player_party != 'lsr'
 on-arrival: {!
 Q.in_coalition = 1;
+Q.kadets_back = Q.gov_kadets ? 0 : 1;
+Q.gov_kadets = 1;
+Q.homogeneous_gov = 0;
 RO.fac(Q, 'defencist', 3, 0);
 RO.fac(Q, 'intl', -2, 8);
 RO.add(Q, {rel_kad: 4, rel_ally: -2, bolshevik: 3});
 !}
 
-The Conference declared for coalition. [+ Dlbl +] are satisfied. Kerensky's cabinet is nonetheless the same.
+The Conference declared for coalition. [+ Dlbl +] are satisfied. [? if kadets_back = 1 : The Kadets have been invited back into Kerensky's cabinet, and have accepted. ?][? if kadets_back = 0 : Kerensky's cabinet is the same as before. ?]
 
 @socialist
 choose-if: rel_ally >= 55
-unavailable-subtitle: The SRs will not support this.
+unavailable-subtitle: The [+ partner_name +] will not support this.
 on-arrival: {!
 Q.in_coalition = 1;
 Q.gov_kadets = 0;

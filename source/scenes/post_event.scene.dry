@@ -31,11 +31,17 @@ if (Q.month_actions >= 1) {
     RO.policyDrift(Q, Q.turn_length);
     RO.oppositionTurn(Q, Q.turn_length);
     if (Q.month_complete) {
-        Q.time += 1;
-        Q.month += 1;
-        if (Q.month >= 13) {
-            Q.month = 1;
-            Q.year += 1;
+        if (Q.year >= 1921 && Q.month >= 12) {
+            // the last turn is December 1921: the game ends there, without turning the calendar to 1922
+            Q.game_end = 1;
+            Q.ending = 'final';
+        } else {
+            Q.time += 1;
+            Q.month += 1;
+            if (Q.month >= 13) {
+                Q.month = 1;
+                Q.year += 1;
+            }
         }
     }
     Q.dix = RO.dix(Q.year, Q.month, Q.half_month);
@@ -54,6 +60,12 @@ if (Q.month_actions >= 1) {
     Q.members += Q.turn_length * Q.mem_scale * (mem_gain - (3 - Q.legality) * 1.5 - Q.repression / 25);
     if (Q.members < 3) { Q.members = 3; }
     Q.dues_income = Math.max(1, Math.round(Q.members / Q.mem_div));
+    // dues come in every month, a quarter of a collection at a time (the Party Dues card is a collection on top of it);
+    // a banned party collects almost nothing
+    Q.dues_acc = (Q.dues_acc || 0) + Q.dues_income * 0.25 * Q.turn_length * (Q.legality <= 0 ? 0.25 : 1);
+    var dues_whole = Math.floor(Q.dues_acc);
+    Q.resources += dues_whole;
+    Q.dues_acc -= dues_whole;
 }
 RO.clampStats(Q);
 RO.updateFactions(Q);

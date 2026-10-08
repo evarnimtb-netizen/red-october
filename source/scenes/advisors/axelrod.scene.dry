@@ -8,7 +8,7 @@ view-if: axelrod_advisor = 1 and (player_party = 'menshevik' or lent_axelrod = 1
 
 = Pavel Axelrod
 
-Axelrod (1850-1928) is an elder of Russian Marxism and the founder of the idea of a broad workers' congress. He went to Western Europe in August 1917, where he lobbies the socialist parties.
+Axelrod (1850-1928) is an elder of Russian Marxism and the founder of the idea of a broad workers' congress. He is the party's link to the socialists of the West.
 
 - @action
 - @root: Return to main
@@ -27,5 +27,4 @@ RO.add(Q, {soviet_democracy: 1, repression: -1}); Q.resources += 2; Q.foreign_pr
 
 Axelrod met the leaders of the British Labour Party and the German Independent Social Democrats. They have promised pressure, and some money.
 
-- @cancel_advisor_action: Cancel action.
 - @root: Continue.
